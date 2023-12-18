@@ -32,7 +32,8 @@ app.use(Quasar, {
     plugins: {},
     config: {
         brand: {
-            primary: '#5541d7',
+            primary: '#ac0e14',
+            secondary: '#ffd278',
             positive: '#26A69A',
         },
     },
