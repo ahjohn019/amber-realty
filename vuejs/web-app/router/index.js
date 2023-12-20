@@ -1,5 +1,6 @@
 import { createWebHistory, createRouter } from 'vue-router';
 import * as Master from '../modules/main/router';
+import Property from '../modules/property/router';
 
 const routes = [
     {
@@ -7,7 +8,13 @@ const routes = [
         component: Master.MainPage,
         meta: { requiresAuth: false },
         name: 'main',
-    }
+    },
+    {
+        path: '/property',
+        component: Property.ListPage,
+        meta: { requiresAuth: false },
+        name: 'property.list',
+    },
 ];
 
 const router = createRouter({

@@ -4,11 +4,11 @@
             class="row social-proof-container mx-auto flex justify-center items-center text-white gap-6 md:gap-0"
         >
             <div
-                class="col-6 col-md-3 text-center"
+                class="col-6 col-md-3 text-center q-gutter-y-sm"
                 v-for="(data, idx) in payload"
                 :key="idx"
             >
-                <div class="social-proof-title">{{ data.title }}</div>
+                <div class="text-6xl font-bold">{{ data.title }}</div>
                 <div class="text-lg">{{ data.content }}</div>
             </div>
         </div>
@@ -39,11 +39,6 @@ export default {
 <style>
 .social-proof-container {
     padding: 88px 125px 88px 125px;
-}
-.social-proof-title {
-    font-size: 48px;
-    font-style: normal;
-    font-weight: 600;
 }
 
 @media only screen and (max-width: 768px) {

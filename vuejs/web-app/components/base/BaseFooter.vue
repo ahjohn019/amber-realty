@@ -2,19 +2,19 @@
     <div class="footer-container">
         <div class="row pb-14 footer-container-main gap-4 md:gap-0">
             <div class="col-12 col-md-4">
-                <div class="footer-logo font-bold">Amber Realty</div>
+                <div class="text-4xl font-bold pb-2">Amber Realty</div>
                 <div>Copyright © 2023 Amber Realty</div>
             </div>
             <div class="col-12 col-md-4 q-gutter-y-sm">
-                <div class="footer-heading">About Us</div>
-                <div class="footer-content footer-about-us">
+                <div class="text-2xl font-bold">About Us</div>
+                <div class="footer-about-us">
                     Hac ullamcorper diam lacus eget amet penatibus. Consectetur
                     non hendrerit vel amet in eu adipiscing scelerisque.
                 </div>
             </div>
             <div class="col-12 col-md-4 q-gutter-y-sm">
-                <div class="footer-heading">Contact Info</div>
-                <div class="q-gutter-y-sm footer-content">
+                <div class="text-2xl font-bold">Contact Info</div>
+                <div class="q-gutter-y-sm">
                     <div>
                         64, Jalan Kuantan, Titiwangsa 53200 Kuala Lumpur,
                         Malaysia
@@ -26,7 +26,7 @@
         </div>
         <q-separator />
         <div class="row pt-8">
-            <div class="col-12 col-md-6 footer-heading">
+            <div class="col-12 col-md-6 text-2xl font-bold">
                 <div class="flex items-center gap-4 footer-follow-us">
                     <div>Follow Us</div>
                     <div>
@@ -53,22 +53,6 @@
 </template>
 
 <style>
-.footer-logo {
-    font-size: 32px;
-}
-
-.footer-heading {
-    font-size: 24px;
-    font-style: normal;
-    font-weight: 600;
-}
-
-.footer-content {
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 500;
-}
-
 .footer-container {
     padding: 88px 125px 88px 125px;
 }

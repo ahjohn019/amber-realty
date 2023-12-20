@@ -4,14 +4,16 @@
             class="row container mx-auto p-6 md:p-12 gap-4 md:gap-0 justify-between"
         >
             <div
-                class="col-12 col-md-8 col-lg-6 flex flex-col gap-6 justify-center header-content-container"
+                class="col-12 col-md-8 col-lg-6 flex flex-col gap-6 justify-center header-content-container px-4"
             >
                 <div class="header-content">
                     <q-icon name="home" size="22px" class="align-middle" />
                     <span class="align-middle"> Amber Realty Real Estate </span>
                 </div>
-                <div class="header-title">Find Your Dream Home Today</div>
-                <div class="header-content">
+                <div class="text-3xl md:text-6xl font-bold">
+                    Find Your Dream Home Today
+                </div>
+                <div class="text-lg">
                     Are you ready to start the search for your dream home? Look
                     no further than Amber Realty Real Estate.
                 </div>
@@ -20,8 +22,11 @@
                 class="col-12 col-md-4 flex flex-col gap-6 bg-white rounded py-6 px-3 md:p-10 justify-center"
             >
                 <div class="flex flex-col gap-2">
-                    <span class="inquiry-title">Real Estate Inquiry Form</span>
-                    <div class="inquiry-details">
+                    <span
+                        class="text-lg md:text-2xl font-bold header-content-container"
+                        >Real Estate Inquiry Form</span
+                    >
+                    <div class="text-sm text-gray-500">
                         Please provide the following information to help us
                         better understand your real estate needs.
                     </div>
@@ -75,42 +80,9 @@ export default {
 </script>
 
 <style>
-.header-title {
-    font-size: 64px;
-    font-style: normal;
-    font-weight: 600;
-}
-
-.header-content {
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 600;
-}
-
-.inquiry-title {
-    font-size: 24px;
-    font-style: normal;
-    font-weight: 600;
-}
-
-.inquiry-details {
-    color: var(--Grey-1, #b8b8c1);
-    font-size: 12px;
-    font-style: normal;
-    font-weight: 400;
-}
-
 @media (max-width: 768px) {
-    .header-title {
-        font-size: 32px;
-    }
-
     .header-content-container {
         text-align: center;
-    }
-
-    .inquiry-title {
-        font-size: 16px;
     }
 
     .inquiry-title,
