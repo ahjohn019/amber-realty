@@ -28,16 +28,34 @@
                             class="col-12 row items-center gap-4 md:gap-0 justify-end"
                         >
                             <div
-                                class="bg-secondary featured-label text-center py-2 font-bold rounded col-12 col-md-3"
+                                class="col-12 flex items-center pt-4"
+                                :class="
+                                    $q.screen.lt.md
+                                        ? 'justify-center'
+                                        : 'justify-end'
+                                "
                             >
-                                For Sale
-                            </div>
-                            <div class="col-12 col-md-5 text-2xl font-bold">
-                                RM 64900
+                                <div
+                                    class="bg-secondary featured-label text-center py-2 px-4 font-bold rounded"
+                                >
+                                    For Sale
+                                </div>
+                                <div class="ml-4">
+                                    <span class="text-2xl font-bold"
+                                        >RM 64900</span
+                                    >
+                                </div>
                             </div>
                         </div>
                         <div class="col-12 row">
-                            <div class="col text-sm text-center">
+                            <div
+                                class="col text-sm"
+                                :class="
+                                    $q.screen.lt.md
+                                        ? 'text-center'
+                                        : 'text-right'
+                                "
+                            >
                                 <q-icon
                                     name="bed"
                                     size="18px"
@@ -45,7 +63,14 @@
                                 />
                                 <span class="align-middle ml-2">3 Beds</span>
                             </div>
-                            <div class="col text-sm text-center">
+                            <div
+                                class="col text-sm"
+                                :class="
+                                    $q.screen.lt.md
+                                        ? 'text-center'
+                                        : 'text-right'
+                                "
+                            >
                                 <q-icon
                                     name="bathroom"
                                     size="18px"
@@ -53,7 +78,14 @@
                                 />
                                 <span class="align-middle ml-2">3 Bath</span>
                             </div>
-                            <div class="col text-sm text-center">
+                            <div
+                                class="col text-sm"
+                                :class="
+                                    $q.screen.lt.md
+                                        ? 'text-center'
+                                        : 'text-right'
+                                "
+                            >
                                 <q-icon
                                     name="dashboard"
                                     size="18px"
@@ -77,19 +109,19 @@
                             />
                         </div>
                         <div class="col-12 row justify-between">
-                            <div class="col-3">
+                            <div class="col-4 p-2">
                                 <img
                                     src="https://cdn.quasar.dev/img/mountains.jpg"
                                     class="w-full object-contain rounded-lg"
                                 />
                             </div>
-                            <div class="col-3">
+                            <div class="col-4 p-2">
                                 <img
                                     src="https://cdn.quasar.dev/img/mountains.jpg"
                                     class="w-full object-contain rounded-lg"
                                 />
                             </div>
-                            <div class="col-3">
+                            <div class="col-4 p-2">
                                 <img
                                     src="https://cdn.quasar.dev/img/mountains.jpg"
                                     class="w-full object-contain rounded-lg"
