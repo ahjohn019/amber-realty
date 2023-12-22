@@ -8,7 +8,7 @@
                     <div class="text-5xl text-center">Property Details</div>
                 </div>
             </div>
-            <div class="container mx-auto px-8 row q-gutter-y-lg">
+            <div class="container mx-auto px-8 pt-8 row q-gutter-y-lg">
                 <div
                     class="col-12 row justify-between items-center pt-8 gap-4 md:gap-0"
                     data-aos="fade-up"
@@ -130,9 +130,11 @@
                         </div>
                     </div>
                     <div class="col-12 col-md-4 col-lg-3 row q-gutter-y-md">
-                        <div class="col-12 bg-secondary rounded row p-6">
+                        <div
+                            class="col-12 bg-secondary rounded row px-12 py-10"
+                        >
                             <div
-                                class="col-12 text-4xl font-bold"
+                                class="col-12 text-3xl font-bold"
                                 :class="
                                     $q.screen.lt.md
                                         ? 'text-center'
@@ -142,7 +144,7 @@
                                 Details
                             </div>
                             <div
-                                class="col-12 row q-gutter-y-lg pt-6"
+                                class="col-12 row q-gutter-y-lg pt-6 font-bold text-lg"
                                 :class="
                                     $q.screen.lt.md
                                         ? 'text-center'
@@ -150,63 +152,35 @@
                                 "
                             >
                                 <div class="col-12 row flex items-center">
-                                    <div
-                                        class="col-12 col-md-5 font-bold text-lg"
-                                    >
-                                        Lot area
-                                    </div>
-                                    <div class="col-12 col-md-7 text-sm">
-                                        900 sqft
+                                    <div class="col-12 col-md-5">Lot area</div>
+                                    <div class="col-12 col-md-7">
+                                        : 900 sqft
                                     </div>
                                 </div>
                                 <div class="col-12 row flex items-center">
-                                    <div
-                                        class="col-12 col-md-5 font-bold text-lg"
-                                    >
-                                        Beds
-                                    </div>
-                                    <div class="col-12 col-md-7 text-sm">
-                                        4 beds
+                                    <div class="col-12 col-md-5">Beds</div>
+                                    <div class="col-12 col-md-7">: 4 beds</div>
+                                </div>
+                                <div class="col-12 row flex items-center">
+                                    <div class="col-12 col-md-5">Baths</div>
+                                    <div class="col-12 col-md-7">: 4 baths</div>
+                                </div>
+                                <div class="col-12 row flex items-center">
+                                    <div class="col-12 col-md-5">Rooms</div>
+                                    <div class="col-12 col-md-7">
+                                        : 12 rooms
                                     </div>
                                 </div>
                                 <div class="col-12 row flex items-center">
-                                    <div
-                                        class="col-12 col-md-5 font-bold text-lg"
-                                    >
-                                        Baths
-                                    </div>
-                                    <div class="col-12 col-md-7 text-sm">
-                                        4 baths
+                                    <div class="col-12 col-md-5">Price</div>
+                                    <div class="col-12 col-md-7">
+                                        : RM 6,490
                                     </div>
                                 </div>
                                 <div class="col-12 row flex items-center">
-                                    <div
-                                        class="col-12 col-md-5 font-bold text-lg"
-                                    >
-                                        Rooms
-                                    </div>
-                                    <div class="col-12 col-md-7 text-sm">
-                                        12 rooms
-                                    </div>
-                                </div>
-                                <div class="col-12 row flex items-center">
-                                    <div
-                                        class="col-12 col-md-5 font-bold text-lg"
-                                    >
-                                        Price
-                                    </div>
-                                    <div class="col-12 col-md-7 text-sm">
-                                        RM 6,490
-                                    </div>
-                                </div>
-                                <div class="col-12 row flex items-center">
-                                    <div
-                                        class="col-12 col-md-5 font-bold text-lg"
-                                    >
-                                        Status
-                                    </div>
-                                    <div class="col-12 col-md-7 text-sm">
-                                        For sale
+                                    <div class="col-12 col-md-5">Status</div>
+                                    <div class="col-12 col-md-7">
+                                        : For sale
                                     </div>
                                 </div>
                             </div>
@@ -251,7 +225,9 @@
                     "
                     data-aos="fade-up"
                 >
-                    <div class="col-12 text-3xl font-bold">Overview</div>
+                    <div class="col-12 text-3xl font-bold border-b pb-4">
+                        Overview
+                    </div>
                     <div class="col-12">
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                         Duis pellentesque laoreet ipsum, vel aliquet lacus
