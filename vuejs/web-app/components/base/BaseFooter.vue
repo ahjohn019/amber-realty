@@ -2,7 +2,7 @@
     <div class="footer-container">
         <div class="row pb-14 footer-container-main gap-4 md:gap-0">
             <div class="col-12 col-md-4">
-                <div class="text-4xl font-bold pb-2">Amber Realty</div>
+                <div class="text-3xl font-bold pb-2">Amber Realty</div>
                 <div>Copyright © 2023 Amber Realty</div>
             </div>
             <div class="col-12 col-md-4 q-gutter-y-sm">
@@ -69,7 +69,7 @@
 
 @media (max-width: 769px) {
     .footer-container {
-        padding: 44px 0 44px 0;
+        padding: 44px 1.25rem 44px 1.25rem;
     }
 
     .footer-container-main {

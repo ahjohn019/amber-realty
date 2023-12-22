@@ -36,6 +36,12 @@ app.use(Quasar, {
             secondary: '#ffd278',
             positive: '#26A69A',
         },
+        screen: {
+            xs: 576, // Extra small screen / phone
+            sm: 768, // Small screen / tablet
+            md: 992, // Medium screen / desktop
+            lg: 1200, // Large screen / wide desktop
+        },
     },
 });
 

@@ -15,6 +15,12 @@ const routes = [
         meta: { requiresAuth: false },
         name: 'property.list',
     },
+    {
+        path: '/property/details/:id',
+        component: Property.DetailsPage,
+        meta: { requiresAuth: false },
+        name: 'property.details',
+    },
 ];
 
 const router = createRouter({
