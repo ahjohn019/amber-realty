@@ -1,7 +1,7 @@
 <template>
     <div class="container mx-auto">
         <div class="row">
-            <div class="col-12 col-md-6">
+            <div class="col-12 col-md-6" data-aos="flip-left">
                 <img
                     src="https://cdn.quasar.dev/img/mountains.jpg"
                     class="h-full object-cover"
@@ -9,6 +9,7 @@
             </div>
             <div
                 class="col-12 col-md-6 featured-container flex flex-col gap-3 justify-center"
+                data-aos="flip-right"
             >
                 <div class="q-gutter-sm pb-3 featured-content">
                     <div class="text-4xl font-bold">Featured Properties</div>

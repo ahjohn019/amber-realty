@@ -1,14 +1,17 @@
 <template>
     <BaseLayout>
         <template #content>
-            <div class="bg-primary">
+            <div class="bg-primary" data-aos="fade-up">
                 <div
                     class="container mx-auto text-white banner-title-container flex justify-center items-center"
                 >
                     <div class="text-5xl text-center">Property List</div>
                 </div>
             </div>
-            <div class="container mx-auto py-8 px-4 md:px-0">
+            <div
+                class="container mx-auto py-8 px-4 md:px-0"
+                data-aos="fade-left"
+            >
                 <ListComponent />
             </div>
             <FeaturedComponent />

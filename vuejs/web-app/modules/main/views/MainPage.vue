@@ -1,10 +1,10 @@
 <template>
     <BaseLayout>
         <template #content>
-            <HeaderContainer />
-            <PropertiesContainer />
-            <SocialProof />
-            <CallToAction />
+            <HeaderContainer data-aos="fade-up" />
+            <PropertiesContainer data-aos="fade-left" />
+            <SocialProof data-aos="fade-right" />
+            <CallToAction data-aos="fade-left" />
         </template>
     </BaseLayout>
 </template>

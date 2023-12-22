@@ -11,10 +11,10 @@ import '@quasar/extras/material-icons/material-icons.css';
 import '@quasar/extras/material-icons-outlined/material-icons-outlined.css';
 import 'animate.css';
 import VueNumber from 'vue-number-animation';
-
 import { createPinia } from 'pinia';
-
 import CKEditor from '@ckeditor/ckeditor5-vue';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 const app = createApp({});
 const pinia = createPinia();
@@ -27,6 +27,16 @@ app.use(VueAxios, axios);
 app.config.globalProperties.mainLogo = '/images/crystal_logo.png';
 
 app.use(CKEditor);
+app.use(
+    AOS.init({
+        // Global settings:
+        offset: 120, // offset (in px) from the original trigger point
+        delay: 0, // values from 0 to 3000, with step 50ms
+        duration: 800, // values from 0 to 3000, with step 50ms
+        easing: 'ease', // default easing for AOS animations
+        once: false, // whether animation should happen only once - while scrolling down
+    })
+);
 
 app.use(Quasar, {
     plugins: {},

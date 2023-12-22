@@ -1,7 +1,7 @@
 <template>
     <BaseLayout>
         <template #content>
-            <div class="bg-primary">
+            <div class="bg-primary" data-aos="zoom-in">
                 <div
                     class="container mx-auto text-white banner-title-container flex justify-center items-center"
                 >
@@ -11,6 +11,7 @@
             <div class="container mx-auto px-8 row q-gutter-y-lg">
                 <div
                     class="col-12 row justify-between items-center pt-8 gap-4 md:gap-0"
+                    data-aos="fade-up"
                 >
                     <div
                         class="col-12 col-md-9 property-details-one q-gutter-y-md"
@@ -66,6 +67,7 @@
                 <div
                     class="col-12 row justify-between"
                     :class="$q.screen.lt.lg ? 'q-gutter-y-lg' : ''"
+                    data-aos="fade-right"
                 >
                     <div class="col-12 col-md-7 col-lg-8 row q-gutter-y-lg">
                         <div class="col-12">
@@ -215,6 +217,7 @@
                     :class="
                         $q.screen.lt.md ? 'text-center p-4' : 'text-left p-10'
                     "
+                    data-aos="fade-up"
                 >
                     <div class="col-12 text-3xl font-bold">Overview</div>
                     <div class="col-12">
