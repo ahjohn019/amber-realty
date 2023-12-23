@@ -15,6 +15,8 @@ import { createPinia } from 'pinia';
 import CKEditor from '@ckeditor/ckeditor5-vue';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import VueSplide from '@splidejs/vue-splide';
+import '@splidejs/vue-splide/css';
 
 const app = createApp({});
 const pinia = createPinia();
@@ -37,6 +39,7 @@ app.use(
         once: false, // whether animation should happen only once - while scrolling down
     })
 );
+app.use(VueSplide);
 
 app.use(Quasar, {
     plugins: {},

@@ -1,7 +1,9 @@
 <template>
-    <NavBar />
-    <slot name="content"></slot>
-    <BaseFooter />
+    <div class="overflow-hidden">
+        <NavBar />
+        <slot name="content"></slot>
+        <BaseFooter />
+    </div>
 </template>
 
 <script>

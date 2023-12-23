@@ -3,7 +3,7 @@
         <template #content>
             <div class="bg-primary" data-aos="fade-up">
                 <div
-                    class="container mx-auto text-white banner-title-container flex justify-center items-center"
+                    class="container mx-auto text-white h-[45vh] flex justify-center items-center"
                 >
                     <div class="text-5xl text-center">Property List</div>
                 </div>
@@ -32,9 +32,3 @@ export default {
     },
 };
 </script>
-
-<style>
-.banner-title-container {
-    height: 45vh;
-}
-</style>

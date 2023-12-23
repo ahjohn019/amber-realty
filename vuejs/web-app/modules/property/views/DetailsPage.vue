@@ -3,7 +3,7 @@
         <template #content>
             <div class="bg-primary" data-aos="zoom-in">
                 <div
-                    class="container mx-auto text-white banner-title-container flex justify-center items-center"
+                    class="container mx-auto text-white h-[45vh] flex justify-center items-center"
                 >
                     <div class="text-5xl text-center">Property Details</div>
                 </div>
@@ -14,7 +14,8 @@
                     data-aos="fade-up"
                 >
                     <div
-                        class="col-12 col-md-9 property-details-one q-gutter-y-md"
+                        class="col-12 col-md-9 q-gutter-y-md"
+                        :class="$q.screen.lt.md ? 'text-center' : ''"
                     >
                         <div class="text-3xl font-bold">
                             Luxury Beachfront Villa
@@ -22,7 +23,8 @@
                         <div class="text-sm">18 Malibu, CA</div>
                     </div>
                     <div
-                        class="col-12 col-md-3 row property-details-container-two q-gutter-y-md"
+                        class="col-12 col-md-3 row q-gutter-y-md"
+                        :class="$q.screen.lt.md ? 'text-right' : 'text-center'"
                     >
                         <div
                             class="col-12 row items-center gap-4 md:gap-0 justify-end"
@@ -101,35 +103,40 @@
                     :class="$q.screen.lt.lg ? 'q-gutter-y-lg' : ''"
                     data-aos="fade-right"
                 >
-                    <div class="col-12 col-md-7 col-lg-8 row q-gutter-y-lg">
+                    <div class="col-12 col-lg-8 row q-gutter-y-lg">
                         <div class="col-12">
                             <img
                                 src="https://cdn.quasar.dev/img/mountains.jpg"
                                 class="rounded-lg w-full object-contain"
                             />
                         </div>
-                        <div class="col-12 row justify-between">
-                            <div class="col-4 p-2">
-                                <img
-                                    src="https://cdn.quasar.dev/img/mountains.jpg"
-                                    class="w-full object-contain rounded-lg"
-                                />
-                            </div>
-                            <div class="col-4 p-2">
-                                <img
-                                    src="https://cdn.quasar.dev/img/mountains.jpg"
-                                    class="w-full object-contain rounded-lg"
-                                />
-                            </div>
-                            <div class="col-4 p-2">
-                                <img
-                                    src="https://cdn.quasar.dev/img/mountains.jpg"
-                                    class="w-full object-contain rounded-lg"
-                                />
-                            </div>
+                        <div class="col-12">
+                            <Splide
+                                :options="sliderOptions"
+                                aria-label="My Favorite Images"
+                            >
+                                <SplideSlide>
+                                    <img
+                                        src="https://cdn.quasar.dev/img/mountains.jpg"
+                                        alt="Sample 1"
+                                    />
+                                </SplideSlide>
+                                <SplideSlide>
+                                    <img
+                                        src="https://cdn.quasar.dev/img/mountains.jpg"
+                                        alt="Sample 2"
+                                    />
+                                </SplideSlide>
+                                <SplideSlide>
+                                    <img
+                                        src="https://cdn.quasar.dev/img/mountains.jpg"
+                                        alt="Sample 2"
+                                    />
+                                </SplideSlide>
+                            </Splide>
                         </div>
                     </div>
-                    <div class="col-12 col-md-4 col-lg-3 row q-gutter-y-md">
+                    <div class="col-12 col-lg-3 row q-gutter-y-md">
                         <div
                             class="col-12 bg-secondary rounded row px-12 py-10"
                         >
@@ -292,38 +299,33 @@
 
 <script>
 import BaseLayout from '@web/modules/layout/BaseLayout.vue';
+import { ref } from 'vue';
 
 export default {
     components: {
         BaseLayout,
     },
+
+    setup() {
+        const sliderOptions = ref({});
+
+        sliderOptions.value = {
+            type: 'loop',
+            perPage: 3,
+            gap: '1rem',
+            breakpoints: {
+                1024: {
+                    perPage: 2,
+                },
+                768: {
+                    perPage: 1,
+                },
+            },
+        };
+
+        return {
+            sliderOptions,
+        };
+    },
 };
 </script>
-
-<style>
-.property-details-two {
-    justify-content: end;
-}
-
-.property-details-container-two {
-    text-align: right;
-}
-
-.banner-title-container {
-    height: 45vh;
-}
-
-@media (max-width: 769px) {
-    .property-details-one {
-        text-align: center;
-    }
-
-    .property-details-container-two {
-        text-align: center;
-    }
-
-    .property-details-two {
-        justify-content: center;
-    }
-}
-</style>
