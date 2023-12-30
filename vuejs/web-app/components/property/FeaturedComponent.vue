@@ -8,7 +8,8 @@
                 />
             </div>
             <div
-                class="col-12 col-md-6 col-lg-5 featured-container flex flex-col gap-3 justify-center py-4 bg-secondary"
+                class="col-12 col-md-6 col-lg-5 featured-container flex flex-col gap-6 justify-center bg-secondary"
+                :class="$q.screen.lt.md ? 'p-7' : 'p-14'"
                 data-aos="flip-right"
             >
                 <div
@@ -22,7 +23,7 @@
                 </div>
                 <q-separator />
                 <div
-                    class="bg-secondary text-center py-2 font-bold rounded mt-3"
+                    class="bg-primary text-center py-2 font-bold rounded text-white"
                     :class="$q.screen.lt.md ? 'w-full' : 'w-[100px]'"
                 >
                     For Sale
@@ -44,20 +45,20 @@
                         RM 4,490
                     </div>
                 </div>
-                <div class="row q-gutter-y-md">
-                    <div class="col-12 col-md-4 text-center">
+                <div class="row q-gutter-y-md justify-center">
+                    <div class="col-6 col-md-4 text-center">
                         <div>
                             <q-icon name="bed" size="48px" />
                         </div>
                         3 Bedrooms
                     </div>
-                    <div class="col-12 col-md-4 text-center">
+                    <div class="col-6 col-md-4 text-center">
                         <div>
                             <q-icon name="bathroom" size="48px" />
                         </div>
                         3 Bathrooms
                     </div>
-                    <div class="col-12 col-md-4 text-center">
+                    <div class="col-6 col-md-4 text-center">
                         <div>
                             <q-icon name="dashboard" size="48px" />
                         </div>
@@ -71,15 +72,3 @@
         </div>
     </div>
 </template>
-
-<style>
-.featured-container {
-    padding: 0 60px;
-}
-
-@media (max-width: 769px) {
-    .featured-container {
-        padding: 22px 1.25rem;
-    }
-}
-</style>

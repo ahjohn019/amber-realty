@@ -1,18 +1,20 @@
 <template>
-    <div class="bg-secondary">
+    <div
+        class="bg-secondary"
+        :class="$q.screen.lt.md ? 'h-full' : 'h-[650px] flex items-center'"
+    >
         <div
             class="row container mx-auto p-6 md:p-12 gap-4 md:gap-0 justify-between"
         >
             <div
                 class="col-12 col-md-8 col-lg-6 flex flex-col gap-6 justify-center header-content-container px-4"
+                data-aos="flip-left"
             >
                 <div class="header-content">
                     <q-icon name="home" size="22px" class="align-middle" />
                     <span class="align-middle"> Amber Realty Real Estate </span>
                 </div>
-                <div class="text-3xl md:text-6xl font-bold">
-                    Find Your Dream Home Today
-                </div>
+                <div class="text-3xl md:text-6xl font-bold header-title"></div>
                 <div class="text-lg">
                     Are you ready to start the search for your dream home? Look
                     no further than Amber Realty Real Estate.
@@ -20,6 +22,7 @@
             </div>
             <div
                 class="col-12 col-md-4 flex flex-col gap-6 bg-white rounded py-6 px-3 md:p-10 justify-center"
+                data-aos="flip-right"
             >
                 <div class="flex flex-col gap-2">
                     <span

@@ -8,7 +8,15 @@
                 v-for="(data, idx) in payload"
                 :key="idx"
             >
-                <div class="text-6xl font-bold">{{ data.title }}</div>
+                <div class="text-6xl font-bold">
+                    <number
+                        class="bold transition"
+                        ref="number2"
+                        :from="numberInit"
+                        :to="data.title || numberInit"
+                        :duration="numberDuration"
+                    />{{ data.quote }}
+                </div>
                 <div class="text-lg">{{ data.content }}</div>
             </div>
         </div>
@@ -21,16 +29,20 @@ import { ref } from 'vue';
 export default {
     setup() {
         const payload = ref({});
+        const numberInit = 0;
+        const numberDuration = 5;
 
         payload.value = [
-            { title: '20+', content: 'Years in the industry' },
-            { title: '90%', content: 'Customer satisfaction' },
-            { title: '10K', content: 'Properties sold' },
-            { title: '50+', content: 'Country served' },
+            { title: '20', content: 'Years in the industry', quote: '+' },
+            { title: '90', content: 'Customer satisfaction', quote: '%' },
+            { title: '10', content: 'Properties sold', quote: 'K' },
+            { title: '50', content: 'Country served', quote: '+' },
         ];
 
         return {
             payload,
+            numberInit,
+            numberDuration,
         };
     },
 };

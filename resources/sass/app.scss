@@ -12,3 +12,11 @@
 @import 'tailwindcss/components';
 
 @import 'tailwindcss/utilities';
+
+@import 'typed';
+
+
+.header-title {
+    @include typed("Find Your Dream Home Today",2,
+        (caret-width: 2px, caret-space: 2px));
+}
