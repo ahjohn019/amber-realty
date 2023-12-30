@@ -15,6 +15,7 @@ export default defineConfig({
                 'resources/sass/app.scss',
                 'vuejs/admin-app/app.js',
                 'resources/sass/custom.scss',
+                'vuejs/web-app/app.js',
             ],
             refresh: true,
         }),
