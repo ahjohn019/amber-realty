@@ -25,6 +25,10 @@ class DatabaseSeeder extends Seeder
             CategorySeeder::class,
             PostSeeder::class,
             CommentSeeder::class,
+            StateSeeder::class,
+            PropertySeeder::class,
+            PropertyTypeSeeder::class,
+            TagSeeder::class
         ]);
     }
 }

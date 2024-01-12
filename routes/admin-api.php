@@ -3,12 +3,13 @@
 use App\Library\RoleTag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\RefController;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\BannerController;
+use App\Http\Controllers\Admin\PropertyController;
 use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\Admin\RefController;
 
 /*
 |--------------------------------------------------------------------------
@@ -80,7 +81,16 @@ Route::middleware(['auth:sanctum', 'role:' . RoleTag::SUPERADMIN . '|' . RoleTag
         Route::get('/bar-chart-data', [DashboardController::class, 'retrieveBarChartData'])->name('bar_chart_data');
     });
 
+    Route::prefix('property')->name('property.')->group(function () {
+        Route::get('/list', [PropertyController::class, 'list'])->name('list');
+        Route::post('/store', [PropertyController::class, 'store'])->name('store');
+        Route::get('/show/{id}', [PropertyController::class, 'show'])->name('show');
+        Route::post('/update/{id}', [PropertyController::class, 'update'])->name('update');
+        Route::delete('/delete/{id}', [PropertyController::class, 'destroy'])->name('destroy');
+    });
+
     Route::prefix('ref')->name('ref.')->group(function () {
         Route::get('/category', [RefController::class, 'category'])->name('category');
+        Route::get('/furnishing', [RefController::class, 'furnishing'])->name('furnishing');
     });
 });

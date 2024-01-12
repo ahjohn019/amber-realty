@@ -20,7 +20,9 @@ class Controller extends BaseController
         ], $code);
     }
 
-    public static function failedResponse(String $message, $result = null, $code = Response::HTTP_FORBIDDEN)
+    // $code = Response::HTTP_INTERNAL_SERVER_ERROR
+
+    public static function failedResponse(String $message, $result = null, $code = null)
     {
         return response()->json([
             'message' => $message,

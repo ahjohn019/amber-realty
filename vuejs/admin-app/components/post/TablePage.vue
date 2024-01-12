@@ -32,7 +32,9 @@
             </template>
             <template v-slot:body-cell-title="props">
                 <q-td :props="props">
-                    <div class="font-bold table-likes-columns">{{ props.value }}</div>
+                    <div class="font-bold table-likes-columns">
+                        {{ props.value }}
+                    </div>
                     <div class="q-table-label">
                         Likes : {{ props.row.likes }}
                     </div>
@@ -48,9 +50,7 @@
                                 color="positive"
                                 style="font-weight: bold"
                                 class="capitalize p-2 rounded"
-                                :label="
-                                    props.row.popularity_percentage + '%'
-                                "
+                                :label="props.row.popularity_percentage + '%'"
                             />
                         </div>
 
@@ -95,9 +95,7 @@
                                             <q-icon name="visibility" />
                                         </q-item-section>
                                         <q-item-section>
-                                            <q-item-label
-                                                >View</q-item-label
-                                            >
+                                            <q-item-label>View</q-item-label>
                                         </q-item-section>
                                     </q-item>
 
@@ -106,25 +104,19 @@
                                             <q-icon name="edit" />
                                         </q-item-section>
                                         <q-item-section>
-                                            <q-item-label
-                                                >Edit</q-item-label
-                                            >
+                                            <q-item-label>Edit</q-item-label>
                                         </q-item-section>
                                     </q-item>
 
                                     <q-item
                                         clickable
-                                        @click="
-                                            handlePostDelete(props.row.id)
-                                        "
+                                        @click="handlePostDelete(props.row.id)"
                                     >
                                         <q-item-section>
                                             <q-icon name="delete" />
                                         </q-item-section>
                                         <q-item-section>
-                                            <q-item-label
-                                                >Delete</q-item-label
-                                            >
+                                            <q-item-label>Delete</q-item-label>
                                         </q-item-section>
                                     </q-item>
                                 </q-list>
@@ -292,8 +284,8 @@ export default {
 </script>
 
 <style scoped>
-    .table-likes-columns{
-        max-width: 250px;
-        text-wrap: wrap;
-    }
+.table-likes-columns {
+    max-width: 250px;
+    text-wrap: wrap;
+}
 </style>

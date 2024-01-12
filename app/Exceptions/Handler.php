@@ -2,8 +2,11 @@
 
 namespace App\Exceptions;
 
-use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
+use Illuminate\Auth\AuthenticationException;
+use Illuminate\Validation\ValidationException;
+use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
 class Handler extends ExceptionHandler
 {
@@ -25,6 +28,26 @@ class Handler extends ExceptionHandler
     {
         $this->reportable(function (Throwable $e) {
             //
+        });
+
+        $this->renderable(function (Throwable $e) {
+            if ($e instanceof AuthenticationException) {
+                return response()->json([
+                    'errors' => $e->getMessage(),
+                    'messages' => $e->getMessage(),
+                    'code' => Response::HTTP_UNAUTHORIZED
+                ]);
+            }
+
+            if ($e instanceof ValidationException) {
+                $errors = $e->validator->errors()->all();
+
+                return response()->json([
+                    'errors' => $e->validator->errors(),
+                    'messages' => $errors,
+                    'code' => Response::HTTP_UNPROCESSABLE_ENTITY
+                ]);
+            }
         });
     }
 }

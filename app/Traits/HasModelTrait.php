@@ -4,10 +4,11 @@ namespace App\Traits;
 
 use Illuminate\Support\Facades\App;
 use App\Exceptions\BadRequestExceptions;
+use Symfony\Component\HttpFoundation\Response;
 
 trait HasModelTrait
 {
-    public static function scopeFirstOrThrowError($query, String $message = 'The selected data is invalid', $status = 400)
+    public static function scopeFirstOrThrowError($query, String $message = 'Data Not Found', $status = Response::HTTP_NOT_FOUND)
     {
         return $query->firstOr(function () use ($message, $status) {
             throw new BadRequestExceptions($message, $status);

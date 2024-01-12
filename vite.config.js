@@ -42,6 +42,14 @@ export default defineConfig({
             '@admin': path.resolve(__dirname, 'vuejs/admin-app'),
             '@shared_admin': path.resolve(__dirname, 'vuejs/admin-app/shared'),
             '@web': path.resolve(__dirname, 'vuejs/web-app'),
+            '@shared_admin_endpoints': path.resolve(
+                __dirname,
+                'vuejs/admin-app/shared/admin/endpoints'
+            ),
+            '@shared_admin_models': path.resolve(
+                __dirname,
+                'vuejs/admin-app/shared/admin/models'
+            ),
         },
     },
 });

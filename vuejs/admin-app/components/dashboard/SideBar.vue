@@ -37,16 +37,10 @@ const sideBarList = [
         route: '/',
     },
     {
-        icon: 'equalizer',
-        title: 'statistics',
-        text: 'Statistics',
-        route: null,
-    },
-    {
         icon: 'description',
-        title: 'posts',
-        text: 'Posts',
-        route: '/posts',
+        title: 'property',
+        text: 'Property',
+        route: '/property',
     },
     {
         icon: 'tune',

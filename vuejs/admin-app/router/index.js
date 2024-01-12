@@ -2,6 +2,7 @@ import { createWebHistory, createRouter } from 'vue-router';
 import * as AdminDashboard from '../modules/dashboard/router';
 import * as LoginDashboard from '../modules/login/router';
 import * as PostDashboard from '../modules/post/router';
+import * as Property from '../modules/property/router';
 import * as TestPage from '../modules/test/router';
 import { useAdminAuthStore } from '@shared_admin/base/auth.js';
 
@@ -29,6 +30,27 @@ const routes = [
                 component: PostDashboard.PostPageForm,
                 meta: { requiresAuth: true },
                 name: 'posts.form',
+                props: (route) => ({ type: route.query.type }),
+            },
+        ],
+    },
+    {
+        path: '/property',
+        component: Property.BasePage,
+        meta: { requiresAuth: true },
+        name: 'property',
+        children: [
+            {
+                path: '',
+                component: Property.ListPage,
+                meta: { requiresAuth: true },
+                name: 'property.list',
+            },
+            {
+                path: 'form',
+                component: Property.FormPage,
+                meta: { requiresAuth: true },
+                name: 'property.form',
                 props: (route) => ({ type: route.query.type }),
             },
         ],
