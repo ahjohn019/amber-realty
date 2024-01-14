@@ -16,7 +16,7 @@
     <meta property="og:url" content="{{ config('app.url') }}" />
     <meta property="og:image" content="{{ asset('images/amber_realty_logo.png') }}" />
 
-    <link rel="icon" type="image/x-icon" href="{{ asset('images/favicon.ico') }}">
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
