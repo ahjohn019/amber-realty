@@ -66,9 +66,15 @@ export default {
 
     setup() {
         const adminStore = useAdminAuthStore();
+        // const formData = ref({
+        //     email: 'admin_one@example.com',
+        //     password: '1111aaaa',
+        //     device_name: 'web',
+        // });
+
         const formData = ref({
-            email: 'admin_one@example.com',
-            password: '1111aaaa',
+            email: '',
+            password: '',
             device_name: 'web',
         });
 
