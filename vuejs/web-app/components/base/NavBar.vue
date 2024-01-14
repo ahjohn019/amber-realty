@@ -3,11 +3,7 @@
         <q-toolbar class="bg-secondary shadow-2" style="height: 85px">
             <div class="col-6 col-md-2">
                 <router-link to="/" exact>
-                    <img
-                        src="/images/amber_realty_logo.png"
-                        alt=""
-                        width="85"
-                    />
+                    <img :src="mainLogo" alt="" width="85" />
                 </router-link>
             </div>
 

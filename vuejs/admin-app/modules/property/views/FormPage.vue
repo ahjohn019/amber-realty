@@ -1,9 +1,17 @@
 <template>
-    <div class="m-4 px-4">
-        <div class="row pb-4">
+    <div class="row">
+        <div class="col-12 row pb-4">
             <div class="col text-2xl">Property Form</div>
+            <div class="col text-right">
+                <span class="font-bold">Details</span>
+                <q-toggle
+                    v-model="propertyDetailsToggle"
+                    color="green"
+                    @click="handlePropertyDetails"
+                />
+            </div>
         </div>
-        <div class="row bg-white p-5 font-bold gap-y-4">
+        <div class="col-12 row bg-white p-5 font-bold gap-y-4">
             <div class="col-12 post-information-name pb-2">Create Property</div>
             <div class="col-12">
                 <div class="post-information-name">Name</div>
@@ -33,7 +41,6 @@
                     {{ errors.descriptions }}
                 </div>
             </div>
-
             <div class="col-12">
                 <div class="post-information-name">Short Descriptions</div>
                 <div class="col-12">
@@ -69,81 +76,79 @@
                 >
                 </q-input>
             </div>
-
             <div
-                class="col-12 col-md-6"
-                :class="$q.screen.lt.md ? 'pr-0' : 'pr-6'"
+                class="col-12 row gap-y-4"
+                :class="propertyDetailsToggle ? '' : 'hidden'"
             >
-                <div class="post-information-name">Tenure</div>
-                <q-select
-                    dense
-                    v-model="propertyFormPayload.tenure"
-                    :options="['a', 'as']"
-                    label="Status"
-                />
-            </div>
-
-            <div class="col-12 col-md-6">
-                <div class="post-information-name">Square Feet</div>
-                <q-input
-                    dense
-                    outlined
-                    label="Square Feet"
-                    v-model="propertyFormPayload.square_feet"
+                <div
+                    class="col-12 col-md-6"
+                    :class="$q.screen.lt.md ? 'pr-0' : 'pr-6'"
                 >
-                </q-input>
-            </div>
-
-            <div
-                class="col-12 col-md-6"
-                :class="$q.screen.lt.md ? 'pr-0' : 'pr-6'"
-            >
-                <div class="post-information-name">Listing Type</div>
-                <q-select
-                    dense
-                    v-model="propertyFormPayload.listing_type"
-                    :options="['a', 'as']"
-                    label="Status"
-                />
-            </div>
-
-            <div class="col-12 col-md-6">
-                <div class="post-information-name">Furnished Type</div>
-                <q-select
-                    dense
-                    v-model="propertyFormPayload.furnishing"
-                    :options="['a', 'as']"
-                    label="Furnished Type"
-                />
-            </div>
-
-            <div
-                class="col-12 col-md-6"
-                :class="$q.screen.lt.md ? 'pr-0' : 'pr-6'"
-            >
-                <div class="post-information-name">Bathroom</div>
-                <q-input
-                    dense
-                    outlined
-                    label="Bathroom"
-                    v-model="propertyFormPayload.bathroom"
-                    type="number"
+                    <div class="post-information-name">Tenure</div>
+                    <q-select
+                        dense
+                        v-model="propertyFormPayload.tenure"
+                        :options="['a', 'as']"
+                        label="Status"
+                    />
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="post-information-name">Square Feet</div>
+                    <q-input
+                        dense
+                        outlined
+                        label="Square Feet"
+                        v-model="propertyFormPayload.square_feet"
+                    >
+                    </q-input>
+                </div>
+                <div
+                    class="col-12 col-md-6"
+                    :class="$q.screen.lt.md ? 'pr-0' : 'pr-6'"
                 >
-                </q-input>
-            </div>
-
-            <div class="col-12 col-md-6">
-                <div class="post-information-name">Bedroom</div>
-                <q-input
-                    dense
-                    outlined
-                    label="Bedroom"
-                    v-model="propertyFormPayload.bedroom"
-                    type="number"
+                    <div class="post-information-name">Listing Type</div>
+                    <q-select
+                        dense
+                        v-model="propertyFormPayload.listing_type"
+                        :options="['a', 'as']"
+                        label="Status"
+                    />
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="post-information-name">Furnished Type</div>
+                    <q-select
+                        dense
+                        v-model="propertyFormPayload.furnishing"
+                        :options="['a', 'as']"
+                        label="Furnished Type"
+                    />
+                </div>
+                <div
+                    class="col-12 col-md-6"
+                    :class="$q.screen.lt.md ? 'pr-0' : 'pr-6'"
                 >
-                </q-input>
+                    <div class="post-information-name">Bathroom</div>
+                    <q-input
+                        dense
+                        outlined
+                        label="Bathroom"
+                        v-model="propertyFormPayload.bathroom"
+                        type="number"
+                    >
+                    </q-input>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="post-information-name">Bedroom</div>
+                    <q-input
+                        dense
+                        outlined
+                        label="Bedroom"
+                        v-model="propertyFormPayload.bedroom"
+                        type="number"
+                    >
+                    </q-input>
+                </div>
             </div>
-
             <div class="col-12">
                 <div class="post-information-name">Images</div>
                 <DropFile @updateFiles="updateParentFiles" />
@@ -197,6 +202,14 @@ export default {
             listing_type: null,
         });
 
+        const propertyDetails = ref(0);
+        const propertyDetailsToggle = ref(false);
+
+        const handlePropertyDetails = () => {
+            propertyDetails.value = !propertyDetailsToggle.value ? 0 : 1;
+            return propertyDetails.value;
+        };
+
         const updateParentFiles = (files) => {
             propertyFormPayload.value.images = files;
         };
@@ -214,6 +227,8 @@ export default {
             updatePostFormData,
             updateParentFiles,
             updateDescriptions,
+            propertyDetailsToggle,
+            handlePropertyDetails,
             model,
             options,
             errors,

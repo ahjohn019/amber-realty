@@ -27,7 +27,7 @@ app.use(VueAxios, axios);
 
 app.use(SortQuasarIconsPlugin);
 
-app.config.globalProperties.mainLogo = '/images/crystal_logo.png';
+app.config.globalProperties.mainLogo = '/images/amber_realty_logo.png';
 
 app.use(CKEditor);
 

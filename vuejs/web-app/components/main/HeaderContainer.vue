@@ -3,7 +3,7 @@
         class="banner-background"
         :class="$q.screen.lt.md ? 'h-full' : 'h-[700px] flex items-center'"
     >
-        <div class="row container mx-auto p-6 md:p-12">
+        <div class="row container mx-auto p-4 md:p-12">
             <div
                 class="col-12 col-md-9 col-lg-7 flex flex-col gap-6 justify-center header-content-container px-4 text-white"
                 data-aos="flip-left"
@@ -16,11 +16,7 @@
                         <div
                             class="col-12 col-md-2 flex items-center justify-center"
                         >
-                            <img
-                                src="/images/amber_realty_logo.png"
-                                alt=""
-                                width="100"
-                            />
+                            <img :src="mainLogo" alt="" width="100" />
                         </div>
                         <div class="col-12 col-md-8 row items-center">
                             <div class="col-12 col-md-6">
@@ -42,8 +38,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="text-xl md:text-7xl font-bold header-title"></div>
-                <div class="text-lg">
+                <div class="md:text-7xl font-bold header-title"></div>
+                <div class="text-sm">
                     Are you ready to start the search for your dream home? Look
                     no further than Amber Realty Real Estate.
                 </div>

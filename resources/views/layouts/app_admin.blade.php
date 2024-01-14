@@ -8,13 +8,13 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.admin_name', 'Admin Project Crystal') }}</title>
+    <title>Admin - Amber Realty</title>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 
-    <link rel="icon" type="image/x-icon" href="{{ asset('images/crystal_logo.ico') }}">
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
 
     <!-- Scripts -->
     @vite(['vuejs/admin-app/app.js', 'resources/sass/app.scss', 'resources/sass/custom.scss'])

@@ -1,7 +1,7 @@
 <template>
     <BasePage>
         <template #content>
-            <div class="dashboard-container-page m-4 px-4">
+            <div class="dashboard-container-page p-4">
                 <router-view></router-view>
             </div>
         </template>
