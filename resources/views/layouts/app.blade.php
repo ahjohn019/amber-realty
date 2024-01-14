@@ -11,7 +11,10 @@
     <meta name="twitter:image" content="{{ asset('images/amber_realty_logo.png') }}">
     <meta name="twitter:title" content="Amber Realty">
     <meta name="twitter:description" content="Amber Realty Malaysia specializes in all types of properties including commercial lots, residential">
-    <meta name="twitter:image" content="{{ asset('images/amber_realty_logo.png') }}">
+    <meta property="og:title" content="Amber Realty" />
+    <meta property="og:type" content="property" />
+    <meta property="og:url" content="{{ config('app.url') }}" />
+    <meta property="og:image" content="{{ asset('images/amber_realty_logo.png') }}" />
 
     <link rel="icon" type="image/x-icon" href="{{ asset('images/favicon.ico') }}">
 
