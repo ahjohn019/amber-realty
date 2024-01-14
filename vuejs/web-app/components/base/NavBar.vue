@@ -1,9 +1,13 @@
 <template>
     <div>
-        <q-toolbar class="text-white shadow-2 bg-primary" style="height: 75px">
+        <q-toolbar class="bg-secondary shadow-2" style="height: 85px">
             <div class="col-6 col-md-2">
                 <router-link to="/" exact>
-                    <q-btn flat label="Amber Realty" />
+                    <img
+                        src="/images/amber_realty_logo.png"
+                        alt=""
+                        width="85"
+                    />
                 </router-link>
             </div>
 
@@ -21,12 +25,6 @@
                 >
                     <q-btn flat :label="option.label" />
                 </router-link>
-            </div>
-            <div class="col-2 text-right nav-bar-content">
-                <q-btn
-                    label="Schedule A Visit"
-                    class="text-black bg-secondary"
-                />
             </div>
         </q-toolbar>
     </div>
@@ -82,7 +80,7 @@ export default {
 }
 
 .active-link {
-    color: #ffd278;
+    color: #ac0e14;
     font-weight: bold;
 }
 

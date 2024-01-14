@@ -20,3 +20,10 @@
     @include typed("Find Your Dream Home Today",2,
         (caret-width: 2px, caret-space: 2px));
 }
+
+.banner-background{
+    background-image: url("../../public/images/amber_realty_banner.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
