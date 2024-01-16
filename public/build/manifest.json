@@ -7,10 +7,6 @@
     "file": "assets/BasePage-fb300440.css",
     "src": "BasePage.css"
   },
-  "DropFile.css": {
-    "file": "assets/DropFile-f6f2ae84.css",
-    "src": "DropFile.css"
-  },
   "_BaseLayout-b02beaf2.js": {
     "css": [
       "assets/BaseLayout-5271f807.css"
@@ -25,11 +21,11 @@
       "_QBtnDropdown-0d1ef10b.js"
     ]
   },
-  "_BasePage-36fb15dd.js": {
+  "_BasePage-a3a575c7.js": {
     "css": [
       "assets/BasePage-fb300440.css"
     ],
-    "file": "assets/BasePage-36fb15dd.js",
+    "file": "assets/BasePage-a3a575c7.js",
     "imports": [
       "_ckeditor-2815513e.js",
       "_QBtn-429a055e.js",
@@ -40,16 +36,6 @@
       "_QToolbar-10f9d1d7.js",
       "_use-prevent-scroll-8cae60da.js",
       "vuejs/admin-app/app.js"
-    ]
-  },
-  "_DropFile-9d376a00.js": {
-    "css": [
-      "assets/DropFile-f6f2ae84.css"
-    ],
-    "file": "assets/DropFile-9d376a00.js",
-    "imports": [
-      "_ckeditor-2815513e.js",
-      "_QBtn-429a055e.js"
     ]
   },
   "_ListComponent-c320a3dc.js": {
@@ -152,17 +138,34 @@
       "_QCheckbox-f8132721.js"
     ]
   },
+  "_index-eb0afb72.js": {
+    "file": "assets/index-eb0afb72.js",
+    "imports": [
+      "_ckeditor-2815513e.js",
+      "vuejs/admin-app/app.js"
+    ]
+  },
   "_option-sizes-bbc58390.js": {
     "file": "assets/option-sizes-bbc58390.js",
     "imports": [
       "_ckeditor-2815513e.js"
     ]
   },
-  "_postTablePage-51cdf64c.js": {
-    "file": "assets/postTablePage-51cdf64c.js",
+  "_postTablePage-0d1be524.js": {
+    "file": "assets/postTablePage-0d1be524.js",
     "imports": [
       "_ckeditor-2815513e.js",
       "vuejs/admin-app/app.js"
+    ]
+  },
+  "_refList-bd8f3169.js": {
+    "css": [
+      "assets/refList-f6f2ae84.css"
+    ],
+    "file": "assets/refList-bd8f3169.js",
+    "imports": [
+      "_ckeditor-2815513e.js",
+      "_QBtn-429a055e.js"
     ]
   },
   "_scrollAnimation-8c31024a.js": {
@@ -218,6 +221,10 @@
     "file": "assets/amber_realty_banner-04bfed11.jpg",
     "src": "public/images/amber_realty_banner.jpg"
   },
+  "refList.css": {
+    "file": "assets/refList-f6f2ae84.css",
+    "src": "refList.css"
+  },
   "resources/sass/app.scss": {
     "file": "assets/app-91641756.css",
     "isEntry": true,
@@ -240,7 +247,7 @@
       "vuejs/admin-app/modules/property/views/FormPage.vue",
       "vuejs/admin-app/modules/test/views/TestPage.vue"
     ],
-    "file": "assets/app-1d6abc3e.js",
+    "file": "assets/app-4a7cf3d9.js",
     "imports": [
       "_ckeditor-2815513e.js"
     ],
@@ -255,7 +262,7 @@
     "css": [
       "assets/MainPage-b8c7c9c0.css"
     ],
-    "file": "assets/MainPage-1b3329ed.js",
+    "file": "assets/MainPage-42c51ae4.js",
     "imports": [
       "_QBtn-429a055e.js",
       "_ckeditor-2815513e.js",
@@ -264,7 +271,7 @@
       "_QMenu-47e5d027.js",
       "_QList-e580fcd2.js",
       "_scrollAnimation-8c31024a.js",
-      "_BasePage-36fb15dd.js",
+      "_BasePage-a3a575c7.js",
       "_QInput-03d5893c.js",
       "_use-key-composition-b380e759.js",
       "_QBtnDropdown-0d1ef10b.js",
@@ -282,7 +289,7 @@
     "css": [
       "assets/MainPage-fdd2b42c.css"
     ],
-    "file": "assets/MainPage-96f45713.js",
+    "file": "assets/MainPage-b8934b60.js",
     "imports": [
       "_QBtn-429a055e.js",
       "_QInput-03d5893c.js",
@@ -304,9 +311,9 @@
     "css": [
       "assets/PostPage-ccfed713.css"
     ],
-    "file": "assets/PostPage-213d5252.js",
+    "file": "assets/PostPage-08ba34bc.js",
     "imports": [
-      "_BasePage-36fb15dd.js",
+      "_BasePage-a3a575c7.js",
       "_ckeditor-2815513e.js",
       "_QBtn-429a055e.js",
       "_QMenu-47e5d027.js",
@@ -329,7 +336,7 @@
     "css": [
       "assets/PostPageForm-e1ecbcec.css"
     ],
-    "file": "assets/PostPageForm-b605cfe8.js",
+    "file": "assets/PostPageForm-33ab7351.js",
     "imports": [
       "_QInput-03d5893c.js",
       "_QSelect-51ffb7e5.js",
@@ -337,8 +344,8 @@
       "_QBtn-429a055e.js",
       "_option-sizes-bbc58390.js",
       "_use-key-composition-b380e759.js",
-      "_DropFile-9d376a00.js",
-      "_postTablePage-51cdf64c.js",
+      "_refList-bd8f3169.js",
+      "_postTablePage-0d1be524.js",
       "vuejs/admin-app/app.js",
       "_QMenu-47e5d027.js",
       "_use-prevent-scroll-8cae60da.js"
@@ -354,7 +361,7 @@
     "css": [
       "assets/PostPageList-fbfbb770.css"
     ],
-    "file": "assets/PostPageList-ef0e583b.js",
+    "file": "assets/PostPageList-1c96d4fa.js",
     "imports": [
       "_QBtn-429a055e.js",
       "_dayjs.min-bba1d50b.js",
@@ -363,7 +370,7 @@
       "_QMenu-47e5d027.js",
       "_QList-e580fcd2.js",
       "_QBtnDropdown-0d1ef10b.js",
-      "_postTablePage-51cdf64c.js",
+      "_postTablePage-0d1be524.js",
       "vuejs/admin-app/app.js",
       "_QInput-03d5893c.js",
       "_QSelect-51ffb7e5.js",
@@ -384,9 +391,9 @@
     "css": [
       "assets/PostPage-ccfed713.css"
     ],
-    "file": "assets/BasePage-e4a66671.js",
+    "file": "assets/BasePage-23cc0626.js",
     "imports": [
-      "_BasePage-36fb15dd.js",
+      "_BasePage-a3a575c7.js",
       "_ckeditor-2815513e.js",
       "_QBtn-429a055e.js",
       "_QMenu-47e5d027.js",
@@ -409,14 +416,16 @@
     "css": [
       "assets/FormPage-88b9eeef.css"
     ],
-    "file": "assets/FormPage-99070520.js",
+    "file": "assets/FormPage-18dbbc44.js",
     "imports": [
       "_ckeditor-2815513e.js",
       "_QBtn-429a055e.js",
       "_use-checkbox-562fcdb2.js",
       "_QInput-03d5893c.js",
       "_QSelect-51ffb7e5.js",
-      "_DropFile-9d376a00.js",
+      "_refList-bd8f3169.js",
+      "_index-eb0afb72.js",
+      "vuejs/admin-app/app.js",
       "_option-sizes-bbc58390.js",
       "_use-key-composition-b380e759.js",
       "_QMenu-47e5d027.js",
@@ -426,11 +435,12 @@
     "src": "vuejs/admin-app/modules/property/views/FormPage.vue"
   },
   "vuejs/admin-app/modules/property/views/ListPage.vue": {
-    "file": "assets/ListPage-cfa89c85.js",
+    "file": "assets/ListPage-224430f4.js",
     "imports": [
       "_QBtn-429a055e.js",
       "_dayjs.min-bba1d50b.js",
       "_ckeditor-2815513e.js",
+      "_index-eb0afb72.js",
       "vuejs/admin-app/app.js",
       "_QList-e580fcd2.js",
       "_QSelect-51ffb7e5.js",
