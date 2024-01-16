@@ -17,5 +17,6 @@ module.exports = {
     plugins: ['vue'],
     rules: {
         'vue/require-default-prop': 'off',
+        camelcase: 'off',
     },
 };

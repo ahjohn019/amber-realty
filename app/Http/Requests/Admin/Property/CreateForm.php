@@ -28,8 +28,8 @@ class CreateForm extends FormRequest
         return [
             //
             'name' => ['required', 'unique:properties'],
-            'description' => ['required'],
-            'short_description' => ['required'],
+            'description' => ['sometimes'],
+            'short_description' => ['sometimes'],
             'status' => ['required', new Enum(PropertyStatusEnum::class)],
             'price' => ['required'],
             'type_id' => [
@@ -47,8 +47,8 @@ class CreateForm extends FormRequest
                 }
             ],
             'tenure' => ['required', 'in:freehold,leasehold'],
-            'bathroom' => ['required', 'integer'],
-            'bedroom' => ['required', 'integer'],
+            'bathroom' => ['required', 'integer', 'between:1,10'],
+            'bedroom' => ['required', 'integer', 'between:1,10'],
             'square_feet' => ['required', 'integer'],
             'listing_type' => ['required', 'in:sale,rent'],
             'furnishing' => ['required', 'in:unfurnished,partially_furnished,furnished'],

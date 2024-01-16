@@ -31,7 +31,7 @@ import { ref } from 'vue';
 
 export default {
     props: {
-        descriptions: String,
+        description: String,
     },
     setup(props, { emit }) {
         const editorData = ref('');

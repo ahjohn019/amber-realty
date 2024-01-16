@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\State;
 use App\Models\Category;
-use App\Enums\Property\Tenure;
-use App\Enums\Property\Furnishing;
+use App\Models\PropertyTypes;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\Admin\Ref\StateResource;
+use App\Http\Resources\Admin\Ref\PropertyTypeResource;
 
 class RefController extends Controller
 {
@@ -17,10 +19,19 @@ class RefController extends Controller
         return self::successResponse('Category Display Successfully', $result);
     }
 
-    public function furnishing()
+    public function state()
     {
-        $result = Furnishing::cases();
+        $state = State::get();
+        $result = StateResource::collection($state);
 
-        return self::successResponse('Furnish List', $result);
+        return self::successResponse('State Display Successfully', $result);
+    }
+
+    public function propertyTypes()
+    {
+        $propertyTypes = PropertyTypes::get();
+        $result = PropertyTypeResource::collection($propertyTypes);
+
+        return self::successResponse('Property Types Display Successfully', $result);
     }
 }

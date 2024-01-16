@@ -91,6 +91,7 @@ Route::middleware(['auth:sanctum', 'role:' . RoleTag::SUPERADMIN . '|' . RoleTag
 
     Route::prefix('ref')->name('ref.')->group(function () {
         Route::get('/category', [RefController::class, 'category'])->name('category');
-        Route::get('/furnishing', [RefController::class, 'furnishing'])->name('furnishing');
+        Route::get('/state', [RefController::class, 'state'])->name('state');
+        Route::get('/property-types', [RefController::class, 'propertyTypes'])->name('propertyTypes');
     });
 });

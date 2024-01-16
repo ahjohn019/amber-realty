@@ -7,14 +7,24 @@
     <meta name="description" content="Amber Realty Malaysia specializes in all types of properties including commercial lots, residential">
     <meta name="title" content="Amber Realty">
     <meta name="keywords" content="Amber Realty">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="twitter:image" content="{{ asset('images/amber_realty_logo.png') }}">
+
+    <!-- Google / Search Engine Tags -->
+    <meta itemprop="name" content="Amber Realty">
+    <meta itemprop="description" content="Amber Realty Malaysia specializes in all types of properties including commercial lots, residential">
+    <meta itemprop="image" content="{{ asset('images/amber_realty_logo.png') }}">
+
+    <!-- Facebook Meta Tags -->
+    <meta property="og:url" content="{{ config('app.url') }}">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Amber Realty">
+    <meta property="og:description" content="Amber Realty Malaysia specializes in all types of properties including commercial lots, residential">
+    <meta property="og:image" content="{{ asset('images/amber_realty_logo.png') }}">
+
+    <!-- Twitter Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Amber Realty">
     <meta name="twitter:description" content="Amber Realty Malaysia specializes in all types of properties including commercial lots, residential">
-    <meta property="og:title" content="Amber Realty" />
-    <meta property="og:type" content="property" />
-    <meta property="og:url" content="{{ config('app.url') }}" />
-    <meta property="og:image" content="{{ asset('images/amber_realty_logo.png') }}" />
+    <meta name="twitter:image" content="{{ asset('images/amber_realty_logo.png') }}">
 
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
 
