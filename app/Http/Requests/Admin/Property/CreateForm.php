@@ -46,12 +46,12 @@ class CreateForm extends FormRequest
                     $this->validateType($value, $fail, State::query());
                 }
             ],
-            'tenure' => ['required', 'in:freehold,leasehold'],
-            'bathroom' => ['required', 'integer', 'between:1,10'],
-            'bedroom' => ['required', 'integer', 'between:1,10'],
-            'square_feet' => ['required', 'integer'],
-            'listing_type' => ['required', 'in:sale,rent'],
-            'furnishing' => ['required', 'in:unfurnished,partially_furnished,furnished'],
+            'tenure' => ['sometimes', 'in:freehold,leasehold'],
+            'bathroom' => ['sometimes', 'integer', 'between:1,10'],
+            'bedroom' => ['sometimes', 'integer', 'between:1,10'],
+            'square_feet' => ['sometimes', 'integer'],
+            'listing_type' => ['sometimes', 'in:sale,rent'],
+            'furnishing' => ['sometimes', 'in:unfurnished,partially_furnished,furnished'],
             'property_details' => ['sometimes', 'boolean']
         ];
     }
