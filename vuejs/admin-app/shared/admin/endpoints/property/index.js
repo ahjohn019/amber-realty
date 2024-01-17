@@ -45,7 +45,7 @@ export const usePropertyAdminStore = defineStore('property_admin', {
             };
 
             if (payload.property_details > 0) {
-                this.handlePropertyDetails(payload);
+                payload = this.handlePropertyDetails(payload);
             }
 
             const { state, property_types, ...filteredPayload } = payload;
