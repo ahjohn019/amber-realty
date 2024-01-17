@@ -57,6 +57,19 @@ class CreateForm extends FormRequest
     }
 
     /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array<string, string>
+     */
+    public function messages(): array
+    {
+        return [
+            'type_id.required' => 'Property types required.',
+            'state_id.required' => 'State required.',
+        ];
+    }
+
+    /**
      * Validate the state ID.
      *
      * @param mixed $value
