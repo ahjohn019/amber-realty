@@ -32,7 +32,7 @@ export const usePropertyAdminStore = defineStore('property_admin', {
             }
         },
 
-        async createProperty(authToken, payload = null) {
+        async createProperty(authToken, payload = null, errors = null) {
             const config = {
                 headers: { Authorization: `Bearer ${authToken}` },
             };
@@ -67,7 +67,21 @@ export const usePropertyAdminStore = defineStore('property_admin', {
                         return response.data.data;
                     }
                 });
+
+                return response;
             } catch (error) {
+                const errorResponse = error.response?.data?.errors;
+
+                errors.value = {
+                    ...errors.value,
+                    name: errorResponse?.name?.[0] ?? '',
+                    description: errorResponse?.description?.[0] ?? '',
+                    short_description:
+                        errorResponse?.short_description?.[0] ?? '',
+                    state_id: errorResponse?.state_id?.[0] ?? '',
+                    type_id: errorResponse?.type_id?.[0] ?? '',
+                };
+
                 return error.response;
             }
         },

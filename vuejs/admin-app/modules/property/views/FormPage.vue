@@ -26,7 +26,7 @@
                     >
                     </q-input>
                 </div>
-                <div class="col-12 text-red-700">
+                <div class="col-12 text-red-700 pt-2">
                     {{ errors.name }}
                 </div>
             </div>
@@ -38,7 +38,7 @@
                         @updateDescriptionsData="updateDescriptions"
                     />
                 </div>
-                <div class="col-12 text-red-700">
+                <div class="col-12 text-red-700 pt-2">
                     {{ errors.description }}
                 </div>
             </div>
@@ -52,6 +52,9 @@
                         placeholder="Short Descriptions"
                         type="textarea"
                     />
+                </div>
+                <div class="col-12 text-red-700 pt-2">
+                    {{ errors.short_description }}
                 </div>
             </div>
             <div
@@ -78,6 +81,9 @@
                     option-label="label"
                     label="Please Select"
                 />
+                <div class="col-12 text-red-700 pt-2">
+                    {{ errors.type_id }}
+                </div>
             </div>
             <div
                 class="col-12 col-md-6"
@@ -92,6 +98,9 @@
                     option-label="label"
                     label="Please Select"
                 />
+                <div class="col-12 text-red-700 pt-2">
+                    {{ errors.state_id }}
+                </div>
             </div>
             <div class="col-12 col-md-6">
                 <div class="post-information-name">Price</div>
@@ -215,10 +224,12 @@ export default {
     },
 
     setup() {
+        // fetch the shared modules
         const fetchPropertyModels = usePropertyAdminModelStore();
         const fetchRefAdminStore = useRefListStore();
         const fetchPropertyAdminStore = usePropertyAdminStore();
 
+        // fetch property data list
         const propertyData = ref(fetchPropertyModels.fetchPropertyData());
         const propertyDetailsData = ref(
             fetchPropertyModels.fetchPropertyDetailsData()
@@ -226,6 +237,7 @@ export default {
         propertyData.value.status = 'Active';
         const errors = ref(fetchPropertyModels.fetchPropertyError());
 
+        // init
         const model = ref(null);
         const options = ref([]);
         const propertyDetails = ref(0);
@@ -266,10 +278,12 @@ export default {
             return propertyDetails.value;
         };
 
+        // Handle images
         const updateParentFiles = (files) => {
             propertyData.value.images = files;
         };
 
+        // handle descriptions
         const updateDescriptions = (value) => {
             propertyData.value.description = value;
         };
@@ -305,7 +319,8 @@ export default {
 
             const response = await fetchPropertyAdminStore.createProperty(
                 getAuthToken,
-                propertyData.value
+                propertyData.value,
+                errors
             );
 
             return response;

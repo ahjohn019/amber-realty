@@ -36,7 +36,7 @@ class Handler extends ExceptionHandler
                     'errors' => $e->getMessage(),
                     'messages' => $e->getMessage(),
                     'code' => Response::HTTP_UNAUTHORIZED
-                ]);
+                ], Response::HTTP_UNAUTHORIZED);
             }
 
             if ($e instanceof ValidationException) {
@@ -46,7 +46,7 @@ class Handler extends ExceptionHandler
                     'errors' => $e->validator->errors(),
                     'messages' => $errors,
                     'code' => Response::HTTP_UNPROCESSABLE_ENTITY
-                ]);
+                ], Response::HTTP_UNPROCESSABLE_ENTITY);
             }
         });
     }
