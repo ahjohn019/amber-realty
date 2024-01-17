@@ -53,7 +53,7 @@ export const usePropertyAdminModelStore = defineStore('property_admin_models', {
                 short_description: '',
                 images: [],
                 status: '',
-                price: 0,
+                price: 300,
                 state: '',
                 property_types: '',
             };

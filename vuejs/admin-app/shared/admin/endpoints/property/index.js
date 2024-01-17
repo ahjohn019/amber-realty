@@ -39,6 +39,9 @@ export const usePropertyAdminStore = defineStore('property_admin', {
 
             payload = {
                 ...payload,
+                type_id: payload.property_types.id,
+                state_id: payload.state.id,
+                status: payload.status.slug,
             };
 
             if (payload.property_details > 0) {
@@ -73,9 +76,6 @@ export const usePropertyAdminStore = defineStore('property_admin', {
             const propertyDetails = {
                 furnishing: payload.furnishing.slug,
                 listing_type: payload.listing_type.slug,
-                type_id: payload.property_types.id,
-                state_id: payload.state.id,
-                status: payload.status.slug,
                 tenure: payload.tenure.slug,
                 bathroom: parseInt(payload.bathroom),
                 bedroom: parseInt(payload.bedroom),

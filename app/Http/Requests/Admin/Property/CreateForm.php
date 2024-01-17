@@ -29,9 +29,9 @@ class CreateForm extends FormRequest
             //
             'name' => ['required', 'unique:properties'],
             'description' => ['sometimes'],
-            'short_description' => ['sometimes'],
+            'short_description' => ['sometimes', 'max:255'],
             'status' => ['required', new Enum(PropertyStatusEnum::class)],
-            'price' => ['required'],
+            'price' => ['required', 'integer', 'min:300'],
             'type_id' => [
                 'required',
                 'integer',
