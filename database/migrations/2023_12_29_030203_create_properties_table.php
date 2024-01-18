@@ -21,6 +21,7 @@ return new class extends Migration
             $table->integer('type_id');
             $table->integer('state_id');
             $table->enum('status', ['active', 'inactive'])->default('active');
+            $table->text('banner_url')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 import { useRouter } from 'vue-router';
-import { useAdminAuthStore } from '@shared_admin/base/auth.js';
+import { useAdminAuthStore } from '@store_admin/base/auth.js';
 
 export const useServerTableStore = defineStore('server_table_admin', {
     state: () => ({

@@ -95,10 +95,10 @@
 
 <script>
 import { ref, onMounted } from 'vue';
-import { useBarChartsPerformanceAdminStore } from '@shared_admin/dashboard/barChartPerformance.js';
-import { useAdminAuthStore } from '@shared_admin/base/auth.js';
-import { useBaseProgressAnimationStore } from '@shared_admin/base/progressAnimation.js';
-import { useCardDetailsAdminStore } from '@shared_admin/dashboard/cardDetails.js';
+import { useBarChartsPerformanceAdminStore } from '@store_admin/dashboard/barChartPerformance.js';
+import { useAdminAuthStore } from '@store_admin/base/auth.js';
+import { useBaseProgressAnimationStore } from '@store_admin/base/progressAnimation.js';
+import { useCardDetailsAdminStore } from '@store_admin/dashboard/cardDetails.js';
 
 export default {
     setup() {

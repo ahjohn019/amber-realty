@@ -31,9 +31,9 @@
 
 <script>
 import { ref, onMounted } from 'vue';
-import { usePropertyAdminStore } from '@shared_admin_endpoints/property/index.js';
-import { usePropertyAdminModelStore } from '@shared_admin_models/property/index.js';
-import { useServerTableStore } from '@shared_admin/admin/server/table.js';
+import { usePropertyAdminStore } from '@store_admin_endpoints/property/index.js';
+import { usePropertyAdminModelStore } from '@store_admin_models/property/index.js';
+import { useServerTableStore } from '@store_admin/admin/server/table.js';
 
 import dayjs from 'dayjs';
 

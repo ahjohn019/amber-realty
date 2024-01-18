@@ -71,9 +71,9 @@
 <script>
 import CkeditorPlugin from '@admin/components/ckeditor/ckEditorPlugin.vue';
 import DropFile from '@admin/components/dragAndDrop/DropFile.vue';
-import { usePostTablePageAdminStore } from '@shared_admin/post/postTablePage.js';
-import { useAdminAuthStore } from '@shared_admin/base/auth.js';
-import { useRefListStore } from '@shared_admin/ref/refList.js';
+import { usePostTablePageAdminStore } from '@store_admin/post/postTablePage.js';
+import { useAdminAuthStore } from '@store_admin/base/auth.js';
+import { useRefListStore } from '@store_admin/ref/refList.js';
 import { ref } from 'vue';
 
 export default {

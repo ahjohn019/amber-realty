@@ -14,7 +14,7 @@
 import CardDetails from '@admin/components/dashboard/CardDetails.vue';
 import BarChart from '@admin/components/charts/dashboard/BarChart.vue';
 import BarPerformance from '@admin/components/dashboard/BarPerformance.vue';
-import { useBaseScrollAnimationStore } from '@shared_admin/base/scrollAnimation.js';
+import { useBaseScrollAnimationStore } from '@store_admin/base/scrollAnimation.js';
 import BasePage from '@admin/modules/base/views/BasePage.vue';
 
 export default {

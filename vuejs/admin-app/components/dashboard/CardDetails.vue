@@ -24,8 +24,8 @@
 </template>
 
 <script>
-import { useCardDetailsAdminStore } from '@shared_admin/dashboard/cardDetails.js';
-import { useAdminAuthStore } from '@shared_admin/base/auth.js';
+import { useCardDetailsAdminStore } from '@store_admin/dashboard/cardDetails.js';
+import { useAdminAuthStore } from '@store_admin/base/auth.js';
 import { onMounted, ref } from 'vue';
 
 export default {

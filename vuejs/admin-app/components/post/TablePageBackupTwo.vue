@@ -156,8 +156,8 @@
 
 <script>
 import { ref } from 'vue';
-import { usePostTablePageAdminStore } from '@shared_admin/post/postTablePage.js';
-import { useAdminAuthStore } from '@shared_admin/base/auth.js';
+import { usePostTablePageAdminStore } from '@store_admin/post/postTablePage.js';
+import { useAdminAuthStore } from '@store_admin/base/auth.js';
 import dayjs from 'dayjs';
 import { useRoute } from 'vue-router';
 import FilterBar from '@admin/components/post/FilterBar.vue';

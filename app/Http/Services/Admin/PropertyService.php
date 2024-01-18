@@ -2,12 +2,12 @@
 
 namespace App\Http\Services\Admin;
 
-use App\Enums\OrderByEnum;
 use App\Models\Property;
-use App\Models\PropertyDetails;
-use App\Enums\Property\PropertyStatusEnum;
+use App\Enums\OrderByEnum;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\DB;
 use App\Http\Services\ImageService;
+use App\Enums\Property\PropertyStatusEnum;
 use Symfony\Component\HttpFoundation\Response;
 use App\Http\Resources\Admin\Property\PropertyResource;
 
@@ -55,12 +55,12 @@ class PropertyService
                     'price' => $payload['price'],
                     'type_id' => $payload['type_id'],
                     'state_id' => $payload['state_id'],
+                    'banner_url' => $payload['banner_url'],
                     'user_id' => auth()->user()->id
                 ]);
 
                 if (isset($payload['file'])) {
-                    $payload['folder_name'] = 'Posts';
-                    ImageService::createImage($payload, $property);
+                    ImageService::handleUploadImageAmount($payload, $property);
                 }
 
                 if (isset($payload['property_details']) && $payload['property_details']) {

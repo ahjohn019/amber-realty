@@ -4,14 +4,15 @@ namespace App\Http\Services;
 
 use App\Models\ServerFile;
 use App\Traits\ServerFileTrait;
+use Illuminate\Http\UploadedFile;
 
 class ImageService
 {
-    public static function createImage(array $payload, $model)
+    public static function createImage(array $payload, $model, $file = null)
     {
-        $serverFile = ServerFileTrait::uploadServerFiles($payload['file'], [
+        $serverFile = ServerFileTrait::uploadServerFiles($file, [
             'model_id' => $model->id,
-            'image' => $payload['file'],
+            'image' => $file,
             'module_path' => ServerFile::MODULE_PATH_WEB_IMAGE,
             'file_type_id' => ServerFile::FILE_TYPE_IMAGE,
             'max_size' => 1000,
@@ -48,5 +49,20 @@ class ImageService
         $result = $model->image()->update($serverFile);
 
         return $result;
+    }
+
+    public static function handleUploadImageAmount($payload, $property)
+    {
+        if ($payload['file'] instanceof UploadedFile) {
+            ImageService::createImage($payload, $property, $payload['file']);
+        }
+
+        if (is_array($payload['file'])) {
+            $payload['folder_name'] = 'Property';
+
+            collect($payload['file'])->each(function ($item) use ($payload, $property) {
+                ImageService::createImage($payload, $property, $item);
+            });
+        }
     }
 }

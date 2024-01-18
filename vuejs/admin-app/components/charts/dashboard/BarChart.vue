@@ -23,8 +23,8 @@
 </template>
 
 <script>
-import { useBarChartsAdminStore } from '@shared_admin/dashboard/barChartDetails.js';
-import { useAdminAuthStore } from '@shared_admin/base/auth.js';
+import { useBarChartsAdminStore } from '@store_admin/dashboard/barChartDetails.js';
+import { useAdminAuthStore } from '@store_admin/base/auth.js';
 import { Bar } from 'vue-chartjs';
 import {
     Chart as ChartJS,

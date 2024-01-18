@@ -34,7 +34,10 @@ export const usePropertyAdminStore = defineStore('property_admin', {
 
         async createProperty(authToken, payload = null, errors = null) {
             const config = {
-                headers: { Authorization: `Bearer ${authToken}` },
+                headers: {
+                    Authorization: `Bearer ${authToken}`,
+                    'Content-Type': 'multipart/form-data',
+                },
             };
 
             payload = {
@@ -42,13 +45,15 @@ export const usePropertyAdminStore = defineStore('property_admin', {
                 type_id: payload.property_types.id,
                 state_id: payload.state.id,
                 status: payload.status.slug,
+                file: payload.images,
             };
 
             if (payload.property_details > 0) {
                 payload = this.handlePropertyDetails(payload);
             }
 
-            const { state, property_types, ...filteredPayload } = payload;
+            const { state, property_types, images, ...filteredPayload } =
+                payload;
 
             try {
                 const response = await axios.post(

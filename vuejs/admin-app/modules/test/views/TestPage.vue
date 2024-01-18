@@ -8,7 +8,7 @@
 </template>
 
 <script setup>
-import { useBaseScrollAnimationStore } from '@shared_admin/base/scrollAnimation.js';
+import { useBaseScrollAnimationStore } from '@store_admin/base/scrollAnimation.js';
 
 const baseScrollAnimationStore = useBaseScrollAnimationStore();
 const animateClassList = [

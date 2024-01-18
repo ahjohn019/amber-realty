@@ -194,7 +194,23 @@
                 </div>
             </div>
             <div class="col-12">
-                <div class="post-information-name">Images</div>
+                <div class="post-information-name">Main Images</div>
+                <input
+                    type="file"
+                    @input="updateMainImage"
+                    accept=".png, .jpg"
+                />
+                <img
+                    v-if="bannerUrl != ''"
+                    :src="bannerUrl"
+                    alt=""
+                    class="object-contain h-[300px] mx-auto"
+                    :class="$q.screen.lt.md ? 'w-full' : 'w-1/2'"
+                />
+            </div>
+
+            <div class="col-12">
+                <div class="post-information-name">Slider Images</div>
                 <DropFile @updateFiles="updateParentFiles" />
             </div>
             <div class="col-12 text-right">
@@ -212,10 +228,10 @@
 import CkeditorPlugin from '@admin/components/ckeditor/ckEditorPlugin.vue';
 import DropFile from '@admin/components/dragAndDrop/DropFile.vue';
 import { ref } from 'vue';
-import { usePropertyAdminModelStore } from '@shared_admin_models/property/index.js';
-import { useAdminAuthStore } from '@shared_admin/base/auth.js';
-import { usePropertyAdminStore } from '@shared_admin_endpoints/property/index.js';
-import { useRefListStore } from '@shared_admin/ref/refList.js';
+import { usePropertyAdminModelStore } from '@store_admin_models/property/index.js';
+import { useAdminAuthStore } from '@store_admin/base/auth.js';
+import { usePropertyAdminStore } from '@store_admin_endpoints/property/index.js';
+import { useRefListStore } from '@store_admin/ref/refList.js';
 
 export default {
     components: {
@@ -238,12 +254,13 @@ export default {
         const errors = ref(fetchPropertyModels.fetchPropertyError());
 
         // init
-        const model = ref(null);
         const options = ref([]);
         const propertyDetails = ref(0);
         const propertyDetailsToggle = ref(false);
         const state = ref([]);
         const property_types = ref([]);
+        const mainImage = ref(null);
+        const bannerUrl = ref('');
 
         // fetch auth token
         const adminAuthStore = useAdminAuthStore();
@@ -283,16 +300,24 @@ export default {
             propertyData.value.images = files;
         };
 
+        const updateMainImage = (event) => {
+            bannerUrl.value = URL.createObjectURL(event.target.files[0]);
+        };
+
         // handle descriptions
         const updateDescriptions = (value) => {
             propertyData.value.description = value;
         };
 
         const submitData = async () => {
-            propertyData.value.property_details = propertyDetails.value;
-            propertyData.value.status = {
-                slug: propertyData.value.status?.slug || 'active',
-                label: propertyData.value.status?.label || 'Active',
+            propertyData.value = {
+                ...propertyData.value,
+                property_details: propertyDetails.value,
+                status: {
+                    slug: propertyData.value.status?.slug || 'active',
+                    label: propertyData.value.status?.label || 'Active',
+                },
+                banner_url: bannerUrl.value,
             };
 
             const {
@@ -337,7 +362,6 @@ export default {
             updateDescriptions,
             propertyDetailsToggle,
             handlePropertyDetails,
-            model,
             options,
             errors,
             tenure,
@@ -348,6 +372,9 @@ export default {
             property_types,
             stateList,
             propertyTypesList,
+            mainImage,
+            bannerUrl,
+            updateMainImage,
         };
     },
 };

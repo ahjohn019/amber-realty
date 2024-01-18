@@ -40,15 +40,15 @@ export default defineConfig({
         alias: {
             vue: 'vue/dist/vue.esm-bundler.js',
             '@admin': path.resolve(__dirname, 'vuejs/admin-app'),
-            '@shared_admin': path.resolve(__dirname, 'vuejs/admin-app/shared'),
+            '@store_admin': path.resolve(__dirname, 'vuejs/admin-app/stores'),
             '@web': path.resolve(__dirname, 'vuejs/web-app'),
-            '@shared_admin_endpoints': path.resolve(
+            '@store_admin_endpoints': path.resolve(
                 __dirname,
-                'vuejs/admin-app/shared/admin/endpoints'
+                'vuejs/admin-app/stores/admin/endpoints'
             ),
-            '@shared_admin_models': path.resolve(
+            '@store_admin_models': path.resolve(
                 __dirname,
-                'vuejs/admin-app/shared/admin/models'
+                'vuejs/admin-app/stores/admin/models'
             ),
         },
     },

@@ -57,7 +57,7 @@
 <script>
 import { ref } from 'vue';
 import WaveComponent from '@admin/components/login/waveComponent.vue';
-import { useAdminAuthStore } from '@shared_admin/base/auth.js';
+import { useAdminAuthStore } from '@store_admin/base/auth.js';
 
 export default {
     components: {

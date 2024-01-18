@@ -4,7 +4,7 @@ import * as LoginDashboard from '../modules/login/router';
 import * as PostDashboard from '../modules/post/router';
 import * as Property from '../modules/property/router';
 import * as TestPage from '../modules/test/router';
-import { useAdminAuthStore } from '@shared_admin/base/auth.js';
+import { useAdminAuthStore } from '@store_admin/base/auth.js';
 
 const routes = [
     {
