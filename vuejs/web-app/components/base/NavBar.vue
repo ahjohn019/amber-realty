@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="fixed z-10 w-full">
         <q-toolbar class="bg-secondary shadow-2" style="height: 85px">
             <div class="col-6 col-md-2">
                 <router-link to="/" exact>
