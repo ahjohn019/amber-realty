@@ -364,6 +364,7 @@ export default {
                 state,
                 price,
                 details,
+                file,
             } = response;
 
             propertyData.value = {
@@ -378,6 +379,7 @@ export default {
                 }),
                 state,
                 price,
+                file,
             };
 
             if (details) {
@@ -408,7 +410,7 @@ export default {
         const submitData = async () => {
             propertyData.value = {
                 ...propertyData.value,
-                property_details: propertyDetails.value,
+                property_details: propertyDetailsToggle.value ? 1 : 0,
                 status: {
                     slug: propertyData.value.status?.slug || 'active',
                     label: propertyData.value.status?.label || 'Active',
