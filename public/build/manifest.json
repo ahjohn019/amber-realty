@@ -20,11 +20,11 @@
       "_QBtnDropdown-a1b51802.js"
     ]
   },
-  "_BasePage-1e031035.js": {
+  "_BasePage-567705d6.js": {
     "css": [
       "assets/BasePage-fb300440.css"
     ],
-    "file": "assets/BasePage-1e031035.js",
+    "file": "assets/BasePage-567705d6.js",
     "imports": [
       "_ckeditor-d241b8c8.js",
       "_QBtn-9e135d5e.js",
@@ -138,8 +138,8 @@
       "_QCheckbox-9fb3866b.js"
     ]
   },
-  "_index-e44889a0.js": {
-    "file": "assets/index-e44889a0.js",
+  "_index-9845f1a8.js": {
+    "file": "assets/index-9845f1a8.js",
     "imports": [
       "_ckeditor-d241b8c8.js",
       "vuejs/admin-app/app.js"
@@ -151,8 +151,8 @@
       "_ckeditor-d241b8c8.js"
     ]
   },
-  "_postTablePage-45895d98.js": {
-    "file": "assets/postTablePage-45895d98.js",
+  "_postTablePage-c2cda04b.js": {
+    "file": "assets/postTablePage-c2cda04b.js",
     "imports": [
       "_ckeditor-d241b8c8.js",
       "vuejs/admin-app/app.js"
@@ -247,7 +247,7 @@
       "vuejs/admin-app/modules/property/views/FormPage.vue",
       "vuejs/admin-app/modules/test/views/TestPage.vue"
     ],
-    "file": "assets/app-06add774.js",
+    "file": "assets/app-cd5b8582.js",
     "imports": [
       "_ckeditor-d241b8c8.js"
     ],
@@ -262,7 +262,7 @@
     "css": [
       "assets/MainPage-b8c7c9c0.css"
     ],
-    "file": "assets/MainPage-bdd1d0a3.js",
+    "file": "assets/MainPage-9e942d8f.js",
     "imports": [
       "_QBtn-9e135d5e.js",
       "_ckeditor-d241b8c8.js",
@@ -271,7 +271,7 @@
       "_QMenu-02259ec8.js",
       "_QBtnDropdown-a1b51802.js",
       "_scrollAnimation-b2550245.js",
-      "_BasePage-1e031035.js",
+      "_BasePage-567705d6.js",
       "_QLayout-851f9627.js",
       "_QInput-ce384207.js",
       "_use-key-composition-1646edd4.js",
@@ -289,7 +289,7 @@
     "css": [
       "assets/MainPage-fdd2b42c.css"
     ],
-    "file": "assets/MainPage-02b7ee92.js",
+    "file": "assets/MainPage-9c0d6bf9.js",
     "imports": [
       "_QBtn-9e135d5e.js",
       "_QInput-ce384207.js",
@@ -311,9 +311,9 @@
     "css": [
       "assets/PostPage-ccfed713.css"
     ],
-    "file": "assets/PostPage-325a7e89.js",
+    "file": "assets/PostPage-a6130931.js",
     "imports": [
-      "_BasePage-1e031035.js",
+      "_BasePage-567705d6.js",
       "_ckeditor-d241b8c8.js",
       "_QBtn-9e135d5e.js",
       "_QLayout-851f9627.js",
@@ -336,7 +336,7 @@
     "css": [
       "assets/PostPageForm-e1ecbcec.css"
     ],
-    "file": "assets/PostPageForm-fbe8fe40.js",
+    "file": "assets/PostPageForm-5fbf7d80.js",
     "imports": [
       "_QInput-ce384207.js",
       "_QSelect-f5f788a2.js",
@@ -345,7 +345,7 @@
       "_option-sizes-82021515.js",
       "_use-key-composition-1646edd4.js",
       "_refList-4a23017b.js",
-      "_postTablePage-45895d98.js",
+      "_postTablePage-c2cda04b.js",
       "vuejs/admin-app/app.js",
       "_QMenu-02259ec8.js",
       "_use-prevent-scroll-779cc389.js"
@@ -361,7 +361,7 @@
     "css": [
       "assets/PostPageList-9cd144a3.css"
     ],
-    "file": "assets/PostPageList-903f56bb.js",
+    "file": "assets/PostPageList-6f9bc62b.js",
     "imports": [
       "_QBtn-9e135d5e.js",
       "_dayjs.min-bd0b96bf.js",
@@ -369,7 +369,7 @@
       "_QLinearProgress-33d0a6aa.js",
       "_QMenu-02259ec8.js",
       "_QBtnDropdown-a1b51802.js",
-      "_postTablePage-45895d98.js",
+      "_postTablePage-c2cda04b.js",
       "vuejs/admin-app/app.js",
       "_QInput-ce384207.js",
       "_QSelect-f5f788a2.js",
@@ -390,9 +390,9 @@
     "css": [
       "assets/PostPage-ccfed713.css"
     ],
-    "file": "assets/BasePage-9ac0b3f7.js",
+    "file": "assets/BasePage-0d641fe1.js",
     "imports": [
-      "_BasePage-1e031035.js",
+      "_BasePage-567705d6.js",
       "_ckeditor-d241b8c8.js",
       "_QBtn-9e135d5e.js",
       "_QLayout-851f9627.js",
@@ -415,7 +415,7 @@
     "css": [
       "assets/FormPage-88b9eeef.css"
     ],
-    "file": "assets/FormPage-ddd2046c.js",
+    "file": "assets/FormPage-543bfa94.js",
     "imports": [
       "_ckeditor-d241b8c8.js",
       "_QBtn-9e135d5e.js",
@@ -423,7 +423,7 @@
       "_QInput-ce384207.js",
       "_QSelect-f5f788a2.js",
       "_refList-4a23017b.js",
-      "_index-e44889a0.js",
+      "_index-9845f1a8.js",
       "vuejs/admin-app/app.js",
       "_option-sizes-82021515.js",
       "_use-key-composition-1646edd4.js",
@@ -434,12 +434,12 @@
     "src": "vuejs/admin-app/modules/property/views/FormPage.vue"
   },
   "vuejs/admin-app/modules/property/views/ListPage.vue": {
-    "file": "assets/ListPage-f3df1774.js",
+    "file": "assets/ListPage-c8f1f349.js",
     "imports": [
       "_QBtn-9e135d5e.js",
       "_dayjs.min-bd0b96bf.js",
       "_ckeditor-d241b8c8.js",
-      "_index-e44889a0.js",
+      "_index-9845f1a8.js",
       "vuejs/admin-app/app.js",
       "_QMenu-02259ec8.js",
       "_QBtnDropdown-a1b51802.js",
