@@ -47,6 +47,8 @@ class PropertyService
     {
         return DB::transaction(function () use ($payload) {
             try {
+                $payload['handle_file_method'] = 'create';
+
                 $property = Property::create([
                     'name' => $payload['name'],
                     'description' => $payload['description'],
@@ -104,6 +106,7 @@ class PropertyService
     {
         return DB::transaction(function () use ($payload, $id) {
             try {
+                $payload['handle_file_method'] = 'update';
                 $property = Property::find($id);
 
                 if (!$property) {
@@ -114,7 +117,7 @@ class PropertyService
                     return $this->handleUpdatePermissionError();
                 }
 
-                $result = $property->update([
+                $property->update([
                     'name' => $payload['name'],
                     'description' => $payload['description'],
                     'short_description' => $payload['short_description'],
@@ -126,8 +129,7 @@ class PropertyService
                 ]);
 
                 if (isset($payload['file'])) {
-                    $payload['folder_name'] = 'Property';
-                    ImageService::createImage($payload, $result);
+                    ImageService::handleUploadImageAmount($payload, $property);
                 }
 
                 if (isset($payload['property_details']) && $payload['property_details']) {

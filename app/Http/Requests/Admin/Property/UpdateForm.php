@@ -53,7 +53,10 @@ class UpdateForm extends FormRequest
             'square_feet' => ['sometimes', 'integer'],
             'listing_type' => ['sometimes', 'in:sale,rent'],
             'furnishing' => ['sometimes', 'in:unfurnished,partially_furnished,furnished'],
-            'property_details' => ['sometimes', 'boolean']
+            'property_details' => ['sometimes', 'boolean'],
+            'file' => ['nullable'],
+            'file.*' => ['file', 'max:5120', 'mimes:jpeg,png'],
+            'banner_url' => ['nullable'],
         ];
     }
 

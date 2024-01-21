@@ -13,7 +13,9 @@
             </div>
         </div>
         <div class="col-12 row bg-white p-5 font-bold gap-y-4">
-            <div class="col-12 post-information-name pb-2">Create Property</div>
+            <div class="col-12 post-information-name pb-2">
+                {{ routeType == 'update' ? 'Update' : 'Create' }} Property
+            </div>
             <div class="col-12">
                 <div class="post-information-name">Name</div>
                 <div class="col-12">
@@ -213,9 +215,10 @@
                 <div class="post-information-name">Slider Images</div>
                 <DropFile @updateFiles="updateParentFiles" />
             </div>
+
             <div class="col-12 text-right">
                 <q-btn
-                    label="Submit"
+                    :label="routeType == 'update' ? 'Update' : 'Submit'"
                     class="text-white bg-primary update-form-button"
                     @click="submitData"
                 />
@@ -232,6 +235,7 @@ import { usePropertyAdminModelStore } from '@store_admin_models/property/index.j
 import { useAdminAuthStore } from '@store_admin/base/auth.js';
 import { usePropertyAdminStore } from '@store_admin_endpoints/property/index.js';
 import { useRefListStore } from '@store_admin/ref/refList.js';
+import { useRoute } from 'vue-router';
 
 export default {
     components: {
@@ -239,7 +243,12 @@ export default {
         DropFile,
     },
 
-    setup() {
+    async setup() {
+        // declare route
+        const route = useRoute();
+        const routeType = route.query?.type || null;
+        const routeId = route.query?.id || null;
+
         // fetch the shared modules
         const fetchPropertyModels = usePropertyAdminModelStore();
         const fetchRefAdminStore = useRefListStore();
@@ -250,7 +259,7 @@ export default {
         const propertyDetailsData = ref(
             fetchPropertyModels.fetchPropertyDetailsData()
         );
-        propertyData.value.status = 'Active';
+
         const errors = ref(fetchPropertyModels.fetchPropertyError());
 
         // init
@@ -261,6 +270,8 @@ export default {
         const property_types = ref([]);
         const mainImage = ref(null);
         const bannerUrl = ref('');
+        const existImage = ref([]);
+        propertyData.value.status = 'Active';
 
         // fetch auth token
         const adminAuthStore = useAdminAuthStore();
@@ -272,7 +283,7 @@ export default {
         const listingType = fetchPropertyModels.fetchListingTypeData();
         const status = fetchPropertyModels.fetchStatusData();
 
-        // fetch state list
+        // Fetch state list
         const stateList = async () => {
             const response = await fetchRefAdminStore.fetchStateList(
                 getAuthToken
@@ -280,35 +291,120 @@ export default {
 
             state.value = response;
         };
-        // fetch property types
+
+        // Fetch property types
         const propertyTypesList = async () => {
             const response = await fetchRefAdminStore.fetchPropertyTypes(
                 getAuthToken
             );
 
             property_types.value = response;
+            return response;
         };
 
         // Handle Property Details
         const handlePropertyDetails = () => {
-            propertyDetails.value = !propertyDetailsToggle.value ? 0 : 1;
+            propertyDetails.value = propertyDetailsToggle.value ? 1 : 0;
             return propertyDetails.value;
         };
 
-        // Handle images
+        // Update parent files
         const updateParentFiles = (files) => {
             propertyData.value.images = files;
         };
 
+        // Update main image
         const updateMainImage = (event) => {
             bannerUrl.value = URL.createObjectURL(event.target.files[0]);
         };
 
-        // handle descriptions
+        // Update descriptions
         const updateDescriptions = (value) => {
             propertyData.value.description = value;
         };
 
+        // Filtered Property Details
+        const filteredPropertyDetails = (payload) => {
+            let filteredPropertyDetails = payload.type.filter((item) => {
+                if (payload.category === 'propertyType') {
+                    return (
+                        item.label.toLowerCase() ===
+                        payload.details.toLowerCase()
+                    );
+                }
+
+                return item.slug === payload.details.toLowerCase();
+            });
+            if (filteredPropertyDetails.length > 0) {
+                filteredPropertyDetails = { ...filteredPropertyDetails }[0];
+            }
+
+            return filteredPropertyDetails;
+        };
+
+        // Fetxh Exist Images
+        const fetchExistImage = async () => {
+            console.log(fetchPropertyAdminStore);
+        };
+
+        // Find Property
+        const findProperty = async () => {
+            const propertyTypes = await propertyTypesList();
+
+            const response = await fetchPropertyAdminStore.findProperty(
+                getAuthToken,
+                routeId
+            );
+
+            const {
+                name,
+                description,
+                short_description,
+                type,
+                state,
+                price,
+                details,
+            } = response;
+
+            propertyData.value = {
+                ...propertyData.value,
+                name,
+                description,
+                short_description,
+                property_types: filteredPropertyDetails({
+                    type: propertyTypes,
+                    details: type,
+                    category: 'propertyType',
+                }),
+                state,
+                price,
+            };
+
+            if (details) {
+                propertyDetailsToggle.value = true;
+
+                propertyDetailsData.value = {
+                    ...propertyDetailsData.value,
+                    tenure: filteredPropertyDetails({
+                        type: tenure,
+                        details: details.tenure,
+                    }),
+                    square_feet: details.square_feet,
+                    listing_type: filteredPropertyDetails({
+                        type: listingType,
+                        details: details.listing_type,
+                    }),
+                    furnishing: filteredPropertyDetails({
+                        type: furnishing,
+                        details: details.furnishing,
+                    }),
+                    bedroom: details.bedroom,
+                    bathroom: details.bathroom,
+                };
+            }
+        };
+
+        // Handle submit data
         const submitData = async () => {
             propertyData.value = {
                 ...propertyData.value,
@@ -351,10 +447,15 @@ export default {
             return response;
         };
 
-        stateList();
-        propertyTypesList();
+        if (routeType === 'update') {
+            await findProperty();
+        }
+
+        await stateList();
+        await propertyTypesList();
 
         return {
+            findProperty,
             propertyData,
             propertyDetailsData,
             submitData,
@@ -375,6 +476,9 @@ export default {
             mainImage,
             bannerUrl,
             updateMainImage,
+            routeType,
+            existImage,
+            fetchExistImage,
         };
     },
 };

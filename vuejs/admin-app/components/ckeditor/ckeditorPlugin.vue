@@ -26,15 +26,12 @@ import { Heading } from '@ckeditor/ckeditor5-heading';
 import { Indent, IndentBlock } from '@ckeditor/ckeditor5-indent';
 import { List } from '@ckeditor/ckeditor5-list';
 import { Table, TableToolbar } from '@ckeditor/ckeditor5-table';
-
 import { ref } from 'vue';
 
 export default {
-    props: {
-        description: String,
-    },
+    props: ['description'],
     setup(props, { emit }) {
-        const editorData = ref('');
+        const editorData = ref(props.description || '');
 
         const handleDescriptionsData = () => {
             emit('updateDescriptionsData', editorData.value);

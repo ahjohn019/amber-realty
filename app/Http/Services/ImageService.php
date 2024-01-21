@@ -26,24 +26,18 @@ class ImageService
         return $result;
     }
 
-    public static function updateImage(array $payload, $model)
+    public static function updateImage(array $payload, $model, $file = null)
     {
-        $checkFileExists = $model->image()->exists();
-
-        if (!$checkFileExists) {
-            return self::createImage($payload, $model);
-        }
-
-        $serverFile = ServerFileTrait::uploadServerFiles($payload['file'], [
+        $serverFile = ServerFileTrait::uploadServerFiles($file, [
             'model_id' => $model->id,
-            'image' => $payload['file'],
+            'image' => $file,
             'module_path' => ServerFile::MODULE_PATH_WEB_IMAGE,
             'file_type_id' => ServerFile::FILE_TYPE_IMAGE,
             'max_size' => 1000,
             'width' => isset($payload['width']) ? $payload['width'] : "",
             'height' => isset($payload['height']) ? $payload['height'] : "",
             'server_files' => $model->image()->firstOrThrowError(),
-            'folder_name' => $payload['folder_name']
+            'folder_name' => isset($payload['folder_name']) ?  $payload['folder_name'] : ""
         ], true);
 
         $result = $model->image()->update($serverFile);
@@ -51,18 +45,38 @@ class ImageService
         return $result;
     }
 
-    public static function handleUploadImageAmount($payload, $property)
+    public static function handleUploadImageAmount($payload, $model)
     {
         if ($payload['file'] instanceof UploadedFile) {
-            ImageService::createImage($payload, $property, $payload['file']);
+            self::handleFileMethod($payload, $model, $payload['file']);
         }
 
         if (is_array($payload['file'])) {
-            $payload['folder_name'] = 'Property';
+            $payload['folder_name'] = 'Model';
 
-            collect($payload['file'])->each(function ($item) use ($payload, $property) {
-                ImageService::createImage($payload, $property, $item);
+            $checkFileExists = $model->image()->exists();
+
+            collect($payload['file'])->each(function ($item) use ($payload, $model, $checkFileExists) {
+                if (!$checkFileExists) {
+                    self::createImage($payload, $model, $item);
+                } else {
+                    self::handleFileMethod($payload, $model, $item);
+                }
             });
+        }
+    }
+
+    public static function handleFileMethod($payload, $model, $file)
+    {
+        switch ($payload['handle_file_method']) {
+            case 'create':
+                self::createImage($payload, $model, $file);
+                break;
+            case 'update':
+                self::updateImage($payload, $model, $file);
+                break;
+            default:
+                break;
         }
     }
 }

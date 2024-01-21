@@ -18,6 +18,7 @@ class PropertyResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
+            "id" => $this->id,
             "name" => $this->name,
             "description" => $this->description,
             "short_description" => $this->short_description,
@@ -26,8 +27,9 @@ class PropertyResource extends JsonResource
             "status" => $this->status,
             "state" => new StateResource($this->state),
             "user" => new UserResource($this->user),
-            "details" => new PropertyDetailsResource($this->propertyDetails),
+            "details" => new PropertyDetailsResource($this->propertyDetail),
             "created_at" => $this->created_at,
+            "file" => $this->image()->get()
         ];;
     }
 }

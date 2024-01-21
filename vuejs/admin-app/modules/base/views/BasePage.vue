@@ -1,12 +1,14 @@
 <template>
     <q-layout view="hHh Lpr lff" container style="height: 100vh">
         <nav-bar />
-        <q-page-container class="dashboard-container">
-            <q-page class="overflow-hidden">
-                <side-bar class="admin-sidebar" />
-                <slot name="content"></slot>
-            </q-page>
-        </q-page-container>
+        <Suspense>
+            <q-page-container class="dashboard-container">
+                <q-page class="overflow-hidden">
+                    <side-bar class="admin-sidebar" />
+                    <slot name="content"></slot>
+                </q-page>
+            </q-page-container>
+        </Suspense>
     </q-layout>
 </template>
 

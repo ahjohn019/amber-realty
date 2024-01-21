@@ -61,7 +61,6 @@ class PropertyController extends Controller
      */
     public function update(UpdateForm $request, string $id)
     {
-        //
         $result = $this->propertyService->update($request->validated(), $id);
 
         if (isset($result['error'])) {

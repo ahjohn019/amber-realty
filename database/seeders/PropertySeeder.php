@@ -19,9 +19,9 @@ class PropertySeeder extends Seeder
         DB::table('properties')->truncate();
         DB::table('property_details')->truncate();
 
-        if (config('app.env') == 'local') {
-            Property::factory(50)->create();
-            PropertyDetails::factory(50)->create();
-        }
+        // if (config('app.env') == 'local') {
+        //     Property::factory(50)->create();
+        //     PropertyDetails::factory(50)->create();
+        // }
     }
 }

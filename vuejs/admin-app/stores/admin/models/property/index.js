@@ -15,13 +15,13 @@ export const usePropertyAdminModelStore = defineStore('property_admin_models', {
                     field: 'name',
                     sortable: true,
                 },
-                {
-                    name: 'description',
-                    align: 'left',
-                    label: 'Description',
-                    field: 'description',
-                    sortable: true,
-                },
+                // {
+                //     name: 'description',
+                //     align: 'left',
+                //     label: 'Description',
+                //     field: 'description',
+                //     sortable: true,
+                // },
                 {
                     name: 'short_description',
                     align: 'left',
@@ -41,6 +41,13 @@ export const usePropertyAdminModelStore = defineStore('property_admin_models', {
                     align: 'left',
                     label: 'Created By',
                     field: 'created_by',
+                    sortable: false,
+                },
+                {
+                    name: 'status',
+                    align: 'center',
+                    label: 'Status',
+                    field: 'status',
                     sortable: false,
                 },
             ];

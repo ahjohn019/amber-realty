@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import { useRouter } from 'vue-router';
+import { useRouter, useRoute } from 'vue-router';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 
@@ -9,6 +9,7 @@ export const usePropertyAdminStore = defineStore('property_admin', {
     state: () => ({
         post_table_admin: null,
         router: useRouter(),
+        route: useRoute(),
     }),
 
     actions: {
@@ -32,6 +33,23 @@ export const usePropertyAdminStore = defineStore('property_admin', {
             }
         },
 
+        async findProperty(authToken, id) {
+            const config = {
+                headers: { Authorization: `Bearer ${authToken}` },
+            };
+
+            try {
+                const response = await axios.get(prefix + 'show/' + id, {
+                    ...config,
+                });
+
+                return response.data.data;
+            } catch (error) {
+                console.error('Error:', error);
+                throw error;
+            }
+        },
+
         async createProperty(authToken, payload = null, errors = null) {
             const config = {
                 headers: {
@@ -40,12 +58,26 @@ export const usePropertyAdminStore = defineStore('property_admin', {
                 },
             };
 
+            // declare route
+            const routeType = this.route.query?.type || null;
+            const routeId = this.route.query?.id || null;
+
+            // check route type
+            const propertyCreateRoute = prefix + 'store';
+            const propertyUpdateRoute = prefix + 'update/' + routeId;
+
+            const responseRoute =
+                routeType === 'update'
+                    ? propertyUpdateRoute
+                    : propertyCreateRoute;
+
             payload = {
                 ...payload,
                 type_id: payload.property_types.id,
                 state_id: payload.state.id,
                 status: payload.status.slug,
                 file: payload.images,
+                id: routeId,
             };
 
             if (payload.property_details > 0) {
@@ -57,7 +89,7 @@ export const usePropertyAdminStore = defineStore('property_admin', {
 
             try {
                 const response = await axios.post(
-                    prefix + 'store',
+                    responseRoute,
                     filteredPayload,
                     config
                 );
@@ -65,7 +97,10 @@ export const usePropertyAdminStore = defineStore('property_admin', {
                 this.router.push('/property');
 
                 Swal.fire({
-                    text: 'Property Created Successfully',
+                    text:
+                        routeType === 'update'
+                            ? 'Property Update Successfully'
+                            : 'Property Create Successfully',
                     icon: 'success',
                 }).then((result) => {
                     if (result.isConfirmed) {
