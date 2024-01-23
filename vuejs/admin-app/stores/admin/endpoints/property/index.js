@@ -142,5 +142,23 @@ export const usePropertyAdminStore = defineStore('property_admin', {
 
             return payload;
         },
+
+        filteredPropertyDetails(payload) {
+            let filteredPropertyDetails = payload.type.filter((item) => {
+                if (payload.category === 'propertyType') {
+                    return (
+                        item.label.toLowerCase() ===
+                        payload.details.toLowerCase()
+                    );
+                }
+
+                return item.slug === payload.details.toLowerCase();
+            });
+            if (filteredPropertyDetails.length > 0) {
+                filteredPropertyDetails = { ...filteredPropertyDetails }[0];
+            }
+
+            return filteredPropertyDetails;
+        },
     },
 });

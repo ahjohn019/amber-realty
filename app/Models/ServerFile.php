@@ -13,6 +13,7 @@ class ServerFile extends Model
 
     protected $fillable = [
         'name',
+        'url',
         'disk',
         'module_path',
         'file_type_id',

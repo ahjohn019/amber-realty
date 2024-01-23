@@ -18,15 +18,17 @@ trait ServerFileTrait
 
         $resizeImages = self::resizeImage($file, $payload['width'], $payload['height']);
         $storageDisk = Storage::disk($disk);
+        $filePath = $folderName . '/' . $payload['model_id'] . '/';
 
-        if ($clearStorage == true) {
-            $storageDisk->delete($folderName . '/' . $payload['server_files']->name);
-        }
+        // if ($clearStorage) {
+        //     $storageDisk->delete($filePath . $payload['server_files']->name);
+        // }
 
-        $storageDisk->put($folderName . '/' . $file->hashName(), (string)$resizeImages->encode());
+        $storageDisk->put($filePath .  $file->hashName(), (string)$resizeImages->encode());
 
         $serverFileArr = [
             'name' => $file->hashName(),
+            'url' => Storage::disk($disk)->url($filePath . $file->hashName()),
             'disk' => $disk,
             'module_path' => $module,
             'file_type_id' => $file_type_id,

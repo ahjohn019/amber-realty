@@ -212,14 +212,25 @@
             </div>
 
             <div class="col-12">
-                <div class="post-information-name">Slider Images</div>
+                <div class="flex justify-between py-2">
+                    <div class="post-information__name">Slider Images</div>
+                    <div
+                        v-if="routeType === 'update'"
+                        class="slider-exist__images"
+                    >
+                        <ExistImageModal
+                            v-if="propertyData.file.length > 0"
+                            :property="propertyData"
+                        />
+                    </div>
+                </div>
                 <DropFile @updateFiles="updateParentFiles" />
             </div>
 
             <div class="col-12 text-right">
                 <q-btn
                     :label="routeType == 'update' ? 'Update' : 'Submit'"
-                    class="text-white bg-primary update-form-button"
+                    class="text-white bg-primary update-form__button"
                     @click="submitData"
                 />
             </div>
@@ -236,11 +247,13 @@ import { useAdminAuthStore } from '@store_admin/base/auth.js';
 import { usePropertyAdminStore } from '@store_admin_endpoints/property/index.js';
 import { useRefListStore } from '@store_admin/ref/refList.js';
 import { useRoute } from 'vue-router';
+import ExistImageModal from '@admin/components/modals/ExistImageModal.vue';
 
 export default {
     components: {
         CkeditorPlugin,
         DropFile,
+        ExistImageModal,
     },
 
     async setup() {
@@ -270,7 +283,9 @@ export default {
         const property_types = ref([]);
         const mainImage = ref(null);
         const bannerUrl = ref('');
-        const existImage = ref([]);
+        const bannerTargetFile = ref('');
+        const existImageModal = ref(false);
+
         propertyData.value.status = 'Active';
 
         // fetch auth token
@@ -316,35 +331,12 @@ export default {
         // Update main image
         const updateMainImage = (event) => {
             bannerUrl.value = URL.createObjectURL(event.target.files[0]);
+            bannerTargetFile.value = event.target.files[0];
         };
 
         // Update descriptions
         const updateDescriptions = (value) => {
             propertyData.value.description = value;
-        };
-
-        // Filtered Property Details
-        const filteredPropertyDetails = (payload) => {
-            let filteredPropertyDetails = payload.type.filter((item) => {
-                if (payload.category === 'propertyType') {
-                    return (
-                        item.label.toLowerCase() ===
-                        payload.details.toLowerCase()
-                    );
-                }
-
-                return item.slug === payload.details.toLowerCase();
-            });
-            if (filteredPropertyDetails.length > 0) {
-                filteredPropertyDetails = { ...filteredPropertyDetails }[0];
-            }
-
-            return filteredPropertyDetails;
-        };
-
-        // Fetxh Exist Images
-        const fetchExistImage = async () => {
-            console.log(fetchPropertyAdminStore);
         };
 
         // Find Property
@@ -356,15 +348,23 @@ export default {
                 routeId
             );
 
+            const bannerImageOnly = response.file.filter(
+                (item) => item.module_path === 'banner-image'
+            );
+
+            if (bannerImageOnly.length > 0) {
+                bannerUrl.value = bannerImageOnly[0].url;
+            }
+
             const {
                 name,
                 description,
                 short_description,
-                type,
                 state,
                 price,
-                details,
                 file,
+                type,
+                details,
             } = response;
 
             propertyData.value = {
@@ -372,14 +372,16 @@ export default {
                 name,
                 description,
                 short_description,
-                property_types: filteredPropertyDetails({
-                    type: propertyTypes,
-                    details: type,
-                    category: 'propertyType',
-                }),
                 state,
                 price,
                 file,
+                property_types: fetchPropertyAdminStore.filteredPropertyDetails(
+                    {
+                        type: propertyTypes,
+                        details: type,
+                        category: 'propertyType',
+                    }
+                ),
             };
 
             if (details) {
@@ -387,19 +389,22 @@ export default {
 
                 propertyDetailsData.value = {
                     ...propertyDetailsData.value,
-                    tenure: filteredPropertyDetails({
+                    tenure: fetchPropertyAdminStore.filteredPropertyDetails({
                         type: tenure,
                         details: details.tenure,
                     }),
                     square_feet: details.square_feet,
-                    listing_type: filteredPropertyDetails({
-                        type: listingType,
-                        details: details.listing_type,
-                    }),
-                    furnishing: filteredPropertyDetails({
-                        type: furnishing,
-                        details: details.furnishing,
-                    }),
+                    listing_type:
+                        fetchPropertyAdminStore.filteredPropertyDetails({
+                            type: listingType,
+                            details: details.listing_type,
+                        }),
+                    furnishing: fetchPropertyAdminStore.filteredPropertyDetails(
+                        {
+                            type: furnishing,
+                            details: details.furnishing,
+                        }
+                    ),
                     bedroom: details.bedroom,
                     bathroom: details.bathroom,
                 };
@@ -415,7 +420,7 @@ export default {
                     slug: propertyData.value.status?.slug || 'active',
                     label: propertyData.value.status?.label || 'Active',
                 },
-                banner_url: bannerUrl.value,
+                banner_url: bannerTargetFile.value,
             };
 
             const {
@@ -479,19 +484,18 @@ export default {
             bannerUrl,
             updateMainImage,
             routeType,
-            existImage,
-            fetchExistImage,
+            existImageModal,
         };
     },
 };
 </script>
 
 <style>
-.post-information-name {
+.post-information__name {
     font-size: 16px;
     padding-bottom: 0.5rem;
 }
-.update-form-button .block {
+.update-form__button .block {
     font-weight: bold;
 }
 </style>

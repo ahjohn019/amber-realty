@@ -24,6 +24,8 @@ class Property extends Model
 
     protected $guarded = [];
 
+    const PROPERTY_IMAGE_TYPE = ['file', 'banner_url'];
+
     public function propertyDetail(): HasOne
     {
         return $this->hasOne(PropertyDetails::class);

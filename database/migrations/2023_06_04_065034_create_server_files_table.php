@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('server_files', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->text('url');
             $table->string('file_type_id');
             $table->string('disk');
             $table->string('module_path');

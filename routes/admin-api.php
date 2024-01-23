@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\RefController;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\PostController;
+use App\Http\Controllers\ServerFileController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\PropertyController;
@@ -93,5 +94,10 @@ Route::middleware(['auth:sanctum', 'role:' . RoleTag::SUPERADMIN . '|' . RoleTag
         Route::get('/category', [RefController::class, 'category'])->name('category');
         Route::get('/state', [RefController::class, 'state'])->name('state');
         Route::get('/property-types', [RefController::class, 'propertyTypes'])->name('propertyTypes');
+    });
+
+    Route::prefix('server-files')->name('server_files.')->group(function () {
+        Route::post('/update', [ServerFileController::class, 'update'])->name('update');
+        Route::post('/delete', [ServerFileController::class, 'delete'])->name('delete');
     });
 });

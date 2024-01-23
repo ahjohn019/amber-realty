@@ -5,78 +5,96 @@ namespace App\Http\Services;
 use App\Models\ServerFile;
 use App\Traits\ServerFileTrait;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 
 class ImageService
 {
+    public static function initServerImage(array $payload, $model, $file = null)
+    {
+        return [
+            'model_id' => $model->id,
+            'image' => $file,
+            'module_path' => isset($payload['banner_url_name']) ? $payload['banner_url_name'] : ServerFile::MODULE_PATH_WEB_IMAGE,
+            'file_type_id' => ServerFile::FILE_TYPE_IMAGE,
+            'max_size' => 1000,
+            'width' => isset($payload['width']) ? $payload['width'] : "",
+            'height' => isset($payload['height']) ? $payload['height'] : "",
+            'folder_name' => isset($payload['folder_name']) ?  $payload['folder_name'] : "",
+        ];
+    }
+
     public static function createImage(array $payload, $model, $file = null)
     {
-        $serverFile = ServerFileTrait::uploadServerFiles($file, [
-            'model_id' => $model->id,
-            'image' => $file,
-            'module_path' => ServerFile::MODULE_PATH_WEB_IMAGE,
-            'file_type_id' => ServerFile::FILE_TYPE_IMAGE,
-            'max_size' => 1000,
-            'width' => isset($payload['width']) ? $payload['width'] : "",
-            'height' => isset($payload['height']) ? $payload['height'] : "",
-            'folder_name' => $payload['folder_name'],
-        ]);
-
-        $result = $model->image()->updateOrCreate($serverFile);
+        $serverFile = ServerFileTrait::uploadServerFiles($file, self::initServerImage($payload, $model, $file));
+        $result = $model->image()->create($serverFile);
 
         return $result;
     }
 
-    public static function updateImage(array $payload, $model, $file = null)
+    public static function updateServerImage(array $payload, $model, $file = null)
     {
-        $serverFile = ServerFileTrait::uploadServerFiles($file, [
-            'model_id' => $model->id,
-            'image' => $file,
-            'module_path' => ServerFile::MODULE_PATH_WEB_IMAGE,
-            'file_type_id' => ServerFile::FILE_TYPE_IMAGE,
-            'max_size' => 1000,
-            'width' => isset($payload['width']) ? $payload['width'] : "",
-            'height' => isset($payload['height']) ? $payload['height'] : "",
-            'server_files' => $model->image()->firstOrThrowError(),
-            'folder_name' => isset($payload['folder_name']) ?  $payload['folder_name'] : ""
-        ], true);
+        $uploadable = $model->uploadable()->first();
+        $initServerImage = self::initServerImage($payload, $uploadable, $file);
+        $serverFiles = ['server_files' => $model->first()->firstOrThrowError()];
+        $serverImageMerge = array_merge($serverFiles, $initServerImage);
+        $serverFile = ServerFileTrait::uploadServerFiles($file, $serverImageMerge, true);
 
-        $result = $model->image()->update($serverFile);
+        $result = $model->update($serverFile);
 
         return $result;
     }
 
-    public static function handleUploadImageAmount($payload, $model)
+    public static function updateBannerImage(array $payload, $model, $file = null)
     {
-        if ($payload['file'] instanceof UploadedFile) {
-            self::handleFileMethod($payload, $model, $payload['file']);
+        $bannerPath = $model->image()->where('module_path', $payload['banner_url_name']);
+        $initServerImage = self::initServerImage($payload, $model, $file);
+        $serverFiles = ['server_files' => $model->image()->firstOrThrowError()];
+        $serverImageMerge = array_merge($serverFiles, $initServerImage);
+        $serverFile = ServerFileTrait::uploadServerFiles($file, $serverImageMerge, true);
+
+        $result = $bannerPath->update($serverFile);
+
+        return $result;
+    }
+
+    public static function deleteImage($payload)
+    {
+        $result = Storage::disk(config('filesystems.default'))->delete('/' . $payload->uploadable_id . '/' . $payload->name);
+        $model = ServerFile::find($payload->id);
+        $model->delete();
+
+        return $result;
+    }
+
+    public static function handleUploadImageAmount(array $payload, $model, $file, $type)
+    {
+        if ($file instanceof UploadedFile) {
+            $payload['banner_url_name'] = 'banner-image';
+
+            if ($type == 'update') {
+                self::updateBannerImage($payload, $model, $file);
+            } else {
+                self::createImage($payload, $model, $file);
+            }
         }
 
-        if (is_array($payload['file'])) {
-            $payload['folder_name'] = 'Model';
-
-            $checkFileExists = $model->image()->exists();
-
-            collect($payload['file'])->each(function ($item) use ($payload, $model, $checkFileExists) {
-                if (!$checkFileExists) {
-                    self::createImage($payload, $model, $item);
-                } else {
-                    self::handleFileMethod($payload, $model, $item);
-                }
+        if (is_array($file)) {
+            collect($file)->each(function ($item) use ($payload, $model) {
+                $payload['banner_url_name'] = 'slider-image';
+                self::createImage($payload, $model, $item);
             });
         }
     }
 
-    public static function handleFileMethod($payload, $model, $file)
+    public static function handleFileCategory(array $payload, $property, $fileName, $type = null)
     {
-        switch ($payload['handle_file_method']) {
-            case 'create':
-                self::createImage($payload, $model, $file);
-                break;
-            case 'update':
-                self::updateImage($payload, $model, $file);
-                break;
-            default:
-                break;
+        $file = [
+            'banner_url' => isset($payload['banner_url']) ? $payload['banner_url'] : null,
+            'file' => isset($payload['file']) ? $payload['file'] : null,
+        ];
+
+        if ($file[$fileName]) {
+            self::handleUploadImageAmount($payload, $property, $file[$fileName], $type);
         }
     }
 }

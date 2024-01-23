@@ -47,8 +47,6 @@ class PropertyService
     {
         return DB::transaction(function () use ($payload) {
             try {
-                $payload['handle_file_method'] = 'create';
-
                 $property = Property::create([
                     'name' => $payload['name'],
                     'description' => $payload['description'],
@@ -57,13 +55,12 @@ class PropertyService
                     'price' => $payload['price'],
                     'type_id' => $payload['type_id'],
                     'state_id' => $payload['state_id'],
-                    'banner_url' => $payload['banner_url'],
                     'user_id' => auth()->user()->id
                 ]);
 
-                if (isset($payload['file'])) {
-                    ImageService::handleUploadImageAmount($payload, $property);
-                }
+                collect(Property::PROPERTY_IMAGE_TYPE)->each(function ($item) use ($payload, $property) {
+                    ImageService::handleFileCategory($payload, $property, $item);
+                });
 
                 if (isset($payload['property_details']) && $payload['property_details']) {
                     $property->propertyDetail()->create([
@@ -106,7 +103,6 @@ class PropertyService
     {
         return DB::transaction(function () use ($payload, $id) {
             try {
-                $payload['handle_file_method'] = 'update';
                 $property = Property::find($id);
 
                 if (!$property) {
@@ -128,9 +124,9 @@ class PropertyService
                     'user_id' => auth()->user()->id
                 ]);
 
-                if (isset($payload['file'])) {
-                    ImageService::handleUploadImageAmount($payload, $property);
-                }
+                collect(Property::PROPERTY_IMAGE_TYPE)->each(function ($item) use ($payload, $property) {
+                    ImageService::handleFileCategory($payload, $property, $item, 'update');
+                });
 
                 if (isset($payload['property_details']) && $payload['property_details']) {
                     $property->propertyDetail()->updateOrCreate(
