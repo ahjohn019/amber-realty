@@ -8,8 +8,10 @@
             <div class="col-12 col-md-4 q-gutter-y-sm">
                 <div class="text-2xl font-bold">About Us</div>
                 <div class="footer-about-us">
-                    Hac ullamcorper diam lacus eget amet penatibus. Consectetur
-                    non hendrerit vel amet in eu adipiscing scelerisque.
+                    Amber Realty is a licensed real estate agent registered with
+                    the Board of Valuers, Appraisers and Estate Agents of
+                    Malaysia, and based in Kuala Lumpur the capital city of
+                    Malaysian.
                 </div>
             </div>
             <div class="col-12 col-md-4 q-gutter-y-sm">

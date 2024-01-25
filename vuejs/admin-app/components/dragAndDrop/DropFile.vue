@@ -46,7 +46,7 @@
             class="preview-container p-2 col-12 overflow-y-auto"
             v-if="files.length"
         >
-            <div v-for="file in files" :key="file.name">
+            <div v-for="(file, index) in files" :key="file.name">
                 <div class="relative p-2" style="width: 250px">
                     <div
                         class="absolute top-0 -right-2 bg-gray-500 text-white rounded-full border border-white"
@@ -65,6 +65,17 @@
                         {{ file.name }} -
                         {{ Math.round(file.size / 1000) + 'kb' }}
                     </div>
+                    <div>
+                        <select
+                            name=""
+                            :id="index"
+                            v-model="file.selectedOption"
+                            @change="handleChange(index)"
+                        >
+                            <option value="banner-image">Banner Image</option>
+                            <option value="slider-image">Slider Image</option>
+                        </select>
+                    </div>
                 </div>
             </div>
         </div>
@@ -78,10 +89,24 @@ export default {
             isDragging: false,
             files: [],
             dropZoneContainer: true,
+            selectedOption: 'slider-image',
+            module_path: [],
         };
     },
     emits: ['updateFiles'],
+    created() {},
     methods: {
+        handleChange(index) {
+            const selectedOption = this.files[index].selectedOption;
+
+            if (this.module_path.length <= index) {
+                this.module_path.length = index + 1;
+            }
+
+            this.module_path[index] = selectedOption;
+
+            console.log(this.module_path);
+        },
         onChange() {
             const self = this;
             const incomingFiles = Array.from(this.$refs.file.files);
@@ -94,11 +119,29 @@ export default {
                 self.showMessage = true;
                 alert('New upload contains files that already exist');
             } else {
+                incomingFiles.forEach((file) => {
+                    file.selectedOption = self.selectedOption;
+
+                    const existingFileIndex =
+                        self.files.findIndex(
+                            (existingFile) =>
+                                existingFile.name === file.name &&
+                                existingFile.size === file.size
+                        ) || self.selectedOption;
+
+                    if (existingFileIndex) {
+                        self.module_path.push(self.selectedOption);
+                    }
+                });
+
                 self.files.push(...incomingFiles);
                 if (self.files.length >= 1) {
                     self.dropZoneContainer = false;
                 }
-                this.$emit('updateFiles', this.files);
+                this.$emit('updateFiles', {
+                    files: this.files,
+                    module_path: this.module_path,
+                });
             }
         },
         dragover(e) {
@@ -116,7 +159,17 @@ export default {
         },
         remove(i) {
             this.files.splice(i, 1);
-            this.$emit('updateFiles', this.files);
+
+            if (i < this.module_path.length) {
+                this.module_path.splice(i, 1);
+            }
+
+            console.log(this.module_path);
+
+            this.$emit('updateFiles', {
+                files: this.files,
+                module_path: this.module_path,
+            });
             if (this.files.length <= 0) {
                 this.dropZoneContainer = true;
             }

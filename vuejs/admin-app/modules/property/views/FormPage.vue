@@ -325,7 +325,11 @@ export default {
 
         // Update parent files
         const updateParentFiles = (files) => {
-            propertyData.value.images = files;
+            propertyData.value = {
+                ...propertyData.value,
+                images: files.files,
+                module_path: files.module_path,
+            };
         };
 
         // Update main image

@@ -13,8 +13,9 @@ class ImageService
     {
         return [
             'model_id' => $model->id,
-            'image' => $file,
-            'module_path' => isset($payload['banner_url_name']) ? $payload['banner_url_name'] : ServerFile::MODULE_PATH_WEB_IMAGE,
+            'image' => $file['file'],
+            'module_path' => $file['module_path'],
+            // 'module_path' => isset($payload['banner_url_name']) ? $payload['banner_url_name'] : ServerFile::MODULE_PATH_WEB_IMAGE,
             'file_type_id' => ServerFile::FILE_TYPE_IMAGE,
             'max_size' => 1000,
             'width' => isset($payload['width']) ? $payload['width'] : "",
@@ -25,7 +26,7 @@ class ImageService
 
     public static function createImage(array $payload, $model, $file = null)
     {
-        $serverFile = ServerFileTrait::uploadServerFiles($file, self::initServerImage($payload, $model, $file));
+        $serverFile = ServerFileTrait::uploadServerFiles($file['file'], self::initServerImage($payload, $model, $file));
         $result = $model->image()->create($serverFile);
 
         return $result;
@@ -79,8 +80,11 @@ class ImageService
         }
 
         if (is_array($file)) {
-            collect($file)->each(function ($item) use ($payload, $model) {
-                $payload['banner_url_name'] = 'slider-image';
+            foreach ($file as $key => $value) {
+                $newFileResult[$key] = ['file' => $value, 'module_path' => $payload['module_path'][$key]];
+            }
+
+            collect($newFileResult)->each(function ($item) use ($payload, $model) {
                 self::createImage($payload, $model, $item);
             });
         }
