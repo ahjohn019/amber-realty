@@ -196,35 +196,19 @@
                 </div>
             </div>
             <div class="col-12">
-                <div class="post-information-name">Main Images</div>
-                <input
-                    type="file"
-                    @input="updateMainImage"
-                    accept=".png, .jpg"
-                />
-                <img
-                    v-if="bannerUrl != ''"
-                    :src="bannerUrl"
-                    alt=""
-                    class="object-contain h-[300px] mx-auto"
-                    :class="$q.screen.lt.md ? 'w-full' : 'w-1/2'"
-                />
-            </div>
-
-            <div class="col-12">
                 <div class="flex justify-between py-2">
-                    <div class="post-information__name">Slider Images</div>
-                    <div
-                        v-if="routeType === 'update'"
-                        class="slider-exist__images"
-                    >
+                    <div class="post-information__name">Images</div>
+                    <div v-if="routeType === 'update'">
                         <ExistImageModal
                             v-if="propertyData.file.length > 0"
                             :property="propertyData"
                         />
                     </div>
                 </div>
-                <DropFile @updateFiles="updateParentFiles" />
+                <DropFile
+                    @updateFiles="updateParentFiles"
+                    :propertyData="propertyData"
+                />
             </div>
 
             <div class="col-12 text-right">

@@ -56,6 +56,7 @@ class UpdateForm extends FormRequest
             'property_details' => ['sometimes', 'boolean'],
             'file' => ['nullable'],
             'file.*' => ['file', 'max:5120', 'mimes:jpeg,png'],
+            'module_path' => ['nullable', $this->uniqueBannerImage()],
             'banner_url' => ['nullable'],
         ];
     }
@@ -74,6 +75,22 @@ class UpdateForm extends FormRequest
         if (!$list) {
             $fail('The :attribute is not included in list.');
         }
+    }
+
+    /**
+     * Get a unique value validation rule instance.
+     *
+     * @return \Illuminate\Contracts\Validation\Rule
+     */
+    protected function uniqueBannerImage()
+    {
+        return function ($attribute, $value, $fail) {
+            $checkBannerImage = array_count_values($value)['banner-image'] ?? 0;
+
+            if ($checkBannerImage > 1) {
+                $fail('Banner Image Cannot More Than One');
+            }
+        };
     }
 
     protected function prepareForValidation()

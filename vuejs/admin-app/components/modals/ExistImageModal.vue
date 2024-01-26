@@ -19,10 +19,7 @@
                     v-for="(file, key) in files"
                     :key="key"
                 >
-                    <div
-                        v-if="file.module_path != 'banner-image'"
-                        class="col row"
-                    >
+                    <div class="col row">
                         <div class="col">
                             <img :src="file.url" alt="" />
                             <div class="break-words">
@@ -40,6 +37,20 @@
                                     @click="handleDeleteFile(file)"
                                 />
                             </div>
+                            <div>
+                                <select
+                                    v-model="file.module_path"
+                                    :data-file-index="key"
+                                    @change="changeModulePath"
+                                >
+                                    <option value="banner-image">
+                                        Banner Image
+                                    </option>
+                                    <option value="slider-image">
+                                        Slider Image
+                                    </option>
+                                </select>
+                            </div>
                         </div>
                         <div class="col">
                             <input
@@ -48,7 +59,7 @@
                                 name="file"
                                 :id="file.id"
                                 class="hidden-input"
-                                @change="onChange"
+                                @change="onFileChange"
                                 ref="currentFile"
                                 accept=".pdf,.jpg,.jpeg,.png"
                             />
@@ -61,7 +72,7 @@
                 <q-btn
                     label="Update"
                     class="text-white bg-primary update-form__button"
-                    @click="updateData"
+                    @click="updateFileData"
                 />
             </q-card-actions>
         </q-card>
@@ -90,22 +101,18 @@ export default {
         const files = props.property?.file || [];
         const incomingFiles = ref([]);
 
-        console.log(props.property);
+        const modulePathList = ref([]);
 
-        const onChange = (event) => {
-            return serverImageStore.handleMultipleImageChange(
-                incomingFiles,
-                event
-            );
+        const fetchAllModulePath = async () => {
+            modulePathList.value = files.map((item) => {
+                return { module_path: item.module_path, file_id: item.id };
+            });
         };
 
-        const updateData = async () => {
-            const response = await serverImageStore.updateFiles(
-                incomingFiles.value,
-                getAuthToken
-            );
-
-            return response;
+        const changeModulePath = (event) => {
+            const fetchFileIndex = event.target.getAttribute('data-file-index');
+            modulePathList.value[fetchFileIndex].module_path =
+                event.target.value;
         };
 
         const handleDeleteFile = async (file) => {
@@ -117,13 +124,46 @@ export default {
             return response;
         };
 
+        const onFileChange = (event) => {
+            return serverImageStore.handleMultipleImageChange(
+                incomingFiles,
+                event
+            );
+        };
+
+        const updateFileData = async () => {
+            const payload = {
+                file: incomingFiles.value,
+                module_path: modulePathList.value,
+            };
+
+            const combinedResult = payload.module_path.map((pathItem) => {
+                const matchingFileItem = payload.file?.find(
+                    (fileItem) => parseInt(fileItem.id) === pathItem.file_id
+                );
+
+                return { ...pathItem, ...matchingFileItem };
+            });
+
+            const response = await serverImageStore.updateFiles(
+                combinedResult,
+                getAuthToken
+            );
+
+            return response;
+        };
+
+        fetchAllModulePath();
+
         return {
             existImageModal,
             files,
-            updateData,
-            onChange,
+            updateFileData,
+            onFileChange,
             handleDeleteFile,
             modulePathOptions,
+            changeModulePath,
+            fetchAllModulePath,
         };
     },
 };

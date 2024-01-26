@@ -40,8 +40,15 @@ export const useServerImageStore = defineStore('server_image_admin', {
 
                 return response.data.data;
             } catch (error) {
-                console.error('Error:', error);
-                throw error;
+                console.log(error);
+
+                this.router.push('/property');
+
+                Swal.fire({
+                    title: error.response.data.data,
+                    text: error.response.data.message,
+                    icon: 'error',
+                });
             }
         },
 

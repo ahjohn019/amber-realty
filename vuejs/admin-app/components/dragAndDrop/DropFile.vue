@@ -93,8 +93,9 @@ export default {
             module_path: [],
         };
     },
+    props: ['propertyData'],
     emits: ['updateFiles'],
-    created() {},
+
     methods: {
         handleChange(index) {
             const selectedOption = this.files[index].selectedOption;
@@ -104,8 +105,6 @@ export default {
             }
 
             this.module_path[index] = selectedOption;
-
-            console.log(this.module_path);
         },
         onChange() {
             const self = this;
@@ -135,6 +134,7 @@ export default {
                 });
 
                 self.files.push(...incomingFiles);
+
                 if (self.files.length >= 1) {
                     self.dropZoneContainer = false;
                 }

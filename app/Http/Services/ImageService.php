@@ -13,9 +13,8 @@ class ImageService
     {
         return [
             'model_id' => $model->id,
-            'image' => $file['file'],
+            'image' => isset($file['file']) ? $file['file'] : null,
             'module_path' => $file['module_path'],
-            // 'module_path' => isset($payload['banner_url_name']) ? $payload['banner_url_name'] : ServerFile::MODULE_PATH_WEB_IMAGE,
             'file_type_id' => ServerFile::FILE_TYPE_IMAGE,
             'max_size' => 1000,
             'width' => isset($payload['width']) ? $payload['width'] : "",
@@ -34,13 +33,17 @@ class ImageService
 
     public static function updateServerImage(array $payload, $model, $file = null)
     {
+        if (!$file) {
+            return $model->update(['module_path' => $payload['module_path']]);
+        }
+
         $uploadable = $model->uploadable()->first();
-        $initServerImage = self::initServerImage($payload, $uploadable, $file);
+        $initServerImage = self::initServerImage($payload, $uploadable, $payload);
         $serverFiles = ['server_files' => $model->first()->firstOrThrowError()];
         $serverImageMerge = array_merge($serverFiles, $initServerImage);
-        $serverFile = ServerFileTrait::uploadServerFiles($file, $serverImageMerge, true);
 
-        $result = $model->update($serverFile);
+        $uploadServerFiles = ServerFileTrait::uploadServerFiles($file, $serverImageMerge, true);
+        $result = $model->update($uploadServerFiles);
 
         return $result;
     }
@@ -69,6 +72,7 @@ class ImageService
 
     public static function handleUploadImageAmount(array $payload, $model, $file, $type)
     {
+
         if ($file instanceof UploadedFile) {
             $payload['banner_url_name'] = 'banner-image';
 
