@@ -28,7 +28,7 @@
                         </q-item-section>
                     </q-item>
 
-                    <q-item clickable>
+                    <q-item clickable @click="handleDelete()">
                         <q-item-section>
                             <q-icon name="delete" />
                         </q-item-section>
@@ -44,6 +44,8 @@
 
 <script>
 import { useRouter } from 'vue-router';
+import { usePropertyAdminStore } from '@store_admin_endpoints/property/index.js';
+import { useAdminAuthStore } from '@store_admin/base/auth.js';
 
 export default {
     props: {
@@ -52,18 +54,33 @@ export default {
 
     setup(data) {
         const router = useRouter();
+        const postPropertyStore = usePropertyAdminStore();
+
+        // fetch auth token
+        const adminAuthStore = useAdminAuthStore();
+        const getAuthToken = adminAuthStore.fetchSessionToken();
+
+        const propertyId = data.data?.row?.id || null;
 
         const handleEdit = () => {
-            const propertyId = data.data?.row?.id || null;
-
             router.push({
                 name: 'property.form',
                 query: { type: 'update', id: propertyId },
             });
         };
 
+        const handleDelete = async () => {
+            const response = await postPropertyStore.deleteProperty(
+                getAuthToken,
+                propertyId
+            );
+
+            return response;
+        };
+
         return {
             handleEdit,
+            handleDelete,
         };
     },
 };

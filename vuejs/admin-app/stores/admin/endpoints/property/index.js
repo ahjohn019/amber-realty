@@ -126,6 +126,33 @@ export const usePropertyAdminStore = defineStore('property_admin', {
             }
         },
 
+        async deleteProperty(authToken, id = null) {
+            try {
+                const config = {
+                    headers: {
+                        Authorization: `Bearer ${authToken}`,
+                        'Content-Type': 'multipart/form-data',
+                    },
+                };
+
+                const response = await axios.delete(
+                    prefix + 'delete/' + id,
+                    config
+                );
+
+                Swal.fire({
+                    text: 'Property Deleted Successfully',
+                    icon: 'success',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        this.router.go(0);
+                    }
+                });
+
+                return response;
+            } catch (error) {}
+        },
+
         handlePropertyDetails(payload) {
             const propertyDetails = {
                 furnishing: payload.furnishing.slug,
