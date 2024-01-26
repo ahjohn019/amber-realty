@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import { useRouter } from 'vue-router';
+import { useRouter, useRoute } from 'vue-router';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 
@@ -9,6 +9,7 @@ export const useServerImageStore = defineStore('server_image_admin', {
     state: () => ({
         post_image_admin: null,
         router: useRouter(),
+        route: useRoute(),
     }),
 
     actions: {
@@ -27,28 +28,24 @@ export const useServerImageStore = defineStore('server_image_admin', {
                     config
                 );
 
-                this.router.push('/property');
-
                 Swal.fire({
                     text: 'Image Update Successfully',
                     icon: 'success',
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        return response.data.data;
+                        return response.data;
                     }
                 });
 
-                return response.data.data;
+                return response.data;
             } catch (error) {
-                console.log(error);
-
-                this.router.push('/property');
-
                 Swal.fire({
                     title: error.response.data.data,
                     text: error.response.data.message,
                     icon: 'error',
                 });
+
+                return error.response;
             }
         },
 
@@ -67,18 +64,16 @@ export const useServerImageStore = defineStore('server_image_admin', {
                     config
                 );
 
-                this.router.push('/property');
-
                 Swal.fire({
                     text: 'Image Deleted Successfully',
                     icon: 'success',
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        return response.data.data;
+                        return response.data;
                     }
                 });
 
-                return response.data.data;
+                return response.data;
             } catch (error) {
                 console.error('Error:', error);
                 throw error;
