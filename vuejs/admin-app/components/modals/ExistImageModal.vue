@@ -87,7 +87,6 @@ import { useServerImageStore } from '@store_admin/image/index.js';
 export default {
     props: ['property'],
     setup(props) {
-        // // fetch auth token
         const adminAuthStore = useAdminAuthStore();
         const serverImageStore = useServerImageStore();
         const getAuthToken = adminAuthStore.fetchSessionToken();
@@ -121,6 +120,8 @@ export default {
                 getAuthToken
             );
 
+            existImageModal.value = false;
+
             return response;
         };
 
@@ -149,6 +150,8 @@ export default {
                 combinedResult,
                 getAuthToken
             );
+
+            existImageModal.value = false;
 
             return response;
         };

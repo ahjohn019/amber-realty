@@ -21,7 +21,6 @@ class ServerFileController extends Controller
             return self::failedResponse('Banner Cannot Add More Than One', 'Banner Unavailable', Response::HTTP_BAD_REQUEST);
         }
 
-
         collect($payload)->each(
             function ($pEntity) {
                 $model = ServerFile::find($pEntity['file_id']);
@@ -30,6 +29,8 @@ class ServerFileController extends Controller
                 ImageService::updateServerImage($pEntity, $model, $file);
             }
         );
+
+        return self::successResponse('Updated Successfully');
     }
 
     public function delete(Request $request)
