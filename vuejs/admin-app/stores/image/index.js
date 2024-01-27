@@ -33,7 +33,7 @@ export const useServerImageStore = defineStore('server_image_admin', {
                     icon: 'success',
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        return response.data;
+                        this.router.go(0);
                     }
                 });
 
