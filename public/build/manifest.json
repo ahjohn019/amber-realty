@@ -50,11 +50,11 @@
       "_ckeditor-6cef9db6.js"
     ]
   },
-  "_LatestComponent-c33a3de7.js": {
+  "_LatestComponent-b5603a8b.js": {
     "css": [
       "assets/LatestComponent-23b2b121.css"
     ],
-    "file": "assets/LatestComponent-c33a3de7.js",
+    "file": "assets/LatestComponent-b5603a8b.js",
     "imports": [
       "_ckeditor-6cef9db6.js",
       "_focus-manager-e961f08d.js",
@@ -243,7 +243,7 @@
     "src": "refList.css"
   },
   "resources/sass/app.scss": {
-    "file": "assets/app-83f65181.css",
+    "file": "assets/app-8eabe434.css",
     "isEntry": true,
     "src": "resources/sass/app.scss"
   },
@@ -495,7 +495,7 @@
       "vuejs/web-app/modules/property/views/ListPage.vue",
       "vuejs/web-app/modules/property/views/DetailsPage.vue"
     ],
-    "file": "assets/app-cbd14f10.js",
+    "file": "assets/app-8649112e.js",
     "imports": [
       "_ckeditor-6cef9db6.js"
     ],
@@ -510,11 +510,11 @@
     "css": [
       "assets/MainPage-bb39799c.css"
     ],
-    "file": "assets/MainPage-241fc12c.js",
+    "file": "assets/MainPage-124148c3.js",
     "imports": [
       "_QLayout-33bf3b12.js",
       "_ckeditor-6cef9db6.js",
-      "_LatestComponent-c33a3de7.js",
+      "_LatestComponent-b5603a8b.js",
       "_BaseLayout-a584d238.js",
       "_focus-manager-e961f08d.js",
       "_QMenu-b4177ad7.js",
@@ -541,10 +541,10 @@
     "src": "vuejs/web-app/modules/property/views/DetailsPage.vue"
   },
   "vuejs/web-app/modules/property/views/ListPage.vue": {
-    "file": "assets/ListPage-fd923db5.js",
+    "file": "assets/ListPage-1ff02891.js",
     "imports": [
       "_BaseLayout-a584d238.js",
-      "_LatestComponent-c33a3de7.js",
+      "_LatestComponent-b5603a8b.js",
       "_QBtnDropdown-f0635edb.js",
       "_focus-manager-e961f08d.js",
       "_ckeditor-6cef9db6.js",
