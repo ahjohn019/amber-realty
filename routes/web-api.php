@@ -3,10 +3,13 @@
 use App\Library\RoleTag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Web\AuthController;
-use App\Http\Controllers\Web\CommentController;
-use App\Http\Controllers\Web\PostController;
-use App\Http\Controllers\Web\UserController;
+use App\Http\Controllers\Web\{
+    AuthController,
+    PostController,
+    UserController,
+    CommentController,
+    PropertyController
+};
 
 /*
 |--------------------------------------------------------------------------
@@ -58,4 +61,9 @@ Route::middleware('auth:sanctum', 'role:' . RoleTag::USER)->group(function () {
         Route::get('/show/{id}', [CommentController::class, 'show'])->name('web.comments.show');
         Route::delete('/delete/{id}', [CommentController::class, 'delete'])->name('web.comments.delete');
     });
+});
+
+// Property List
+Route::prefix('property')->name('web.property')->group(function () {
+    Route::get('/latest', [PropertyController::class, 'latest'])->name('latest');
 });

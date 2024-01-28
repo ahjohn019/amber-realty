@@ -25,6 +25,8 @@ class Property extends Model
     protected $guarded = [];
 
     const PROPERTY_IMAGE_TYPE = ['file', 'banner_url'];
+    const STATUS_ACTIVE = 'active';
+    const LATEST = 'desc';
 
     public function propertyDetail(): HasOne
     {

@@ -59,12 +59,6 @@ const menuList = [
         route: '/',
         separator: true,
     },
-    // {
-    //     icon: 'equalizer',
-    //     title: 'statistics',
-    //     text: 'Statistics',
-    //     route: null,
-    // },
     {
         icon: 'description',
         title: 'property',

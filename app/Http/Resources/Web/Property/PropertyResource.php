@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Resources\Admin\Property;
+namespace App\Http\Resources\Web\Property;
 
 use Illuminate\Http\Request;
 use App\Http\Resources\Ref\StateResource;
 use App\Http\Resources\Admin\User\UserResource;
 use Illuminate\Http\Resources\Json\JsonResource;
-use App\Http\Resources\Admin\Property\PropertyDetailsResource;
+use App\Http\Resources\Web\Property\PropertyDetailsResource;
 
 class PropertyResource extends JsonResource
 {
@@ -19,7 +19,7 @@ class PropertyResource extends JsonResource
     {
         return [
             "id" => $this->id,
-            "name" => $this->name,
+            "name" => ucwords($this->name),
             "description" => $this->description,
             "short_description" => $this->short_description,
             "price" => $this->price,
@@ -29,7 +29,8 @@ class PropertyResource extends JsonResource
             "user" => new UserResource($this->user),
             "details" => new PropertyDetailsResource($this->propertyDetail),
             "created_at" => $this->created_at,
-            "file" => $this->image()->get()
-        ];;
+            "banner_image" => $this->image()->where('module_path', 'banner-image')->first(),
+            "slider_image" => $this->image()->where('module_path', 'slider-image')->get(),
+        ];
     }
 }

@@ -12,7 +12,7 @@
                 class="container mx-auto py-8 px-4 md:px-0"
                 data-aos="fade-left"
             >
-                <ListComponent />
+                <LatestComponent />
             </div>
             <FeaturedComponent />
         </template>
@@ -21,13 +21,13 @@
 
 <script>
 import BaseLayout from '@web/modules/layout/BaseLayout.vue';
-import ListComponent from '@web/components/property/ListComponent.vue';
+import LatestComponent from '@web/components/property/LatestComponent.vue';
 import FeaturedComponent from '@web/components/property/FeaturedComponent.vue';
 
 export default {
     components: {
         BaseLayout,
-        ListComponent,
+        LatestComponent,
         FeaturedComponent,
     },
 };

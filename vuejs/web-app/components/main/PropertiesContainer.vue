@@ -10,16 +10,16 @@
                 <router-link to="#">See All Property</router-link>
             </div>
         </div>
-        <ListComponent />
+        <LatestComponent />
     </div>
 </template>
 
 <script>
-import ListComponent from '@web/components/property/ListComponent.vue';
+import LatestComponent from '@web/components/property/LatestComponent.vue';
 
 export default {
     components: {
-        ListComponent,
+        LatestComponent,
     },
 };
 </script>

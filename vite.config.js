@@ -50,6 +50,7 @@ export default defineConfig({
                 __dirname,
                 'vuejs/admin-app/stores/admin/models'
             ),
+            '@store_web': path.resolve(__dirname, 'vuejs/web-app/stores'),
         },
     },
 });

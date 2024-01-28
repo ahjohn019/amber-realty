@@ -6,8 +6,8 @@ use App\Models\State;
 use App\Models\Category;
 use App\Models\PropertyTypes;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\Admin\Ref\StateResource;
-use App\Http\Resources\Admin\Ref\PropertyTypeResource;
+use App\Http\Resources\Ref\StateResource;
+use App\Http\Resources\Ref\PropertyTypeResource;
 
 class RefController extends Controller
 {

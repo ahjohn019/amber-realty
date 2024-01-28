@@ -3,14 +3,17 @@
 use App\Library\RoleTag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Admin\RefController;
-use App\Http\Controllers\Admin\AuthController;
-use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\ServerFileController;
-use App\Http\Controllers\Admin\AdminController;
-use App\Http\Controllers\Admin\BannerController;
-use App\Http\Controllers\Admin\PropertyController;
-use App\Http\Controllers\Admin\DashboardController;
+
+use App\Http\Controllers\Admin\{
+    RefController,
+    AuthController,
+    PostController,
+    AdminController,
+    BannerController,
+    PropertyController,
+    DashboardController
+};
 
 /*
 |--------------------------------------------------------------------------
