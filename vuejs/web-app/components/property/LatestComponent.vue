@@ -35,9 +35,12 @@
                             </q-tooltip>
                         </div>
                     </q-card-section>
-                    <q-card-section class="q-pt-none h-[65px]">
+                    <q-card-section
+                        class="q-pt-none"
+                        :class="$q.screen.lt.md ? '' : 'h-[75px]'"
+                    >
                         <div class="row" v-if="latest.details">
-                            <div class="col-12 col-md-4">
+                            <div class="col-6 col-md-4">
                                 <q-icon
                                     name="arrow_circle_right"
                                     size="22px"
@@ -47,7 +50,7 @@
                                     {{ latest.details.bedroom }} Beds
                                 </span>
                             </div>
-                            <div class="col-12 col-md-4">
+                            <div class="col-6 col-md-4">
                                 <q-icon
                                     name="arrow_circle_right"
                                     size="22px"
@@ -86,7 +89,7 @@ export default {
     setup() {
         const webProperty = usePropertyWebStore();
         const payload = {
-            limit: 5,
+            limit: 4,
         };
 
         const latestProperty = ref([]);
