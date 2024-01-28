@@ -187,5 +187,24 @@ export const usePropertyAdminStore = defineStore('property_admin', {
 
             return filteredPropertyDetails;
         },
+
+        // For Handle Status
+        handleEditProperty(propertyId) {
+            this.router.push({
+                name: 'property.form',
+                query: { type: 'update', id: propertyId },
+            });
+        },
+
+        async handleDeleteProperty(propertyId, authToken) {
+            const postPropertyStore = usePropertyAdminStore();
+
+            const response = await postPropertyStore.deleteProperty(
+                authToken,
+                propertyId
+            );
+
+            return response;
+        },
     },
 });

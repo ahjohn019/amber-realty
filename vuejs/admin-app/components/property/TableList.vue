@@ -29,8 +29,10 @@
                     <TableStatus :data="props" />
                 </q-td>
             </template>
+            <template v-slot:item="props">
+                <TableMobileResponsive :props="props" />
+            </template>
         </q-table>
-        <div class="q-mt-md">Selected: {{ JSON.stringify(selected) }}</div>
     </div>
 </template>
 
@@ -39,6 +41,7 @@ import { ref, onMounted } from 'vue';
 import { usePropertyAdminStore } from '@store_admin_endpoints/property/index.js';
 import { usePropertyAdminModelStore } from '@store_admin_models/property/index.js';
 import { useServerTableStore } from '@store_admin/admin/server/table.js';
+import TableMobileResponsive from './TableMobileResponsive.vue';
 import TableStatus from './TableStatus.vue';
 
 import dayjs from 'dayjs';
@@ -46,6 +49,7 @@ import dayjs from 'dayjs';
 export default {
     components: {
         TableStatus,
+        TableMobileResponsive,
     },
 
     setup() {

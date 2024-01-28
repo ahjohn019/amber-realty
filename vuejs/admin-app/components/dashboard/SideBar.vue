@@ -42,12 +42,12 @@ const sideBarList = [
         text: 'Property',
         route: '/property',
     },
-    {
-        icon: 'tune',
-        title: 'settings',
-        text: 'Settings',
-        route: null,
-    },
+    // {
+    //     icon: 'tune',
+    //     title: 'settings',
+    //     text: 'Settings',
+    //     route: null,
+    // },
 ];
 
 export default {

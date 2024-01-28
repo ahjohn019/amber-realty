@@ -14,30 +14,14 @@
     >
         <q-scroll-area class="fit">
             <q-list>
-                <q-item>
-                    <q-item-section>
-                        <q-input outlined dense label="Search">
-                            <template v-slot:append>
-                                <q-icon name="search" />
-                            </template>
-                        </q-input>
-                    </q-item-section>
-                </q-item>
-                <q-item clickable v-ripple>
+                <q-item clickable v-ripple to="/">
                     <q-item-section class="items-center">
                         <q-avatar size="100px">
-                            <img src="https://cdn.quasar.dev/img/avatar.png" />
+                            <img :src="mainLogo" />
                         </q-avatar>
                     </q-item-section>
                 </q-item>
-                <q-item clickable v-ripple>
-                    <q-item-section class="items-center">
-                        <div class="font-bold">Shoo Bro Thoo</div>
-                        <div class="lowercase text-gray-500">
-                            shoobro@email.com
-                        </div>
-                    </q-item-section>
-                </q-item>
+                <q-separator />
                 <template v-for="(menuItem, index) in menuList" :key="index">
                     <q-item
                         clickable
@@ -72,25 +56,27 @@ const menuList = [
         title: 'dashboard',
         text: 'Dashboard',
         route: '/',
+        separator: true,
     },
-    {
-        icon: 'equalizer',
-        title: 'statistics',
-        text: 'Statistics',
-        route: null,
-    },
+    // {
+    //     icon: 'equalizer',
+    //     title: 'statistics',
+    //     text: 'Statistics',
+    //     route: null,
+    // },
     {
         icon: 'description',
-        title: 'posts',
-        text: 'Posts',
-        route: '/posts',
+        title: 'property',
+        text: 'Property',
+        route: '/property',
+        separator: true,
     },
-    {
-        icon: 'tune',
-        title: 'settings',
-        text: 'Settings',
-        route: null,
-    },
+    // {
+    //     icon: 'tune',
+    //     title: 'settings',
+    //     text: 'Settings',
+    //     route: null,
+    // },
 ];
 
 export default {

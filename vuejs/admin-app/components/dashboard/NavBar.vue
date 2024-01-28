@@ -1,12 +1,12 @@
 <template>
     <q-header class="border-b bg-white text-black py-2">
-        <div class="row items-center mx-4 md:mx-10">
-            <div class="col-2 col-lg-1 text-sm md:text-2xl lg:text-center ml-4">
+        <div class="row items-center mx-4 md:mx-10 justify-between">
+            <div class="col col-lg-1 text-sm md:text-2xl lg:text-center">
                 <router-link to="/">
-                    <img :src="mainLogo" alt="" width="100" class="mx-auto" />
+                    <img :src="mainLogo" alt="" width="100" />
                 </router-link>
             </div>
-            <div class="col col-lg-9 col-md-5 nav-profile-details">
+            <!-- <div class="col col-lg-9 col-md-5 nav-profile-details">
                 <q-input
                     outlined
                     dense
@@ -17,16 +17,11 @@
                         <q-icon name="search" />
                     </template>
                 </q-input>
-            </div>
+            </div> -->
 
-            <div class="col nav-profile-details">
-                <div class="row items-center">
-                    <div class="col col-md-3 flex justify-end">
-                        <q-avatar>
-                            <img src="https://cdn.quasar.dev/img/avatar.png" />
-                        </q-avatar>
-                    </div>
-                    <div class="col">
+            <div class="col nav-profile-details row text-right">
+                <div class="col-12 row">
+                    <div class="col-12">
                         <q-btn-dropdown
                             class="text-black"
                             color="white"
