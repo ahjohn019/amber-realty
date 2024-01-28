@@ -6,19 +6,6 @@
                     <img :src="mainLogo" alt="" width="100" />
                 </router-link>
             </div>
-            <!-- <div class="col col-lg-9 col-md-5 nav-profile-details">
-                <q-input
-                    outlined
-                    dense
-                    label="Search"
-                    v-model="searchKeywordAdmin"
-                >
-                    <template v-slot:append>
-                        <q-icon name="search" />
-                    </template>
-                </q-input>
-            </div> -->
-
             <div class="col nav-profile-details row text-right">
                 <div class="col-12 row">
                     <div class="col-12">

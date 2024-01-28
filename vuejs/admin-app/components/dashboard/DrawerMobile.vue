@@ -49,6 +49,7 @@
 
 <script>
 import { ref } from 'vue';
+import { useAdminAuthStore } from '@store_admin/base/auth.js';
 
 const menuList = [
     {
@@ -71,6 +72,11 @@ const menuList = [
         route: '/property',
         separator: true,
     },
+    {
+        icon: 'logout',
+        title: 'logout',
+        text: 'Logout',
+    },
     // {
     //     icon: 'tune',
     //     title: 'settings',
@@ -85,6 +91,9 @@ export default {
 
         const link = ref('dashboard');
 
+        const adminStore = useAdminAuthStore();
+        const getAuthToken = adminStore.fetchSessionToken();
+
         // Expose the parent method
         const toggleDrawerMobile = () => {
             toggleDrawer.value = !toggleDrawer.value;
@@ -92,11 +101,24 @@ export default {
 
         const handleItemClick = (sideBarItem) => {
             link.value = sideBarItem.title;
+
+            if (link.value === 'logout') {
+                handleLogout();
+            }
+        };
+
+        const handleLogout = async () => {
+            try {
+                await adminStore.handleLogout(getAuthToken);
+            } catch (error) {
+                console.log(error);
+            }
         };
 
         return {
             toggleDrawerMobile,
             handleItemClick,
+            handleLogout,
             toggleDrawer,
             menuList,
         };
