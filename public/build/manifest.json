@@ -244,7 +244,7 @@
     "src": "refList.css"
   },
   "resources/sass/app.scss": {
-    "file": "assets/app-45a10095.css",
+    "file": "assets/app-ffeac927.css",
     "isEntry": true,
     "src": "resources/sass/app.scss"
   },
@@ -496,7 +496,7 @@
       "vuejs/web-app/modules/property/views/ListPage.vue",
       "vuejs/web-app/modules/property/views/DetailsPage.vue"
     ],
-    "file": "assets/app-a6624241.js",
+    "file": "assets/app-2781274a.js",
     "imports": [
       "_ckeditor-6cef9db6.js"
     ],
@@ -511,7 +511,7 @@
     "css": [
       "assets/MainPage-bb39799c.css"
     ],
-    "file": "assets/MainPage-0bbf3835.js",
+    "file": "assets/MainPage-d0fc73f5.js",
     "imports": [
       "_QLayout-33bf3b12.js",
       "_ckeditor-6cef9db6.js",
