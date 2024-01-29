@@ -46,9 +46,12 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12 row" v-if="propertyDetails.details">
+                        <div
+                            class="col-12 row gap-2 justify-end"
+                            v-if="propertyDetails.details"
+                        >
                             <div
-                                class="col text-sm"
+                                class="col-12 col-lg-3 text-sm"
                                 :class="
                                     $q.screen.lt.md
                                         ? 'text-center'
@@ -68,7 +71,7 @@
                                 >
                             </div>
                             <div
-                                class="col text-sm"
+                                class="col-12 col-lg-3 text-sm"
                                 :class="
                                     $q.screen.lt.md
                                         ? 'text-center'
@@ -88,7 +91,7 @@
                                 >
                             </div>
                             <div
-                                class="col text-sm"
+                                class="col-12 col-lg-3 text-sm"
                                 :class="
                                     $q.screen.lt.md
                                         ? 'text-center'
@@ -110,7 +113,7 @@
                         </div>
                         <div class="row col-12 gap-2 justify-end">
                             <div
-                                class="col-12 col-lg-4 text-sm bg-primary text-white rounded-lg p-1 text-center"
+                                class="col-12 col-lg-3 text-sm bg-primary text-white rounded-lg p-1 text-center"
                                 v-for="(contact, key) in contactNumber"
                                 :key="key"
                             >
@@ -147,7 +150,7 @@
                             <div
                                 class="col-12"
                                 :class="
-                                    propertyDetails.details ? 'col-md-9' : ''
+                                    propertyDetails.details ? 'col-lg-9' : ''
                                 "
                             >
                                 <q-img
@@ -156,10 +159,11 @@
                                     :class="
                                         $q.screen.lt.md ? 'h-full' : 'h-[650px]'
                                     "
+                                    :fit="$q.screen.lt.lg ? 'contain' : 'cover'"
                                 />
                             </div>
                             <div
-                                class="col-12 col-md-3 text-center"
+                                class="col-12 col-lg-3 text-center"
                                 v-if="propertyDetails.details"
                             >
                                 <q-card
