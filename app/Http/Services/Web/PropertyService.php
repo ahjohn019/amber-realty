@@ -18,4 +18,13 @@ class PropertyService
 
         return $result;
     }
+
+    public function fetchDetails($id)
+    {
+        $result = Property::find($id);
+
+        $result = new PropertyResource($result);
+
+        return $result;
+    }
 }

@@ -10,7 +10,10 @@
                 class="col-12 col-md-3 text-center text-xl font-bold text-white"
                 style="width: 250px"
             >
-                <router-link to="#">
+                <a
+                    href="https://wa.me/0123729668?text=I'm%20interested%20in%20property%20for%20sale"
+                    target="_blank"
+                >
                     <div class="bg-primary px-8 py-4 rounded row">
                         <div class="col-2">
                             <img
@@ -21,7 +24,7 @@
                         </div>
                         <div class="col-10">0123729668</div>
                     </div>
-                </router-link>
+                </a>
             </div>
         </div>
     </div>

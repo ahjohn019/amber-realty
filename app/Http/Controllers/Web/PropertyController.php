@@ -13,13 +13,21 @@ class PropertyController extends Controller
     ) {
     }
 
-
     /**
-     * Display a listing of the resource.
+     * Display latest property
+     *
+     * @param Request $request
+     * @return void
      */
     public function latest(Request $request)
     {
         $result = $this->propertyService->fetchLatestProperty($request);
         return self::successResponse('Latest Property Display Successfully', $result);
+    }
+
+    public function details(String $id)
+    {
+        $result = $this->propertyService->fetchDetails($id);
+        return self::successResponse('Details Display Successfully', $result);
     }
 }

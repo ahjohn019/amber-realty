@@ -15,7 +15,7 @@ class PropertyDetailsResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'tenure' => $this->tenure,
+            'tenure' => ucwords($this->tenure),
             'bathroom' => $this->bathroom,
             'bedroom' => $this->bedroom,
             'square_feet' => $this->square_feet,

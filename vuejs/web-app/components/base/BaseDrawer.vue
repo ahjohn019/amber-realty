@@ -7,9 +7,8 @@
                     :key="idx"
                     clickable
                     v-close-popup
-                    @click="onItemClick"
                 >
-                    <q-item-section>
+                    <q-item-section clickable @click="onItemClick(menu.route)">
                         <q-item-label>{{ menu.title }}</q-item-label>
                     </q-item-section>
                 </q-item>
@@ -20,21 +19,22 @@
 
 <script>
 import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 
 export default {
     setup() {
+        const router = useRouter();
         const baseDrawerMenu = ref({});
 
         baseDrawerMenu.value = [
-            { title: 'Home', value: 'home' },
-            { title: 'About Us', value: 'about_us' },
-            { title: 'Property', value: 'property' },
-            { title: 'Schedule A Visit', value: 'schedule_visit' },
+            { title: 'Home', value: 'home', route: '/' },
+            { title: 'About Us', value: 'about_us', route: '/' },
+            { title: 'Property', value: 'property', route: '/property' },
         ];
 
         return {
-            onItemClick() {
-                console.log('Clicked on an Item');
+            onItemClick(routeName) {
+                router.push(routeName);
             },
             baseDrawerMenu,
         };

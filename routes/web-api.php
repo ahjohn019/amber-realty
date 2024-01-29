@@ -66,4 +66,5 @@ Route::middleware('auth:sanctum', 'role:' . RoleTag::USER)->group(function () {
 // Property List
 Route::prefix('property')->name('web.property')->group(function () {
     Route::get('/latest', [PropertyController::class, 'latest'])->name('latest');
+    Route::get('/details/{id}', [PropertyController::class, 'details'])->name('details');
 });

@@ -1,11 +1,14 @@
 import { defineStore } from 'pinia';
 import axios from 'axios';
+import { useRouter, useRoute } from 'vue-router';
 
 const prefix = '/api/property/';
 
 export const usePropertyWebStore = defineStore('property_web', {
     state: () => ({
         post_table_web: null,
+        router: useRouter(),
+        route: useRoute(),
     }),
 
     actions: {
@@ -20,6 +23,21 @@ export const usePropertyWebStore = defineStore('property_web', {
                 console.error('Error:', error);
                 throw error;
             }
+        },
+
+        async fetchPropertyDetails() {
+            try {
+                const routeId = this.route.params?.id || null;
+
+                const response = await axios.get(
+                    prefix + 'details/' + routeId,
+                    routeId
+                );
+
+                console.log(response);
+
+                return response.data.data;
+            } catch (error) {}
         },
     },
 });

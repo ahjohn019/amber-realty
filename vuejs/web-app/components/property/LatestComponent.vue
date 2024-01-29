@@ -6,73 +6,80 @@
                 v-for="(latest, key) in latestProperty"
                 :key="key"
             >
-                <q-card class="my-card">
-                    <div class="relative">
-                        <q-img :src="latest.banner_image.url" :ratio="16 / 9" />
-                        <div
-                            class="absolute top-4 left-5 bg-secondary font-bold px-6 py-2 rounded"
-                            v-if="latest.details"
-                        >
-                            For {{ latest.details.listing_type }}
+                <router-link :to="'property/details/' + latest.id">
+                    <q-card class="my-card">
+                        <div class="relative">
+                            <q-img
+                                :src="latest.banner_image.url"
+                                :ratio="16 / 9"
+                            />
+                            <div
+                                class="absolute top-4 left-5 bg-secondary font-bold px-6 py-2 rounded"
+                                v-if="latest.details"
+                            >
+                                For {{ latest.details.listing_type }}
+                            </div>
                         </div>
-                    </div>
-                    <q-card-section class="row gap-2">
-                        <div class="col-12 text-lg">RM {{ latest.price }}</div>
-                        <div
-                            class="col-12 text-xl font-bold latest-property__name"
-                        >
-                            {{ latest.name }}
-                            <q-tooltip max-width="350px">
+                        <q-card-section class="row gap-2">
+                            <div class="col-12 text-lg">
+                                RM {{ latest.price }}
+                            </div>
+                            <div
+                                class="col-12 text-xl font-bold latest-property__name"
+                            >
                                 {{ latest.name }}
-                            </q-tooltip>
-                        </div>
-                        <div
-                            class="col-12 text-subtitle2 latest-property__descriptions !h-[65px]"
-                        >
-                            {{ latest.short_description }}
-                            <q-tooltip max-width="350px">
+                                <q-tooltip max-width="350px">
+                                    {{ latest.name }}
+                                </q-tooltip>
+                            </div>
+                            <div
+                                class="col-12 text-subtitle2 latest-property__descriptions !h-[65px]"
+                            >
                                 {{ latest.short_description }}
-                            </q-tooltip>
-                        </div>
-                    </q-card-section>
-                    <q-card-section
-                        class="q-pt-none"
-                        :class="$q.screen.lt.md ? '' : 'h-[75px]'"
-                    >
-                        <div class="row" v-if="latest.details">
-                            <div class="col-6 col-md-4">
-                                <q-icon
-                                    name="arrow_circle_right"
-                                    size="22px"
-                                    class="align-middle"
-                                />
-                                <span class="align-middle text-lg pl-2">
-                                    {{ latest.details.bedroom }} Beds
-                                </span>
+                                <q-tooltip max-width="350px">
+                                    {{ latest.short_description }}
+                                </q-tooltip>
                             </div>
-                            <div class="col-6 col-md-4">
-                                <q-icon
-                                    name="arrow_circle_right"
-                                    size="22px"
-                                    class="align-middle"
-                                />
-                                <span class="align-middle text-lg pl-2">
-                                    {{ latest.details.bathroom }} Bath
-                                </span>
+                        </q-card-section>
+                        <q-card-section
+                            class="q-pt-none"
+                            :class="$q.screen.lt.md ? '' : 'h-[75px]'"
+                        >
+                            <div class="row" v-if="latest.details">
+                                <div class="col-6 col-md-4">
+                                    <q-icon
+                                        name="arrow_circle_right"
+                                        size="22px"
+                                        class="align-middle"
+                                    />
+                                    <span class="align-middle text-lg pl-2">
+                                        {{ latest.details.bedroom }} Beds
+                                    </span>
+                                </div>
+                                <div class="col-6 col-md-4">
+                                    <q-icon
+                                        name="arrow_circle_right"
+                                        size="22px"
+                                        class="align-middle"
+                                    />
+                                    <span class="align-middle text-lg pl-2">
+                                        {{ latest.details.bathroom }} Bath
+                                    </span>
+                                </div>
+                                <div class="col-12 col-md-4">
+                                    <q-icon
+                                        name="arrow_circle_right"
+                                        size="22px"
+                                        class="align-middle"
+                                    />
+                                    <span class="align-middle text-lg pl-2">
+                                        {{ latest.details.square_feet }} sqft
+                                    </span>
+                                </div>
                             </div>
-                            <div class="col-12 col-md-4">
-                                <q-icon
-                                    name="arrow_circle_right"
-                                    size="22px"
-                                    class="align-middle"
-                                />
-                                <span class="align-middle text-lg pl-2">
-                                    {{ latest.details.square_feet }} sqft
-                                </span>
-                            </div>
-                        </div>
-                    </q-card-section>
-                </q-card>
+                        </q-card-section>
+                    </q-card>
+                </router-link>
             </div>
         </div>
         <div class="col-12" v-else>

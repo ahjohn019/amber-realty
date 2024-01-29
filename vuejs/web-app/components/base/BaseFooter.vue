@@ -21,7 +21,8 @@
                         64, Jalan Kuantan, Titiwangsa 53200 Kuala Lumpur,
                         Malaysia
                     </div>
-                    <div>0192140561</div>
+                    <div>012-3729668</div>
+                    <div>03-40222822</div>
                     <div>amberrealty88@gmail.com</div>
                 </div>
             </div>
