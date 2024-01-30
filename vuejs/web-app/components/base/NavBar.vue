@@ -49,7 +49,7 @@ export default {
                 {
                     label: 'About Us',
                     value: 'about_us',
-                    to: '/about',
+                    to: '/about-us',
                     exact: false,
                     activeClass: 'active-link',
                 },

@@ -21,6 +21,12 @@ const routes = [
         meta: { requiresAuth: false },
         name: 'property.details',
     },
+    {
+        path: '/about-us',
+        component: Master.AboutUs,
+        meta: { requiresAuth: false },
+        name: 'property.about_us',
+    },
 ];
 
 const router = createRouter({
