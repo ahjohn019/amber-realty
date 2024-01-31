@@ -127,6 +127,7 @@
                                             detail, key
                                         ) in propertyDetailsSection"
                                         :key="key"
+                                        class="q-pb-sm"
                                     >
                                         <div class="text-h5">
                                             {{ detail.name }}
