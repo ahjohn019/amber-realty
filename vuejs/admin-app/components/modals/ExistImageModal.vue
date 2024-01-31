@@ -124,7 +124,7 @@ export default {
         const adminAuthStore = useAdminAuthStore();
         const serverImageStore = useServerImageStore();
         const getAuthToken = adminAuthStore.fetchSessionToken();
-        const existImageModal = ref(true);
+        const existImageModal = ref(false);
 
         const modulePathOptions = [
             { label: 'Banner Image', value: 'banner-image' },
