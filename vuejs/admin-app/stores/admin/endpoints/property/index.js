@@ -197,6 +197,13 @@ export const usePropertyAdminStore = defineStore('property_admin', {
             });
         },
 
+        handleViewProperty(propertyId) {
+            this.router.push({
+                name: 'property.detail',
+                params: { id: propertyId },
+            });
+        },
+
         async handleDeleteProperty(propertyId, authToken) {
             const postPropertyStore = usePropertyAdminStore();
 

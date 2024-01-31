@@ -10,7 +10,7 @@
             </template>
 
             <q-list class="q-table-edit-dropdown-list">
-                <q-item clickable>
+                <q-item clickable @click="handleView()">
                     <q-item-section>
                         <q-icon name="visibility" />
                     </q-item-section>
@@ -69,9 +69,14 @@ export default {
             );
         };
 
+        const handleView = () => {
+            postPropertyStore.handleViewProperty(propertyId, data);
+        };
+
         return {
             handleEdit,
             handleDelete,
+            handleView,
         };
     },
 };
