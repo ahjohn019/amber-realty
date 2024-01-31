@@ -67,9 +67,17 @@
                                 </q-chip>
                             </div>
                         </div>
-                        <div class="row col-12 gap-2 justify-end">
-                            <div
-                                class="col-12 col-md-5 col-lg-3 text-sm bg-primary text-white rounded-lg p-1 text-center"
+                        <div
+                            class="row col-12"
+                            :class="
+                                $q.screen.lt.md
+                                    ? 'justify-center'
+                                    : 'justify-end'
+                            "
+                        >
+                            <q-chip
+                                color="primary"
+                                text-color="white"
                                 v-for="(contact, key) in contactNumber"
                                 :key="key"
                             >
@@ -84,13 +92,13 @@
                                     <q-img
                                         src="/images/amber_whatsapp.png"
                                         alt=""
-                                        width="25px"
+                                        width="20px"
                                     />
                                     <span class="align-middle ml-2 text-sm">{{
                                         contact.name
                                     }}</span>
                                 </a>
-                            </div>
+                            </q-chip>
                         </div>
                     </div>
                 </div>
@@ -129,7 +137,7 @@
                                         :key="key"
                                         class="q-pb-sm"
                                     >
-                                        <div class="text-h5">
+                                        <div class="text-h6">
                                             {{ detail.name }}
                                         </div>
                                         <div class="text-subtitle2">
