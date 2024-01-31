@@ -85,7 +85,8 @@
                                     :href="
                                         'https://wa.me/' +
                                         contact.contact +
-                                        '?text=Im%20interested%20in%20property%20for%20sale'
+                                        '?text=' +
+                                        encodeURIComponent(whatsAppEnquiries)
                                     "
                                     target="_blank"
                                 >
@@ -242,6 +243,7 @@ export default {
         const contactNumber = ref([]);
         const propertyRoomDetails = ref([]);
         const propertyDetailsSection = ref([]);
+        const whatsAppEnquiries = ref('');
 
         const fetchPropertyDetails = async () => {
             const response = await webProperty.fetchPropertyDetails();
@@ -249,6 +251,13 @@ export default {
             sliderImageNumber.value = response.slider_image?.length || 0;
 
             sliderListOptions(sliderImageNumber.value);
+
+            whatsAppEnquiries.value =
+                'I am interested in ' +
+                propertyDetails.value.name +
+                ' priced at RM' +
+                propertyDetails.value.price +
+                '. Can you provide more details?';
 
             return response;
         };
@@ -327,6 +336,7 @@ export default {
             contactNumber,
             propertyRoomDetails,
             propertyDetailsSection,
+            whatsAppEnquiries,
         };
     },
 };
