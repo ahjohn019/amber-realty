@@ -120,6 +120,7 @@ export const usePropertyAdminStore = defineStore('property_admin', {
                         errorResponse?.short_description?.[0] ?? '',
                     state_id: errorResponse?.state_id?.[0] ?? '',
                     type_id: errorResponse?.type_id?.[0] ?? '',
+                    module_path: errorResponse?.module_path?.[0] ?? '',
                 };
 
                 return error.response;

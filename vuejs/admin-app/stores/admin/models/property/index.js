@@ -105,6 +105,7 @@ export const usePropertyAdminModelStore = defineStore('property_admin_models', {
                 furnishing: null,
                 bathroom: null,
                 bedroom: null,
+                module_path: null,
             };
         },
 
