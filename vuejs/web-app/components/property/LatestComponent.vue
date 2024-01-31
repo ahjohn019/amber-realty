@@ -6,7 +6,10 @@
                 v-for="(latest, key) in latestProperty"
                 :key="key"
             >
-                <router-link :to="'property/details/' + latest.id">
+                <router-link
+                    :to="'property/details/' + latest.id"
+                    @click="onItemClick()"
+                >
                     <q-card class="my-card">
                         <div class="relative">
                             <q-img
@@ -108,6 +111,10 @@ export default {
             return response;
         };
 
+        const onItemClick = () => {
+            window.scrollTo(0, 0);
+        };
+
         onMounted(() => {
             fetchLatestProperty();
         });
@@ -115,6 +122,7 @@ export default {
         return {
             fetchLatestProperty,
             latestProperty,
+            onItemClick,
         };
     },
 };
