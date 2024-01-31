@@ -29,7 +29,7 @@ export default {
         baseDrawerMenu.value = [
             { title: 'Home', value: 'home', route: '/' },
             { title: 'About Us', value: 'about_us', route: '/about-us' },
-            { title: 'Property', value: 'property', route: '/property' },
+            // { title: 'Property', value: 'property', route: '/property' },
         ];
 
         return {

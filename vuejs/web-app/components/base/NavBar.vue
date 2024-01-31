@@ -18,6 +18,7 @@
                     :to="option.to"
                     :exact="option.exact"
                     :active-class="option.activeClass"
+                    @click="onClickPage()"
                 >
                     <q-btn flat :label="option.label" />
                 </router-link>
@@ -35,6 +36,10 @@ export default {
         BaseDrawer,
     },
     setup() {
+        const onClickPage = () => {
+            window.scrollTo(0, 0);
+        };
+
         return {
             model: ref('home'),
 
@@ -53,14 +58,15 @@ export default {
                     exact: false,
                     activeClass: 'active-link',
                 },
-                {
-                    label: 'Property',
-                    value: 'property',
-                    to: '/property',
-                    exact: false,
-                    activeClass: 'active-link',
-                },
+                // {
+                //     label: 'Property',
+                //     value: 'property',
+                //     to: '/property',
+                //     exact: false,
+                //     activeClass: 'active-link',
+                // },
             ],
+            onClickPage,
         };
     },
 };
