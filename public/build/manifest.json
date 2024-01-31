@@ -540,7 +540,7 @@
       "vuejs/web-app/modules/property/views/ListPage.vue",
       "vuejs/web-app/modules/property/views/DetailsPage.vue"
     ],
-    "file": "assets/app-84afa58f.js",
+    "file": "assets/app-972e72ad.js",
     "imports": [
       "_ckeditor-6cef9db6.js"
     ],
@@ -591,7 +591,7 @@
     "src": "vuejs/web-app/modules/main/views/MainPage.vue"
   },
   "vuejs/web-app/modules/property/views/DetailsPage.vue": {
-    "file": "assets/DetailsPage-cbaaa3e0.js",
+    "file": "assets/DetailsPage-14e8d1a4.js",
     "imports": [
       "_QChip-6e88bffb.js",
       "_QImg-77ae440c.js",
