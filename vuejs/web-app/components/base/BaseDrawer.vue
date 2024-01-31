@@ -35,6 +35,7 @@ export default {
         return {
             onItemClick(routeName) {
                 router.push(routeName);
+                window.scrollTo(0, 0);
             },
             baseDrawerMenu,
         };

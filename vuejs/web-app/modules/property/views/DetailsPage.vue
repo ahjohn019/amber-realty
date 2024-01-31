@@ -274,9 +274,9 @@ export default {
         };
 
         contactNumber.value = [
-            { name: 'Agent Ng', contact: '0192137731' },
-            { name: 'Agent Doo', contact: '0123729668' },
-            { name: 'Agent Teng', contact: '0193560561' },
+            { name: 'Agent Ng', contact: '60192137731' },
+            { name: 'Agent Doo', contact: '60123729668' },
+            { name: 'Agent Teng', contact: '60193560561' },
         ];
 
         propertyRoomDetails.value = [
