@@ -26,7 +26,7 @@
                 <q-separator />
                 <q-item
                     v-for="col in props.cols.filter(
-                        (col) => col.name !== 'status'
+                        (col) => col.name !== 'action'
                     )"
                     :key="col.name"
                 >
@@ -37,7 +37,7 @@
                 </q-item>
                 <q-item>
                     <q-item-section>
-                        <q-item-label>Status</q-item-label>
+                        <q-item-label>Action</q-item-label>
                         <div class="q-gutter-md">
                             <q-btn
                                 color="primary"
