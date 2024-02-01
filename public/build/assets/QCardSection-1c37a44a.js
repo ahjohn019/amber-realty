@@ -1,0 +1,1 @@
+import{l as e,J as r}from"./ckeditor-f77a8037.js";import{c as n,h as s}from"./Ripple-e7d418a1.js";const l=n({name:"QCardSection",props:{tag:{type:String,default:"div"},horizontal:Boolean},setup(t,{slots:o}){const a=e(()=>`q-card__section q-card__section--${t.horizontal===!0?"horiz row no-wrap":"vert"}`);return()=>r(t.tag,{class:a.value},s(o.default))}});export{l as Q};
