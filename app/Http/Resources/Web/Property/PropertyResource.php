@@ -7,9 +7,12 @@ use App\Http\Resources\Ref\StateResource;
 use App\Http\Resources\Admin\User\UserResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 use App\Http\Resources\Web\Property\PropertyDetailsResource;
+use Pylon\JsonResourceKit\Traits\BaseJsonResource;
 
 class PropertyResource extends JsonResource
 {
+	use BaseJsonResource;
+
     /**
      * Transform the resource into an array.
      *

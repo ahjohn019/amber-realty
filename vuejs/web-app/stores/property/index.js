@@ -25,6 +25,19 @@ export const usePropertyWebStore = defineStore('property_web', {
             }
         },
 
+        async fetchPropertyList(payload = null) {
+            try {
+                const response = await axios.get(prefix + 'list', {
+                    params: payload,
+                });
+
+                return response.data.data;
+            } catch (error) {
+                console.error('Error:', error);
+                throw error;
+            }
+        },
+
         async fetchPropertyDetails() {
             try {
                 const routeId = this.route.params?.id || null;

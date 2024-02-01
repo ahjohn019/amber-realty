@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Web;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Web\Property\ListFormRequest;
 use App\Http\Services\Web\PropertyService;
 
 class PropertyController extends Controller
@@ -30,4 +31,13 @@ class PropertyController extends Controller
         $result = $this->propertyService->fetchDetails($id);
         return self::successResponse('Details Display Successfully', $result);
     }
+
+	public function list(ListFormRequest $request)
+	{
+		$payload = $request->validated();
+
+		$result = $this->propertyService->list($payload);
+
+		return self::successResponse("Success", $result);
+	}
 }

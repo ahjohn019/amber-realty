@@ -3,6 +3,12 @@
         <template #content>
             <q-layout class="mt-20">
                 <HeaderContainer data-aos="fade-up" />
+
+				<div class="row justify-center">
+					<div class="col col-12 col-sm-10 col-md-8 col-lg-6 col-xl-5 p-4 pb-1 md:p-10 md:pb-4">
+						<SearchCard></SearchCard>
+					</div>
+				</div>
                 <PropertiesContainer data-aos="fade-left" />
                 <SocialProof data-aos="fade-right" />
                 <CallToAction data-aos="fade-left" />
@@ -17,14 +23,15 @@ import PropertiesContainer from '@web/components/main/PropertiesContainer.vue';
 import SocialProof from '@web/components/main/SocialProof.vue';
 import CallToAction from '@web/components/main/CallToAction.vue';
 import BaseLayout from '@web/modules/layout/BaseLayout.vue';
-
+import SearchCard from '../../../components/main/SearchCard.vue';
 export default {
     components: {
-        BaseLayout,
-        HeaderContainer,
-        PropertiesContainer,
-        SocialProof,
-        CallToAction,
-    },
+		BaseLayout,
+		HeaderContainer,
+		PropertiesContainer,
+		SocialProof,
+		CallToAction,
+		SearchCard
+	},
 };
 </script>
