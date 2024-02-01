@@ -31,7 +31,9 @@ class PropertyResource extends JsonResource
             "state" => new StateResource($this->state),
             "user" => new UserResource($this->user),
             "details" => new PropertyDetailsResource($this->propertyDetail),
+			"propertyType" => $this->propertyType,
             "created_at" => $this->created_at,
+            "updated_at" => $this->updated_at,
             "banner_image" => $this->image()->where('module_path', 'banner-image')->first(),
             "slider_image" => $this->image()->where('module_path', 'slider-image')->get(),
         ];

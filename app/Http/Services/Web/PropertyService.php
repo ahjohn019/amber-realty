@@ -34,7 +34,15 @@ class PropertyService
 		$result = PropertyQueriplex::make(Property::query(), $payload)
 			->paginate($payload['items_per_page'] ?? 15);
 
-        $result = PropertyResource::paginateCollection($result);
+		$result->load([
+			"user",
+			"propertyDetail",
+			"tags",
+			"propertyType",
+			"image",
+			"state",
+		]);
+		$result = PropertyResource::paginateCollection($result);
 
         return $result;
     }

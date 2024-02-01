@@ -8,7 +8,8 @@ use App\Http\Controllers\Web\{
     PostController,
     UserController,
     CommentController,
-    PropertyController
+    PropertyController,
+    RefController
 };
 
 /*
@@ -24,6 +25,17 @@ use App\Http\Controllers\Web\{
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
+});
+
+
+// Property List
+Route::prefix('ref')->name('ref')->group(function () {
+    Route::get('/property/filter-option-group', [RefController::class, 'propertyFilterOptionGroup'])->name('list');
+});
+Route::prefix('property')->name('web.property')->group(function () {
+    Route::get('/list', [PropertyController::class, 'list'])->name('list');
+    Route::get('/latest', [PropertyController::class, 'latest'])->name('latest');
+    Route::get('/details/{id}', [PropertyController::class, 'details'])->name('details');
 });
 
 Route::prefix('auth')->middleware([])->group(
@@ -61,11 +73,4 @@ Route::middleware('auth:sanctum', 'role:' . RoleTag::USER)->group(function () {
         Route::get('/show/{id}', [CommentController::class, 'show'])->name('web.comments.show');
         Route::delete('/delete/{id}', [CommentController::class, 'delete'])->name('web.comments.delete');
     });
-});
-
-// Property List
-Route::prefix('property')->name('web.property')->group(function () {
-    Route::get('/list', [PropertyController::class, 'list'])->name('list');
-    Route::get('/latest', [PropertyController::class, 'latest'])->name('latest');
-    Route::get('/details/{id}', [PropertyController::class, 'details'])->name('details');
 });

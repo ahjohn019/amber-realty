@@ -52,5 +52,18 @@ export const usePropertyWebStore = defineStore('property_web', {
                 return response.data.data;
             } catch (error) {}
         },
+
+        async fetchPropertyFilterOptionGroup(payload = null) {
+            try {
+                const response = await axios.get('/api/ref/' + 'property/filter-option-group', {
+                    params: payload,
+                });
+
+                return response.data.data;
+            } catch (error) {
+                console.error('Error:', error);
+                throw error;
+            }
+        },
     },
 });

@@ -36,4 +36,17 @@ trait HasModelTrait
             return $searchMainResult;
         });
     }
+
+	public function scopeKeywordSearch($query, $column, $value)
+	{
+		$keywords = explode(' ', $value);
+
+		return $query->where(function ($q) use ($column, $keywords)
+		{
+			foreach ($keywords as $keyword)
+			{
+				$q->where($column, 'like', '%' . $keyword . '%');
+			}
+		});
+	}
 }

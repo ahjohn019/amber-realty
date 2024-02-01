@@ -19,14 +19,42 @@ class PropertyQueriplex extends Queriplex
 			'id' => 'id',
 			'active' => 'active',
 			'min_price' => function($query, $value){
-				$query->where('price', ">=", $value);
+				if($value){
+					$query->where('price', ">=", $value);
+				}
 			},
 			'max_price' => function($query, $value){
-				$query->where('price', "<=", $value);
+				if($value){
+					$query->where('price', "<=", $value);
+				}
 			},
-			'tenure' => function($query, $value){
+			'min_floor_size' => function($query, $value){
+				if($value){
+					$query->whereHas('propertyDetail', function($q) use ($value) {
+						$q->where('square_feet', ">=", $value);
+					});
+				}
+			},
+			'max_floor_size' => function($query, $value){
+				if($value){
+					$query->whereHas('propertyDetail', function($q) use ($value) {
+						$q->where('square_feet', "<=", $value);
+					});
+				}
+			},
+			'listing_type' => function($query, $value){
 				$query->whereHas('propertyDetail', function($q) use ($value) {
-					$q->where('tenure', $value);
+					$q->where('listing_type', $value);
+				});
+			},
+			'property_types' => function($query, $value){
+				$query->whereHas('propertyType', function($q) use ($value) {
+					$q->whereIn('id', $value);
+				});
+			},
+			'tenures' => function($query, $value){
+				$query->whereHas('propertyDetail', function($q) use ($value) {
+					$q->whereIn('tenure', $value);
 				});
 			},
 			'search' => (fn ($query, $value) => $this->searchQuery($query, $value))
@@ -44,7 +72,7 @@ class PropertyQueriplex extends Queriplex
 
 		return [
 			"id" => fn ($query) => $query->orderBy('id', $orderMode),
-			"created_time" => fn ($query) => $query->orderBy('created_at', $orderMode),
+			"date" => fn ($query) => $query->orderBy('updated_at', $orderMode),
 			"price" => fn ($query) => $query->orderBy('price', $orderMode),
 		];
     }

@@ -1113,6 +1113,11 @@
     "postcss-js" "^4"
     "tailwindcss" "^3"
 
+"date-fns@~3.3.1":
+  "integrity" "sha512-y8e109LYGgoQDveiEBD3DYXKba1jWf5BA8YU1FL5Tvm0BTdEfy54WLCwnuYWZNnzzvALy/QQ4Hov+Q9RVRv+Zw=="
+  "resolved" "https://registry.npmjs.org/date-fns/-/date-fns-3.3.1.tgz"
+  "version" "3.3.1"
+
 "dayjs@^1.11.3", "dayjs@^1.5.24":
   "integrity" "sha512-QvzAURSbQ0pKdIye2txOzNaHmxtUBXerpY0FJsFXUMKbIZeFm5ht1LS/jFsrncjnmtv8HsG0W2g6c0zUjZWmpA=="
   "resolved" "https://registry.npmjs.org/dayjs/-/dayjs-1.11.9.tgz"

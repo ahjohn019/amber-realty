@@ -57,4 +57,17 @@ class Property extends Model
     {
         return $this->morphOne(ServerFile::class, 'uploadable');
     }
+
+	// methods
+
+	// static methods
+	public static function convertListingType(string $listingTypeKey): string
+	{
+		$listingTypeList = [
+			"buy" => "sale",
+			"rent" => "rent",
+		];
+
+		return $listingTypeList[$listingTypeKey] ?? null;
+	}
 }
