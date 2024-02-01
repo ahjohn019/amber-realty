@@ -10,7 +10,7 @@
             </div>
 			<div class="row justify-center p-4 md:p-8">
 				<div class="container">
-					<div class="row q-gutter-sm">
+					<div class="row q-gutter-y-sm">
 
 						<!-- search bar -->
 						<div class="col col-12 col-md-6">
@@ -78,7 +78,7 @@
 
 					<!-- body -->
 					<template v-if="entityLoading">
-						<div class="row q-gutter-sm">
+						<div class="row q-gutter-y-sm">
 							<template v-for="i in 4" :key="i">
 								<div class="col col-12">
 									<q-skeleton height="150px" />
@@ -91,7 +91,7 @@
 							<div class="italic">Displaying {{ entityPaginationData.from }} - {{ entityPaginationData.to }} results of {{ entityPaginationData.total }}</div>
 						</div>
 						<div class="pt-4">
-							<div class="row q-gutter-sm">
+							<div class="row q-gutter-y-sm">
 								<template v-for="property in entityList" :key="property.id">
 									<div class="col col-12">
 										<PropertyCard
