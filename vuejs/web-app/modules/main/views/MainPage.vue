@@ -5,7 +5,7 @@
                 <HeaderContainer data-aos="fade-up" />
 
 				<div class="row justify-center">
-					<div class="col col-12 col-sm-10 col-md-8 col-lg-6 col-xl-5 p-4 pb-1 md:p-10 md:pb-4">
+					<div class="col col-12 col-sm-10 col-md-8 col-lg-6 col-xl-5 p-4 md:p-10 md:pb-4">
 						<SearchCard></SearchCard>
 					</div>
 				</div>
