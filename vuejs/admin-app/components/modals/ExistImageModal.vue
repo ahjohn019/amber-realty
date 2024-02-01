@@ -7,13 +7,13 @@
     />
     <q-dialog v-model="existImageModal">
         <q-card>
-            <q-card-section class="row items-center q-pb-none">
-                <div class="text-h6">Edit</div>
+            <q-card-section class="row items-center">
+                <div class="text-h5">Edit</div>
                 <q-space />
                 <q-btn icon="close" flat round dense v-close-popup />
             </q-card-section>
 
-            <q-card-section class="q-pt-none">
+            <q-card-section class="q-pt-none q-gutter-y-lg">
                 <div
                     class="row items-center"
                     v-for="(file, key) in files"
@@ -21,48 +21,82 @@
                 >
                     <div class="col row">
                         <div class="col">
-                            <img :src="file.url" alt="" />
-                            <div class="break-words">
-                                {{ file.name }}
-                            </div>
-                            <div>
-                                {{ Math.round(file.size / 1000) + 'kb' }}
-                            </div>
-                            <div>
-                                <q-btn
-                                    size="14px"
-                                    round
-                                    color="red"
-                                    icon="delete"
-                                    @click="handleDeleteFile(file)"
+                            <q-card class="my-card">
+                                <q-img
+                                    :src="file.url"
+                                    :ratio="16 / 9"
+                                    fit="cover"
                                 />
-                            </div>
-                            <div>
-                                <select
-                                    v-model="file.module_path"
-                                    :data-file-index="key"
-                                    @change="changeModulePath"
+
+                                <q-card-section>
+                                    <div class="text-subtitle1 break-words">
+                                        <q-chip
+                                            color="primary"
+                                            text-color="white"
+                                        >
+                                            {{ file.name }}
+                                        </q-chip>
+                                    </div>
+                                    <div class="text-subtitle2">
+                                        <q-chip
+                                            color="teal"
+                                            text-color="white"
+                                            icon="bookmark"
+                                        >
+                                            {{
+                                                Math.round(file.size / 1000) +
+                                                'kb'
+                                            }}
+                                        </q-chip>
+                                    </div>
+                                </q-card-section>
+
+                                <q-card-section
+                                    class="row place-items-center justify-center"
                                 >
-                                    <option value="banner-image">
-                                        Banner Image
-                                    </option>
-                                    <option value="slider-image">
-                                        Slider Image
-                                    </option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <input
-                                type="file"
-                                multiple
-                                name="file"
-                                :id="file.id"
-                                class="hidden-input"
-                                @change="onFileChange"
-                                ref="currentFile"
-                                accept=".pdf,.jpg,.jpeg,.png"
-                            />
+                                    <q-card-section class="col-4 text-center">
+                                        <q-btn
+                                            size="14px"
+                                            round
+                                            color="red"
+                                            icon="delete"
+                                            @click="handleDeleteFile(file)"
+                                        />
+                                    </q-card-section>
+                                    <q-separator vertical />
+                                    <q-card-section class="col-4">
+                                        <select
+                                            v-model="file.module_path"
+                                            :data-file-index="key"
+                                            @change="changeModulePath"
+                                        >
+                                            <option value="banner-image">
+                                                Banner Image
+                                            </option>
+                                            <option value="slider-image">
+                                                Slider Image
+                                            </option>
+                                        </select>
+                                    </q-card-section>
+                                </q-card-section>
+
+                                <q-card-section
+                                    class="q-pt-none row justify-center"
+                                >
+                                    <q-card-section class="col-7">
+                                        <input
+                                            type="file"
+                                            multiple
+                                            name="file"
+                                            :id="file.id"
+                                            class="hidden-input"
+                                            @change="onFileChange"
+                                            ref="currentFile"
+                                            accept=".pdf,.jpg,.jpeg,.png"
+                                        />
+                                    </q-card-section>
+                                </q-card-section>
+                            </q-card>
                         </div>
                     </div>
                 </div>
@@ -90,7 +124,7 @@ export default {
         const adminAuthStore = useAdminAuthStore();
         const serverImageStore = useServerImageStore();
         const getAuthToken = adminAuthStore.fetchSessionToken();
-        const existImageModal = ref(true);
+        const existImageModal = ref(false);
 
         const modulePathOptions = [
             { label: 'Banner Image', value: 'banner-image' },

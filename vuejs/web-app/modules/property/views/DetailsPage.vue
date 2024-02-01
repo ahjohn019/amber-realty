@@ -3,7 +3,7 @@
         <template #content>
             <div
                 class="container mx-auto row q-gutter-y-lg"
-                style="margin-top: 3.5rem; width: 75%"
+                style="margin-top: 2.5rem; width: 75%"
             >
                 <div
                     class="col-12 row justify-between items-center pt-8 gap-4 md:gap-0"
@@ -13,7 +13,7 @@
                         class="col-12 col-md-7 q-gutter-y-md"
                         :class="$q.screen.lt.md ? 'text-center' : ''"
                     >
-                        <div class="text-3xl font-bold">
+                        <div class="text-xl font-bold">
                             {{ propertyDetails.name }}
                         </div>
                     </div>
@@ -46,74 +46,38 @@
                                 </div>
                             </div>
                         </div>
-                        <div
-                            class="col-12 row gap-2 justify-end"
-                            v-if="propertyDetails.details"
-                        >
+                        <div class="col-12" v-if="propertyDetails.details">
                             <div
-                                class="col-12 col-lg-3 text-sm"
+                                class="text-sm"
                                 :class="
                                     $q.screen.lt.md
                                         ? 'text-center'
                                         : 'text-right'
                                 "
                             >
-                                <q-icon
-                                    name="bed"
-                                    size="22px"
-                                    class="align-middle"
-                                />
-                                <span class="align-middle ml-2 text-xl"
-                                    >{{
-                                        propertyDetails.details.bedroom
-                                    }}
-                                    Beds</span
+                                <q-chip
+                                    color="teal"
+                                    text-color="white"
+                                    :icon="room.icon"
+                                    v-for="(room, key) in propertyRoomDetails"
+                                    :key="key"
                                 >
-                            </div>
-                            <div
-                                class="col-12 col-lg-3 text-sm"
-                                :class="
-                                    $q.screen.lt.md
-                                        ? 'text-center'
-                                        : 'text-right'
-                                "
-                            >
-                                <q-icon
-                                    name="bathroom"
-                                    size="22px"
-                                    class="align-middle"
-                                />
-                                <span class="align-middle ml-2 text-xl"
-                                    >{{
-                                        propertyDetails.details.bathroom
-                                    }}
-                                    Bath</span
-                                >
-                            </div>
-                            <div
-                                class="col-12 col-lg-3 text-sm"
-                                :class="
-                                    $q.screen.lt.md
-                                        ? 'text-center'
-                                        : 'text-right'
-                                "
-                            >
-                                <q-icon
-                                    name="dashboard"
-                                    size="22px"
-                                    class="align-middle"
-                                />
-                                <span class="align-middle ml-2 text-xl"
-                                    >{{
-                                        propertyDetails.details.square_feet
-                                    }}
-                                    sqft</span
-                                >
+                                    {{ propertyDetails.details[room.value] }}
+                                    {{ room.name }}
+                                </q-chip>
                             </div>
                         </div>
-                        <div class="row col-12 gap-2 justify-end">
-                            <div
-                                class="col-12 col-lg-3 text-sm bg-primary text-white rounded-lg p-1 text-center"
+                        <div
+                            class="row col-12"
+                            :class="
+                                $q.screen.lt.md
+                                    ? 'justify-center'
+                                    : 'justify-end'
+                            "
+                        >
+                            <q-chip
+                                color="primary"
+                                text-color="white"
                                 v-for="(contact, key) in contactNumber"
                                 :key="key"
                             >
@@ -121,20 +85,21 @@
                                     :href="
                                         'https://wa.me/' +
                                         contact.contact +
-                                        '?text=Im%20interested%20in%20property%20for%20sale'
+                                        '?text=' +
+                                        encodeURIComponent(whatsAppEnquiries)
                                     "
                                     target="_blank"
                                 >
                                     <q-img
                                         src="/images/amber_whatsapp.png"
                                         alt=""
-                                        width="25px"
+                                        width="20px"
                                     />
-                                    <span class="align-middle ml-2 text-lg">{{
+                                    <span class="align-middle ml-2 text-sm">{{
                                         contact.name
                                     }}</span>
                                 </a>
-                            </div>
+                            </q-chip>
                         </div>
                     </div>
                 </div>
@@ -156,10 +121,7 @@
                                 <q-img
                                     :src="propertyDetails.banner_image.url"
                                     class="rounded-lg"
-                                    :class="
-                                        $q.screen.lt.md ? 'h-full' : 'h-[650px]'
-                                    "
-                                    :fit="$q.screen.lt.lg ? 'contain' : 'cover'"
+                                    :ratio="16 / 9"
                                 />
                             </div>
                             <div
@@ -167,60 +129,31 @@
                                 v-if="propertyDetails.details"
                             >
                                 <q-card
-                                    class="my-card flex flex-col justify-center"
-                                    :class="
-                                        $q.screen.lt.md ? 'h-full' : 'h-[650px]'
-                                    "
+                                    class="my-card flex flex-col justify-center h-full"
                                 >
-                                    <q-card-section>
-                                        <div class="text-h5">Lot Area</div>
+                                    <q-card-section
+                                        v-for="(
+                                            detail, key
+                                        ) in propertyDetailsSection"
+                                        :key="key"
+                                        class="q-pb-sm"
+                                    >
+                                        <div class="text-h6">
+                                            {{ detail.name }}
+                                        </div>
                                         <div class="text-subtitle2">
+                                            {{ detail.front_label }}
+
                                             {{
-                                                propertyDetails.details
-                                                    .square_feet
+                                                detail.value == 'price'
+                                                    ? propertyDetails[
+                                                          detail.value
+                                                      ]
+                                                    : propertyDetails.details[
+                                                          detail.value
+                                                      ]
                                             }}
-                                            sqft
-                                        </div>
-                                    </q-card-section>
-                                    <q-card-section>
-                                        <div class="text-h5">Bedroom</div>
-                                        <div class="text-subtitle2">
-                                            {{
-                                                propertyDetails.details
-                                                    .square_feet
-                                            }}
-                                            sqft
-                                        </div>
-                                    </q-card-section>
-                                    <q-card-section>
-                                        <div class="text-h5">Baths</div>
-                                        <div class="text-subtitle2">
-                                            {{
-                                                propertyDetails.details.bathroom
-                                            }}
-                                            baths
-                                        </div>
-                                    </q-card-section>
-                                    <q-card-section>
-                                        <div class="text-h5">Tenure</div>
-                                        <div class="text-subtitle2">
-                                            {{ propertyDetails.details.tenure }}
-                                        </div>
-                                    </q-card-section>
-                                    <q-card-section>
-                                        <div class="text-h5">Price</div>
-                                        <div class="text-subtitle2">
-                                            RM {{ propertyDetails.price }}
-                                        </div>
-                                    </q-card-section>
-                                    <q-card-section>
-                                        <div class="text-h5">Listing Type</div>
-                                        <div class="text-subtitle2">
-                                            For
-                                            {{
-                                                propertyDetails.details
-                                                    .listing_type
-                                            }}
+                                            {{ detail.label }}
                                         </div>
                                     </q-card-section>
                                 </q-card>
@@ -308,6 +241,9 @@ export default {
         const propertyDetails = ref({});
         const sliderImageNumber = ref(0);
         const contactNumber = ref([]);
+        const propertyRoomDetails = ref([]);
+        const propertyDetailsSection = ref([]);
+        const whatsAppEnquiries = ref('');
 
         const fetchPropertyDetails = async () => {
             const response = await webProperty.fetchPropertyDetails();
@@ -315,6 +251,13 @@ export default {
             sliderImageNumber.value = response.slider_image?.length || 0;
 
             sliderListOptions(sliderImageNumber.value);
+
+            whatsAppEnquiries.value =
+                'I am interested in ' +
+                propertyDetails.value.name +
+                ' priced at RM' +
+                propertyDetails.value.price +
+                '. Can you provide more details?';
 
             return response;
         };
@@ -324,7 +267,7 @@ export default {
 
             sliderOptions.value = {
                 type: 'loop',
-                perPage: sliderNumber > 2 ? 2 : sliderNumber,
+                perPage: sliderNumber > 3 ? 3 : sliderNumber,
                 gap: '1rem',
                 breakpoints: {
                     1024: {
@@ -340,9 +283,44 @@ export default {
         };
 
         contactNumber.value = [
-            { name: 'Agent Ng', contact: '0192137731' },
-            { name: 'Agent Doo', contact: '0123729668' },
-            { name: 'Agent Teng', contact: '0193560561' },
+            { name: 'Agent Ng', contact: '60192137731' },
+            { name: 'Agent Doo', contact: '60123729668' },
+            { name: 'Agent Teng', contact: '60193560561' },
+        ];
+
+        propertyRoomDetails.value = [
+            { name: 'Beds', icon: 'bed', value: 'bedroom' },
+            { name: 'Bath', icon: 'bathroom', value: 'bathroom' },
+            { name: 'sqft', icon: 'dashboard', value: 'square_feet' },
+        ];
+
+        propertyDetailsSection.value = [
+            {
+                name: 'Lot Area',
+                label: 'sqft',
+                front_label: '',
+                value: 'square_feet',
+            },
+            {
+                name: 'Bedroom',
+                label: 'rooms',
+                front_label: '',
+                value: 'bedroom',
+            },
+            {
+                name: 'Baths',
+                label: 'baths',
+                front_label: '',
+                value: 'bathroom',
+            },
+            { name: 'Tenure', label: '', front_label: '', value: 'tenure' },
+            { name: 'Price', label: '', front_label: 'RM', value: 'price' },
+            {
+                name: 'Listing Type',
+                label: '',
+                front_label: 'For',
+                value: 'listing_type',
+            },
         ];
 
         onMounted(() => {
@@ -356,6 +334,9 @@ export default {
             fetchPropertyDetails,
             sliderListOptions,
             contactNumber,
+            propertyRoomDetails,
+            propertyDetailsSection,
+            whatsAppEnquiries,
         };
     },
 };

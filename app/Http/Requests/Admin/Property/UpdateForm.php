@@ -3,9 +3,10 @@
 namespace App\Http\Requests\Admin\Property;
 
 use App\Models\State;
+use App\Models\Property;
 use App\Models\PropertyTypes;
-use App\Enums\Property\PropertyStatusEnum;
 use Illuminate\Validation\Rules\Enum;
+use App\Enums\Property\PropertyStatusEnum;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateForm extends FormRequest
@@ -85,10 +86,11 @@ class UpdateForm extends FormRequest
     protected function uniqueBannerImage()
     {
         return function ($attribute, $value, $fail) {
-            $checkBannerImage = array_count_values($value)['banner-image'] ?? 0;
+            $property = Property::find(request()->id);
+            $bannerImageAmount = $property->image()->where('module_path', 'banner-image')->exists();
 
-            if ($checkBannerImage > 1) {
-                $fail('Banner Image Cannot More Than One');
+            if ($bannerImageAmount) {
+                $fail('Banner Image Already Exists');
             }
         };
     }

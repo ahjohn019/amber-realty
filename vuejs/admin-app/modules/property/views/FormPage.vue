@@ -209,6 +209,9 @@
                     @updateFiles="updateParentFiles"
                     :propertyData="propertyData"
                 />
+                <div class="col-12 text-red-700 pt-2">
+                    {{ errors.module_path }}
+                </div>
             </div>
 
             <div class="col-12 text-right">

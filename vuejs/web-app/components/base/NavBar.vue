@@ -2,7 +2,7 @@
     <div class="fixed z-10 w-full">
         <q-toolbar class="bg-secondary shadow-2" style="height: 85px">
             <div class="col-6 col-md-2">
-                <router-link to="/" exact>
+                <router-link to="/" exact @click="onClickPage()">
                     <img :src="mainLogo" alt="" width="85" />
                 </router-link>
             </div>
@@ -18,6 +18,7 @@
                     :to="option.to"
                     :exact="option.exact"
                     :active-class="option.activeClass"
+                    @click="onClickPage()"
                 >
                     <q-btn flat :label="option.label" />
                 </router-link>
@@ -35,6 +36,10 @@ export default {
         BaseDrawer,
     },
     setup() {
+        const onClickPage = () => {
+            window.scrollTo(0, 0);
+        };
+
         return {
             model: ref('home'),
 
@@ -49,18 +54,19 @@ export default {
                 {
                     label: 'About Us',
                     value: 'about_us',
-                    to: '/about',
+                    to: '/about-us',
                     exact: false,
                     activeClass: 'active-link',
                 },
-                {
-                    label: 'Property',
-                    value: 'property',
-                    to: '/property',
-                    exact: false,
-                    activeClass: 'active-link',
-                },
+                // {
+                //     label: 'Property',
+                //     value: 'property',
+                //     to: '/property',
+                //     exact: false,
+                //     activeClass: 'active-link',
+                // },
             ],
+            onClickPage,
         };
     },
 };

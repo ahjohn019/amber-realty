@@ -10,6 +10,7 @@
 					</div>
 				</div>
                 <PropertiesContainer data-aos="fade-left" />
+                <MissionStatement data-aos="fade-right" />
                 <SocialProof data-aos="fade-right" />
                 <CallToAction data-aos="fade-left" />
             </q-layout>
@@ -23,15 +24,17 @@ import PropertiesContainer from '@web/components/main/PropertiesContainer.vue';
 import SocialProof from '@web/components/main/SocialProof.vue';
 import CallToAction from '@web/components/main/CallToAction.vue';
 import BaseLayout from '@web/modules/layout/BaseLayout.vue';
-import SearchCard from '../../../components/main/SearchCard.vue';
+import MissionStatement from '@web/components/main/MissionStatement.vue';
+import SearchCard from '@web/components/main/SearchCard.vue';
 export default {
     components: {
-		BaseLayout,
-		HeaderContainer,
-		PropertiesContainer,
-		SocialProof,
-		CallToAction,
-		SearchCard
-	},
+        BaseLayout,
+        HeaderContainer,
+        PropertiesContainer,
+        SocialProof,
+        CallToAction,
+		SearchCard,
+        MissionStatement,
+    },
 };
 </script>

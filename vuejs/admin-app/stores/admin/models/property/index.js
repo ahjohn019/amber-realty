@@ -50,6 +50,20 @@ export const usePropertyAdminModelStore = defineStore('property_admin_models', {
                     field: 'status',
                     sortable: false,
                 },
+                {
+                    name: 'created_at',
+                    align: 'center',
+                    label: 'Created At',
+                    field: 'created_at',
+                    sortable: false,
+                },
+                {
+                    name: 'action',
+                    align: 'center',
+                    label: 'Action',
+                    field: 'action',
+                    sortable: false,
+                },
             ];
         },
 
@@ -91,6 +105,7 @@ export const usePropertyAdminModelStore = defineStore('property_admin_models', {
                 furnishing: null,
                 bathroom: null,
                 bedroom: null,
+                module_path: null,
             };
         },
 

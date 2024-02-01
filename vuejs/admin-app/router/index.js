@@ -53,6 +53,12 @@ const routes = [
                 name: 'property.form',
                 props: (route) => ({ type: route.query.type }),
             },
+            {
+                path: 'detail/:id',
+                component: Property.DetailPage,
+                meta: { requiresAuth: true },
+                name: 'property.detail',
+            },
         ],
     },
     {

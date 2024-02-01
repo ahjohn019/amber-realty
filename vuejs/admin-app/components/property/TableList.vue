@@ -16,6 +16,7 @@
             selection="multiple"
             row-key="name"
             class="property-table"
+            wrap-cells
         >
             <template v-slot:header-cell="props">
                 <q-th :props="props">
@@ -24,7 +25,7 @@
                     </label>
                 </q-th>
             </template>
-            <template v-slot:body-cell-status="props">
+            <template v-slot:body-cell-action="props">
                 <q-td :props="props">
                     <TableStatus :data="props" />
                 </q-td>

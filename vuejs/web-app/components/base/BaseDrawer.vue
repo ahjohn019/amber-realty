@@ -28,13 +28,14 @@ export default {
 
         baseDrawerMenu.value = [
             { title: 'Home', value: 'home', route: '/' },
-            { title: 'About Us', value: 'about_us', route: '/' },
-            { title: 'Property', value: 'property', route: '/property' },
+            { title: 'About Us', value: 'about_us', route: '/about-us' },
+            // { title: 'Property', value: 'property', route: '/property' },
         ];
 
         return {
             onItemClick(routeName) {
                 router.push(routeName);
+                window.scrollTo(0, 0);
             },
             baseDrawerMenu,
         };
