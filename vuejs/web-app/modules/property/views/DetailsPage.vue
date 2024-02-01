@@ -291,7 +291,7 @@ export default {
 
         propertyRoomDetails.value = [
             { name: 'Beds', icon: 'bed', value: 'bedroom' },
-            { name: 'Bath', icon: 'bathroom', value: 'bathroom' },
+            { name: 'Bath', icon: 'bathtub', value: 'bathroom' },
             { name: 'sqft', icon: 'dashboard', value: 'square_feet' },
         ];
 

@@ -57,36 +57,36 @@
                             class="q-pt-none"
                             :class="$q.screen.lt.md ? '' : 'h-[75px]'"
                         >
-                            <div class="row" v-if="latest.details">
-                                <div class="col-6 col-md-4">
-                                    <q-icon
-                                        name="arrow_circle_right"
-                                        size="22px"
-                                        class="align-middle"
-                                    />
-                                    <span class="align-middle text-lg pl-2">
-                                        {{ latest.details.bedroom }} Beds
+                            <div class="flex gap-4" v-if="latest.details">
+                                <div>
+                                    <span class="align-middle text-lg">
+                                        {{ latest.details.bedroom }}
                                     </span>
-                                </div>
-                                <div class="col-6 col-md-4">
                                     <q-icon
-                                        name="arrow_circle_right"
+                                        name="bed"
                                         size="22px"
-                                        class="align-middle"
+                                        class="pl-1"
                                     />
-                                    <span class="align-middle text-lg pl-2">
-                                        {{ latest.details.bathroom }} Bath
+                                </div>
+                                <div>
+                                    <span class="align-middle text-lg">
+                                        {{ latest.details.bathroom }}
                                     </span>
-                                </div>
-                                <div class="col-12 col-md-4">
                                     <q-icon
-                                        name="arrow_circle_right"
+                                        name="bathtub"
                                         size="22px"
-                                        class="align-middle"
+                                        class="pl-1"
                                     />
-                                    <span class="align-middle text-lg pl-2">
+                                </div>
+                                <div>
+                                    <span class="align-middle text-lg">
                                         {{ latest.details.square_feet }} sqft
                                     </span>
+                                    <q-icon
+                                        name="dashboard"
+                                        size="22px"
+                                        class="pl-1"
+                                    />
                                 </div>
                             </div>
                         </q-card-section>
