@@ -119,6 +119,7 @@
                                 "
                             >
                                 <q-img
+                                    v-if="propertyDetails.banner_image"
                                     :src="propertyDetails.banner_image.url"
                                     class="rounded-lg"
                                     :ratio="16 / 9"

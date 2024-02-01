@@ -13,6 +13,7 @@
                     <q-card class="my-card">
                         <div class="relative">
                             <q-img
+                                v-if="latest.banner_image"
                                 :src="latest.banner_image.url"
                                 :ratio="16 / 9"
                             />
