@@ -11,7 +11,7 @@
                 style="width: 250px"
             >
                 <a
-                    href="https://wa.me/0123729668?text=I'm%20interested%20in%20property%20for%20sale"
+                    href="https://wa.me/60123729668?text=I'm%20interested%20in%20property%20for%20sale"
                     target="_blank"
                 >
                     <div class="bg-primary px-8 py-4 rounded row">
