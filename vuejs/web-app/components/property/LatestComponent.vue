@@ -111,10 +111,6 @@ export default {
             return response;
         };
 
-        const onItemClick = () => {
-            window.scrollTo(0, 0);
-        };
-
         onMounted(() => {
             fetchLatestProperty();
         });
@@ -122,7 +118,6 @@ export default {
         return {
             fetchLatestProperty,
             latestProperty,
-            onItemClick,
         };
     },
 };

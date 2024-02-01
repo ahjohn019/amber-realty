@@ -1,5 +1,5 @@
 import { createWebHistory, createRouter } from 'vue-router';
-import * as AdminDashboard from '../modules/dashboard/router';
+// import * as AdminDashboard from '../modules/dashboard/router';
 import * as LoginDashboard from '../modules/login/router';
 import * as PostDashboard from '../modules/post/router';
 import * as Property from '../modules/property/router';
@@ -7,12 +7,12 @@ import * as TestPage from '../modules/test/router';
 import { useAdminAuthStore } from '@store_admin/base/auth.js';
 
 const routes = [
-    {
-        path: '/',
-        component: AdminDashboard.MainPage,
-        meta: { requiresAuth: true },
-        name: 'home',
-    },
+    // {
+    //     path: '/',
+    //     component: AdminDashboard.MainPage,
+    //     meta: { requiresAuth: true },
+    //     name: 'home',
+    // },
     {
         path: '/posts',
         component: PostDashboard.PostPage,
@@ -35,7 +35,7 @@ const routes = [
         ],
     },
     {
-        path: '/property',
+        path: '/',
         component: Property.BasePage,
         meta: { requiresAuth: true },
         name: 'property',
@@ -77,6 +77,9 @@ const routes = [
 
 const router = createRouter({
     history: createWebHistory(),
+    scrollBehavior(to, from, savedPosition) {
+        return { top: 0 };
+    },
     routes,
 });
 

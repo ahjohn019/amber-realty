@@ -52,18 +52,18 @@ import { ref } from 'vue';
 import { useAdminAuthStore } from '@store_admin/base/auth.js';
 
 const menuList = [
-    {
-        icon: 'grid_view',
-        title: 'dashboard',
-        text: 'Dashboard',
-        route: '/',
-        separator: true,
-    },
+    // {
+    //     icon: 'grid_view',
+    //     title: 'dashboard',
+    //     text: 'Dashboard',
+    //     route: '/',
+    //     separator: true,
+    // },
     {
         icon: 'description',
         title: 'property',
         text: 'Property',
-        route: '/property',
+        route: '/',
         separator: true,
     },
     {

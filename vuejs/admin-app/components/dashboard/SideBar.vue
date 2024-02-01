@@ -30,17 +30,17 @@
 import { ref } from 'vue';
 
 const sideBarList = [
-    {
-        icon: 'grid_view',
-        title: 'dashboard',
-        text: 'Dashboard',
-        route: '/',
-    },
+    // {
+    //     icon: 'grid_view',
+    //     title: 'dashboard',
+    //     text: 'Dashboard',
+    //     route: '/',
+    // },
     {
         icon: 'description',
         title: 'property',
         text: 'Property',
-        route: '/property',
+        route: '/',
     },
     // {
     //     icon: 'tune',
