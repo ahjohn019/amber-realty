@@ -11,9 +11,8 @@
                     @click="onItemClick()"
                 >
                     <q-card class="my-card">
-                        <div class="relative">
+                        <div class="relative" v-if="latest.banner_image">
                             <q-img
-                                v-if="latest.banner_image"
                                 :src="latest.banner_image.url"
                                 :ratio="16 / 9"
                             />
@@ -25,8 +24,17 @@
                             </div>
                         </div>
                         <q-card-section class="row gap-2">
-                            <div class="col-12 text-lg">
-                                RM {{ latest.price }}
+                            <div
+                                class="col-12 text-lg flex items-center justify-between"
+                            >
+                                <div
+                                    class="bg-secondary font-bold px-2 py-2 rounded"
+                                    :class="latest.banner_image ? 'hidden' : ''"
+                                    v-if="latest.details"
+                                >
+                                    For {{ latest.details.listing_type }}
+                                </div>
+                                <div>RM {{ latest.price }}</div>
                             </div>
                             <div
                                 class="col-12 text-xl font-bold latest-property__name"
