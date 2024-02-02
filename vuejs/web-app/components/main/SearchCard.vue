@@ -1,11 +1,12 @@
 <template>
 	<q-card
-		class="p-3 md:p-6"
-		style="background-color: #0e2638e6; border-radius: 15px;"
+		class="p-3 md:p-8"
+		square
+		style="background-color: #0e2638;"
 	>
 		<q-card-section>
 				<div class="row justify-center">
-					<div class="col col-11 col-sm-10 col-md-8 col-lg-6">
+					<div class="col col-6 col-sm-5 col-md-4 col-lg-3">
 						<q-btn-group
 							v-model="formInput.searchType"
 							rounded

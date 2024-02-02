@@ -61,7 +61,7 @@ class Property extends Model
 	// methods
 
 	// static methods
-	public static function convertListingType(string $listingTypeKey): string
+	public static function convertListingType($listingTypeKey)
 	{
 		$listingTypeList = [
 			"buy" => "sale",

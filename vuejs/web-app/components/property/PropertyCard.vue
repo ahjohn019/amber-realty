@@ -12,7 +12,10 @@
 				</q-img>
 			</div>
 			<div class="col col-12 col-md-8 p-4 md:pt-8 q-gutter-y-sm">
-				<div class="text-h5" style="font-weight: bold;">{{ item.name }}</div>
+				<div class="text-h5">
+					<div style="font-weight: bold;">{{ item.name }}</div>
+					<div class="text-caption">- {{ item.state?.label }}</div>
+				</div>
 				<div class="text-body1" style="font-weight: bold;">{{ numberFormat(item.price, "RM ") }}</div>
 				<div class="row q-gutter-sm text-body2">
 					<div class="col col-auto">{{ item.details.bedroom }}<q-icon name="bed"></q-icon></div>

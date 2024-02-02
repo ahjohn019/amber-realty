@@ -57,6 +57,7 @@ class PropertyQueriplex extends Queriplex
 					$q->whereIn('tenure', $value);
 				});
 			},
+			'state_id' => 'state_id',
 			'search' => (fn ($query, $value) => $this->searchQuery($query, $value))
         ];
     }
