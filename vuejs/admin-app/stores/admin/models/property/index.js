@@ -88,6 +88,7 @@ export const usePropertyAdminModelStore = defineStore('property_admin_models', {
                 furnishing: '',
                 bathroom: 1,
                 bedroom: 1,
+                car_park: 1,
             };
         },
 

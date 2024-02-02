@@ -6,15 +6,15 @@ use App\Models\User;
 use App\Models\ServerFile;
 use App\Models\PropertyTags;
 use App\Models\PropertyTypes;
-use App\Models\PropertyDetails;
 use App\Traits\HasModelTrait;
+use App\Models\PropertyDetails;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Property extends Model
 {
@@ -58,16 +58,16 @@ class Property extends Model
         return $this->morphOne(ServerFile::class, 'uploadable');
     }
 
-	// methods
+    // methods
 
-	// static methods
-	public static function convertListingType(string $listingTypeKey): string
-	{
-		$listingTypeList = [
-			"buy" => "sale",
-			"rent" => "rent",
-		];
+    // static methods
+    public static function convertListingType(string $listingTypeKey): string
+    {
+        $listingTypeList = [
+            "buy" => "sale",
+            "rent" => "rent",
+        ];
 
-		return $listingTypeList[$listingTypeKey] ?? null;
-	}
+        return $listingTypeList[$listingTypeKey] ?? null;
+    }
 }

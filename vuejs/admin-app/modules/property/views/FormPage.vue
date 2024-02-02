@@ -194,6 +194,17 @@
                     >
                     </q-input>
                 </div>
+                <div class="col-12">
+                    <div class="post-information-name">Car Park</div>
+                    <q-input
+                        dense
+                        outlined
+                        label="Carpark"
+                        v-model="propertyDetailsData.car_park"
+                        type="number"
+                    >
+                    </q-input>
+                </div>
             </div>
             <div class="col-12">
                 <div class="flex justify-between py-2">
@@ -398,6 +409,7 @@ export default {
                     ),
                     bedroom: details.bedroom,
                     bathroom: details.bathroom,
+                    car_park: details.car_park,
                 };
             }
         };
@@ -418,6 +430,7 @@ export default {
                 tenure,
                 bathroom,
                 bedroom,
+                car_park,
                 square_feet,
                 listing_type,
                 furnishing,

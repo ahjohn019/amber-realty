@@ -61,6 +61,10 @@
                             <div class="col-12">
                                 {{ propertyData.bathroom }}
                             </div>
+                            <div class="col-12 text-h6">Car Park:</div>
+                            <div class="col-12">
+                                {{ propertyData.car_park }}
+                            </div>
                             <div class="col-12 text-h6">Furnishing:</div>
                             <div class="col-12 capitalize">
                                 {{ propertyData.furnishing }}
@@ -144,6 +148,7 @@ export default {
                 ),
                 bathroom: response.details?.bathroom || '-',
                 bedroom: response.details?.bedroom || '-',
+                car_park: response.details?.car_park || '-',
                 furnishing: response.details?.furnishing || '-',
                 listing_type: response.details?.listing_type || '-',
                 square_feet: response.details?.square_feet || '-',

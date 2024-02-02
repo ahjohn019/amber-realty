@@ -68,6 +68,7 @@ class PropertyService
                         'tenure' => $payload['tenure'],
                         'bathroom' => $payload['bathroom'],
                         'bedroom' => $payload['bedroom'],
+                        'car_park' => $payload['car_park'],
                         'square_feet' => $payload['square_feet'],
                         'listing_type' => $payload['listing_type'],
                         'furnishing' => $payload['furnishing']
@@ -136,6 +137,7 @@ class PropertyService
                             'tenure' => $payload['tenure'],
                             'bathroom' => $payload['bathroom'],
                             'bedroom' => $payload['bedroom'],
+                            'car_park' => $payload['car_park'],
                             'square_feet' => $payload['square_feet'],
                             'listing_type' => $payload['listing_type'],
                             'furnishing' => $payload['furnishing']

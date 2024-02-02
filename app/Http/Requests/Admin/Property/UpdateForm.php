@@ -51,6 +51,7 @@ class UpdateForm extends FormRequest
             'tenure' => ['sometimes', 'in:freehold,leasehold'],
             'bathroom' => ['sometimes', 'integer'],
             'bedroom' => ['sometimes', 'integer'],
+            'car_park' => ['sometimes', 'integer', 'between:1,10'],
             'square_feet' => ['sometimes', 'integer'],
             'listing_type' => ['sometimes', 'in:sale,rent'],
             'furnishing' => ['sometimes', 'in:unfurnished,partially_furnished,furnished'],

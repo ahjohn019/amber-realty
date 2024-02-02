@@ -18,6 +18,7 @@ class PropertyDetailsResource extends JsonResource
             'tenure' => $this->tenure,
             'bathroom' => $this->bathroom,
             'bedroom' => $this->bedroom,
+            'car_park' => $this->car_park,
             'square_feet' => $this->square_feet,
             'listing_type' => $this->listing_type,
             'furnishing' => $this->furnishing,

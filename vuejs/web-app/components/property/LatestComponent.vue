@@ -80,6 +80,16 @@
                                 </div>
                                 <div>
                                     <span class="align-middle text-lg">
+                                        {{ latest.details.car_park }}
+                                    </span>
+                                    <q-icon
+                                        name="directions_car"
+                                        size="22px"
+                                        class="pl-1"
+                                    />
+                                </div>
+                                <div>
+                                    <span class="align-middle text-lg">
                                         {{ latest.details.square_feet }} sqft
                                     </span>
                                     <q-icon
@@ -115,6 +125,8 @@ export default {
 
         const fetchLatestProperty = async () => {
             const response = await webProperty.fetchLatestProperty(payload);
+
+            console.log(response);
             latestProperty.value = response;
 
             return response;

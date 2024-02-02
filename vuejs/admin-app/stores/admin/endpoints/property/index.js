@@ -94,7 +94,7 @@ export const usePropertyAdminStore = defineStore('property_admin', {
                     config
                 );
 
-                this.router.push('/property');
+                this.router.push('/');
 
                 Swal.fire({
                     text:
