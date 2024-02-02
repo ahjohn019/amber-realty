@@ -17,9 +17,13 @@ class ListFormRequest extends FormRequest
 
 	protected function prepareForValidation()
 	{
-		$this->merge([
-			'listing_type' => Property::convertListingType($this->listing_type),
-		]);
+		$mergeValues = [];
+
+		if(isset($this->listing_type)){
+			$mergeValues['listing_type'] = Property::convertListingType($this->listing_type);
+		}
+
+		$this->merge($mergeValues);
 	}
 
     /**
@@ -44,6 +48,7 @@ class ListFormRequest extends FormRequest
 			"min_price" => ['nullable', 'numeric', 'decimal:0,2'],
 			"max_price" => ['nullable', 'numeric', 'decimal:0,2'],
 			"tenures" => ['nullable'],
+			"state_id" => ['nullable', 'integer'],
         ];
     }
 }

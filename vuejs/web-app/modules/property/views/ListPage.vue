@@ -40,7 +40,7 @@
 						</div>
 
 						<!-- filter & sorting -->
-						<div class="col col-12 col-md-auto pb-4">
+						<div class="col col-12 col-md-auto pb-4 md:pl-2">
 							<q-btn
 								label="Filter"
 								outline
@@ -277,6 +277,23 @@
 									</div>
 								</div>
 							</div>
+							<div class="col col-12">
+								<div class="row q-gutter-y-sm">
+									<div class="col col-12">
+										<div class="font-bold">State:</div>
+									</div>
+									<div class="col col-12 q-gutter-x-sm">
+										<q-select
+											v-model="filterForm.state"
+											outlined
+											dense
+											:options="stateFilterOptions"
+											option-label="name"
+											option-value="id"
+										/>
+									</div>
+								</div>
+							</div>
 						</div>
 					</q-card-section>
 					<hr>
@@ -327,6 +344,7 @@ export default {
 			filterForm: {},
 			propertyTypeFilterOptions : [],
 			tenureFilterOptions : [],
+			stateFilterOptions: [],
 		}
 	},
 	async created(){
@@ -340,6 +358,7 @@ export default {
 		this.formInput.items_per_page = 20
 		this.formInput.property_types = []
 		this.formInput.tenures = []
+		this.formInput.state = { id: null, name: 'All State' }
 
 		await this.fetchPropertyFilterOptionGroup();
 
@@ -388,6 +407,7 @@ export default {
 				min_price: this.formInput.min_price,
 				max_price: this.formInput.max_price,
 				tenures : this.formInput.tenures,
+				state_id : this.formInput.state?.id,
 			}
 			this.entityLoading = true;
 			this.entityList = [];
@@ -404,6 +424,7 @@ export default {
 		async fetchPropertyFilterOptionGroup(){
             const response = await this.property_webStore.fetchPropertyFilterOptionGroup();
 			this.propertyTypeFilterOptions = response.property_types
+			this.stateFilterOptions = [ { id: null, name: "All State" }, ...response.states ]
 		},
 		setListingType(listingTypeVal){
 			this.filterForm.listing_type = listingTypeVal
@@ -420,6 +441,7 @@ export default {
 			this.formInput.max_floor_size = this.filterForm.max_floor_size
 			this.formInput.property_types = this.filterForm.property_types
 			this.formInput.tenures = this.filterForm.tenures
+			this.formInput.state = this.filterForm.state
 
 			this.filterDialog = false
 			this.fetchEntityList(1)
@@ -432,6 +454,8 @@ export default {
 			this.filterForm.max_floor_size = this.formInput.max_floor_size
 			this.filterForm.property_types = this.formInput.property_types
 			this.filterForm.tenures = this.formInput.tenures
+			this.filterForm.state = this.formInput.state
+
 			this.filterDialog = true
 		},
 		formatNumberInput(model, value, decimalPlaces = 0) {
