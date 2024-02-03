@@ -86,12 +86,12 @@ export default {
 			}
 
 			const daysDiff = differenceInDays(now, lastUpdated);
-			if (daysDiff < 30) {
+			if (daysDiff < 7) {
 				return `${daysDiff}d`;
 			}
 
 			const weeksDiff = differenceInWeeks(now, lastUpdated);
-			if (weeksDiff < 4) {
+			if (weeksDiff <= 4 && daysDiff <= 30) {
 				return `${weeksDiff}w`;
 			}
 
