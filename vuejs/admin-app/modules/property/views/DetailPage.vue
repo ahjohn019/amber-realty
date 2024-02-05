@@ -83,23 +83,61 @@
                             </div>
                         </div>
                     </q-tab-panel>
-                    <q-tab-panel name="images">
-                        <div
-                            v-for="(file, key) in propertyData.file"
-                            :key="key"
-                            class="row"
-                        >
-                            <div class="text-subtitle1 col-12">
-                                {{ file.module_path }}
+                    <q-tab-panel name="images" class="q-gutter-y-md">
+                        <div class="row" v-if="propertyData.banner">
+                            <div class="col-12 text-2xl">Banner</div>
+                            <div class="col-12 row">
+                                <div class="col-12">
+                                    <q-img
+                                        :src="propertyData.banner.image.url"
+                                        height="450px"
+                                        fit="contain"
+                                    >
+                                    </q-img>
+                                </div>
+                                <div class="col-12">
+                                    <q-chip color="primary" text-color="white">
+                                        {{ propertyData.banner.name }}
+                                    </q-chip>
+                                    <q-chip color="primary" text-color="white">
+                                        {{
+                                            Math.round(
+                                                propertyData.banner.image.size /
+                                                    1000
+                                            ) + 'kb'
+                                        }}
+                                    </q-chip>
+                                </div>
                             </div>
+                        </div>
 
-                            <div class="col-12">
-                                <q-img
-                                    :src="file.url"
-                                    height="250px"
-                                    fit="contain"
-                                >
-                                </q-img>
+                        <div class="row" v-if="propertyData.sliders">
+                            <div class="col-12 text-2xl">Sliders</div>
+                            <div
+                                v-for="(slider, key) in propertyData.sliders"
+                                :key="key"
+                                class="col-12 row"
+                            >
+                                <div class="col-12">
+                                    <q-img
+                                        :src="slider.image.url"
+                                        height="250px"
+                                        fit="contain"
+                                    >
+                                    </q-img>
+                                </div>
+                                <div class="col-12">
+                                    <q-chip color="primary" text-color="white">
+                                        {{ slider.name }}
+                                    </q-chip>
+                                    <q-chip color="primary" text-color="white">
+                                        {{
+                                            Math.round(
+                                                slider.image.size / 1000
+                                            ) + 'kb'
+                                        }}
+                                    </q-chip>
+                                </div>
                             </div>
                         </div>
                     </q-tab-panel>
@@ -153,7 +191,8 @@ export default {
                 listing_type: response.details?.listing_type || '-',
                 square_feet: response.details?.square_feet || '-',
                 tenure: response.details?.tenure || '-',
-                file: response.file || '-',
+                banner: response.banner,
+                sliders: response.sliders,
             };
 
             return response;

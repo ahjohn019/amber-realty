@@ -108,19 +108,16 @@
                     data-aos="fade-right"
                 >
                     <div class="col-12 row q-gutter-y-lg">
-                        <div
-                            class="col-12 row"
-                            v-if="propertyDetails.banner_image"
-                        >
+                        <div class="col-12 row">
                             <div
                                 class="col-12"
                                 :class="
                                     propertyDetails.details ? 'col-lg-9' : ''
                                 "
+                                v-if="propertyDetails.banner"
                             >
                                 <q-img
-                                    v-if="propertyDetails.banner_image"
-                                    :src="propertyDetails.banner_image.url"
+                                    :src="propertyDetails.banner.image.url"
                                     class="rounded-lg"
                                     :ratio="16 / 9"
                                 />
@@ -162,22 +159,19 @@
                         </div>
 
                         <div class="col-12 row justify-between">
-                            <div
-                                class="col-12"
-                                v-if="propertyDetails.slider_image"
-                            >
+                            <div class="col-12" v-if="propertyDetails.sliders">
                                 <Splide
                                     :options="sliderOptions"
                                     aria-label="My Favorite Images"
                                 >
                                     <SplideSlide
                                         v-for="(
-                                            sliderImg, sliderKey
-                                        ) in propertyDetails.slider_image"
+                                            slider, sliderKey
+                                        ) in propertyDetails.sliders"
                                         :key="sliderKey"
                                     >
                                         <q-img
-                                            :src="sliderImg.url"
+                                            :src="slider.image.url"
                                             class="h-full"
                                             fit="contain"
                                         />
@@ -249,7 +243,7 @@ export default {
         const fetchPropertyDetails = async () => {
             const response = await webProperty.fetchPropertyDetails();
             propertyDetails.value = response;
-            sliderImageNumber.value = response.slider_image?.length || 0;
+            sliderImageNumber.value = response.sliders?.length || 0;
 
             sliderListOptions(sliderImageNumber.value);
 
@@ -264,8 +258,6 @@ export default {
         };
 
         const sliderListOptions = async (sliderNumber) => {
-            console.log(sliderNumber);
-
             sliderOptions.value = {
                 type: 'loop',
                 perPage: sliderNumber > 3 ? 3 : sliderNumber,
@@ -276,7 +268,7 @@ export default {
                     },
                     768: {
                         perPage: 1,
-                        height: 0,
+                        height: 350,
                     },
                 },
                 height: 500,

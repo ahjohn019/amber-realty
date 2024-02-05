@@ -11,10 +11,11 @@
                     @click="onItemClick()"
                 >
                     <q-card class="my-card">
-                        <div class="relative" v-if="latest.banner_image">
+                        <div class="relative" v-if="latest.banner">
                             <q-img
-                                :src="latest.banner_image.url"
+                                :src="latest.banner.image.url"
                                 :ratio="16 / 9"
+                                :fit="contain"
                             />
                             <div
                                 class="absolute top-4 left-5 bg-secondary font-bold px-6 py-2 rounded"
