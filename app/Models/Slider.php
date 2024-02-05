@@ -2,19 +2,15 @@
 
 namespace App\Models;
 
-use App\Models\ServerFile;
-use App\Traits\HasModelTrait;
-use App\Traits\ServerFileTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Banner extends Model
+class Slider extends Model
 {
-    use HasFactory, SoftDeletes, HasModelTrait, ServerFileTrait;
+    use HasFactory, SoftDeletes;
 
     protected $fillable = ['name', 'entity_id'];
 
@@ -23,7 +19,7 @@ class Banner extends Model
         return $this->morphOne(ServerFile::class, 'uploadable');
     }
 
-    public function banner(): MorphTo
+    public function sliders(): MorphTo
     {
         return $this->morphTo();
     }

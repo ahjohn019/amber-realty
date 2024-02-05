@@ -29,7 +29,8 @@ class PropertyResource extends JsonResource
             "user" => new UserResource($this->user),
             "details" => new PropertyDetailsResource($this->propertyDetail),
             "created_at" => $this->created_at,
-            "file" => $this->image()->get()
+            "banner" => $this->banner,
+            "sliders" => $this->sliders
         ];;
     }
 }

@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Property extends Model
@@ -51,6 +52,16 @@ class Property extends Model
     public function state(): BelongsTo
     {
         return $this->belongsTo(State::class);
+    }
+
+    public function banner(): MorphOne
+    {
+        return $this->morphOne(Banner::class, 'entity');
+    }
+
+    public function sliders(): MorphMany
+    {
+        return $this->morphMany(Slider::class, 'entity');
     }
 
     public function image(): MorphOne

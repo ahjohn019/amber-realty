@@ -22,10 +22,8 @@ class UpdateFormRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'file' => ['nullable'],
+            'file' => ['sometimes'],
             '*.file' => ['file', 'max:5120', 'mimes:jpeg,png'],
-            '*.module_path' => ['required'],
-            '*.file_id' => ['required'],
             '*.id' => ['sometimes'],
         ];
     }

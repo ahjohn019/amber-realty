@@ -12,7 +12,6 @@ trait ServerFileTrait
     {
         //
         $disk = $payload['disk'] ?? config('filesystems.default');
-        $module = $payload['module_path'];
         $file_type_id = $payload['file_type_id'];
         $folderName = $payload['folder_name'] ?? 'uploads';
 
@@ -20,17 +19,12 @@ trait ServerFileTrait
         $storageDisk = Storage::disk($disk);
         $filePath = $folderName . '/' . $payload['model_id'] . '/';
 
-        // if ($clearStorage) {
-        //     $storageDisk->delete($filePath . $payload['server_files']->name);
-        // }
-
         $storageDisk->put($filePath .  $file->hashName(), (string)$resizeImages->encode());
 
         $serverFileArr = [
             'name' => $file->hashName(),
             'url' => Storage::disk($disk)->url($filePath . $file->hashName()),
             'disk' => $disk,
-            'module_path' => $module,
             'file_type_id' => $file_type_id,
             'mime_type' => $file->getMimeType(),
             'extension' => $file->extension(),
@@ -38,6 +32,11 @@ trait ServerFileTrait
             'ori_file' => $file->getClientOriginalName(),
             'uploadable_id' => $payload['model_id'],
         ];
+
+        if (isset($payload['module_path'])) {
+            $modulePath = ['module_path' => $payload['module_path']];
+            $serverFileArr = array_merge($modulePath, $serverFileArr);
+        }
 
         return $serverFileArr;
     }
