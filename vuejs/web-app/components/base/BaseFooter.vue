@@ -17,6 +17,8 @@
             <div class="col-12 col-md-4 q-gutter-y-sm">
                 <div class="text-2xl font-bold">Contact Info</div>
                 <div class="q-gutter-y-sm row">
+                    <div class="col-12 text-xl font-bold">Account</div>
+                    <div class="col-12">Public Bank: 3186084126</div>
                     <div class="col-12 text-xl font-bold">Address</div>
                     <div class="col-12">
                         No. 2774-2, Jalan Changkat Permata, Taman Permata 53300
