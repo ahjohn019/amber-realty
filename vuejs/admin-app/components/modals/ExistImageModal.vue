@@ -68,6 +68,10 @@
                                             multiple
                                             name="file"
                                             :id="file.id"
+                                            :module_path="
+                                                file.image.module_path
+                                            "
+                                            :file_index="key"
                                             class="hidden-input"
                                             @change="onFileChange"
                                             ref="currentFile"
@@ -116,13 +120,6 @@ export default {
 
         const incomingFiles = ref([]);
 
-        const modulePathOptions = [
-            { label: 'Banner Image', value: 'banner-image' },
-            { label: 'Slider Image', value: 'slider-image' },
-        ];
-
-        const files = props.property?.file || [];
-
         const finalFiles = [
             props.property.banner,
             ...props.property.sliders,
@@ -159,11 +156,9 @@ export default {
 
         return {
             existImageModal,
-            files,
             updateFileData,
             onFileChange,
             handleDeleteFile,
-            modulePathOptions,
             finalFiles,
         };
     },

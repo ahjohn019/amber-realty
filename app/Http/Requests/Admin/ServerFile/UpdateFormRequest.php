@@ -24,6 +24,7 @@ class UpdateFormRequest extends FormRequest
         return [
             'file' => ['sometimes'],
             '*.file' => ['file', 'max:5120', 'mimes:jpeg,png'],
+            '*.module_path' => ['required'],
             '*.id' => ['sometimes'],
         ];
     }

@@ -10,7 +10,9 @@
                 <div
                     class="col-12 col-md-6 text-right font-bold properties-content text-white"
                 >
-                    <router-link to="#">See All Property</router-link>
+                    <router-link :to="{ name: 'property.list' }"
+                        >See All Property</router-link
+                    >
                 </div>
             </div>
             <LatestComponent />

@@ -22,7 +22,7 @@
                             <div class="col-12 col-md-6">
                                 <div class="text-2xl">amber realty</div>
                                 <div class="row justify-between items-center">
-                                    <div class="col-12 col-md-4">E-31482</div>
+                                    <div class="col-12 col-md-4">E-(3)1482</div>
                                     <div
                                         class="col-12 col-md-4 flex flex-col justify-center items-center"
                                     >
