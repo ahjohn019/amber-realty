@@ -29,7 +29,7 @@ class UpdateForm extends FormRequest
     {
         $modulePathValidation = ['sometimes'];
 
-        if (in_array("banner-image", request()->module_path)) {
+        if (request()->module_path !== null && in_array("banner-image", request()->module_path)) {
             $modulePathBannerValidation = [$this->uniqueBannerImage()];
             $modulePathValidation = array_merge($modulePathBannerValidation, $modulePathValidation);
         }
