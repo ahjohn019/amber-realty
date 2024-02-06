@@ -30,7 +30,13 @@
                     <div class="col-12 text-2xl font-bold">Office</div>
                     <div class="col-12">603-40222822</div>
                     <div class="col-12 text-2xl font-bold">Email</div>
-                    <div class="col-12">amberrealty88@gmail.com</div>
+                    <div class="col-12">
+                        <a
+                            href="mailto:amberrealty88@gmail.com"
+                            class="text-blue-600 font-bold"
+                            >amberrealty88@gmail.com</a
+                        >
+                    </div>
                 </div>
             </div>
         </div>
