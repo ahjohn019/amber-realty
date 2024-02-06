@@ -15,6 +15,8 @@ class PropertyService
             ->limit($payload->limit)
             ->get();
 
+        $result->load(['banner.image', 'sliders.image']);
+
         $result = PropertyResource::collection($result);
 
         return $result;
@@ -24,6 +26,8 @@ class PropertyService
     {
         $result = Property::find($id);
 
+        $result->load(['banner.image', 'sliders.image']);
+
         $result = new PropertyResource($result);
 
         return $result;
@@ -31,18 +35,20 @@ class PropertyService
 
     public function list(array $payload)
     {
-		$result = PropertyQueriplex::make(Property::query(), $payload)
-			->paginate($payload['items_per_page'] ?? 15);
+        $result = PropertyQueriplex::make(Property::query(), $payload)
+            ->paginate($payload['items_per_page'] ?? 15);
 
-		$result->load([
-			"user",
-			"propertyDetail",
-			"tags",
-			"propertyType",
-			"image",
-			"state",
-		]);
-		$result = PropertyResource::paginateCollection($result);
+        $result->load([
+            "user",
+            "propertyDetail",
+            "tags",
+            "propertyType",
+            "image",
+            "state",
+            'banner.image',
+            'sliders.image'
+        ]);
+        $result = PropertyResource::paginateCollection($result);
 
         return $result;
     }

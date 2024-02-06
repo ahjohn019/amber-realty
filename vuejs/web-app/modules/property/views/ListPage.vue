@@ -355,8 +355,12 @@ export default {
 			this.formInput.search = this.$route.query.s
 		}
 
-		this.formInput.items_per_page = 20
 		this.formInput.property_types = []
+		if(this.$route.query.pt){
+			this.formInput.property_types = this.$route.query.pt.split(",").map((item) => parseInt(item))
+		}
+
+		this.formInput.items_per_page = 20
 		this.formInput.tenures = []
 		this.formInput.state = { id: null, name: 'All State' }
 
@@ -365,10 +369,8 @@ export default {
 		this.initPage();
 	},
 	computed: {
-    // note we are not passing an array, just one store after the other
-    // each store will be accessible as its id + 'Store'
-    ...mapStores(usePropertyWebStore)
-  },
+		...mapStores(usePropertyWebStore)
+	},
 	methods:{
 		initPage(){
 			this.sortOptions = [
@@ -422,9 +424,13 @@ export default {
 			}
         },
 		async fetchPropertyFilterOptionGroup(){
-            const response = await this.property_webStore.fetchPropertyFilterOptionGroup();
+			const payload = {
+				propertyTypes : 1,
+				states : 1,
+			}
+            const response = await this.property_webStore.fetchPropertyFilterOptionGroup(payload);
 			this.propertyTypeFilterOptions = response.property_types
-			this.stateFilterOptions = [ { id: null, name: "All State" }, ...response.states ]
+			this.stateFilterOptions = [{ id: null, name: "All State" }, ...response.states ]
 		},
 		setListingType(listingTypeVal){
 			this.filterForm.listing_type = listingTypeVal

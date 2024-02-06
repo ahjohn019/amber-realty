@@ -3,20 +3,26 @@
 namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Web\Ref\ListFormRequest;
 use App\Models\PropertyTypes;
 use App\Models\State;
 
 class RefController extends Controller
 {
-	public function propertyFilterOptionGroup()
+	public function propertyFilterOptionGroup(ListFormRequest $request)
 	{
-		$propertyTypes = PropertyTypes::get();
-		$states = State::get();
+		$payload = $request->validated();
+		$result = [];
 
-		$result = [
-			'property_types' => $propertyTypes,
-			'states' => $states,
-		];
+		if(isset($payload['propertyTypes'])){
+			$propertyTypes = PropertyTypes::get();
+			$result['property_types'] = $propertyTypes;
+		}
+
+		if(isset($payload['states'])){
+			$states = State::get();
+			$result['states'] = $states;
+		}
 
 		return self::successResponse("Success", $result);
 	}

@@ -33,11 +33,16 @@
                 <div class="flex items-center gap-4 footer-follow-us">
                     <div>Follow Us</div>
                     <div>
-                        <img src="/images/amber_facebook.png" width="25" />
+                        <a
+                            href="https://www.facebook.com/amberrealtypropertiesandnews/"
+                            target="_blank"
+                        >
+                            <img src="/images/amber_facebook.png" width="25" />
+                        </a>
                     </div>
                 </div>
             </div>
-            <div
+            <!-- <div
                 class="col-12 col-md-6 flex items-center footer-follow-us justify-end gap-2"
             >
                 <div>
@@ -50,7 +55,7 @@
                         >Privacy Policy</router-link
                     >
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
 </template>
