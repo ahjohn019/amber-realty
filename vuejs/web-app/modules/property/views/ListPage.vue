@@ -1,11 +1,24 @@
 <template>
     <BaseLayout>
         <template #content>
-            <div class="bg-primary" data-aos="fade-up">
+            <div
+                class="bg-primary"
+                data-aos="fade-up"
+                style="margin-top: 3.5rem"
+            >
                 <div
-                    class="container mx-auto text-white h-[45vh] flex justify-center items-center"
+                    class="container mx-auto text-white h-[45vh] flex justify-center items-center flex-col gap-2"
                 >
-                    <div class="text-5xl text-center">Property List</div>
+                    <div class="text-5xl text-center col-12">Property List</div>
+                    <div>
+                        <q-breadcrumbs
+                            active-color="secondary"
+                            class="flex justify-center"
+                        >
+                            <q-breadcrumbs-el label="Home" icon="home" to="/" />
+                            <q-breadcrumbs-el label="Property List" />
+                        </q-breadcrumbs>
+                    </div>
                 </div>
             </div>
             <div class="row justify-center p-4 md:p-8">
