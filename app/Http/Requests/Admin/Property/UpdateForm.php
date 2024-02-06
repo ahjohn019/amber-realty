@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Admin\Property;
 
 use App\Models\State;
+use App\Models\Banner;
 use App\Models\Property;
 use App\Models\PropertyTypes;
 use Illuminate\Validation\Rules\Enum;
@@ -26,6 +27,13 @@ class UpdateForm extends FormRequest
      */
     public function rules(): array
     {
+        $modulePathValidation = ['sometimes'];
+
+        if (in_array("banner-image", request()->module_path)) {
+            $modulePathBannerValidation = [$this->uniqueBannerImage()];
+            $modulePathValidation = array_merge($modulePathBannerValidation, $modulePathValidation);
+        }
+
         return [
             //
             'id' => ['required', 'integer'],
@@ -58,7 +66,7 @@ class UpdateForm extends FormRequest
             'property_details' => ['sometimes', 'boolean'],
             'file' => ['nullable'],
             'file.*' => ['file', 'max:5120', 'mimes:jpeg,png'],
-            'module_path' => ['nullable', $this->uniqueBannerImage()],
+            'module_path' => $modulePathValidation,
             'banner_url' => ['nullable'],
         ];
     }
@@ -87,10 +95,9 @@ class UpdateForm extends FormRequest
     protected function uniqueBannerImage()
     {
         return function ($attribute, $value, $fail) {
-            $property = Property::find(request()->id);
-            $bannerImageAmount = $property->image()->where('module_path', 'banner-image')->exists();
+            $banner = Banner::where('entity_id', request()->id)->exists();
 
-            if ($bannerImageAmount) {
+            if ($banner) {
                 $fail('Banner Image Already Exists');
             }
         };

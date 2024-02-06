@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Admin\ServerFile;
+namespace App\Http\Requests\Web\Ref;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateFormRequest extends FormRequest
+class ListFormRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,10 +22,8 @@ class UpdateFormRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'file' => ['sometimes'],
-            '*.file' => ['file', 'max:5120', 'mimes:jpeg,png'],
-            '*.module_path' => ['required'],
-            '*.id' => ['sometimes'],
+			"propertyTypes" => ['nullable', 'in:1,0'],
+			"states" => ['nullable', 'in:1,0'],
         ];
     }
 }

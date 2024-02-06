@@ -2,6 +2,8 @@
 
 namespace App\Http\Services\Admin;
 
+use App\Models\Banner;
+use App\Models\Slider;
 use App\Models\Property;
 use App\Enums\OrderByEnum;
 use Illuminate\Http\UploadedFile;
@@ -28,6 +30,33 @@ class PropertyService
         return ['error' => $th->getMessage(), 'code' => Response::HTTP_INTERNAL_SERVER_ERROR];
     }
 
+    private function handleFileInit($payload)
+    {
+        foreach ($payload['file'] as $key => $value) {
+            $newFileResult[$key] = ['file' => $value, 'module_path' => $payload['module_path'][$key]];
+        }
+
+        return $newFileResult;
+    }
+
+    private function handleCreateImage($payload, $property)
+    {
+        $fileResult = self::handleFileInit($payload);
+
+        $modelType = [
+            'banner-image' => $property->banner(),
+            'slider-image' => $property->sliders()
+        ];
+
+        collect($fileResult)->each(function ($item) use ($payload, $modelType) {
+            $model = $modelType[$item['module_path']]->create([
+                'name' => $item['file']->getClientOriginalName(),
+            ]);
+
+            ImageService::createImage($payload, $model, $item);
+        });
+    }
+
     public function list(array $payload)
     {
         $postAttribute = $payload['attribute'] ?? OrderByEnum::createdAt->value;
@@ -47,6 +76,8 @@ class PropertyService
     {
         return DB::transaction(function () use ($payload) {
             try {
+                $this->handleFileInit($payload);
+
                 $property = Property::create([
                     'name' => $payload['name'],
                     'description' => $payload['description'],
@@ -58,9 +89,7 @@ class PropertyService
                     'user_id' => auth()->user()->id
                 ]);
 
-                collect(Property::PROPERTY_IMAGE_TYPE)->each(function ($item) use ($payload, $property) {
-                    ImageService::handleFileCategory($payload, $property, $item);
-                });
+                $this->handleCreateImage($payload, $property);
 
                 if (isset($payload['property_details']) && $payload['property_details']) {
                     $property->propertyDetail()->create([
@@ -91,7 +120,7 @@ class PropertyService
                 return $this->handleNotFoundError();
             }
 
-            $property->load(['propertyDetail', 'propertyType', 'user', 'state']);
+            $property->load(['propertyDetail', 'propertyType', 'user', 'state', 'banner.image', 'sliders.image']);
             $result = new PropertyResource($property);
 
             return $result;
@@ -104,7 +133,11 @@ class PropertyService
     {
         return DB::transaction(function () use ($payload, $id) {
             try {
+                $this->handleFileInit($payload);
+
                 $property = Property::find($id);
+
+                $this->handleCreateImage($payload, $property);
 
                 if (!$property) {
                     return $this->handleNotFoundError();
@@ -124,10 +157,6 @@ class PropertyService
                     'state_id' => $payload['state_id'],
                     'user_id' => auth()->user()->id
                 ]);
-
-                collect(Property::PROPERTY_IMAGE_TYPE)->each(function ($item) use ($payload, $property) {
-                    ImageService::handleFileCategory($payload, $property, $item, 'update');
-                });
 
                 if (isset($payload['property_details']) && $payload['property_details']) {
                     $property->propertyDetail()->updateOrCreate(

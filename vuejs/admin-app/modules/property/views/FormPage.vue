@@ -210,10 +210,7 @@
                 <div class="flex justify-between py-2">
                     <div class="post-information__name">Images</div>
                     <div v-if="routeType === 'update'">
-                        <ExistImageModal
-                            v-if="propertyData.file.length > 0"
-                            :property="propertyData"
-                        />
+                        <ExistImageModal :property="propertyData" />
                     </div>
                 </div>
                 <DropFile
@@ -350,13 +347,15 @@ export default {
                 routeId
             );
 
-            const bannerImageOnly = response.file.filter(
-                (item) => item.module_path === 'banner-image'
-            );
+            console.log(response);
 
-            if (bannerImageOnly.length > 0) {
-                bannerUrl.value = bannerImageOnly[0].url;
-            }
+            // const bannerImageOnly = response.file.filter(
+            //     (item) => item.module_path === 'banner-image'
+            // );
+
+            // if (bannerImageOnly.length > 0) {
+            //     bannerUrl.value = bannerImageOnly[0].url;
+            // }
 
             const {
                 name,
@@ -365,6 +364,8 @@ export default {
                 state,
                 price,
                 file,
+                banner,
+                sliders,
                 type,
                 details,
             } = response;
@@ -377,6 +378,8 @@ export default {
                 state,
                 price,
                 file,
+                banner,
+                sliders,
                 property_types: fetchPropertyAdminStore.filteredPropertyDetails(
                     {
                         type: propertyTypes,

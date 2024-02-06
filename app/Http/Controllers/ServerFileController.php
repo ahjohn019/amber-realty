@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Banner;
+use App\Models\Slider;
 use App\Models\ServerFile;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -14,19 +16,16 @@ class ServerFileController extends Controller
     public function update(UpdateFormRequest $request)
     {
         $payload = $request->validated();
-        $fetchModulePath = array_column($payload, 'module_path');
-        $countBannerImage = array_count_values($fetchModulePath)['banner-image'] ?? 0;
 
-        if ($countBannerImage > 1) {
-            return self::failedResponse('Banner Cannot Add More Than One', 'Banner Unavailable', Response::HTTP_BAD_REQUEST);
-        }
+        $modelType = [
+            'banner-image' => new Banner,
+            'slider-image' => new Slider
+        ];
 
         collect($payload)->each(
-            function ($pEntity) {
-                $model = ServerFile::find($pEntity['file_id']);
-                $file = isset($pEntity['file']) ? $pEntity['file'] : null;
-
-                ImageService::updateServerImage($pEntity, $model, $file);
+            function ($pEntity) use ($modelType) {
+                $model = $modelType[$pEntity['module_path']]->find($pEntity['id'])->image()->first();
+                ImageService::updateServerImage($pEntity, $model, $pEntity['file']);
             }
         );
 
