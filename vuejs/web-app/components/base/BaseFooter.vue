@@ -16,14 +16,21 @@
             </div>
             <div class="col-12 col-md-4 q-gutter-y-sm">
                 <div class="text-2xl font-bold">Contact Info</div>
-                <div class="q-gutter-y-sm">
-                    <div>
+                <div class="q-gutter-y-sm row">
+                    <div class="col-12">
                         64, Jalan Kuantan, Titiwangsa 53200 Kuala Lumpur,
                         Malaysia
                     </div>
-                    <div>012-3729668</div>
-                    <div>03-40222822</div>
-                    <div>amberrealty88@gmail.com</div>
+                    <div class="col-12 text-2xl font-bold">Main</div>
+                    <div class="col-12">6012-3729668</div>
+                    <div class="col-12 text-2xl font-bold">Admin</div>
+                    <div class="col-12">6019-2140561</div>
+                    <div class="col-12">6019-3560561</div>
+                    <div class="col-12">6012-3771428</div>
+                    <div class="col-12 text-2xl font-bold">Office</div>
+                    <div class="col-12">603-40222822</div>
+                    <div class="col-12 text-2xl font-bold">Email</div>
+                    <div class="col-12">amberrealty88@gmail.com</div>
                 </div>
             </div>
         </div>
