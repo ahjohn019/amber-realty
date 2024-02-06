@@ -68,6 +68,18 @@
 					>
 					</q-btn>
 				</div>
+				<div class="col col-auto pl-2 md:pl-4">
+					<q-btn
+						flat
+						dense
+						color="white"
+						:label="formInput.state?.name"
+						icon-right="expand_more"
+						class="text-capitalize"
+						@click="openStateDialog"
+					>
+					</q-btn>
+				</div>
 			</div>
 		</q-card-section>
 	</q-card>
@@ -80,7 +92,7 @@
 				<div class="text-center text-primary">Property Type</div>
 			</q-card-section>
 			<hr>
-			<q-card-section style="overflow: auto; max-height: 65vh; padding: 0;">
+			<q-card-section style="overflow-y: auto; max-height: 65vh; padding: 0;">
 				<q-list style="min-width: 280px;">
 					<template v-for="propertyTypeFilterOption in propertyTypeFilterOptions" :key="propertyTypeFilterOption.id">
 						<template v-if="propertyTypeFilterOption.id != null">
@@ -120,6 +132,32 @@
 			</q-card-actions>
 		</q-card>
 	</q-dialog>
+
+	<q-dialog
+		v-model="stateFilterDialog"
+	>
+		<q-card>
+			<q-card-section>
+				<div class="text-center text-primary">State</div>
+			</q-card-section>
+			<hr>
+			<q-card-section style="overflow-y: auto; max-height: 65vh; padding: 0;">
+				<q-list style="min-width: 280px;">
+					<template v-for="stateFilterOption in stateFilterOptions" :key="stateFilterOption.id">
+						<q-item
+							clickable
+							@click="selectState(stateFilterOption)"
+						>
+							<q-item-section avatar>
+								<q-icon :name="this.formInput.state.id == stateFilterOption.id ? 'radio_button_checked' : 'radio_button_unchecked'" />
+							</q-item-section>
+							<q-item-section class="font-bold">{{ stateFilterOption.name }}</q-item-section>
+						</q-item>
+					</template>
+				</q-list>
+			</q-card-section>
+		</q-card>
+	</q-dialog>
 </template>
 
 <script>
@@ -132,10 +170,13 @@ export default {
 				search: "",
 				searchType: "buy",
 				propertyTypes : [],
+				selectedState: {},
 			},
 			selectedPropertyTypes : [],
 			propertyTypeFilterOptions: [],
 			propertyTypeFilterDialog: false,
+			stateFilterOptions: [],
+			stateFilterDialog: false,
 		}
 	},
 	computed: {
@@ -147,6 +188,8 @@ export default {
 	created(){
 		this.propertyTypeFilterOptions = []
 		this.formInput.propertyTypes = []
+		this.formInput.state = { id: null, name: 'All State' }
+
 		this.fetchPropertyFilterOptionGroup()
 	},
 	methods:{
@@ -154,7 +197,7 @@ export default {
 			this.formInput.searchType = searchTypeVal
 		},
 		searchProperty(){
-			const { searchType, search, propertyTypes } = this.formInput
+			const { searchType, search, propertyTypes, state } = this.formInput
 
 			const hasAllPropertyOption = (propertyTypes.findIndex((item) => item.id === null) !== -1)
 			let propertyTypesVal;
@@ -169,14 +212,15 @@ export default {
 				query: {
 					t: searchType,
 					s: search,
-					pt: propertyTypesVal
+					pt: propertyTypesVal,
+					state: state.id,
 				}
 			})
 		},
 		async fetchPropertyFilterOptionGroup(){
 			const payload = {
 				propertyTypes : 1,
-				// states : 1,
+				states : 1,
 			}
             const response = await this.property_webStore.fetchPropertyFilterOptionGroup(payload);
 			const propertyTypes = response.property_types.map((item)=> {
@@ -188,7 +232,7 @@ export default {
 			this.propertyTypeFilterOptions = [...propertyTypes]
 			this.formInput.propertyTypes = this.propertyTypeFilterOptions.map((item) => item)
 			this.selectedPropertyTypes = this.propertyTypeFilterOptions.map((item) => item)
-			// this.stateFilterOptions = [ { id: null, name: "All State" }, ...response.states ]
+			this.stateFilterOptions = [ { id: null, name: "All State" }, ...response.states ]
 		},
 		openFilterDialog(){
 			this.selectedPropertyTypes = this.formInput.propertyTypes.map((item) => item)
@@ -214,7 +258,14 @@ export default {
 			// 		this.selectedPropertyTypes = []
 			// 	}
 			// }
-		}
+		},
+		openStateDialog(){
+			this.stateFilterDialog = true
+		},
+		selectState(option){
+			this.formInput.state = option
+			this.stateFilterDialog = false
+		},
 	}
 }
 </script>

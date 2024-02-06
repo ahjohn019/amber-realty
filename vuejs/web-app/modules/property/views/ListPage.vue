@@ -360,11 +360,19 @@ export default {
 			this.formInput.property_types = this.$route.query.pt.split(",").map((item) => parseInt(item))
 		}
 
-		this.formInput.items_per_page = 20
-		this.formInput.tenures = []
 		this.formInput.state = { id: null, name: 'All State' }
 
+		this.formInput.items_per_page = 20
+		this.formInput.tenures = []
+
 		await this.fetchPropertyFilterOptionGroup();
+
+		if(this.$route.query.state){
+			const state = this.stateFilterOptions.find((item)=> item.id === parseInt(this.$route.query.state))
+			if(state){
+				this.formInput.state = state
+			}
+		}
 
 		this.initPage();
 	},
