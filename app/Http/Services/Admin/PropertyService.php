@@ -76,7 +76,9 @@ class PropertyService
     {
         return DB::transaction(function () use ($payload) {
             try {
-                $this->handleFileInit($payload);
+                if (isset($payload['file'])) {
+                    $this->handleFileInit($payload);
+                }
 
                 $property = Property::create([
                     'name' => $payload['name'],
@@ -89,7 +91,9 @@ class PropertyService
                     'user_id' => auth()->user()->id
                 ]);
 
-                $this->handleCreateImage($payload, $property);
+                if (isset($payload['file'])) {
+                    $this->handleCreateImage($payload, $property);
+                }
 
                 if (isset($payload['property_details']) && $payload['property_details']) {
                     $property->propertyDetail()->create([
@@ -133,11 +137,15 @@ class PropertyService
     {
         return DB::transaction(function () use ($payload, $id) {
             try {
-                $this->handleFileInit($payload);
+                if (isset($payload['file'])) {
+                    $this->handleFileInit($payload);
+                }
 
                 $property = Property::find($id);
 
-                $this->handleCreateImage($payload, $property);
+                if (isset($payload['file'])) {
+                    $this->handleCreateImage($payload, $property);
+                }
 
                 if (!$property) {
                     return $this->handleNotFoundError();
