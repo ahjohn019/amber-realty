@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Banner;
+use App\Models\Slider;
 use App\Models\ServerFile;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -15,9 +17,14 @@ class ServerFileController extends Controller
     {
         $payload = $request->validated();
 
+        $modelType = [
+            'banner-image' => new Banner,
+            'slider-image' => new Slider
+        ];
+
         collect($payload)->each(
-            function ($pEntity) {
-                $model = ServerFile::where('uploadable_id', $pEntity['id'])->first();
+            function ($pEntity) use ($modelType) {
+                $model = $modelType[$pEntity['module_path']]->find($pEntity['id'])->image()->first();
                 ImageService::updateServerImage($pEntity, $model, $pEntity['file']);
             }
         );

@@ -81,17 +81,25 @@ export const useServerImageStore = defineStore('server_image_admin', {
         },
 
         handleMultipleImageChange(incomingFiles, event) {
-            const fileId = event.target.id;
-            const file = event.target.files[0];
+            const eventTarget = event.target;
 
-            const existingFile = incomingFiles.value.find(
-                (item) => item.id === fileId
-            ) || { id: fileId };
+            const fileId = eventTarget.id;
+            const file = eventTarget.files[0];
+            const fileIndex = eventTarget.getAttribute('file_index');
+            const modulePath = eventTarget.getAttribute('module_path');
 
-            existingFile.file = file;
+            const existingFiles = incomingFiles.value.find(
+                (item) => item.id === fileId && item.module_path === modulePath
+            );
 
-            if (!incomingFiles.value.includes(existingFile)) {
-                incomingFiles.value.push(existingFile);
+            if (!incomingFiles.value.includes(existingFiles)) {
+                incomingFiles.value.push({
+                    id: fileId,
+                    file,
+                    module_path: modulePath,
+                });
+            } else {
+                incomingFiles.value[fileIndex].file = file;
             }
 
             return incomingFiles;
