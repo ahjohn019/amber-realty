@@ -2,8 +2,11 @@
     <div class="footer-container">
         <div class="row pb-14 footer-container-main gap-4 md:gap-0">
             <div class="col-12 col-md-4">
-                <div class="text-3xl font-bold pb-2">
-                    <img :src="mainLogo" alt="" width="85" />
+                <div
+                    class="text-3xl font-bold pb-2 flex"
+                    :class="$q.screen.lt.md ? 'justify-center' : ''"
+                >
+                    <img :src="mainLogo" alt="" width="100" />
                 </div>
                 <div>Copyright © {{ yearNow }} Amber Realty</div>
             </div>

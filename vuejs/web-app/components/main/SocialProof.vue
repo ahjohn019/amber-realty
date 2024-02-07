@@ -33,10 +33,10 @@ export default {
         const numberDuration = 5;
 
         payload.value = [
-            { title: '20', content: 'Years in the industry', quote: '+' },
-            { title: '90', content: 'Customer satisfaction', quote: '%' },
-            { title: '10', content: 'Properties sold', quote: 'K' },
-            { title: '50', content: 'Country served', quote: '+' },
+            { title: '11', content: 'Years in the industry', quote: '+' },
+            { title: '100', content: 'Customer satisfaction', quote: '%' },
+            { title: '5', content: 'Properties sold', quote: 'K' },
+            { title: '1', content: 'Country served', quote: '' },
         ];
 
         return {
