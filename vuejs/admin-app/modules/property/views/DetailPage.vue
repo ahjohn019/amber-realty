@@ -33,6 +33,10 @@
                             <div class="col-12">
                                 RM {{ propertyData.price }}
                             </div>
+                            <div class="col-12 text-h6">Listing Type:</div>
+                            <div class="col-12 capitalize">
+                                {{ propertyData.listing_type }}
+                            </div>
                             <div class="col-12 text-h6">State:</div>
                             <div class="col-12">
                                 {{ propertyData.state }}
@@ -69,13 +73,11 @@
                             <div class="col-12 capitalize">
                                 {{ propertyData.furnishing }}
                             </div>
-                            <div class="col-12 text-h6">Listing Type:</div>
-                            <div class="col-12 capitalize">
-                                {{ propertyData.listing_type }}
+                            <div class="col-12 text-h6">
+                                Square Feet (sqft):
                             </div>
-                            <div class="col-12 text-h6">Square Feet:</div>
                             <div class="col-12">
-                                {{ propertyData.square_feet }} sqft
+                                {{ propertyData.square_feet }}
                             </div>
                             <div class="col-12 text-h6">Tenure:</div>
                             <div class="col-12 capitalize">
@@ -188,7 +190,7 @@ export default {
                 bedroom: response.details?.bedroom || '-',
                 car_park: response.details?.car_park || '-',
                 furnishing: response.details?.furnishing || '-',
-                listing_type: response.details?.listing_type || '-',
+                listing_type: response.listing_type || '-',
                 square_feet: response.details?.square_feet || '-',
                 tenure: response.details?.tenure || '-',
                 banner: response.banner,
