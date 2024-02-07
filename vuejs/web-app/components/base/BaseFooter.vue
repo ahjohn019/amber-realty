@@ -2,8 +2,10 @@
     <div class="footer-container">
         <div class="row pb-14 footer-container-main gap-4 md:gap-0">
             <div class="col-12 col-md-4">
-                <div class="text-3xl font-bold pb-2">Amber Realty</div>
-                <div>Copyright © 2023 Amber Realty</div>
+                <div class="text-3xl font-bold pb-2">
+                    <img :src="mainLogo" alt="" width="85" />
+                </div>
+                <div>Copyright © {{ yearNow }} Amber Realty</div>
             </div>
             <div class="col-12 col-md-4 q-gutter-y-sm">
                 <div class="text-2xl font-bold">About Us</div>
@@ -75,6 +77,22 @@
         </div>
     </div>
 </template>
+
+<script>
+import dayjs from 'dayjs';
+import { ref } from 'vue';
+
+export default {
+    setup() {
+        const yearNow = ref('');
+        yearNow.value = dayjs().format('YYYY');
+
+        return {
+            yearNow,
+        };
+    },
+};
+</script>
 
 <style>
 .footer-container {
