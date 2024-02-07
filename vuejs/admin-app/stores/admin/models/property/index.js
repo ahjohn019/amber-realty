@@ -90,8 +90,7 @@ export const usePropertyAdminModelStore = defineStore('property_admin_models', {
         fetchPropertyDetailsData() {
             return {
                 tenure: '',
-                square_feet: '',
-                listing_type: '',
+                square_feet: 0,
                 furnishing: '',
                 bathroom: 1,
                 bedroom: 1,

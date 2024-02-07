@@ -143,9 +143,9 @@
                         dense
                         v-model="propertyDetailsData.tenure"
                         :options="tenure"
-                        option-value="slug"
-                        option-label="label"
                         label="Please Select"
+                        emit-value
+                        map-options
                     />
                 </div>
                 <div class="col-12 col-md-6">
@@ -160,15 +160,18 @@
                     </q-input>
                 </div>
 
-                <div class="col-12 col-md-6">
+                <div
+                    class="col-12 col-md-6"
+                    :class="$q.screen.lt.md ? 'pr-0' : 'pr-6'"
+                >
                     <div class="post-information-name">Furnished Type</div>
                     <q-select
                         dense
                         v-model="propertyDetailsData.furnishing"
                         :options="furnishing"
-                        option-value="slug"
-                        option-label="label"
                         label="Please Select"
+                        emit-value
+                        map-options
                     />
                 </div>
                 <div
@@ -185,7 +188,10 @@
                     >
                     </q-input>
                 </div>
-                <div class="col-12 col-md-6">
+                <div
+                    class="col-12 col-md-6"
+                    :class="$q.screen.lt.md ? 'pr-0' : 'pr-6'"
+                >
                     <div class="post-information-name">Bedroom</div>
                     <q-input
                         dense
@@ -196,7 +202,7 @@
                     >
                     </q-input>
                 </div>
-                <div class="col-12">
+                <div class="col-12 col-md-6">
                     <div class="post-information-name">Car Park</div>
                     <q-input
                         dense
@@ -301,6 +307,13 @@ export default {
             (item) => item.slug === 'active'
         );
 
+        propertyDetailsData.value.tenure = tenure.find(
+            (item) => item.slug === 'freehold'
+        );
+        propertyDetailsData.value.furnishing = furnishing.find(
+            (item) => item.slug === 'unfurnished'
+        );
+
         // Fetch state list
         const stateList = async () => {
             const response = await fetchRefAdminStore.fetchStateList(
@@ -398,6 +411,7 @@ export default {
 
                 propertyDetailsData.value = {
                     ...propertyDetailsData.value,
+
                     tenure: fetchPropertyAdminStore.filteredPropertyDetails({
                         type: tenure,
                         details: details.tenure,
@@ -424,8 +438,6 @@ export default {
                 banner_url: bannerTargetFile.value,
             };
 
-            console.log(propertyData.value);
-
             const {
                 tenure,
                 bathroom,
@@ -448,6 +460,8 @@ export default {
                     ),
                 };
             }
+
+            console.log(propertyData.value);
 
             const response = await fetchPropertyAdminStore.createProperty(
                 getAuthToken,
