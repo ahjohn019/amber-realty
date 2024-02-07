@@ -1,218 +1,61 @@
 <template>
     <BaseLayout>
         <template #content>
+            <BannerComponent
+                v-if="propertyDetails.banner"
+                :propertyDetails="propertyDetails"
+                style="margin-top: 5.5rem"
+            />
             <div
-                class="container mx-auto row q-gutter-y-lg"
-                style="margin-top: 2.5rem; width: 75%"
+                class="container mx-auto row"
+                style="margin-top: 1.5rem; width: 75%"
             >
-                <div
-                    class="col-12 row justify-between items-center pt-8 gap-4 md:gap-0"
-                    data-aos="fade-up"
-                >
-                    <div
-                        class="col-12 col-md-7 q-gutter-y-md"
-                        :class="$q.screen.lt.md ? 'text-center' : ''"
-                    >
-                        <div class="text-xl font-bold">
-                            {{ propertyDetails.name }}
-                        </div>
-                    </div>
-                    <div
-                        class="col-12 col-md-5 row q-gutter-y-md"
-                        :class="$q.screen.lt.md ? 'text-right' : 'text-center'"
-                    >
-                        <div
-                            class="col-12 row items-center gap-4 md:gap-0 justify-end"
-                        >
-                            <div
-                                class="col-12 flex items-center pt-4 gap-2"
-                                :class="
-                                    $q.screen.lt.md
-                                        ? 'justify-center'
-                                        : 'justify-end'
-                                "
-                            >
-                                <div
-                                    class="bg-secondary featured-label text-center py-2 px-4 font-bold rounded capitalize"
-                                >
-                                    For
-                                    {{ propertyDetails.listing_type }}
-                                </div>
-                                <div :class="$q.screen.lt.md ? '' : 'ml-4'">
-                                    <span class="text-2xl font-bold"
-                                        >RM {{ propertyDetails.price }}</span
-                                    >
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12" v-if="propertyDetails.details">
-                            <div
-                                class="text-sm"
-                                :class="
-                                    $q.screen.lt.md
-                                        ? 'text-center'
-                                        : 'text-right'
-                                "
-                            >
-                                <q-chip
-                                    color="teal"
-                                    text-color="white"
-                                    :icon="room.icon"
-                                    v-for="(room, key) in propertyRoomDetails"
-                                    :key="key"
-                                >
-                                    {{ propertyDetails.details[room.value] }}
-                                    {{ room.name }}
-                                </q-chip>
-                            </div>
-                        </div>
-                        <div
-                            class="row col-12"
-                            :class="
-                                $q.screen.lt.md
-                                    ? 'justify-center'
-                                    : 'justify-end'
-                            "
-                        >
-                            <q-chip
-                                color="primary"
-                                text-color="white"
-                                v-for="(contact, key) in contactNumber"
-                                :key="key"
-                            >
-                                <a
-                                    :href="
-                                        'https://wa.me/' +
-                                        contact.contact +
-                                        '?text=' +
-                                        encodeURIComponent(whatsAppEnquiries)
-                                    "
-                                    target="_blank"
-                                >
-                                    <q-img
-                                        src="/images/amber_whatsapp.png"
-                                        alt=""
-                                        width="20px"
-                                    />
-                                    <span class="align-middle ml-2 text-sm">{{
-                                        contact.name
-                                    }}</span>
-                                </a>
-                            </q-chip>
-                        </div>
-                    </div>
-                </div>
                 <div
                     class="col-12 row justify-between gap-6"
                     data-aos="fade-right"
                 >
-                    <div class="col-12 row q-gutter-y-lg">
-                        <div class="col-12 row">
-                            <div
-                                class="col-12"
-                                :class="
-                                    propertyDetails.details ? 'col-lg-9' : ''
-                                "
-                                v-if="propertyDetails.banner"
-                            >
-                                <q-img
-                                    :src="propertyDetails.banner.image.url"
-                                    class="rounded-lg"
-                                    :ratio="16 / 9"
-                                />
-                            </div>
-                            <div
-                                class="col-12 col-lg-3 text-center"
-                                v-if="propertyDetails.details"
-                            >
-                                <q-card
-                                    class="my-card flex flex-col justify-center h-full"
-                                >
-                                    <q-card-section
-                                        v-for="(
-                                            detail, key
-                                        ) in propertyDetailsSection"
-                                        :key="key"
-                                        class="q-pb-sm"
-                                    >
-                                        <div class="text-h6">
-                                            {{ detail.name }}
-                                        </div>
-                                        <div class="text-subtitle2">
-                                            {{ detail.front_label }}
-
-                                            {{
-                                                detail.value == 'price'
-                                                    ? propertyDetails[
-                                                          detail.value
-                                                      ]
-                                                    : propertyDetails.details[
-                                                          detail.value
-                                                      ]
-                                            }}
-                                            {{ detail.label }}
-                                        </div>
-                                    </q-card-section>
-                                </q-card>
-                            </div>
-                        </div>
-
-                        <div class="col-12 row justify-between">
-                            <div class="col-12" v-if="propertyDetails.sliders">
-                                <Splide
-                                    :options="sliderOptions"
-                                    aria-label="My Favorite Images"
-                                >
-                                    <SplideSlide
-                                        v-for="(
-                                            slider, sliderKey
-                                        ) in propertyDetails.sliders"
-                                        :key="sliderKey"
-                                    >
-                                        <q-img
-                                            :src="slider.image.url"
-                                            class="h-full"
-                                            fit="contain"
-                                        />
-                                    </SplideSlide>
-                                </Splide>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 row q-gutter-y-md justify-between">
+                    <div class="col-12 row">
                         <div
-                            class="col-12 bg-secondary rounded row p-6 row q-gutter-y-md"
+                            class="col-12"
                             :class="
-                                $q.screen.lt.md
-                                    ? 'text-center p-4'
-                                    : 'text-left p-10'
+                                $q.screen.lt.md ? 'text-center' : 'text-right'
                             "
                         >
-                            <div class="col-12">
-                                <div class="text-3xl font-bold pb-4">
-                                    Short Descriptions
-                                </div>
-                                <span>{{
-                                    propertyDetails.short_description
-                                }}</span>
-                            </div>
+                            <q-btn
+                                label="View More"
+                                icon="photo_camera"
+                                color="teal"
+                                @click="selectSliderModal()"
+                            />
+
+                            <q-dialog v-model="sliderModal">
+                                <q-card style="width: 700px; max-width: 100vw">
+                                    <q-card-section>
+                                        <SliderComponent
+                                            :propertyDetails="propertyDetails"
+                                            :sliderOptions="sliderOptions"
+                                        />
+                                    </q-card-section>
+                                </q-card>
+                            </q-dialog>
                         </div>
+
+                        <InfoComponent
+                            :propertyDetailsData="propertyDetails"
+                            :propertyRoomDetails="propertyRoomDetails"
+                            :contactNumber="contactNumber"
+                            :whatsAppEnquiries="whatsAppEnquiries"
+                        />
                     </div>
-                </div>
-                <div
-                    class="col-12 row q-gutter-y-md bg-primary text-white rounded-lg"
-                    :class="
-                        $q.screen.lt.md ? 'text-center p-4' : 'text-left p-10'
-                    "
-                    data-aos="fade-up"
-                >
-                    <div class="col-12 text-3xl font-bold border-b pb-4">
-                        Overview
-                    </div>
-                    <div
-                        class="col-12"
-                        v-html="propertyDetails.description"
-                    ></div>
+                    <ShortDescriptionsComponent
+                        :propertyDetails="propertyDetails"
+                    />
+
+                    <DescriptionsComponent :propertyDetails="propertyDetails" />
+
+                    <ListingAgentComponent
+                        :whatsAppEnquiries="whatsAppEnquiries"
+                    />
                 </div>
             </div>
         </template>
@@ -224,9 +67,22 @@ import BaseLayout from '@web/modules/layout/BaseLayout.vue';
 import { usePropertyWebStore } from '@store_web/property/index.js';
 import { ref, onMounted } from 'vue';
 
+import InfoComponent from '@web/components/property/details/InfoComponent.vue';
+import SliderComponent from '@web/components/property/details/SliderComponent.vue';
+import ShortDescriptionsComponent from '@web/components/property/details/ShortDescComponent.vue';
+import DescriptionsComponent from '@web/components/property/details/DescriptionsComponent.vue';
+import BannerComponent from '@web/components/property/details/BannerComponent.vue';
+import ListingAgentComponent from '@web/components/property/details/ListingAgentComponent.vue';
+
 export default {
     components: {
         BaseLayout,
+        InfoComponent,
+        SliderComponent,
+        ShortDescriptionsComponent,
+        DescriptionsComponent,
+        BannerComponent,
+        ListingAgentComponent,
     },
 
     setup() {
@@ -238,6 +94,8 @@ export default {
         const propertyRoomDetails = ref([]);
         const propertyDetailsSection = ref([]);
         const whatsAppEnquiries = ref('');
+        const sliderModal = ref(false);
+        const sliderDisplayDuration = 1500;
 
         const fetchPropertyDetails = async () => {
             const response = await webProperty.fetchPropertyDetails();
@@ -256,21 +114,20 @@ export default {
             return response;
         };
 
-        const sliderListOptions = async (sliderNumber) => {
+        const selectSliderModal = () => {
+            sliderModal.value = true;
+
+            setTimeout(() => {
+                sliderListOptions();
+            }, sliderDisplayDuration);
+        };
+
+        const sliderListOptions = async () => {
             sliderOptions.value = {
                 type: 'loop',
-                perPage: sliderNumber > 3 ? 3 : sliderNumber,
+                perPage: 1,
                 gap: '1rem',
-                breakpoints: {
-                    1024: {
-                        perPage: 2,
-                    },
-                    768: {
-                        perPage: 1,
-                        height: 350,
-                    },
-                },
-                height: 500,
+                height: 0,
             };
         };
 
@@ -283,35 +140,21 @@ export default {
         propertyRoomDetails.value = [
             { name: 'Beds', icon: 'bed', value: 'bedroom' },
             { name: 'Bath', icon: 'bathtub', value: 'bathroom' },
-            { name: 'sqft', icon: 'dashboard', value: 'square_feet' },
+            { name: 'Car Park', icon: 'directions_car', value: 'car_park' },
+            { name: 'sqft', icon: 'square_foot', value: 'square_feet' },
+            { name: '', icon: 'apartment', value: 'tenure' },
         ];
 
         propertyDetailsSection.value = [
-            {
-                name: 'Lot Area',
-                label: 'sqft',
-                front_label: '',
-                value: 'square_feet',
-            },
-            {
-                name: 'Bedroom',
-                label: 'rooms',
-                front_label: '',
-                value: 'bedroom',
-            },
-            {
-                name: 'Baths',
-                label: 'baths',
-                front_label: '',
-                value: 'bathroom',
-            },
             { name: 'Tenure', label: '', front_label: '', value: 'tenure' },
             { name: 'Price', label: '', front_label: 'RM', value: 'price' },
         ];
 
         onMounted(() => {
             fetchPropertyDetails();
-            sliderListOptions();
+            setTimeout(() => {
+                sliderListOptions();
+            }, sliderDisplayDuration);
         });
 
         return {
@@ -323,6 +166,8 @@ export default {
             propertyRoomDetails,
             propertyDetailsSection,
             whatsAppEnquiries,
+            sliderModal,
+            selectSliderModal,
         };
     },
 };

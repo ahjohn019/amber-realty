@@ -1,6 +1,7 @@
 <template>
     <div class="overflow-hidden">
         <NavBar />
+
         <slot name="content"></slot>
         <BackToTop />
         <BaseFooter />
