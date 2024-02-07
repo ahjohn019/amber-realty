@@ -307,12 +307,6 @@ export default {
             },
             { name: 'Tenure', label: '', front_label: '', value: 'tenure' },
             { name: 'Price', label: '', front_label: 'RM', value: 'price' },
-            {
-                name: 'Listing Type',
-                label: '',
-                front_label: 'For',
-                value: 'listing_type',
-            },
         ];
 
         onMounted(() => {
