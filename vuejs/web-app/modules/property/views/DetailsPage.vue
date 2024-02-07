@@ -33,11 +33,10 @@
                                 "
                             >
                                 <div
-                                    class="bg-secondary featured-label text-center py-2 px-4 font-bold rounded"
-                                    v-if="propertyDetails.details"
+                                    class="bg-secondary featured-label text-center py-2 px-4 font-bold rounded capitalize"
                                 >
                                     For
-                                    {{ propertyDetails.details.listing_type }}
+                                    {{ propertyDetails.listing_type }}
                                 </div>
                                 <div :class="$q.screen.lt.md ? '' : 'ml-4'">
                                     <span class="text-2xl font-bold"

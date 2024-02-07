@@ -37,6 +37,13 @@ export const usePropertyAdminModelStore = defineStore('property_admin_models', {
                     sortable: true,
                 },
                 {
+                    name: 'listing_type',
+                    align: 'left',
+                    label: 'Listing Type',
+                    field: 'listing_type',
+                    sortable: true,
+                },
+                {
                     name: 'created_by',
                     align: 'left',
                     label: 'Created By',

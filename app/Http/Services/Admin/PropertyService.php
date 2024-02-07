@@ -88,6 +88,7 @@ class PropertyService
                     'price' => $payload['price'],
                     'type_id' => $payload['type_id'],
                     'state_id' => $payload['state_id'],
+                    'listing_type' => $payload['listing_type'],
                     'user_id' => auth()->user()->id
                 ]);
 
@@ -103,7 +104,6 @@ class PropertyService
                         'bedroom' => $payload['bedroom'],
                         'car_park' => $payload['car_park'],
                         'square_feet' => $payload['square_feet'],
-                        'listing_type' => $payload['listing_type'],
                         'furnishing' => $payload['furnishing']
                     ]);
                 }
@@ -163,6 +163,7 @@ class PropertyService
                     'price' => $payload['price'],
                     'type_id' => $payload['type_id'],
                     'state_id' => $payload['state_id'],
+                    'listing_type' => $payload['listing_type'],
                     'user_id' => auth()->user()->id
                 ]);
 
@@ -176,7 +177,6 @@ class PropertyService
                             'bedroom' => $payload['bedroom'],
                             'car_park' => $payload['car_park'],
                             'square_feet' => $payload['square_feet'],
-                            'listing_type' => $payload['listing_type'],
                             'furnishing' => $payload['furnishing']
                         ]
                     );

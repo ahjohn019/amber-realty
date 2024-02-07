@@ -6,22 +6,18 @@
                 v-for="(latest, key) in latestProperty"
                 :key="key"
             >
-                <router-link
-                    :to="'property/details/' + latest.id"
-                    @click="onItemClick()"
-                >
+                <router-link :to="'property/details/' + latest.id">
                     <q-card class="my-card">
                         <div class="relative" v-if="latest.banner">
                             <q-img
                                 :src="latest.banner.image.url"
                                 :ratio="16 / 9"
-                                :fit="contain"
+                                fit="contain"
                             />
                             <div
-                                class="absolute top-4 left-5 bg-secondary font-bold px-6 py-2 rounded"
-                                v-if="latest.details"
+                                class="absolute top-4 left-5 bg-secondary font-bold px-6 py-2 rounded capitalize"
                             >
-                                For {{ latest.details.listing_type }}
+                                For {{ latest.listing_type }}
                             </div>
                         </div>
                         <q-card-section class="row gap-2">
@@ -29,11 +25,10 @@
                                 class="col-12 text-lg flex items-center justify-between"
                             >
                                 <div
-                                    class="bg-secondary font-bold px-2 py-2 rounded"
-                                    :class="latest.banner_image ? 'hidden' : ''"
-                                    v-if="latest.details"
+                                    class="bg-secondary font-bold px-2 py-2 rounded capitalize"
+                                    :class="latest.banner ? 'hidden' : ''"
                                 >
-                                    For {{ latest.details.listing_type }}
+                                    For {{ latest.listing_type }}
                                 </div>
                                 <div>RM {{ latest.price }}</div>
                             </div>

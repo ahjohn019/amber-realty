@@ -51,7 +51,7 @@ class CreateForm extends FormRequest
             'bedroom' => ['sometimes', 'integer', 'between:1,10'],
             'car_park' => ['sometimes', 'integer', 'between:1,10'],
             'square_feet' => ['sometimes', 'integer'],
-            'listing_type' => ['sometimes', 'in:sale,rent'],
+            'listing_type' => ['required', 'in:sale,rent'],
             'furnishing' => ['sometimes', 'in:unfurnished,partially_furnished,furnished'],
             'property_details' => ['sometimes', 'boolean'],
             'file' => ['nullable'],

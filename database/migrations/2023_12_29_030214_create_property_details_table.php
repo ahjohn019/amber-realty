@@ -19,7 +19,6 @@ return new class extends Migration
             $table->integer('bedroom')->default(1);
             $table->integer('car_park')->default(1);
             $table->integer('square_feet');
-            $table->enum('listing_type', ['sale', 'rent'])->default('sale');
             $table->enum('furnishing', ['unfurnished', 'partially_furnished', 'furnished'])->default('unfurnished');
             $table->timestamps();
             $table->softDeletes();

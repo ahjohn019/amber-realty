@@ -31,6 +31,7 @@ class PropertyResource extends JsonResource
             "state" => new StateResource($this->state),
             "user" => new UserResource($this->user),
             "details" => new PropertyDetailsResource($this->propertyDetail),
+            "listing_type" => $this->listing_type,
             "propertyType" => $this->propertyType,
             "created_at" => $this->created_at,
             "updated_at" => $this->updated_at,

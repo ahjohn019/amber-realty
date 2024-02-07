@@ -116,6 +116,21 @@
                 </q-input>
             </div>
             <div
+                class="col-12 col-md-6"
+                :class="$q.screen.lt.md ? 'pr-0' : 'pr-6'"
+            >
+                <div class="post-information-name">Listing Type</div>
+
+                <q-select
+                    dense
+                    v-model="propertyData.listing_type"
+                    :options="listingType"
+                    label="Please Select"
+                    emit-value
+                    map-options
+                />
+            </div>
+            <div
                 class="col-12 row gap-y-4"
                 :class="propertyDetailsToggle ? '' : 'hidden'"
             >
@@ -144,20 +159,7 @@
                     >
                     </q-input>
                 </div>
-                <div
-                    class="col-12 col-md-6"
-                    :class="$q.screen.lt.md ? 'pr-0' : 'pr-6'"
-                >
-                    <div class="post-information-name">Listing Type</div>
-                    <q-select
-                        dense
-                        v-model="propertyDetailsData.listing_type"
-                        :options="listingType"
-                        option-value="slug"
-                        option-label="label"
-                        label="Please Select"
-                    />
-                </div>
+
                 <div class="col-12 col-md-6">
                     <div class="post-information-name">Furnished Type</div>
                     <q-select
@@ -281,8 +283,6 @@ export default {
         const bannerTargetFile = ref('');
         const existImageModal = ref(false);
 
-        propertyData.value.status = 'Active';
-
         // fetch auth token
         const adminAuthStore = useAdminAuthStore();
         const getAuthToken = adminAuthStore.fetchSessionToken();
@@ -292,6 +292,14 @@ export default {
         const furnishing = fetchPropertyModels.fetchFurnishingData();
         const listingType = fetchPropertyModels.fetchListingTypeData();
         const status = fetchPropertyModels.fetchStatusData();
+
+        propertyData.value.listing_type = listingType.find(
+            (item) => item.slug === 'sale'
+        );
+
+        propertyData.value.status = status.find(
+            (item) => item.slug === 'active'
+        );
 
         // Fetch state list
         const stateList = async () => {
@@ -347,16 +355,6 @@ export default {
                 routeId
             );
 
-            console.log(response);
-
-            // const bannerImageOnly = response.file.filter(
-            //     (item) => item.module_path === 'banner-image'
-            // );
-
-            // if (bannerImageOnly.length > 0) {
-            //     bannerUrl.value = bannerImageOnly[0].url;
-            // }
-
             const {
                 name,
                 description,
@@ -368,6 +366,7 @@ export default {
                 sliders,
                 type,
                 details,
+                listing_type,
             } = response;
 
             propertyData.value = {
@@ -387,7 +386,12 @@ export default {
                         category: 'propertyType',
                     }
                 ),
+                listing_type,
             };
+
+            propertyData.value.listing_type = listingType.find(
+                (item) => item.slug === propertyData.value.listing_type
+            );
 
             if (details) {
                 propertyDetailsToggle.value = true;
@@ -399,11 +403,6 @@ export default {
                         details: details.tenure,
                     }),
                     square_feet: details.square_feet,
-                    listing_type:
-                        fetchPropertyAdminStore.filteredPropertyDetails({
-                            type: listingType,
-                            details: details.listing_type,
-                        }),
                     furnishing: fetchPropertyAdminStore.filteredPropertyDetails(
                         {
                             type: furnishing,
@@ -422,12 +421,10 @@ export default {
             propertyData.value = {
                 ...propertyData.value,
                 property_details: propertyDetailsToggle.value ? 1 : 0,
-                status: {
-                    slug: propertyData.value.status?.slug || 'active',
-                    label: propertyData.value.status?.label || 'Active',
-                },
                 banner_url: bannerTargetFile.value,
             };
+
+            console.log(propertyData.value);
 
             const {
                 tenure,
@@ -435,10 +432,10 @@ export default {
                 bedroom,
                 car_park,
                 square_feet,
-                listing_type,
                 furnishing,
                 ...remainingDetails
             } = propertyData.value;
+
             propertyData.value = remainingDetails;
 
             if (propertyData.value.property_details > 0) {

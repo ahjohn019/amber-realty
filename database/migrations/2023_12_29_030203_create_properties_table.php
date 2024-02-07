@@ -20,6 +20,7 @@ return new class extends Migration
             $table->integer('user_id');
             $table->integer('type_id');
             $table->integer('state_id');
+            $table->enum('listing_type', ['sale', 'rent'])->default('sale');
             $table->enum('status', ['active', 'inactive'])->default('active');
             $table->text('banner_url')->nullable();
             $table->timestamps();

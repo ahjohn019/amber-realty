@@ -23,7 +23,7 @@
                 <div class="text-body1" style="font-weight: bold">
                     {{ numberFormat(item.price, 'RM ') }}
                 </div>
-                <div class="row q-gutter-sm text-body2">
+                <div class="row q-gutter-sm text-body2" v-if="item.details">
                     <div class="col col-auto">
                         {{ item.details.bedroom }}<q-icon name="bed"></q-icon>
                     </div>
@@ -40,7 +40,7 @@
                     <div class="col col-auto">
                         <q-icon name="circle" size="5px"></q-icon>
                     </div>
-                    <div class="col col-auto">
+                    <div class="col col-auto" v-if="item.details">
                         {{ getPricePerSquareFeet(item) }} psf
                     </div>
                 </div>
@@ -49,9 +49,14 @@
                         <q-chip dense outline square color="primary">{{
                             item.propertyType.name
                         }}</q-chip>
-                        <q-chip dense outline square color="primary">{{
-                            item.details.tenure
-                        }}</q-chip>
+                        <q-chip
+                            dense
+                            outline
+                            square
+                            color="primary"
+                            v-if="item.details"
+                            >{{ item.details.tenure }}</q-chip
+                        >
                     </div>
                     <div class="col col-auto">
                         <q-icon name="schedule"></q-icon>

@@ -77,6 +77,7 @@ export const usePropertyAdminStore = defineStore('property_admin', {
                 state_id: payload.state.id,
                 status: payload.status.slug,
                 file: payload.images,
+                listing_type: payload.listing_type.slug,
                 id: routeId,
             };
 
@@ -157,7 +158,6 @@ export const usePropertyAdminStore = defineStore('property_admin', {
         handlePropertyDetails(payload) {
             const propertyDetails = {
                 furnishing: payload.furnishing.slug,
-                listing_type: payload.listing_type.slug,
                 tenure: payload.tenure.slug,
                 bathroom: parseInt(payload.bathroom),
                 bedroom: parseInt(payload.bedroom),

@@ -44,6 +44,7 @@
                                 icon="visibility"
                                 label="View"
                                 size="sm"
+                                @click="handleView()"
                             />
                             <q-btn
                                 color="secondary"
@@ -96,7 +97,12 @@ export default {
             );
         };
 
+        const handleView = () => {
+            postPropertyStore.handleViewProperty(propertyId, props.props);
+        };
+
         return {
+            handleView,
             handleEdit,
             handleDelete,
             selected,
