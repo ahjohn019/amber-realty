@@ -8,40 +8,15 @@
             />
             <div
                 class="container mx-auto row"
-                style="margin-top: 1.5rem; width: 75%"
+                :class="$q.screen.lt.md ? 'w-full p-4' : 'w-3/4'"
             >
                 <div
                     class="col-12 row justify-between gap-6"
                     data-aos="fade-right"
                 >
                     <div class="col-12 row">
-                        <div
-                            class="col-12"
-                            :class="
-                                $q.screen.lt.md ? 'text-center' : 'text-right'
-                            "
-                        >
-                            <q-btn
-                                label="View More"
-                                icon="photo_camera"
-                                color="teal"
-                                @click="selectSliderModal()"
-                            />
-
-                            <q-dialog v-model="sliderModal">
-                                <q-card style="width: 700px; max-width: 100vw">
-                                    <q-card-section>
-                                        <SliderComponent
-                                            :propertyDetails="propertyDetails"
-                                            :sliderOptions="sliderOptions"
-                                        />
-                                    </q-card-section>
-                                </q-card>
-                            </q-dialog>
-                        </div>
-
                         <InfoComponent
-                            :propertyDetailsData="propertyDetails"
+                            :propertyDetails="propertyDetails"
                             :propertyRoomDetails="propertyRoomDetails"
                             :contactNumber="contactNumber"
                             :whatsAppEnquiries="whatsAppEnquiries"
@@ -68,7 +43,7 @@ import { usePropertyWebStore } from '@store_web/property/index.js';
 import { ref, onMounted } from 'vue';
 
 import InfoComponent from '@web/components/property/details/InfoComponent.vue';
-import SliderComponent from '@web/components/property/details/SliderComponent.vue';
+
 import ShortDescriptionsComponent from '@web/components/property/details/ShortDescComponent.vue';
 import DescriptionsComponent from '@web/components/property/details/DescriptionsComponent.vue';
 import BannerComponent from '@web/components/property/details/BannerComponent.vue';
@@ -78,7 +53,7 @@ export default {
     components: {
         BaseLayout,
         InfoComponent,
-        SliderComponent,
+
         ShortDescriptionsComponent,
         DescriptionsComponent,
         BannerComponent,
@@ -86,7 +61,6 @@ export default {
     },
 
     setup() {
-        const sliderOptions = ref({});
         const webProperty = usePropertyWebStore();
         const propertyDetails = ref({});
         const sliderImageNumber = ref(0);
@@ -94,15 +68,11 @@ export default {
         const propertyRoomDetails = ref([]);
         const propertyDetailsSection = ref([]);
         const whatsAppEnquiries = ref('');
-        const sliderModal = ref(false);
-        const sliderDisplayDuration = 1500;
 
         const fetchPropertyDetails = async () => {
             const response = await webProperty.fetchPropertyDetails();
             propertyDetails.value = response;
             sliderImageNumber.value = response.sliders?.length || 0;
-
-            sliderListOptions(sliderImageNumber.value);
 
             whatsAppEnquiries.value =
                 'I am interested in ' +
@@ -112,23 +82,6 @@ export default {
                 '. Can you provide more details?';
 
             return response;
-        };
-
-        const selectSliderModal = () => {
-            sliderModal.value = true;
-
-            setTimeout(() => {
-                sliderListOptions();
-            }, sliderDisplayDuration);
-        };
-
-        const sliderListOptions = async () => {
-            sliderOptions.value = {
-                type: 'loop',
-                perPage: 1,
-                gap: '1rem',
-                height: 0,
-            };
         };
 
         contactNumber.value = [
@@ -152,22 +105,16 @@ export default {
 
         onMounted(() => {
             fetchPropertyDetails();
-            setTimeout(() => {
-                sliderListOptions();
-            }, sliderDisplayDuration);
         });
 
         return {
-            sliderOptions,
             propertyDetails,
             fetchPropertyDetails,
-            sliderListOptions,
+
             contactNumber,
             propertyRoomDetails,
             propertyDetailsSection,
             whatsAppEnquiries,
-            sliderModal,
-            selectSliderModal,
         };
     },
 };

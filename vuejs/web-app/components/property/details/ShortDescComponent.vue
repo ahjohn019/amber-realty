@@ -1,12 +1,18 @@
 <template>
     <div class="col-12 row q-gutter-y-md justify-between">
         <div
-            class="col-12 bg-secondary rounded row p-10 row q-gutter-y-md"
-            :class="$q.screen.lt.md ? 'text-center p-4' : 'text-left p-10'"
+            class="col-12 bg-secondary rounded row q-gutter-y-md"
+            :class="$q.screen.lt.md ? 'p-4' : 'p-10'"
         >
-            <div class="col-12">
-                <div class="text-3xl font-bold pb-4">Short Descriptions</div>
-                <span>{{ propertyDetails.short_description }}</span>
+            <div class="col-12 row q-gutter-y-md">
+                <div
+                    class="col-12 text-3xl font-bold border-b border-black pb-4"
+                >
+                    Short Descriptions
+                </div>
+                <div class="col-12">
+                    {{ propertyDetails.short_description }}
+                </div>
             </div>
         </div>
     </div>

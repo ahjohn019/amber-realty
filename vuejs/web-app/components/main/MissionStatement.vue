@@ -1,6 +1,9 @@
 <template>
     <div class="">
-        <div class="row container mx-auto py-24 px-12 justify-between gap-2">
+        <div
+            class="row container mx-auto py-24 justify-between gap-2"
+            :class="$q.screen.lt.md ? 'px-4' : 'px-10'"
+        >
             <div
                 class="col-12 text-3xl font-bold pb-8"
                 :class="$q.screen.lt.md ? 'text-center' : ''"
