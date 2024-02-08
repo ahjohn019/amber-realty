@@ -10,9 +10,10 @@
                 >
                     Short Descriptions
                 </div>
-                <div class="col-12">
-                    {{ propertyDetails.short_description }}
-                </div>
+                <div
+                    class="col-12 break-words"
+                    v-html="propertyDetails.short_description"
+                ></div>
             </div>
         </div>
     </div>

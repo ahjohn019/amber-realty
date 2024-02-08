@@ -21,7 +21,7 @@ class PropertyResource extends JsonResource
             "id" => $this->id,
             "name" => $this->name,
             "description" => $this->description,
-            "short_description" => $this->short_description,
+            "short_description" => nl2br($this->short_description),
             "price" => $this->price,
             "type" => $this->propertyType->name,
             "status" => $this->status,
