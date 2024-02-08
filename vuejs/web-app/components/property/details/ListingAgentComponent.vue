@@ -3,10 +3,7 @@
         class="row q-gutter-y-md border rounded-lg bg-slate-50"
         :class="$q.screen.lt.md ? 'p-4' : 'p-10'"
     >
-        <div
-            class="col-12 text-3xl font-bold border-b-2 pb-4"
-            :class="$q.screen.lt.md ? 'text-center' : ''"
-        >
+        <div class="col-12 text-3xl font-bold border-b-2 pb-4">
             Listing Agent
         </div>
         <div
