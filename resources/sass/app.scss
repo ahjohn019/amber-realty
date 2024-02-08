@@ -17,8 +17,7 @@
 
 
 .header-title {
-    @include typed("Find Your Dream Home Today",2,
-        (caret-width: 2px, caret-space: 2px));
+    @include typed("Terrarce", "Apartments", "Bungalow", "House", "Studio", "Townhouse", 2);
 }
 
 .banner-background{

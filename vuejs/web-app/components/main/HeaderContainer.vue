@@ -3,9 +3,12 @@
         class="banner-background"
         :class="$q.screen.lt.md ? 'h-full' : 'h-[700px] flex items-center'"
     >
-        <div class="row container mx-auto p-4 md:p-12">
+        <div
+            class="row container mx-auto p-4 md:p-12 flex items-center"
+            :class="$q.screen.lt.md ? 'gap-4' : ''"
+        >
             <div
-                class="col-12 col-md-9 col-lg-7 flex flex-col gap-6 justify-center header-content-container px-4 text-white"
+                class="col-12 col-md-6 flex flex-col gap-6 justify-center header-content-container px-4 text-white"
                 data-aos="flip-left"
             >
                 <div class="header-content uppercase">
@@ -20,9 +23,14 @@
                         </div>
                         <div class="col-12 col-md-8 row items-center">
                             <div class="col-12 col-md-6">
-                                <div class="text-2xl">amber realty</div>
+                                <div class="text-xl">amber realty</div>
                                 <div class="row justify-between items-center">
-                                    <div class="col-12 col-md-4">E-(3)1482</div>
+                                    <div
+                                        class="col-12 col-md-4"
+                                        style="text-wrap: nowrap"
+                                    >
+                                        E-(3)1482
+                                    </div>
                                     <div
                                         class="col-12 col-md-4 flex flex-col justify-center items-center"
                                     >
@@ -38,11 +46,18 @@
                         </div>
                     </div>
                 </div>
-                <div class="md:text-7xl font-bold header-title"></div>
+                <div class="text-lg md:text-5xl font-bold">
+                    Are You Looking For
+                    <div class="header-title pt-2"></div>
+                </div>
                 <div class="text-sm">
                     Are you ready to start the search for your dream home? Look
                     no further than Amber Realty Real Estate.
                 </div>
+            </div>
+
+            <div class="col-12 col-md-6">
+                <SearchCard />
             </div>
         </div>
     </div>
@@ -50,8 +65,13 @@
 
 <script>
 import { ref } from 'vue';
+import SearchCard from '@web/components/main/SearchCard.vue';
 
 export default {
+    components: {
+        SearchCard,
+    },
+
     setup() {
         const payload = ref({
             name: '',
