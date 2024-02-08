@@ -4,8 +4,8 @@
         :class="$q.screen.lt.md ? 'h-full' : 'h-[700px] flex items-center'"
     >
         <div
-            class="row container mx-auto p-4 md:p-12 flex items-center"
-            :class="$q.screen.lt.md ? 'gap-4' : ''"
+            class="row container mx-auto flex items-center"
+            :class="$q.screen.lt.md ? 'gap-4' : 'p-4'"
         >
             <div
                 class="col-12 col-md-6 flex flex-col gap-6 justify-center header-content-container px-4 text-white"
@@ -23,7 +23,7 @@
                         </div>
                         <div class="col-12 col-md-8 row items-center">
                             <div class="col-12 col-md-6">
-                                <div class="text-xl">amber realty</div>
+                                <div>amber realty</div>
                                 <div class="row justify-between items-center">
                                     <div
                                         class="col-12 col-md-4"
