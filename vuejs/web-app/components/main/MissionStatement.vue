@@ -1,8 +1,8 @@
 <template>
     <div class="">
         <div
-            class="row container mx-auto py-24 justify-between gap-2"
-            :class="$q.screen.lt.md ? 'px-4' : 'px-10'"
+            class="row container mx-auto py-24 justify-between"
+            :class="$q.screen.lt.sm ? 'px-4 q-gutter-y-md' : 'px-12'"
         >
             <div
                 class="col-12 text-3xl font-bold pb-8"

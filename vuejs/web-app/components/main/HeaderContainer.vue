@@ -8,7 +8,8 @@
             :class="$q.screen.lt.md ? 'gap-4' : 'p-4'"
         >
             <div
-                class="col-12 col-md-6 flex flex-col gap-6 justify-center header-content-container px-4 text-white"
+                class="col-12 col-md-6 flex flex-col gap-6 justify-center px-4 text-white"
+                :class="$q.screen.lt.md ? 'text-center' : ''"
                 data-aos="flip-left"
             >
                 <div class="header-content uppercase">
@@ -84,17 +85,3 @@ export default {
     },
 };
 </script>
-
-<style>
-@media (max-width: 768px) {
-    .header-content-container {
-        text-align: center;
-    }
-
-    .inquiry-title,
-    .inquiry-details,
-    .inquiry-info {
-        text-align: center;
-    }
-}
-</style>

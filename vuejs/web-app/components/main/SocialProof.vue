@@ -1,14 +1,17 @@
 <template>
     <div class="bg-primary">
         <div
-            class="row social-proof-container mx-auto flex justify-center items-center text-white gap-6 md:gap-0"
+            class="container mx-auto row social-proof-container mx-auto flex justify-center items-center text-white gap-y-6"
         >
             <div
                 class="col-6 col-md-3 text-center q-gutter-y-sm"
                 v-for="(data, idx) in payload"
                 :key="idx"
             >
-                <div class="text-6xl font-bold">
+                <div
+                    class="font-bold"
+                    :class="$q.screen.lt.sm ? 'text-4xl' : 'text-7xl'"
+                >
                     <number
                         class="bold transition"
                         ref="number2"
@@ -17,7 +20,9 @@
                         :duration="numberDuration"
                     />{{ data.quote }}
                 </div>
-                <div class="text-lg">{{ data.content }}</div>
+                <div :class="$q.screen.lt.sm ? 'text-md' : 'text-lg'">
+                    {{ data.content }}
+                </div>
             </div>
         </div>
     </div>
@@ -50,12 +55,6 @@ export default {
 
 <style>
 .social-proof-container {
-    padding: 88px 125px 88px 125px;
-}
-
-@media only screen and (max-width: 768px) {
-    .social-proof-container {
-        padding: 88px 0 88px 0;
-    }
+    padding: 88px 0 88px 0;
 }
 </style>

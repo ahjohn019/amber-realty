@@ -1,25 +1,28 @@
 <template>
     <div class="footer-container">
-        <div class="row pb-14 footer-container-main gap-4 md:gap-0">
-            <div class="col-12 col-md-4">
+        <div
+            class="row pb-14"
+            :class="$q.screen.lt.lg ? 'text-center gap-4' : ''"
+        >
+            <div class="col-12 col-lg-4">
                 <div
                     class="text-3xl font-bold pb-2 flex"
-                    :class="$q.screen.lt.md ? 'justify-center' : ''"
+                    :class="$q.screen.lt.lg ? 'justify-center' : ''"
                 >
                     <img :src="mainLogo" alt="" width="100" />
                 </div>
                 <div>Copyright © {{ yearNow }} Amber Realty</div>
             </div>
-            <div class="col-12 col-md-4 q-gutter-y-sm">
+            <div class="col-12 col-lg-4 q-gutter-y-sm">
                 <div class="text-2xl font-bold">About Us</div>
-                <div class="footer-about-us">
+                <div :class="$q.screen.lt.lg ? 'w-full' : 'w-[300px]'">
                     Amber Realty is a licensed real estate agent registered with
                     the Board of Valuers, Appraisers and Estate Agents of
                     Malaysia, and based in Kuala Lumpur the capital city of
                     Malaysian.
                 </div>
             </div>
-            <div class="col-12 col-md-4 q-gutter-y-sm">
+            <div class="col-12 col-lg-4 q-gutter-y-sm">
                 <div class="text-2xl font-bold">Contact Info</div>
                 <div class="q-gutter-y-sm row">
                     <div class="col-12 text-xl font-bold">Account</div>
@@ -49,9 +52,12 @@
             </div>
         </div>
         <q-separator />
-        <div class="row pt-8">
+        <div class="row pt-8" :class="$q.screen.lt.lg ? 'justify-center' : ''">
             <div class="col-12 col-md-6 text-2xl font-bold">
-                <div class="flex items-center gap-4 footer-follow-us">
+                <div
+                    class="flex items-center gap-4"
+                    :class="$q.screen.lt.lg ? 'justify-center' : ''"
+                >
                     <div>Follow Us</div>
                     <div>
                         <a

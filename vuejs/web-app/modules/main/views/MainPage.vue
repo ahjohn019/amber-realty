@@ -3,12 +3,6 @@
         <template #content>
             <q-layout class="mt-20">
                 <HeaderContainer data-aos="fade-up" />
-
-                <!-- <div class="row justify-center">
-					<div class="col col-12 col-sm-10 col-md-8 col-lg-6 col-xl-5 p-4 md:p-10">
-						<SearchCard style="margin-top: -100px;"></SearchCard>
-					</div>
-				</div> -->
                 <PropertiesContainer data-aos="fade-left" />
                 <MissionStatement data-aos="fade-right" />
                 <SocialProof data-aos="fade-right" />

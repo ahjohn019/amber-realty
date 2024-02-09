@@ -1,7 +1,8 @@
 <template>
     <div class="bg-secondary">
         <div
-            class="row justify-around items-center container mx-auto call-to-action-container q-gutter-y-lg"
+            class="row justify-around items-center container mx-auto q-gutter-y-lg call-to-action-container"
+            :class="$q.screen.lt.md ? 'text-center' : ''"
         >
             <div class="col-12 col-md-7 text-2xl md:text-4xl font-bold">
                 Contact Us to Start Your Real Estate Journey !
@@ -33,15 +34,5 @@
 <style>
 .call-to-action-container {
     padding: 88px 0 88px 0;
-}
-
-@media only screen and (max-width: 768px) {
-    .call-to-action-container {
-        text-align: center;
-    }
-
-    .cta-contact {
-        justify-content: center;
-    }
 }
 </style>

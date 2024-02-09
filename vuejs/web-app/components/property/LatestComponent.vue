@@ -2,7 +2,7 @@
     <div class="col-12 row">
         <div class="col-12 row" v-if="latestProperty.length > 0">
             <div
-                class="col-12 col-md-6 col-lg-3 p-2"
+                class="col-12 col-md-4 col-lg-3 p-2"
                 v-for="(latest, key) in latestProperty"
                 :key="key"
             >
@@ -42,12 +42,8 @@
                             </div>
                             <div
                                 class="col-12 text-subtitle2 latest-property__descriptions !h-[65px]"
-                            >
-                                {{ latest.short_description }}
-                                <q-tooltip max-width="350px">
-                                    {{ latest.short_description }}
-                                </q-tooltip>
-                            </div>
+                                v-html="latest.short_description"
+                            ></div>
                         </q-card-section>
                         <q-card-section
                             class="q-pt-none"
@@ -80,16 +76,6 @@
                                     </span>
                                     <q-icon
                                         name="directions_car"
-                                        size="22px"
-                                        class="pl-1"
-                                    />
-                                </div>
-                                <div>
-                                    <span class="align-middle text-lg">
-                                        {{ latest.details.square_feet }} sqft
-                                    </span>
-                                    <q-icon
-                                        name="dashboard"
                                         size="22px"
                                         class="pl-1"
                                     />
