@@ -14,7 +14,10 @@
                 >
                     Explore Our Latest Properties
                 </div>
-                <div class="col col-auto font-bold text-white">
+                <div
+                    class="col col-auto font-bold text-white"
+                    style="text-wrap: nowrap"
+                >
                     <router-link :to="{ name: 'property.list' }"
                         >See All Property</router-link
                     >
