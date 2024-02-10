@@ -32,7 +32,16 @@
                 >
                     <q-item-section>
                         <q-item-label>{{ col.label }}</q-item-label>
-                        <q-item-label caption>{{ col.value }}</q-item-label>
+                        <q-item-label caption>
+                            <div
+                                v-if="col.name == 'short_description'"
+                                v-html="col.value"
+                                class="break-all"
+                            ></div>
+                            <div v-else>
+                                {{ col.value }}
+                            </div>
+                        </q-item-label>
                     </q-item-section>
                 </q-item>
                 <q-item>
