@@ -1,7 +1,7 @@
 <template>
-    <div class="row">
-        <div class="col text-2xl">Property List</div>
-        <div class="col text-right">
+    <div class="row q-gutter-y-sm justify-between">
+        <div class="col col-auto text-2xl">Property List</div>
+        <div class="col col-auto text-right">
             <q-btn
                 icon-right="add"
                 label="Add Property"
