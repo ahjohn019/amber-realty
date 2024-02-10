@@ -82,8 +82,16 @@ export default {
     setup(props, { emit }) {
         let drawerSelection = props.drawer;
 
+        let firstClick = true;
+
         const drawerToggle = () => {
-            drawerSelection = !drawerSelection;
+            if (firstClick) {
+                drawerSelection = false;
+                firstClick = false;
+            } else {
+                drawerSelection = !drawerSelection;
+            }
+
             handleDrawerSelection(drawerSelection);
         };
 
