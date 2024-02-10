@@ -1,6 +1,6 @@
 <template>
-    <q-header class="border-b bg-white text-black py-2">
-        <div class="row items-center mx-4 md:mx-10 justify-between">
+    <q-header class="border-b bg-white text-black py-2 absolute-top">
+        <div class="row items-center justify-between">
             <div
                 class="col col-lg-1 text-sm md:text-2xl lg:text-center"
                 :class="$q.screen.lt.md ? 'hidden' : ''"
@@ -137,7 +137,6 @@ export default {
 
         onMounted(() => {
             fetchProfile();
-            drawerToggle();
         });
 
         return {

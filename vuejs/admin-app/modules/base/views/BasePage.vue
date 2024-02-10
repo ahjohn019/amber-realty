@@ -11,8 +11,8 @@
                         v-model="updateDrawerSelectionData"
                         show-if-above
                         :width="200"
-                        :breakpoint="1024"
                         bordered
+                        :class="$q.screen.lt.md ? false : true"
                     >
                         <q-scroll-area class="fit">
                             <side-bar class="admin-sidebar" />
