@@ -4,7 +4,7 @@
             flat
             ref="propertyRef"
             bordered
-            :grid="$q.screen.lt.sm"
+            :grid="$q.screen.lt.md"
             :rows="rows"
             :columns="columns"
             v-model:pagination="pagination"

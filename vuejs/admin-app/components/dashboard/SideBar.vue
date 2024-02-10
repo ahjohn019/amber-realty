@@ -51,7 +51,7 @@ const sideBarList = [
 ];
 
 export default {
-    setup() {
+    setup(props) {
         const link = ref('dashboard');
 
         function handleItemClick(sideBarItem) {

@@ -1,12 +1,26 @@
 <template>
     <q-header class="border-b bg-white text-black py-2">
         <div class="row items-center mx-4 md:mx-10 justify-between">
-            <div class="col col-lg-1 text-sm md:text-2xl lg:text-center">
-                <router-link to="/">
-                    <img :src="mainLogo" alt="" width="100" />
-                </router-link>
+            <div
+                class="col col-lg-1 text-sm md:text-2xl lg:text-center"
+                :class="$q.screen.lt.md ? 'hidden' : ''"
+            >
+                <q-toolbar>
+                    <q-btn flat @click="drawerToggle" round dense icon="menu" />
+                    <q-toolbar-title
+                        ><router-link to="/">
+                            <img
+                                :src="mainLogo"
+                                alt=""
+                                width="100"
+                            /> </router-link
+                    ></q-toolbar-title>
+                </q-toolbar>
             </div>
-            <div class="col nav-profile-details row text-right">
+            <div
+                class="col row text-right"
+                :class="$q.screen.lt.md ? 'hidden' : ''"
+            >
                 <div class="col-12 row">
                     <div class="col-12">
                         <q-btn-dropdown
@@ -46,7 +60,7 @@
                 </div>
             </div>
 
-            <div class="col nav-profile-sidebar">
+            <div class="col" :class="$q.screen.lt.md ? '' : 'hidden'">
                 <DrawerMobile />
             </div>
         </div>
@@ -63,7 +77,20 @@ export default {
         DrawerMobile,
     },
 
-    setup() {
+    props: ['drawer'],
+
+    setup(props, { emit }) {
+        let drawerSelection = props.drawer;
+
+        const drawerToggle = () => {
+            drawerSelection = !drawerSelection;
+            handleDrawerSelection(drawerSelection);
+        };
+
+        const handleDrawerSelection = (drawerSelection) => {
+            emit('updateDrawerSelectionData', drawerSelection);
+        };
+
         const adminStore = useAdminAuthStore();
         const getAuthToken = adminStore.fetchSessionToken();
         const adminProfileData = ref({
@@ -110,6 +137,7 @@ export default {
 
         onMounted(() => {
             fetchProfile();
+            drawerToggle();
         });
 
         return {
@@ -118,6 +146,9 @@ export default {
             navBarDropDown,
             handleDropdownMenu,
             searchKeywordAdmin,
+            drawerSelection,
+            drawerToggle,
+            handleDrawerSelection,
         };
     },
 };

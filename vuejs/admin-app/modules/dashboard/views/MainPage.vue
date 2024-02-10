@@ -37,11 +37,3 @@ export default {
     },
 };
 </script>
-
-<style>
-@media (min-width: 769px) {
-    .dashboard-container-page {
-        padding-left: 250px;
-    }
-}
-</style>
