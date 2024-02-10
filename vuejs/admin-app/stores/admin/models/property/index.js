@@ -52,14 +52,14 @@ export const usePropertyAdminModelStore = defineStore('property_admin_models', {
                 },
                 {
                     name: 'status',
-                    align: 'center',
+                    align: 'left',
                     label: 'Status',
                     field: 'status',
                     sortable: false,
                 },
                 {
                     name: 'created_at',
-                    align: 'center',
+                    align: 'left',
                     label: 'Created At',
                     field: 'created_at',
                     sortable: false,

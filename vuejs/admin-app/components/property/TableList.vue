@@ -19,11 +19,16 @@
             wrap-cells
         >
             <template v-slot:header-cell="props">
-                <q-th :props="props">
+                <q-th :props="props" style="text-wrap: nowrap">
                     <label :for="props.col.label" class="font-bold text-sm">
                         {{ props.col.label }}
                     </label>
                 </q-th>
+            </template>
+            <template v-slot:body-cell-short_description="props">
+                <q-td :props="props">
+                    <div class="break-all" v-html="props.value"></div>
+                </q-td>
             </template>
             <template v-slot:body-cell-action="props">
                 <q-td :props="props">

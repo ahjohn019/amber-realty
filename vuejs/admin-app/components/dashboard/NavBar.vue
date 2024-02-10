@@ -1,5 +1,5 @@
 <template>
-    <q-header class="border-b bg-white text-black py-2 absolute-top">
+    <q-header class="border-b bg-white text-black py-2">
         <div class="row items-center justify-between">
             <div
                 class="col col-lg-1 text-sm md:text-2xl lg:text-center"
