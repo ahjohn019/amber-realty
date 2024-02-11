@@ -9,7 +9,7 @@
         >
             <div
                 class="col-12 col-md-6 flex flex-col gap-6 justify-center px-4 text-white"
-                :class="$q.screen.lt.md ? 'text-center' : ''"
+                :class="$q.screen.lt.md ? 'text-center hidden' : ''"
                 data-aos="flip-left"
             >
                 <div class="header-content uppercase">
