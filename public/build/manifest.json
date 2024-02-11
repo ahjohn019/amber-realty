@@ -626,7 +626,7 @@
       "vuejs/web-app/modules/property/views/ListPage.vue",
       "vuejs/web-app/modules/property/views/DetailsPage.vue"
     ],
-    "file": "assets/app-974310f4.js",
+    "file": "assets/app-a5ef2732.js",
     "imports": [
       "_ckeditor-2db82a36.js"
     ],
@@ -660,7 +660,7 @@
     "css": [
       "assets/MainPage-59405579.css"
     ],
-    "file": "assets/MainPage-3f0f1182.js",
+    "file": "assets/MainPage-6ff7275e.js",
     "imports": [
       "_QLayout-bde8e6bc.js",
       "_ckeditor-2db82a36.js",
