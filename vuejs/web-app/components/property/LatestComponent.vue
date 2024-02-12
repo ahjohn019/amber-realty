@@ -49,7 +49,10 @@
                             class="q-pt-none"
                             :class="$q.screen.lt.md ? '' : 'h-[75px]'"
                         >
-                            <div class="flex gap-4" v-if="latest.details">
+                            <div
+                                class="flex gap-4"
+                                v-if="latest.details_toggle"
+                            >
                                 <div>
                                     <span class="align-middle text-lg">
                                         {{ latest.details.bedroom }}

@@ -5,7 +5,7 @@
                 {{ propertyDetails.name }}
             </div>
 
-            <div class="col col-auto text-right">
+            <div class="col col-auto text-right" v-if="sliders > 0">
                 <q-btn
                     label="View More"
                     icon="photo_camera"
@@ -25,7 +25,11 @@
                 </q-dialog>
             </div>
         </div>
-        <div class="col-12" v-if="propertyDetails.details">
+
+        <div
+            class="col-12"
+            v-if="propertyDetails.details && propertyDetails.details_toggle"
+        >
             <div class="text-sm">
                 <q-chip
                     color="teal"
@@ -69,6 +73,7 @@ export default {
         'propertyRoomDetails',
         'contactNumber',
         'whatsAppEnquiries',
+        'sliders',
     ],
 
     setup() {
@@ -103,8 +108,6 @@ export default {
                 sliderButton.value = '';
             }, sliderDisplayDuration);
         });
-
-        console.log(sliderButton.value);
 
         return {
             selectSliderModal,

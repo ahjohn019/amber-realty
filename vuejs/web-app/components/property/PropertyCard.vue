@@ -23,7 +23,11 @@
                 <div class="text-body1" style="font-weight: bold">
                     {{ numberFormat(item.price, 'RM ') }}
                 </div>
-                <div class="row q-gutter-sm text-body2" v-if="item.details">
+
+                <div
+                    class="row q-gutter-sm text-body2"
+                    v-if="item.details && item.details_toggle"
+                >
                     <div class="col col-auto">
                         {{ item.details.bedroom }}<q-icon name="bed"></q-icon>
                     </div>

@@ -34,7 +34,7 @@
             </div>
             <div class="col-12">
                 <div class="post-information-name">Descriptions</div>
-                <div class="col-12">
+                <div class="col-12 prose max-w-none">
                     <CkeditorPlugin
                         :description="propertyData.description"
                         @updateDescriptionsData="updateDescriptions"
@@ -368,66 +368,57 @@ export default {
                 routeId
             );
 
-            const {
-                name,
-                description,
-                short_description,
-                state,
-                price,
-                file,
-                banner,
-                sliders,
-                type,
-                details,
-                listing_type,
-            } = response;
+            const { details } = response;
 
             propertyData.value = {
                 ...propertyData.value,
-                name,
-                description,
-                short_description,
-                state,
-                price,
-                file,
-                banner,
-                sliders,
-                property_types: fetchPropertyAdminStore.filteredPropertyDetails(
-                    {
-                        type: propertyTypes,
-                        details: type,
-                        category: 'propertyType',
-                    }
-                ),
-                listing_type,
+                name: response.name,
+                description: response.description,
+                short_description: response.short_description,
+                state: response.state,
+                price: response.price,
+                file: response.file,
+                banner: response.banner,
+                sliders: response.sliders,
+                listing_type: response.listing_type,
+                details: response.details_toggle,
+                property_types:
+                    fetchPropertyAdminStore.handleFilteredPropertyDetails(
+                        propertyTypes,
+                        response.type,
+                        'propertyType'
+                    ),
             };
+
+            // remove html tag on show page
+            propertyData.value.short_description =
+                propertyData.value.short_description.replace(/<[^>]+>/g, '');
 
             propertyData.value.listing_type = listingType.find(
                 (item) => item.slug === propertyData.value.listing_type
             );
 
-            if (details) {
-                propertyDetailsToggle.value = true;
+            propertyDetailsToggle.value = propertyData.value.details;
 
-                propertyDetailsData.value = {
-                    ...propertyDetailsData.value,
+            propertyDetailsData.value = {
+                ...propertyDetailsData.value,
 
-                    tenure: fetchPropertyAdminStore.filteredPropertyDetails({
-                        type: tenure,
-                        details: details.tenure,
-                    }),
-                    square_feet: details.square_feet,
-                    furnishing: fetchPropertyAdminStore.filteredPropertyDetails(
-                        {
-                            type: furnishing,
-                            details: details.furnishing,
-                        }
+                tenure: fetchPropertyAdminStore.handleFilteredPropertyDetails(
+                    tenure,
+                    details.tenure
+                ),
+                square_feet: details.square_feet,
+
+                furnishing:
+                    fetchPropertyAdminStore.handleFilteredPropertyDetails(
+                        furnishing,
+                        details.furnishing
                     ),
-                    bedroom: details.bedroom,
-                    bathroom: details.bathroom,
-                    car_park: details.car_park,
-                };
-            }
+
+                bedroom: details.bedroom,
+                bathroom: details.bathroom,
+                car_park: details.car_park,
+            };
         };
 
         // Handle submit data
@@ -438,30 +429,22 @@ export default {
                 banner_url: bannerTargetFile.value,
             };
 
-            const {
-                tenure,
-                bathroom,
-                bedroom,
-                car_park,
-                square_feet,
-                furnishing,
-                ...remainingDetails
-            } = propertyData.value;
-
-            propertyData.value = remainingDetails;
-
             if (propertyData.value.property_details > 0) {
                 propertyData.value = {
                     ...propertyData.value,
-                    ...Object.fromEntries(
-                        Object.entries(propertyDetailsData.value).map(
-                            ([key, value]) => [key, value ?? null]
-                        )
-                    ),
+                    ...propertyDetailsData.value,
                 };
-            }
+            } else {
+                const detailsKey = Object.keys(propertyDetailsData.value);
 
-            console.log(propertyData.value);
+                const filterDetails = Object.fromEntries(
+                    Object.entries(propertyData.value).filter(
+                        ([key]) => !detailsKey.includes(key)
+                    )
+                );
+
+                propertyData.value = filterDetails;
+            }
 
             const response = await fetchPropertyAdminStore.createProperty(
                 getAuthToken,

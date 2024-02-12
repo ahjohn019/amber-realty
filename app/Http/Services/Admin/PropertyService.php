@@ -2,11 +2,8 @@
 
 namespace App\Http\Services\Admin;
 
-use App\Models\Banner;
-use App\Models\Slider;
 use App\Models\Property;
 use App\Enums\OrderByEnum;
-use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\DB;
 use App\Http\Services\ImageService;
 use App\Enums\Property\PropertyStatusEnum;
@@ -89,6 +86,7 @@ class PropertyService
                     'type_id' => $payload['type_id'],
                     'state_id' => $payload['state_id'],
                     'listing_type' => $payload['listing_type'],
+                    'details' => $payload['property_details'],
                     'user_id' => auth()->user()->id
                 ]);
 
@@ -164,6 +162,7 @@ class PropertyService
                     'type_id' => $payload['type_id'],
                     'state_id' => $payload['state_id'],
                     'listing_type' => $payload['listing_type'],
+                    'details' => $payload['property_details'],
                     'user_id' => auth()->user()->id
                 ]);
 

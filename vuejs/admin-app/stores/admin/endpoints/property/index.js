@@ -189,6 +189,19 @@ export const usePropertyAdminStore = defineStore('property_admin', {
             return filteredPropertyDetails;
         },
 
+        // filter property details
+        handleFilteredPropertyDetails(
+            filteredData,
+            detailsData,
+            categoryData = null
+        ) {
+            return this.filteredPropertyDetails({
+                type: filteredData,
+                details: detailsData,
+                category: categoryData,
+            });
+        },
+
         // For Handle Status
         handleEditProperty(propertyId) {
             this.router.push({

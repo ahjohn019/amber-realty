@@ -1,9 +1,13 @@
 <template>
-    <div v-if="propertyDetails.banner">
+    <div>
         <q-img
-            :src="propertyDetails.banner.image.url"
-            class="h-[450px] cursor-pointer"
-            fit="cover"
+            :src="
+                propertyDetails.banner
+                    ? propertyDetails.banner.image.url
+                    : '/images/Image_not_available.png'
+            "
+            class="cursor-pointer h-[550px]"
+            :fit="$q.screen.lt.md ? 'cover' : 'contain'"
             @click="toggleBanner()"
         />
 
@@ -11,7 +15,11 @@
             <q-card style="width: 700px; max-width: 80vw">
                 <q-card-section>
                     <q-img
-                        :src="propertyDetails.banner.image.url"
+                        :src="
+                            propertyDetails.banner
+                                ? propertyDetails.banner.image.url
+                                : '/images/Image_not_available.png'
+                        "
                         :ratio="16 / 9"
                     />
                 </q-card-section>

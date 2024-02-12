@@ -2,7 +2,6 @@
     <BaseLayout>
         <template #content>
             <BannerComponent
-                v-if="propertyDetails.banner"
                 :propertyDetails="propertyDetails"
                 style="margin-top: 5.5rem"
             />
@@ -20,6 +19,7 @@
                             :propertyRoomDetails="propertyRoomDetails"
                             :contactNumber="contactNumber"
                             :whatsAppEnquiries="whatsAppEnquiries"
+                            :sliders="sliderImageNumber"
                         />
                     </div>
                     <ShortDescriptionsComponent
@@ -115,6 +115,7 @@ export default {
             propertyRoomDetails,
             propertyDetailsSection,
             whatsAppEnquiries,
+            sliderImageNumber,
         };
     },
 };

@@ -31,7 +31,8 @@ class PropertyResource extends JsonResource
             'listing_type' => $this->listing_type,
             "created_at" => $this->created_at,
             "banner" => $this->banner,
-            "sliders" => $this->sliders
+            "sliders" => $this->sliders,
+            'details_toggle' => $this->details == 1 ? true : false,
         ];;
     }
 }
