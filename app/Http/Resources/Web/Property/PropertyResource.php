@@ -37,7 +37,7 @@ class PropertyResource extends JsonResource
             "updated_at" => $this->updated_at,
             "banner" => $this->banner,
             "sliders" => $this->sliders,
-            'details_toggle' => $this->details,
+            'details_toggle' => $this->details == 1 ? true : false,
         ];
     }
 }
