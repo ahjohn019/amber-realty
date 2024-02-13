@@ -76,7 +76,7 @@
                             </div>
                             <div class="col-12 text-h6">Furnishing:</div>
                             <div class="col-12 capitalize">
-                                {{ propertyData.furnishing }}
+                                {{ removeSnakeCase(propertyData.furnishing) }}
                             </div>
                             <div class="col-12 text-h6">
                                 Square Feet (sqft):
@@ -205,6 +205,16 @@ export default {
             return response;
         };
 
+        const removeSnakeCase = (value) => {
+            const result = value
+                .replace(/_/g, ' ')
+                .replace(/\b\w/g, function (char) {
+                    return char.toUpperCase();
+                });
+
+            return result;
+        };
+
         onMounted(() => {
             findProperty();
         });
@@ -213,6 +223,7 @@ export default {
             tab: ref('basic'),
             findProperty,
             propertyData,
+            removeSnakeCase,
         };
     },
 };

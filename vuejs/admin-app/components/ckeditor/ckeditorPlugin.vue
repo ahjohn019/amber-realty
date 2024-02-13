@@ -24,9 +24,11 @@ import {
     ImageResize,
     ImageStyle,
     ImageToolbar,
-    ImageUpload,
+    // ImageUpload,
+    ImageInsertViaUrl,
+    AutoImage,
 } from '@ckeditor/ckeditor5-image';
-import { Base64UploadAdapter } from '@ckeditor/ckeditor5-upload';
+// import { Base64UploadAdapter } from '@ckeditor/ckeditor5-upload';
 import { Heading } from '@ckeditor/ckeditor5-heading';
 import { Indent, IndentBlock } from '@ckeditor/ckeditor5-indent';
 import { List } from '@ckeditor/ckeditor5-list';
@@ -60,14 +62,16 @@ export default {
                     ImageResize,
                     ImageStyle,
                     ImageToolbar,
-                    ImageUpload,
-                    Base64UploadAdapter,
+                    ImageInsertViaUrl,
+                    AutoImage,
                     Heading,
                     Indent,
                     IndentBlock,
                     List,
                     Table,
                     TableToolbar,
+                    // ImageUpload,
+                    // Base64UploadAdapter,
                 ],
 
                 toolbar: {
@@ -80,12 +84,13 @@ export default {
                         'link',
                         'undo',
                         'redo',
-                        'imageUpload',
+                        'insertImage',
                         'outdent',
                         'indent',
                         'bulletedList',
                         'numberedList',
                         'insertTable',
+                        // 'imageUpload',
                     ],
                 },
                 table: {
