@@ -11,7 +11,12 @@
 import { ClassicEditor } from '@ckeditor/ckeditor5-editor-classic';
 
 import { Essentials } from '@ckeditor/ckeditor5-essentials';
-import { Bold, Italic } from '@ckeditor/ckeditor5-basic-styles';
+import {
+    Bold,
+    Italic,
+    Strikethrough,
+    Underline,
+} from '@ckeditor/ckeditor5-basic-styles';
 import { Link } from '@ckeditor/ckeditor5-link';
 import { Paragraph } from '@ckeditor/ckeditor5-paragraph';
 import {
@@ -26,6 +31,7 @@ import { Heading } from '@ckeditor/ckeditor5-heading';
 import { Indent, IndentBlock } from '@ckeditor/ckeditor5-indent';
 import { List } from '@ckeditor/ckeditor5-list';
 import { Table, TableToolbar } from '@ckeditor/ckeditor5-table';
+
 import { ref } from 'vue';
 
 export default {
@@ -46,6 +52,8 @@ export default {
                     Essentials,
                     Bold,
                     Italic,
+                    Strikethrough,
+                    Underline,
                     Link,
                     Paragraph,
                     Image,
@@ -67,6 +75,8 @@ export default {
                         'heading',
                         'bold',
                         'italic',
+                        'strikethrough',
+                        'underline',
                         'link',
                         'undo',
                         'redo',
@@ -87,12 +97,14 @@ export default {
                 },
                 image: {
                     toolbar: [
+                        'imageStyle:alignLeft',
                         'imageStyle:block',
                         'imageStyle:side',
                         '|',
                         'imageTextAlternative',
                         '|',
                         'link',
+                        'linkImage',
                     ],
                 },
                 heading: {
@@ -145,3 +157,9 @@ export default {
     },
 };
 </script>
+
+<style>
+.ck-content {
+    height: 500px;
+}
+</style>

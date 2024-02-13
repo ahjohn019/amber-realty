@@ -9,6 +9,7 @@
                     align="justify"
                 >
                     <q-tab name="basic" label="Basic" />
+                    <q-tab name="descriptions" label="Descriptions" />
                     <q-tab name="details" label="Details" />
                     <q-tab name="images" label="Images" />
                 </q-tabs>
@@ -20,15 +21,11 @@
                             <div class="col-12">
                                 {{ propertyData.name }}
                             </div>
-                            <div class="col-12 text-h6">Description:</div>
+                            <div class="col-12 text-h6">Short Description:</div>
                             <div
                                 class="col-12"
-                                v-html="propertyData.description"
+                                v-html="propertyData.short_description"
                             ></div>
-                            <div class="col-12 text-h6">Short Description:</div>
-                            <div class="col-12">
-                                {{ propertyData.short_description }}
-                            </div>
                             <div class="col-12 text-h6">Price:</div>
                             <div class="col-12">
                                 RM {{ propertyData.price }}
@@ -54,6 +51,14 @@
                                 {{ propertyData.created_at }}
                             </div>
                         </div>
+                    </q-tab-panel>
+                    <q-tab-panel name="descriptions">
+                        <q-scroll-area class="h-[550px]">
+                            <div
+                                class="prose max-w-none prose-strong:font-black prose-h1:text-7xl prose-h2:text-6xl prose-h3:text-5xl"
+                                v-html="propertyData.description"
+                            ></div>
+                        </q-scroll-area>
                     </q-tab-panel>
                     <q-tab-panel name="details">
                         <div class="row q-gutter-y-sm">

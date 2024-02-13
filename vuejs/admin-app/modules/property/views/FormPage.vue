@@ -34,7 +34,9 @@
             </div>
             <div class="col-12">
                 <div class="post-information-name">Descriptions</div>
-                <div class="col-12 prose max-w-none">
+                <div
+                    class="col-12 prose max-w-none prose-strong:font-black prose-h1:text-7xl prose-h2:text-6xl prose-h3:text-5xl"
+                >
                     <CkeditorPlugin
                         :description="propertyData.description"
                         @updateDescriptionsData="updateDescriptions"
