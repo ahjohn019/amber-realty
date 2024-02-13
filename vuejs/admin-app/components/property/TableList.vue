@@ -18,6 +18,31 @@
             class="property-table"
             wrap-cells
         >
+            <template v-slot:top-right>
+                <q-input
+                    borderless
+                    dense
+                    debounce="300"
+                    v-model="searchKeyword"
+                    placeholder="Search"
+                    class="border px-4 rounded-lg"
+                    @keyup.enter="handlePostKeywords(searchKeyword)"
+                >
+                    <template v-slot:append>
+                        <q-icon
+                            v-if="searchKeyword !== ''"
+                            name="close"
+                            @click="searchKeyword = ''"
+                            class="cursor-pointer"
+                        />
+                        <q-icon
+                            name="search"
+                            @click="handlePostKeywords(searchKeyword)"
+                            class="cursor-pointer"
+                        />
+                    </template>
+                </q-input>
+            </template>
             <template v-slot:header-cell="props">
                 <q-th :props="props" style="text-wrap: nowrap">
                     <label :for="props.col.label" class="font-bold text-sm">
@@ -73,6 +98,7 @@ export default {
         });
         const selected = ref([]);
         const payload = ref({});
+        const searchKeyword = ref('');
 
         const postPropertyStore = usePropertyAdminStore();
         const modelPropertyStore = usePropertyAdminModelStore();
@@ -89,7 +115,12 @@ export default {
             payload.value = {
                 ...payload.value,
                 keyword: keywords,
-                searchable: [],
+                searchable: [
+                    'name',
+                    'short_description',
+                    'price',
+                    'listing_type',
+                ],
                 page: 1,
                 attribute: 'name',
                 sortable: 'asc',
@@ -119,10 +150,13 @@ export default {
             });
 
             rows.value = updatedData;
-            pagination.value = serverTableStore.fetchServerPagination(
-                response,
-                paginate
-            );
+
+            if (paginate != null) {
+                pagination.value = serverTableStore.fetchServerPagination(
+                    response,
+                    paginate
+                );
+            }
 
             payload = serverTableStore.fetchServerPayload(payload, response);
             loading.value = false;
@@ -152,8 +186,8 @@ export default {
             selected,
             fetchPagination,
             handlePostKeywords,
+            searchKeyword,
             getSelectedString() {
-                console.log(selected.value);
                 return selected.value.length === 0
                     ? ''
                     : `${selected.value.length} record${

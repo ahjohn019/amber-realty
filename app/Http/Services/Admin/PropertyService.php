@@ -61,6 +61,7 @@ class PropertyService
 
         $result = Property::where('status', PropertyStatusEnum::Active->value)
             ->orderBy($postAttribute, $postSortable)
+            ->searchable($payload)
             ->paginate($payload['paginate'] ?? 15);
 
         $result->load(['propertyDetail', 'propertyType', 'user', 'state']);

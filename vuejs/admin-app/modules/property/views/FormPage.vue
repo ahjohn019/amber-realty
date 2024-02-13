@@ -402,25 +402,27 @@ export default {
 
             propertyDetailsToggle.value = propertyData.value.details;
 
-            propertyDetailsData.value = {
-                ...propertyDetailsData.value,
+            if (details) {
+                propertyDetailsData.value = {
+                    ...propertyDetailsData.value,
 
-                tenure: fetchPropertyAdminStore.handleFilteredPropertyDetails(
-                    tenure,
-                    details.tenure
-                ),
-                square_feet: details.square_feet,
-
-                furnishing:
-                    fetchPropertyAdminStore.handleFilteredPropertyDetails(
-                        furnishing,
-                        details.furnishing
+                    tenure: fetchPropertyAdminStore.handleFilteredPropertyDetails(
+                        tenure,
+                        details.tenure
                     ),
+                    square_feet: details.square_feet,
 
-                bedroom: details.bedroom,
-                bathroom: details.bathroom,
-                car_park: details.car_park,
-            };
+                    furnishing:
+                        fetchPropertyAdminStore.handleFilteredPropertyDetails(
+                            furnishing,
+                            details.furnishing
+                        ),
+
+                    bedroom: details.bedroom,
+                    bathroom: details.bathroom,
+                    car_park: details.car_park,
+                };
+            }
         };
 
         // Handle submit data
