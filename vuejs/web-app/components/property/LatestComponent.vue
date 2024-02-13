@@ -8,9 +8,13 @@
             >
                 <router-link :to="'property/details/' + latest.id">
                     <q-card class="my-card">
-                        <div class="relative" v-if="latest.banner">
+                        <div class="relative">
                             <q-img
-                                :src="latest.banner.image.url"
+                                :src="
+                                    latest.banner
+                                        ? latest.banner.image.url
+                                        : 'https://cdn.quasar.dev/img/parallax2.jpg'
+                                "
                                 :ratio="16 / 9"
                                 fit="contain"
                             />
@@ -24,12 +28,6 @@
                             <div
                                 class="col-12 text-lg flex items-center justify-between"
                             >
-                                <div
-                                    class="bg-secondary font-bold px-2 py-2 rounded capitalize"
-                                    :class="latest.banner ? 'hidden' : ''"
-                                >
-                                    For {{ latest.listing_type }}
-                                </div>
                                 <div>RM {{ latest.price }}</div>
                             </div>
                             <div

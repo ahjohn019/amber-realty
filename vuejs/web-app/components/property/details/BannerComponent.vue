@@ -4,7 +4,7 @@
             :src="
                 propertyDetails.banner
                     ? propertyDetails.banner.image.url
-                    : '/images/Image_not_available.png'
+                    : 'https://cdn.quasar.dev/img/parallax2.jpg'
             "
             class="cursor-pointer h-[550px]"
             :fit="$q.screen.lt.md ? 'cover' : 'contain'"
