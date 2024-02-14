@@ -6,52 +6,27 @@ use App\Models\Property;
 use App\Enums\OrderByEnum;
 use Illuminate\Support\Facades\DB;
 use App\Http\Services\ImageService;
+use App\Http\Services\ExceptionService;
 use App\Enums\Property\PropertyStatusEnum;
 use Symfony\Component\HttpFoundation\Response;
 use App\Http\Resources\Admin\Property\PropertyResource;
 
 class PropertyService
 {
-    private function handleNotFoundError()
-    {
-        return ['error' => 'Property Not Found', 'code' => Response::HTTP_NOT_FOUND];
+    public function __construct(
+        protected ExceptionService $exceptionService,
+        protected ImageService $imageService
+    ) {
     }
 
-    private function handleUpdatePermissionError()
+    private function createImage($payload, $property)
     {
-        return ['error' => 'You are not allowed to update other people\'s posts', 'code' => Response::HTTP_FORBIDDEN];
-    }
-
-    private function handleException($th)
-    {
-        return ['error' => $th->getMessage(), 'code' => Response::HTTP_INTERNAL_SERVER_ERROR];
-    }
-
-    private function handleFileInit($payload)
-    {
-        foreach ($payload['file'] as $key => $value) {
-            $newFileResult[$key] = ['file' => $value, 'module_path' => $payload['module_path'][$key]];
-        }
-
-        return $newFileResult;
-    }
-
-    private function handleCreateImage($payload, $property)
-    {
-        $fileResult = self::handleFileInit($payload);
-
         $modelType = [
             'banner-image' => $property->banner(),
             'slider-image' => $property->sliders()
         ];
 
-        collect($fileResult)->each(function ($item) use ($payload, $modelType) {
-            $model = $modelType[$item['module_path']]->create([
-                'name' => $item['file']->getClientOriginalName(),
-            ]);
-
-            ImageService::createImage($payload, $model, $item);
-        });
+        $this->imageService->handleCreateImage($payload, $modelType);
     }
 
     public function list(array $payload)
@@ -75,7 +50,7 @@ class PropertyService
         return DB::transaction(function () use ($payload) {
             try {
                 if (isset($payload['file'])) {
-                    $this->handleFileInit($payload);
+                    $this->imageService->handleFileInit($payload);
                 }
 
                 $property = Property::create([
@@ -92,7 +67,7 @@ class PropertyService
                 ]);
 
                 if (isset($payload['file'])) {
-                    $this->handleCreateImage($payload, $property);
+                    $this->createImage($payload, $property);
                 }
 
                 if (isset($payload['property_details']) && $payload['property_details']) {
@@ -109,7 +84,7 @@ class PropertyService
 
                 return $property;
             } catch (\Throwable $th) {
-                return $this->handleException($th);
+                return $this->exceptionService->exception($th->getMessage(), Response::HTTP_INTERNAL_SERVER_ERROR);
             }
         });
     }
@@ -120,7 +95,7 @@ class PropertyService
             $property = Property::find($id);
 
             if (!$property) {
-                return $this->handleNotFoundError();
+                return $this->exceptionService->exception('Property Not Found', Response::HTTP_NOT_FOUND);
             }
 
             $property->load(['propertyDetail', 'propertyType', 'user', 'state', 'banner.image', 'sliders.image']);
@@ -128,7 +103,7 @@ class PropertyService
 
             return $result;
         } catch (\Throwable $th) {
-            return $this->handleException($th);
+            return $this->exceptionService->exception($th->getMessage(), Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -137,21 +112,21 @@ class PropertyService
         return DB::transaction(function () use ($payload, $id) {
             try {
                 if (isset($payload['file'])) {
-                    $this->handleFileInit($payload);
+                    $this->imageService->handleFileInit($payload);
                 }
 
                 $property = Property::find($id);
 
                 if (isset($payload['file'])) {
-                    $this->handleCreateImage($payload, $property);
+                    $this->createImage($payload, $property);
                 }
 
                 if (!$property) {
-                    return $this->handleNotFoundError();
+                    return $this->exceptionService->exception('Property Not Found', Response::HTTP_NOT_FOUND);
                 }
 
                 if ($property->user_id != auth()->user()->id) {
-                    return $this->handleUpdatePermissionError();
+                    return $this->exceptionService->exception('You are not allowed to update other people\'s posts', Response::HTTP_FORBIDDEN);
                 }
 
                 $property->update([
@@ -186,7 +161,7 @@ class PropertyService
 
                 return $property;
             } catch (\Throwable $th) {
-                return $this->handleException($th);
+                return $this->exceptionService->exception($th->getMessage(), Response::HTTP_INTERNAL_SERVER_ERROR);
             }
         });
     }
@@ -198,7 +173,7 @@ class PropertyService
                 $property = Property::find($id);
 
                 if (!$property) {
-                    return $this->handleNotFoundError();
+                    return $this->exceptionService->exception('Property Not Found', Response::HTTP_NOT_FOUND);
                 }
 
                 $payload = $property->delete();
@@ -207,7 +182,7 @@ class PropertyService
 
                 return $payload;
             } catch (\Throwable $th) {
-                return $this->handleException($th);
+                return $this->exceptionService->exception($th->getMessage(), Response::HTTP_INTERNAL_SERVER_ERROR);
             }
         });
     }

@@ -62,4 +62,26 @@ class ImageService
 
         return $result;
     }
+
+    public static function handleFileInit($payload)
+    {
+        foreach ($payload['file'] as $key => $value) {
+            $newFileResult[$key] = ['file' => $value, 'module_path' => $payload['module_path'][$key]];
+        }
+
+        return $newFileResult;
+    }
+
+    public static function handleCreateImage($payload, $modelType)
+    {
+        $fileResult = self::handleFileInit($payload);
+
+        collect($fileResult)->each(function ($item) use ($payload, $modelType) {
+            $model = $modelType[$item['module_path']]->create([
+                'name' => $item['file']->getClientOriginalName(),
+            ]);
+
+            ImageService::createImage($payload, $model, $item);
+        });
+    }
 }
