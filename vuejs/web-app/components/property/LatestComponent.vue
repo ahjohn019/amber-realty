@@ -88,7 +88,9 @@
             </div>
         </div>
         <div class="col-12" v-else>
-            <h5 class="text-center">Latest Property Not Available</h5>
+            <h5 class="text-center text-white font-bold">
+                Latest Property Not Available
+            </h5>
         </div>
     </div>
 </template>
