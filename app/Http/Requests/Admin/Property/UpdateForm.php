@@ -65,7 +65,7 @@ class UpdateForm extends FormRequest
             'furnishing' => ['sometimes', 'in:unfurnished,partially_furnished,furnished'],
             'property_details' => ['sometimes', 'boolean'],
             'file' => ['nullable'],
-            'file.*' => ['file', 'max:5120', 'mimes:jpeg,png'],
+            'file.*' => ['file', 'max:1024', 'mimes:jpeg,png'],
             'module_path' => $modulePathValidation,
             'banner_url' => ['nullable'],
         ];

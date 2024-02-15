@@ -14,36 +14,31 @@
             >
                 <div class="header-content uppercase">
                     <div
-                        class="row uppercase text-sm font-bold gap-2"
+                        class="row uppercase text-sm font-bold gap-6"
                         :class="$q.screen.lt.md ? 'justify-center' : ''"
                     >
                         <div
-                            class="col-12 col-md-2 flex items-center justify-center"
+                            class="col col-auto flex items-center justify-center"
                         >
                             <img :src="mainLogo" alt="" width="100" />
                         </div>
-                        <div class="col-12 col-md-8 row items-center">
-                            <div class="col-12 col-md-6">
-                                <div>amber realty</div>
-                                <div class="row justify-between items-center">
-                                    <div
-                                        class="col-12 col-md-4"
-                                        style="text-wrap: nowrap"
-                                    >
-                                        E-(3)1482
-                                    </div>
-                                    <div
-                                        class="col-12 col-md-4 flex flex-col justify-center items-center"
-                                    >
-                                        <img
-                                            src="/images/amber_lppeh_logo.png"
-                                            alt=""
-                                            width="25"
-                                        />
-                                        <div class="text-center">E-2346</div>
-                                    </div>
+                        <div class="col col-auto row items-center">
+                            <div class="col-12">
+                                <div class="text-2xl">amber realty</div>
+                                <div class="pt-2" style="text-wrap: nowrap">
+                                    E-(3)1482
                                 </div>
                             </div>
+                        </div>
+                        <div
+                            class="col col-auto flex flex-col items-center justify-center"
+                        >
+                            <img
+                                src="/images/amber_lppeh_logo.png"
+                                alt=""
+                                width="55"
+                            />
+                            <div class="text-center">E-2346</div>
                         </div>
                     </div>
                 </div>
