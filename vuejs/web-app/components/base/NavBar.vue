@@ -1,13 +1,20 @@
 <template>
     <div class="fixed z-10 w-full">
         <q-toolbar class="bg-secondary shadow-2" style="height: 85px">
-            <div class="col-6 col-md-2">
+            <div class="col-4 col-md-2">
                 <router-link to="/" exact>
                     <img :src="mainLogo" alt="" width="85" />
                 </router-link>
             </div>
 
-            <div class="col text-right nav-bar-dropdown">
+            <div class="col-4 nav-bar-dropdown text-center uppercase font-bold">
+                <div :class="$q.screen.lt.sm ? 'text-sm' : 'text-2xl'">
+                    amber realty
+                </div>
+                <div style="text-wrap: nowrap">E-(3)1482</div>
+            </div>
+
+            <div class="col-4 text-right nav-bar-dropdown">
                 <BaseDrawer />
             </div>
 
