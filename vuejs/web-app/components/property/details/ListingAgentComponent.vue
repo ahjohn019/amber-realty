@@ -64,9 +64,9 @@ export default {
         const contactAgent = ref([]);
 
         contactAgent.value = [
-            { name: 'Admin Ng', contact: '60192137731' },
-            { name: 'Admin Doo', contact: '60123729668' },
-            { name: 'Admin Teng', contact: '60193560561' },
+            { name: 'Admin', contact: '60192140561' },
+            { name: 'Admin', contact: '60123729668' },
+            { name: 'Admin', contact: '60193560561' },
         ];
 
         return {
