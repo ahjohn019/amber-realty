@@ -4,7 +4,7 @@
         :class="$q.screen.lt.md ? 'p-4' : 'p-10'"
     >
         <div class="col-12 text-3xl font-bold border-b-2 pb-4">
-            Listing Agent
+            Listing Admin
         </div>
         <div
             class="col-12 row items-center border-b-2 pb-6"
@@ -64,9 +64,9 @@ export default {
         const contactAgent = ref([]);
 
         contactAgent.value = [
-            { name: 'Agent Ng', contact: '60192137731' },
-            { name: 'Agent Doo', contact: '60123729668' },
-            { name: 'Agent Teng', contact: '60193560561' },
+            { name: 'Admin Ng', contact: '60192137731' },
+            { name: 'Admin Doo', contact: '60123729668' },
+            { name: 'Admin Teng', contact: '60193560561' },
         ];
 
         return {
