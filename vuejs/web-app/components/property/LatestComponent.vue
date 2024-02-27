@@ -28,7 +28,9 @@
                             <div
                                 class="col-12 text-lg flex items-center justify-between"
                             >
-                                <div>RM {{ latest.price }}</div>
+                                <div>
+                                    {{ numberFormat(latest.price, 'RM ') }}
+                                </div>
                             </div>
                             <div
                                 class="col-12 text-xl font-bold latest-property__name"
@@ -117,12 +119,20 @@ export default {
             return response;
         };
 
+        const numberFormat = (number, symbol = 'RM') => {
+            const formattedNumber = number
+                .toString()
+                .replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+            return `${symbol}${formattedNumber}`;
+        };
+
         onMounted(() => {
             fetchLatestProperty();
         });
 
         return {
             fetchLatestProperty,
+            numberFormat,
             latestProperty,
         };
     },

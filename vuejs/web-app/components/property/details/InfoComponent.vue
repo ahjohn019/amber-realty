@@ -52,8 +52,8 @@
             </div>
         </div>
         <div class="col-12 pl-2">
-            <span class="text-xl font-bold"
-                >MYR {{ propertyDetails.price }}</span
+            <span class="text-xl font-bold">
+                {{ numberFormat(propertyDetails.price, 'RM ') }}</span
             >
         </div>
     </div>
@@ -102,6 +102,13 @@ export default {
             };
         };
 
+        const numberFormat = (number, symbol = 'RM') => {
+            const formattedNumber = number
+                .toString()
+                .replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+            return `${symbol}${formattedNumber}`;
+        };
+
         onMounted(() => {
             setTimeout(() => {
                 sliderListOptions();
@@ -115,6 +122,7 @@ export default {
             sliderModal,
             sliderOptions,
             sliderButton,
+            numberFormat,
         };
     },
 };
