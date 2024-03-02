@@ -91,12 +91,19 @@ export default {
             dropZoneContainer: true,
             selectedOption: 'slider-image',
             module_path: [],
+            image_sequences: [],
+            totalFiles: 0,
+            file_sequence: 1,
         };
     },
     props: ['propertyData'],
-    emits: ['updateFiles'],
+    emits: ['updateFiles', 'updateImageSequences'],
 
     methods: {
+        handleImageSequence(event, index) {
+            this.files[index].sequence = parseInt(event.target.value);
+            this.image_sequences[index] = this.files[index].sequence;
+        },
         handleChange(index) {
             const selectedOption = this.files[index].selectedOption;
 
@@ -106,7 +113,7 @@ export default {
 
             this.module_path[index] = selectedOption;
         },
-        onChange() {
+        onChange(event) {
             const self = this;
             const incomingFiles = Array.from(this.$refs.file.files);
             const fileExist = self.files.some((r) =>
@@ -130,6 +137,9 @@ export default {
 
                     if (existingFileIndex) {
                         self.module_path.push(self.selectedOption);
+                        self.image_sequences.push(self.file_sequence);
+
+                        self.file_sequence++;
                     }
                 });
 
@@ -138,9 +148,13 @@ export default {
                 if (self.files.length >= 1) {
                     self.dropZoneContainer = false;
                 }
+
+                this.totalFiles = this.files.length;
+
                 this.$emit('updateFiles', {
                     files: this.files,
                     module_path: this.module_path,
+                    sequences: this.image_sequences,
                 });
             }
         },
@@ -164,11 +178,18 @@ export default {
                 this.module_path.splice(i, 1);
             }
 
-            console.log(this.module_path);
+            if (i < this.image_sequences.length) {
+                this.image_sequences.splice(i, 1);
+            }
+
+            if (this.files.length <= 0) {
+                this.file_sequence = 1;
+            }
 
             this.$emit('updateFiles', {
                 files: this.files,
                 module_path: this.module_path,
+                sequences: this.image_sequences,
             });
             if (this.files.length <= 0) {
                 this.dropZoneContainer = true;

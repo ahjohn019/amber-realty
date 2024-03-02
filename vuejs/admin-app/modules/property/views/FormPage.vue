@@ -347,6 +347,7 @@ export default {
                 ...propertyData.value,
                 images: files.files,
                 module_path: files.module_path,
+                sequences: files.sequences,
             };
         };
 

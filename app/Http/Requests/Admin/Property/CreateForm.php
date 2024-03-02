@@ -56,6 +56,7 @@ class CreateForm extends FormRequest
             'property_details' => ['sometimes', 'boolean'],
             'file' => ['nullable'],
             'file.*' => ['file', 'max:1024', 'mimes:jpeg,png'],
+            'sequences.*' => ['sometimes'],
             'module_path' => ['nullable', $this->uniqueBannerImage()],
             'banner_url' => ['nullable'],
         ];

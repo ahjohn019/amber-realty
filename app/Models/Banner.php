@@ -16,7 +16,7 @@ class Banner extends Model
 {
     use HasFactory, SoftDeletes, HasModelTrait, ServerFileTrait;
 
-    protected $fillable = ['name', 'entity_id'];
+    protected $guarded = [];
 
     public function image(): MorphOne
     {

@@ -32,6 +32,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::prefix('ref')->name('ref')->group(function () {
     Route::get('/property/filter-option-group', [RefController::class, 'propertyFilterOptionGroup'])->name('list');
 });
+
 Route::prefix('property')->name('web.property')->group(function () {
     Route::get('/list', [PropertyController::class, 'list'])->name('list');
     Route::get('/latest', [PropertyController::class, 'latest'])->name('latest');

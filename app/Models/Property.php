@@ -61,7 +61,7 @@ class Property extends Model
 
     public function sliders(): MorphMany
     {
-        return $this->morphMany(Slider::class, 'entity');
+        return $this->morphMany(Slider::class, 'entity')->orderBy('seq_value', 'asc');
     }
 
     public function image(): MorphOne
