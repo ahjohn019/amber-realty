@@ -24,10 +24,25 @@ class ServerFileController extends Controller
 
         collect($payload)->each(
             function ($pEntity) use ($modelType) {
-                $model = $modelType[$pEntity['module_path']]->find($pEntity['id'])->image()->first();
-                ImageService::updateServerImage($pEntity, $model, $pEntity['file']);
+                if (isset($pEntity['file'])) {
+                    $model = $modelType[$pEntity['module_path']]->find($pEntity['id']);
+                    $serverFile = $model->image()->first();
+
+                    $model->update([
+                        'name' => $pEntity['file']->getClientOriginalName()
+                    ]);
+
+                    if (isset($pEntity['sequences'])) {
+                        $model->update(['seq_value' => $pEntity['sequences']]);
+                    }
+
+                    if (isset($pEntity['file'])) {
+                        ImageService::updateServerImage($pEntity, $serverFile, $pEntity['file']);
+                    }
+                }
             }
         );
+
 
         return self::successResponse('Updated Successfully');
     }
@@ -36,5 +51,26 @@ class ServerFileController extends Controller
     {
         $result = ImageService::deleteImage($request);
         return self::successResponse('Deleted Successfully', $result);
+    }
+
+    public function updateSequence(Request $request)
+    {
+        $modelType = [
+            'banner-image' => new Banner,
+            'slider-image' => new Slider
+        ];
+
+        $modulePath = $request['module_path'];
+
+        $existModulePath = $modelType[$modulePath]->find($request['id']);
+        $fetchPreviousId = $existModulePath->seq_value;
+        $existModulePath->update(['seq_value' => $request['sequences']]);
+
+        $previousModulePath = $modelType[$modulePath]->handlePreviousModulePath($request)->first();
+        $previousModulePath->update(['seq_value' => $fetchPreviousId]);
+
+        $getLatestModulePath = $modelType[$modulePath]->where('entity_id', $request['entity_id'])->with('image')->get();
+
+        return self::successResponse('Sequence Display Successfully', $getLatestModulePath);
     }
 }

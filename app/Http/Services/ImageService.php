@@ -2,11 +2,8 @@
 
 namespace App\Http\Services;
 
-use App\Models\Banner;
-use App\Models\Slider;
 use App\Models\ServerFile;
 use App\Traits\ServerFileTrait;
-use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 
 class ImageService
@@ -66,7 +63,11 @@ class ImageService
     public static function handleFileInit($payload)
     {
         foreach ($payload['file'] as $key => $value) {
-            $newFileResult[$key] = ['file' => $value, 'module_path' => $payload['module_path'][$key]];
+            $newFileResult[$key] = [
+                'file' => $value,
+                'module_path' => $payload['module_path'][$key],
+                'sequences' => $payload['sequences'][$key]
+            ];
         }
 
         return $newFileResult;
@@ -79,6 +80,7 @@ class ImageService
         collect($fileResult)->each(function ($item) use ($payload, $modelType) {
             $model = $modelType[$item['module_path']]->create([
                 'name' => $item['file']->getClientOriginalName(),
+                'seq_value' => $item['sequences']
             ]);
 
             ImageService::createImage($payload, $model, $item);

@@ -50,4 +50,11 @@ trait ServerFileTrait
 
         return $imgFile;
     }
+
+    public static function scopeHandlePreviousModulePath($query, $request)
+    {
+        return $query->where('seq_value', $request['sequences'])
+            ->where('entity_id', $request['entity_id'])
+            ->where('id', '!=', $request['id']);
+    }
 }

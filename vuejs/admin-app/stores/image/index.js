@@ -80,29 +80,71 @@ export const useServerImageStore = defineStore('server_image_admin', {
             }
         },
 
+        findIncomingFiles(incomingFiles, fileId) {
+            return (
+                incomingFiles.value.find((item) => item.id === fileId) || null
+            );
+        },
+
         handleMultipleImageChange(incomingFiles, event) {
             const eventTarget = event.target;
 
-            const fileId = eventTarget.id;
+            const fileId = parseInt(eventTarget.id);
             const file = eventTarget.files[0];
-            const fileIndex = eventTarget.getAttribute('file_index');
+            const fileIndex = eventTarget.getAttribute('index');
             const modulePath = eventTarget.getAttribute('module_path');
 
-            const existingFiles = incomingFiles.value.find(
-                (item) => item.id === fileId && item.module_path === modulePath
-            );
+            const existingFiles = this.findIncomingFiles(incomingFiles, fileId);
 
-            if (!incomingFiles.value.includes(existingFiles)) {
+            if (existingFiles) {
+                incomingFiles.value[fileIndex].file = file;
+            } else {
                 incomingFiles.value.push({
                     id: fileId,
                     file,
                     module_path: modulePath,
                 });
-            } else {
-                incomingFiles.value[fileIndex].file = file;
             }
 
             return incomingFiles;
+        },
+
+        async updateSequence(payload, authToken) {
+            const config = {
+                headers: {
+                    Authorization: `Bearer ${authToken}`,
+                    'Content-Type': 'multipart/form-data',
+                },
+            };
+
+            try {
+                const response = await axios.post(
+                    prefix + 'sequence',
+                    payload,
+                    config
+                );
+
+                return response.data;
+            } catch (error) {}
+        },
+
+        async handleExistImageSequence(payload, authToken = null) {
+            const { eventTarget, incomingFiles, fileId } = payload;
+            const fetchModulePath = eventTarget.getAttribute('module_path');
+
+            const sequenceData = {
+                id: fileId,
+                sequences: parseInt(eventTarget.value),
+                module_path: fetchModulePath,
+                entity_id: this.route.query.id,
+            };
+
+            incomingFiles.value.push(sequenceData);
+
+            // update sequence api
+            const response = await this.updateSequence(sequenceData, authToken);
+
+            return { list: response, sequence: incomingFiles.value };
         },
     },
 });

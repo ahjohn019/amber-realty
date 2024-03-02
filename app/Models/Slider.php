@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\ServerFileTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
@@ -10,9 +11,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Slider extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory, SoftDeletes, ServerFileTrait;
 
-    protected $fillable = ['name', 'entity_id'];
+    protected $guarded = [];
 
     public function image(): MorphOne
     {

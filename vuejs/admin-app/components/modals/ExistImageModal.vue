@@ -59,6 +59,38 @@
                                             {{ file.image.module_path }}
                                         </q-chip>
                                     </div>
+
+                                    <div>
+                                        <select
+                                            name=""
+                                            :id="parseInt(file.id)"
+                                            :index="key"
+                                            :module_path="
+                                                file.image.module_path
+                                            "
+                                            @change="
+                                                handleExistImageSequence(
+                                                    $event,
+                                                    file.id
+                                                )
+                                            "
+                                        >
+                                            <option
+                                                :value="item"
+                                                v-for="(
+                                                    item, key
+                                                ) in finalFiles.length"
+                                                :key="key"
+                                                :selected="
+                                                    file.seq_value === item
+                                                        ? true
+                                                        : false
+                                                "
+                                            >
+                                                {{ item }}
+                                            </option>
+                                        </select>
+                                    </div>
                                 </q-card-section>
 
                                 <q-card-section class="justify-center flex">
@@ -71,9 +103,9 @@
                                             :module_path="
                                                 file.image.module_path
                                             "
-                                            :file_index="key"
+                                            :index="key"
                                             class="hidden-input"
-                                            @change="onFileChange"
+                                            @change="handleFileChange"
                                             ref="currentFile"
                                             accept=".pdf,.jpg,.jpeg,.png"
                                         />
@@ -117,10 +149,10 @@ export default {
         const serverImageStore = useServerImageStore();
         const getAuthToken = adminAuthStore.fetchSessionToken();
         const existImageModal = ref(false);
-
         const incomingFiles = ref([]);
+        const finalFiles = ref([]);
 
-        const finalFiles = [
+        finalFiles.value = [
             props.property.banner,
             ...props.property.sliders,
         ].filter((item) => item !== null);
@@ -136,11 +168,28 @@ export default {
             return response;
         };
 
-        const onFileChange = (event) => {
+        const handleFileChange = (event) => {
             return serverImageStore.handleMultipleImageChange(
                 incomingFiles,
                 event
             );
+        };
+
+        const handleExistImageSequence = async (event, fileId) => {
+            const payload = {
+                eventTarget: event.target,
+                fileId,
+                incomingFiles,
+            };
+
+            const response = await serverImageStore.handleExistImageSequence(
+                payload,
+                getAuthToken
+            );
+
+            finalFiles.value = response.list.data;
+
+            return response.sequence;
         };
 
         const updateFileData = async () => {
@@ -157,9 +206,10 @@ export default {
         return {
             existImageModal,
             updateFileData,
-            onFileChange,
+            handleFileChange,
             handleDeleteFile,
             finalFiles,
+            handleExistImageSequence,
         };
     },
 };

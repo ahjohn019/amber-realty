@@ -4,7 +4,6 @@
             <div class="col col-auto text-4xl break-words">
                 {{ propertyDetails.name }}
             </div>
-
             <div class="col col-auto text-right" v-if="sliders > 0">
                 <q-btn
                     label="View More"
@@ -104,7 +103,7 @@ export default {
 
         const numberFormat = (number, symbol = 'RM') => {
             const formattedNumber = number
-                .toString()
+                ?.toString()
                 .replace(/\B(?=(\d{3})+(?!\d))/g, ',');
             return `${symbol}${formattedNumber}`;
         };
