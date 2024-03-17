@@ -12,15 +12,15 @@
         />
 
         <q-dialog v-model="openBanner">
-            <q-card style="width: 700px; max-width: 80vw">
+            <q-card style="width: 100%">
                 <q-card-section>
                     <q-img
                         :src="
                             propertyDetails.banner
                                 ? propertyDetails.banner.image.url
-                                : '/images/Image_not_available.png'
+                                : 'https://cdn.quasar.dev/img/parallax2.jpg'
                         "
-                        :ratio="16 / 9"
+                        :fit="contain"
                     />
                 </q-card-section>
             </q-card>

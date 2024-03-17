@@ -13,7 +13,7 @@ export const useServerImageStore = defineStore('server_image_admin', {
     }),
 
     actions: {
-        async updateFiles(payload, authToken) {
+        async updateFiles(files, sequenceFiles = null, authToken) {
             const config = {
                 headers: {
                     Authorization: `Bearer ${authToken}`,
@@ -22,9 +22,16 @@ export const useServerImageStore = defineStore('server_image_admin', {
             };
 
             try {
+                const finalData = {
+                    files,
+                    sequenceFiles,
+                };
+
+                console.log(finalData);
+
                 const response = await axios.post(
                     prefix + 'update',
-                    payload,
+                    finalData,
                     config
                 );
 
@@ -107,44 +114,6 @@ export const useServerImageStore = defineStore('server_image_admin', {
             }
 
             return incomingFiles;
-        },
-
-        async updateSequence(payload, authToken) {
-            const config = {
-                headers: {
-                    Authorization: `Bearer ${authToken}`,
-                    'Content-Type': 'multipart/form-data',
-                },
-            };
-
-            try {
-                const response = await axios.post(
-                    prefix + 'sequence',
-                    payload,
-                    config
-                );
-
-                return response.data;
-            } catch (error) {}
-        },
-
-        async handleExistImageSequence(payload, authToken = null) {
-            const { eventTarget, incomingFiles, fileId } = payload;
-            const fetchModulePath = eventTarget.getAttribute('module_path');
-
-            const sequenceData = {
-                id: fileId,
-                sequences: parseInt(eventTarget.value),
-                module_path: fetchModulePath,
-                entity_id: this.route.query.id,
-            };
-
-            incomingFiles.value.push(sequenceData);
-
-            // update sequence api
-            const response = await this.updateSequence(sequenceData, authToken);
-
-            return { list: response, sequence: incomingFiles.value };
         },
     },
 });

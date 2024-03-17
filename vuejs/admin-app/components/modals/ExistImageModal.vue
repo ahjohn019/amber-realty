@@ -60,10 +60,13 @@
                                         </q-chip>
                                     </div>
 
-                                    <div>
+                                    <div
+                                        v-if="
+                                            file.image.module_path !=
+                                            'banner-image'
+                                        "
+                                    >
                                         <select
-                                            name=""
-                                            :id="parseInt(file.id)"
                                             :index="key"
                                             :module_path="
                                                 file.image.module_path
@@ -71,7 +74,7 @@
                                             @change="
                                                 handleExistImageSequence(
                                                     $event,
-                                                    file.id
+                                                    file.seq_value
                                                 )
                                             "
                                         >
@@ -79,12 +82,10 @@
                                                 :value="item"
                                                 v-for="(
                                                     item, key
-                                                ) in finalFiles.length"
+                                                ) in filterBannerImage.length"
                                                 :key="key"
                                                 :selected="
                                                     file.seq_value === item
-                                                        ? true
-                                                        : false
                                                 "
                                             >
                                                 {{ item }}
@@ -151,11 +152,17 @@ export default {
         const existImageModal = ref(false);
         const incomingFiles = ref([]);
         const finalFiles = ref([]);
+        const optionsRef = ref(null);
+        const filterBannerImage = ref([]);
 
         finalFiles.value = [
             props.property.banner,
             ...props.property.sliders,
         ].filter((item) => item !== null);
+
+        filterBannerImage.value = finalFiles.value.filter(
+            (item) => item.image.module_path !== 'banner-image'
+        );
 
         const handleDeleteFile = async (file) => {
             const response = await serverImageStore.deleteFiles(
@@ -175,26 +182,34 @@ export default {
             );
         };
 
-        const handleExistImageSequence = async (event, fileId) => {
-            const payload = {
-                eventTarget: event.target,
-                fileId,
-                incomingFiles,
-            };
-
-            const response = await serverImageStore.handleExistImageSequence(
-                payload,
-                getAuthToken
+        const handleExistImageSequence = async (event, fileSequence) => {
+            const originalImagePosition = filterBannerImage.value.findIndex(
+                (item) => item.seq_value === fileSequence
             );
 
-            finalFiles.value = response.list.data;
+            const targetImagePosition = filterBannerImage.value.findIndex(
+                (item) => item.seq_value === parseInt(event.target.value)
+            );
 
-            return response.sequence;
+            filterBannerImage.value[originalImagePosition].seq_value = parseInt(
+                event.target.value
+            );
+
+            filterBannerImage.value[targetImagePosition].seq_value =
+                fileSequence;
         };
 
         const updateFileData = async () => {
+            const updateSeqValue = filterBannerImage.value.map((item) => ({
+                id: item.id,
+                seq_value: item.seq_value,
+                entity_id: item.entity_id,
+                module_path: item.image.module_path,
+            }));
+
             const response = await serverImageStore.updateFiles(
                 incomingFiles.value,
+                updateSeqValue,
                 getAuthToken
             );
 
@@ -210,6 +225,8 @@ export default {
             handleDeleteFile,
             finalFiles,
             handleExistImageSequence,
+            optionsRef,
+            filterBannerImage,
         };
     },
 };
