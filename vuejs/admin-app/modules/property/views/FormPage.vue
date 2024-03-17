@@ -225,7 +225,7 @@
                 </div>
                 <DropFile
                     @updateFiles="updateParentFiles"
-                    :propertyData="propertyData"
+                    :property="propertyData"
                 />
                 <div class="col-12 text-red-700 pt-2">
                     {{ errors.module_path }}

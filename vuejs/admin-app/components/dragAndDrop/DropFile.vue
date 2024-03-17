@@ -96,8 +96,12 @@ export default {
             file_sequence: 1,
         };
     },
-    props: ['propertyData'],
+    props: ['property'],
     emits: ['updateFiles', 'updateImageSequences'],
+
+    created() {
+        this.handleImageSequenceInit();
+    },
 
     methods: {
         handleImageSequence(event, index) {
@@ -113,7 +117,7 @@ export default {
 
             this.module_path[index] = selectedOption;
         },
-        onChange(event) {
+        onChange() {
             const self = this;
             const incomingFiles = Array.from(this.$refs.file.files);
             const fileExist = self.files.some((r) =>
@@ -138,8 +142,9 @@ export default {
                     if (existingFileIndex) {
                         self.module_path.push(self.selectedOption);
                         self.image_sequences.push(self.file_sequence);
-
                         self.file_sequence++;
+
+                        console.log('image sequences', self.image_sequences);
                     }
                 });
 
@@ -183,7 +188,7 @@ export default {
             }
 
             if (this.files.length <= 0) {
-                this.file_sequence = 1;
+                this.handleImageSequenceInit();
             }
 
             this.$emit('updateFiles', {
@@ -201,6 +206,12 @@ export default {
                 URL.revokeObjectURL(fileSrc);
             }, 1000);
             return fileSrc;
+        },
+        handleImageSequenceInit() {
+            this.file_sequence =
+                this.$route.query.type === 'update'
+                    ? this.property.sliders.length + 1
+                    : this.file_sequence;
         },
     },
 };
