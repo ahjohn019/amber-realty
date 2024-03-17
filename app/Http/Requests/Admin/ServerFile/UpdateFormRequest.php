@@ -22,11 +22,11 @@ class UpdateFormRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'file' => ['sometimes'],
+            'sequenceFiles' => ['sometimes'],
+            'files' => ['sometimes'],
             '*.file' => ['file', 'max:1024', 'mimes:jpeg,png'],
             '*.module_path' => ['sometimes'],
-            '*.sequences' => ['sometimes'],
-            '*.id' => ['required'],
+            '*.id' => ['sometimes'],
         ];
     }
 }

@@ -102,6 +102,5 @@ Route::middleware(['auth:sanctum', 'role:' . RoleTag::SUPERADMIN . '|' . RoleTag
     Route::prefix('server-files')->name('server_files.')->group(function () {
         Route::post('/update', [ServerFileController::class, 'update'])->name('update');
         Route::post('/delete', [ServerFileController::class, 'delete'])->name('delete');
-        Route::post('/sequence', [ServerFileController::class, 'updateSequence'])->name('update_sequence');
     });
 });
