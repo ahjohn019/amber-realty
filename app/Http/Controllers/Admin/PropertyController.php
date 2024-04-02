@@ -83,4 +83,16 @@ class PropertyController extends Controller
 
         return self::successResponse('Property Deleted Successfully', $result);
     }
+
+    public function highlight(Request $request)
+    {
+        $params = $request->all();
+        $result = $this->propertyService->submitHighlight($params);
+
+        if (isset($result['error'])) {
+            return self::failedResponse('Invalid Property Data', $result['error'], $result['code']);
+        }
+
+        return self::successResponse('Highlight Updated Successfully', $result);
+    }
 }

@@ -429,14 +429,6 @@
                     </q-card-actions>
                 </q-card>
             </q-dialog>
-
-            <!-- <div
-                class="container mx-auto py-8 px-4 md:px-0"
-                data-aos="fade-left"
-            >
-                <LatestComponent />
-            </div> -->
-            <!-- <FeaturedComponent /> -->
         </template>
     </BaseLayout>
 </template>
@@ -446,8 +438,6 @@ import BaseLayout from '@web/modules/layout/BaseLayout.vue';
 import PropertyCard from '@web/components/property/PropertyCard.vue';
 import { usePropertyWebStore } from '@store_web/property/index.js';
 import { mapStores } from 'pinia';
-// import LatestComponent from '@web/components/property/LatestComponent.vue';
-// import FeaturedComponent from '@web/components/property/FeaturedComponent.vue';
 
 export default {
     components: {
@@ -489,12 +479,14 @@ export default {
 
         await this.fetchPropertyFilterOptionGroup();
 
-		if(this.$route.query.state){
-			const state = this.stateFilterOptions.find((item)=> item.id === parseInt(this.$route.query.state))
-			if(state){
-				this.formInput.state = state
-			}
-		}
+        if (this.$route.query.state) {
+            const state = this.stateFilterOptions.find(
+                (item) => item.id === parseInt(this.$route.query.state)
+            );
+            if (state) {
+                this.formInput.state = state;
+            }
+        }
 
         this.initPage();
     },
