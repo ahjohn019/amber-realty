@@ -51,6 +51,10 @@ export default defineConfig({
                 'vuejs/admin-app/stores/admin/models'
             ),
             '@store_web': path.resolve(__dirname, 'vuejs/web-app/stores'),
+            '@store_web_endpoints': path.resolve(
+                __dirname,
+                'vuejs/admin-app/stores/web/endpoints'
+            ),
         },
     },
 });

@@ -3,8 +3,9 @@
 namespace App\Http\Services\Web;
 
 use App\Models\Property;
-use App\Http\Resources\Web\Property\PropertyResource;
+use App\Models\PropertyHighlight;
 use App\Queriplex\PropertyQueriplex;
+use App\Http\Resources\Web\Property\PropertyResource;
 
 class PropertyService
 {
@@ -49,6 +50,13 @@ class PropertyService
             'sliders.image'
         ]);
         $result = PropertyResource::paginateCollection($result);
+
+        return $result;
+    }
+
+    public function highlights()
+    {
+        $result = PropertyHighlight::with('property', 'property.propertyDetail', 'property.banner.image')->where('status', 1)->get();
 
         return $result;
     }

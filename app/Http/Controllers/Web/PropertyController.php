@@ -32,12 +32,23 @@ class PropertyController extends Controller
         return self::successResponse('Details Display Successfully', $result);
     }
 
-	public function list(ListFormRequest $request)
-	{
-		$payload = $request->validated();
+    public function list(ListFormRequest $request)
+    {
+        $payload = $request->validated();
 
-		$result = $this->propertyService->list($payload);
+        $result = $this->propertyService->list($payload);
 
-		return self::successResponse("Success", $result);
-	}
+        return self::successResponse("Success", $result);
+    }
+
+    public function highlights()
+    {
+        $result = $this->propertyService->highlights();
+
+        if (isset($result['error'])) {
+            return self::failedResponse('Invalid Property Data', $result['error'], $result['code']);
+        }
+
+        return self::successResponse('Fetch Highlight Successfully', $result);
+    }
 }

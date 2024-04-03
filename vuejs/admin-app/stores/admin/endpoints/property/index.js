@@ -227,5 +227,21 @@ export const usePropertyAdminStore = defineStore('property_admin', {
 
             return response;
         },
+
+        async submitHighlight(props, authToken) {
+            try {
+                const config = {
+                    headers: { Authorization: `Bearer ${authToken}` },
+                };
+
+                const response = await axios.post(
+                    prefix + 'highlight',
+                    props,
+                    config
+                );
+
+                console.log(response);
+            } catch (error) {}
+        },
     },
 });
