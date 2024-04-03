@@ -35,7 +35,7 @@
                                     :class="
                                         $q.screen.lt.md
                                             ? 'h-[350px]'
-                                            : 'h-[550px]'
+                                            : 'h-[600px]'
                                     "
                                 />
                             </div>
