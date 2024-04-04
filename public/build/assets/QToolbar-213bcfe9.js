@@ -1,1 +1,0 @@
-import{l as r,E as a}from"./ckeditor-fbb897ca.js";import{c as s,e as l}from"./vm-bbb8e40e.js";const c=s({name:"QToolbar",props:{inset:Boolean},setup(o,{slots:e}){const t=r(()=>"q-toolbar row no-wrap items-center"+(o.inset===!0?" q-toolbar--inset":""));return()=>a("div",{class:t.value,role:"toolbar"},l(e.default))}});export{c as Q};
