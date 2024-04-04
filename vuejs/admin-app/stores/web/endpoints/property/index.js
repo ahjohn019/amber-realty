@@ -1,7 +1,6 @@
 import { defineStore } from 'pinia';
 import { useRouter, useRoute } from 'vue-router';
 import axios from 'axios';
-import Swal from 'sweetalert2';
 
 const prefix = '/api/property/';
 
