@@ -15,13 +15,6 @@ export const usePropertyAdminModelStore = defineStore('property_admin_models', {
                     field: 'name',
                     sortable: true,
                 },
-                // {
-                //     name: 'description',
-                //     align: 'left',
-                //     label: 'Description',
-                //     field: 'description',
-                //     sortable: true,
-                // },
                 {
                     name: 'short_description',
                     align: 'left',
@@ -64,6 +57,14 @@ export const usePropertyAdminModelStore = defineStore('property_admin_models', {
                     field: 'created_at',
                     sortable: false,
                 },
+                {
+                    name: 'highlight',
+                    align: 'left',
+                    label: 'Highlight',
+                    field: 'highlight',
+                    sortable: false,
+                },
+
                 {
                     name: 'action',
                     align: 'center',

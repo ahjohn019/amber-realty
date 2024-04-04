@@ -19,6 +19,13 @@
             wrap-cells
         >
             <template v-slot:top-right>
+                <q-btn
+                    color="primary"
+                    icon="star"
+                    class="mr-4"
+                    v-if="isHighlighted"
+                    @click="submitHighlight(propertyData)"
+                />
                 <q-input
                     borderless
                     dense
@@ -55,6 +62,16 @@
                     <div class="break-all" v-html="props.value"></div>
                 </q-td>
             </template>
+            <template v-slot:body-cell-highlight="props">
+                <q-td :props="props">
+                    <q-checkbox
+                        size="sm"
+                        v-model="props.row.checked"
+                        val="sm"
+                        @click="handleHighlight(props.row)"
+                    />
+                </q-td>
+            </template>
             <template v-slot:body-cell-action="props">
                 <q-td :props="props">
                     <TableStatus :data="props" />
@@ -72,6 +89,7 @@ import { ref, onMounted } from 'vue';
 import { usePropertyAdminStore } from '@store_admin_endpoints/property/index.js';
 import { usePropertyAdminModelStore } from '@store_admin_models/property/index.js';
 import { useServerTableStore } from '@store_admin/admin/server/table.js';
+import { useAdminAuthStore } from '@store_admin/base/auth.js';
 import TableMobileResponsive from './TableMobileResponsive.vue';
 import TableStatus from './TableStatus.vue';
 
@@ -103,6 +121,39 @@ export default {
         const postPropertyStore = usePropertyAdminStore();
         const modelPropertyStore = usePropertyAdminModelStore();
         const serverTableStore = useServerTableStore();
+
+        const adminAuthStore = useAdminAuthStore();
+        const getAuthToken = adminAuthStore.fetchSessionToken();
+
+        const propertyData = ref([]);
+        const isHighlighted = ref(false);
+
+        const handleHighlight = (props) => {
+            props.highlight = props.checked;
+
+            isHighlighted.value = true;
+
+            const isItemPresent = propertyData.value.some((item) => {
+                if (props.id === item.id) {
+                    item.highlight = props.checked;
+                    return true;
+                }
+                return false;
+            });
+
+            if (!isItemPresent) {
+                propertyData.value.push({ ...props, highlight: props.checked });
+            }
+        };
+
+        const submitHighlight = async (props) => {
+            const response = await postPropertyStore.submitHighlight(
+                props,
+                getAuthToken
+            );
+
+            console.log(response);
+        };
 
         const fetchPagination = (pagination) => {
             return serverTableStore.fetchPaginationData(
@@ -187,6 +238,10 @@ export default {
             fetchPagination,
             handlePostKeywords,
             searchKeyword,
+            handleHighlight,
+            submitHighlight,
+            isHighlighted,
+            propertyData,
             getSelectedString() {
                 return selected.value.length === 0
                     ? ''

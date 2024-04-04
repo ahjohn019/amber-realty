@@ -227,5 +227,24 @@ export const usePropertyAdminStore = defineStore('property_admin', {
 
             return response;
         },
+
+        async submitHighlight(props, authToken) {
+            try {
+                const config = {
+                    headers: { Authorization: `Bearer ${authToken}` },
+                };
+
+                await axios.post(prefix + 'highlight', props, config);
+
+                Swal.fire({
+                    text: 'Submit Highlight Successfully',
+                    icon: 'success',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        this.router.go(0);
+                    }
+                });
+            } catch (error) {}
+        },
     },
 });

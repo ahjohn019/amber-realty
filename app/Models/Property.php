@@ -8,6 +8,7 @@ use App\Models\PropertyTags;
 use App\Models\PropertyTypes;
 use App\Traits\HasModelTrait;
 use App\Models\PropertyDetails;
+use App\Models\PropertyHighlight;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -32,6 +33,11 @@ class Property extends Model
     public function propertyDetail(): HasOne
     {
         return $this->hasOne(PropertyDetails::class);
+    }
+
+    public function highlight(): HasOne
+    {
+        return $this->hasOne(PropertyHighlight::class);
     }
 
     public function tags(): HasMany
@@ -68,6 +74,8 @@ class Property extends Model
     {
         return $this->morphOne(ServerFile::class, 'uploadable');
     }
+
+
 
     // methods
 

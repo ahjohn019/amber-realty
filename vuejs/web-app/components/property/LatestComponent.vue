@@ -112,8 +112,6 @@ export default {
 
         const fetchLatestProperty = async () => {
             const response = await webProperty.fetchLatestProperty(payload);
-
-            console.log(response);
             latestProperty.value = response;
 
             return response;

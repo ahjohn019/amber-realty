@@ -91,6 +91,7 @@ Route::middleware(['auth:sanctum', 'role:' . RoleTag::SUPERADMIN . '|' . RoleTag
         Route::get('/show/{id}', [PropertyController::class, 'show'])->name('show');
         Route::post('/update/{id}', [PropertyController::class, 'update'])->name('update');
         Route::delete('/delete/{id}', [PropertyController::class, 'destroy'])->name('destroy');
+        Route::post('/highlight', [PropertyController::class, 'highlight'])->name('highlight');
     });
 
     Route::prefix('ref')->name('ref.')->group(function () {

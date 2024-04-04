@@ -4,6 +4,7 @@ namespace App\Http\Services\Admin;
 
 use App\Models\Property;
 use App\Enums\OrderByEnum;
+use App\Models\PropertyHighlight;
 use Illuminate\Support\Facades\DB;
 use App\Http\Services\ImageService;
 use App\Http\Services\ExceptionService;
@@ -181,6 +182,36 @@ class PropertyService
                 $property->propertyDetail()->delete();
 
                 return $payload;
+            } catch (\Throwable $th) {
+                return $this->exceptionService->exception($th->getMessage(), Response::HTTP_INTERNAL_SERVER_ERROR);
+            }
+        });
+    }
+
+    public function submitHighlight($params)
+    {
+        $filterHighlight = array_filter($params, function ($value) {
+            return $value['highlight'] === true;
+        });
+
+        if (count($filterHighlight) > 3) {
+            return $this->exceptionService->exception("Highlight Has Reached Maximum Limitation.", Response::HTTP_BAD_REQUEST);
+        }
+
+        return DB::transaction(function () use ($params) {
+            try {
+                collect($params)->each(function ($item) {
+                    $result = PropertyHighlight::updateOrCreate([
+                        'property_id' => $item['id'],
+                        'user_id' => auth()->user()->id
+                    ], [
+                        'property_id' => $item['id'],
+                        'user_id' => auth()->user()->id,
+                        'status' => $item['highlight'] ? 1 : 0
+                    ]);
+
+                    return $result;
+                });
             } catch (\Throwable $th) {
                 return $this->exceptionService->exception($th->getMessage(), Response::HTTP_INTERNAL_SERVER_ERROR);
             }
