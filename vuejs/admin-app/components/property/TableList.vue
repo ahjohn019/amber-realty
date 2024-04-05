@@ -125,7 +125,8 @@ export default {
         const adminAuthStore = useAdminAuthStore();
         const getAuthToken = adminAuthStore.fetchSessionToken();
 
-        const propertyData = ref([]);
+        const propertySubmitHighlights = ref([]);
+        const propertyHighlights = ref([]);
         const isHighlighted = ref(false);
 
         const handleHighlight = (props) => {
@@ -133,26 +134,29 @@ export default {
 
             isHighlighted.value = true;
 
-            const isItemPresent = propertyData.value.some((item) => {
-                if (props.id === item.id) {
-                    item.highlight = props.checked;
-                    return true;
-                }
-                return false;
+            const existHighlights = propertyHighlights.value;
+
+            const isHighlights = existHighlights.findIndex((item) => {
+                return props.id === item.id;
             });
 
-            if (!isItemPresent) {
-                propertyData.value.push({ ...props, highlight: props.checked });
+            if (isHighlights !== -1) {
+                existHighlights[isHighlights].highlight = props.highlight;
+            } else {
+                existHighlights.push({
+                    ...props,
+                    highlight: props.checked,
+                });
             }
+
+            propertySubmitHighlights.value = existHighlights;
         };
 
-        const submitHighlight = async (props) => {
-            const response = await postPropertyStore.submitHighlight(
-                props,
+        const submitHighlight = async () => {
+            await postPropertyStore.submitHighlight(
+                propertySubmitHighlights.value,
                 getAuthToken
             );
-
-            console.log(response);
         };
 
         const fetchPagination = (pagination) => {
@@ -189,6 +193,8 @@ export default {
                 'fetchPropertyList',
                 payload
             );
+
+            propertyHighlights.value = response.data;
 
             const updatedData = response.data.map((item) => {
                 return {
@@ -241,7 +247,7 @@ export default {
             handleHighlight,
             submitHighlight,
             isHighlighted,
-            propertyData,
+            propertySubmitHighlights,
             getSelectedString() {
                 return selected.value.length === 0
                     ? ''
