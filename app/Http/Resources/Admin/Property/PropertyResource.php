@@ -34,6 +34,7 @@ class PropertyResource extends JsonResource
             "sliders" => $this->sliders,
             'details_toggle' => $this->details == 1 ? true : false,
             'checked' => $this->highlight?->status == 1 ? true : false,
+            'highlight' => $this->highlight?->status == 1 ? true : false,
         ];;
     }
 }

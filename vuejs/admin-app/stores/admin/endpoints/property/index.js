@@ -244,7 +244,12 @@ export const usePropertyAdminStore = defineStore('property_admin', {
                         this.router.go(0);
                     }
                 });
-            } catch (error) {}
+            } catch (error) {
+                Swal.fire({
+                    text: error.response.data.data,
+                    icon: 'error',
+                });
+            }
         },
     },
 });
