@@ -78,7 +78,11 @@
                 </q-td>
             </template>
             <template v-slot:item="props">
-                <TableMobileResponsive :props="props" />
+                <TableMobileResponsive
+                    :props="props"
+                    :propertyHighlights="propertyHighlights"
+                    @mobileHighlightsData="mobileHighlightSelection"
+                />
             </template>
         </q-table>
     </div>
@@ -129,25 +133,18 @@ export default {
         const propertyHighlights = ref([]);
         const isHighlighted = ref(false);
 
-        const handleHighlight = (props) => {
-            props.highlight = props.checked;
+        const mobileHighlightSelection = (data) => {
+            isHighlighted.value = true;
+            propertySubmitHighlights.value = data;
+        };
 
+        const handleHighlight = (props) => {
             isHighlighted.value = true;
 
-            const existHighlights = propertyHighlights.value;
-
-            const isHighlights = existHighlights.findIndex((item) => {
-                return props.id === item.id;
-            });
-
-            if (isHighlights !== -1) {
-                existHighlights[isHighlights].highlight = props.highlight;
-            } else {
-                existHighlights.push({
-                    ...props,
-                    highlight: props.checked,
-                });
-            }
+            const existHighlights = postPropertyStore.handleHighlights(
+                props,
+                propertyHighlights.value
+            );
 
             propertySubmitHighlights.value = existHighlights;
         };
@@ -248,6 +245,8 @@ export default {
             submitHighlight,
             isHighlighted,
             propertySubmitHighlights,
+            propertyHighlights,
+            mobileHighlightSelection,
             getSelectedString() {
                 return selected.value.length === 0
                     ? ''
