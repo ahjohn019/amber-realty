@@ -361,7 +361,7 @@
       "vuejs/admin-app/modules/property/views/DetailPage.vue",
       "vuejs/admin-app/modules/test/views/TestPage.vue"
     ],
-    "file": "assets/app-c8e88184.js",
+    "file": "assets/app-c4884772.js",
     "imports": [
       "_ckeditor-f906adf3.js",
       "_auth-8ea048e2.js"
@@ -579,7 +579,7 @@
     "css": [
       "assets/ListPage-44d6f862.css"
     ],
-    "file": "assets/ListPage-758fd2c5.js",
+    "file": "assets/ListPage-f1ebb8ba.js",
     "imports": [
       "_QBtn-265fd93a.js",
       "_vm-9a171682.js",
