@@ -84,7 +84,7 @@
                     :propertyHighlights="propertyHighlights"
                     @mobileHighlightsData="mobileHighlightSelection"
                 />
-                <div class="fixed bottom-8 right-0">
+                <div class="fixed bottom-20 right-0">
                     <q-btn
                         round
                         color="primary"
