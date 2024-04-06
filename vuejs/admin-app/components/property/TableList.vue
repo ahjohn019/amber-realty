@@ -23,6 +23,7 @@
                     color="primary"
                     icon="star"
                     class="mr-4"
+                    :class="$q.screen.lt.sm ? 'hidden' : ''"
                     v-if="isHighlighted"
                     @click="submitHighlight(propertyData)"
                 />
@@ -83,6 +84,17 @@
                     :propertyHighlights="propertyHighlights"
                     @mobileHighlightsData="mobileHighlightSelection"
                 />
+                <div class="fixed bottom-20 right-0">
+                    <q-btn
+                        round
+                        color="primary"
+                        icon="star"
+                        class="mr-4"
+                        :class="$q.screen.lt.sm ? '' : 'hidden'"
+                        v-if="isHighlighted"
+                        @click="submitHighlight(propertyData)"
+                    />
+                </div>
             </template>
         </q-table>
     </div>
