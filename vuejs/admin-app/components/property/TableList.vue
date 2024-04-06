@@ -23,6 +23,7 @@
                     color="primary"
                     icon="star"
                     class="mr-4"
+                    :class="$q.screen.lt.sm ? 'hidden' : ''"
                     v-if="isHighlighted"
                     @click="submitHighlight(propertyData)"
                 />
@@ -78,7 +79,22 @@
                 </q-td>
             </template>
             <template v-slot:item="props">
-                <TableMobileResponsive :props="props" />
+                <TableMobileResponsive
+                    :props="props"
+                    :propertyHighlights="propertyHighlights"
+                    @mobileHighlightsData="mobileHighlightSelection"
+                />
+                <div class="fixed bottom-20 right-0">
+                    <q-btn
+                        round
+                        color="primary"
+                        icon="star"
+                        class="mr-4"
+                        :class="$q.screen.lt.sm ? '' : 'hidden'"
+                        v-if="isHighlighted"
+                        @click="submitHighlight(propertyData)"
+                    />
+                </div>
             </template>
         </q-table>
     </div>
@@ -125,34 +141,31 @@ export default {
         const adminAuthStore = useAdminAuthStore();
         const getAuthToken = adminAuthStore.fetchSessionToken();
 
-        const propertyData = ref([]);
+        const propertySubmitHighlights = ref([]);
+        const propertyHighlights = ref([]);
         const isHighlighted = ref(false);
 
-        const handleHighlight = (props) => {
-            props.highlight = props.checked;
-
+        const mobileHighlightSelection = (data) => {
             isHighlighted.value = true;
-
-            const isItemPresent = propertyData.value.some((item) => {
-                if (props.id === item.id) {
-                    item.highlight = props.checked;
-                    return true;
-                }
-                return false;
-            });
-
-            if (!isItemPresent) {
-                propertyData.value.push({ ...props, highlight: props.checked });
-            }
+            propertySubmitHighlights.value = data;
         };
 
-        const submitHighlight = async (props) => {
-            const response = await postPropertyStore.submitHighlight(
+        const handleHighlight = (props) => {
+            isHighlighted.value = true;
+
+            const existHighlights = postPropertyStore.handleHighlights(
                 props,
-                getAuthToken
+                propertyHighlights.value
             );
 
-            console.log(response);
+            propertySubmitHighlights.value = existHighlights;
+        };
+
+        const submitHighlight = async () => {
+            await postPropertyStore.submitHighlight(
+                propertySubmitHighlights.value,
+                getAuthToken
+            );
         };
 
         const fetchPagination = (pagination) => {
@@ -189,6 +202,8 @@ export default {
                 'fetchPropertyList',
                 payload
             );
+
+            propertyHighlights.value = response.data;
 
             const updatedData = response.data.map((item) => {
                 return {
@@ -241,7 +256,9 @@ export default {
             handleHighlight,
             submitHighlight,
             isHighlighted,
-            propertyData,
+            propertySubmitHighlights,
+            propertyHighlights,
+            mobileHighlightSelection,
             getSelectedString() {
                 return selected.value.length === 0
                     ? ''

@@ -40,7 +40,7 @@ class PropertyService
             ->searchable($payload)
             ->paginate($payload['paginate'] ?? 15);
 
-        $result->load(['propertyDetail', 'propertyType', 'user', 'state']);
+        $result->load(['propertyDetail', 'propertyType', 'user', 'state', 'highlight']);
         $result = PropertyResource::collection($result)->response()->getData();
 
         return $result;
@@ -191,11 +191,11 @@ class PropertyService
     public function submitHighlight($params)
     {
         $filterHighlight = array_filter($params, function ($value) {
-            return $value['highlight'] === true;
+            return $value['highlight'];
         });
 
         if (count($filterHighlight) > 3) {
-            return $this->exceptionService->exception("Highlight Has Reached Maximum Limitation.", Response::HTTP_BAD_REQUEST);
+            return $this->exceptionService->exception("Select only three property highlights.", Response::HTTP_BAD_REQUEST);
         }
 
         return DB::transaction(function () use ($params) {

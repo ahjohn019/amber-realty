@@ -10,7 +10,6 @@
             >
                 Highlight
             </div>
-
             <div class="col-12">
                 <Splide
                     :options="{ rewind: true, type: 'fade' }"
@@ -24,21 +23,29 @@
                             <div
                                 class="col-12 col-md-6 col-lg-7 grid place-items-center"
                             >
-                                <img
-                                    :src="
-                                        highlight.property.banner
-                                            ? highlight.property.banner.image
-                                                  .url
-                                            : 'https://cdn.quasar.dev/img/mountains.jpg'
-                                    "
-                                    class="object-cover rounded-lg"
-                                    :class="
-                                        $q.screen.lt.md
-                                            ? 'h-[350px]'
-                                            : 'h-[600px]'
-                                    "
-                                />
+                                <router-link
+                                    :to="{
+                                        name: 'property.details',
+                                        params: { id: highlight.id },
+                                    }"
+                                >
+                                    <img
+                                        :src="
+                                            highlight.property.banner
+                                                ? highlight.property.banner
+                                                      .image.url
+                                                : 'https://cdn.quasar.dev/img/mountains.jpg'
+                                        "
+                                        class="object-cover rounded-lg"
+                                        :class="
+                                            $q.screen.lt.md
+                                                ? 'h-[350px]'
+                                                : 'h-[600px]'
+                                        "
+                                    />
+                                </router-link>
                             </div>
+
                             <div
                                 class="col-12 col-md-6 col-lg-5 featured-container flex flex-col gap-12 justify-center border rounded-lg py-6"
                                 :class="$q.screen.lt.md ? 'px-7' : 'px-10'"
@@ -135,17 +142,6 @@
                                         }}
                                         sqft
                                     </div>
-                                </div>
-                                <div
-                                    :class="
-                                        $q.screen.lt.md ? 'text-center' : ''
-                                    "
-                                >
-                                    <q-btn
-                                        color="primary"
-                                        label="Whatsapp Us"
-                                        icon="mail"
-                                    />
                                 </div>
                             </div>
                         </div>

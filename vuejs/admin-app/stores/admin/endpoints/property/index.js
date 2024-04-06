@@ -228,6 +228,27 @@ export const usePropertyAdminStore = defineStore('property_admin', {
             return response;
         },
 
+        handleHighlights(props, propertyHighlights) {
+            props.highlight = props.checked;
+
+            const existHighlights = propertyHighlights;
+
+            const isHighlights = existHighlights.findIndex((item) => {
+                return props.id === item.id;
+            });
+
+            if (isHighlights !== -1) {
+                existHighlights[isHighlights].highlight = props.highlight;
+            } else {
+                existHighlights.push({
+                    ...props,
+                    highlight: props.checked,
+                });
+            }
+
+            return existHighlights;
+        },
+
         async submitHighlight(props, authToken) {
             try {
                 const config = {
@@ -244,7 +265,12 @@ export const usePropertyAdminStore = defineStore('property_admin', {
                         this.router.go(0);
                     }
                 });
-            } catch (error) {}
+            } catch (error) {
+                Swal.fire({
+                    text: error.response.data.data,
+                    icon: 'error',
+                });
+            }
         },
     },
 });

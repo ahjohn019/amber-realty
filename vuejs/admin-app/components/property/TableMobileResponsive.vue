@@ -26,7 +26,7 @@
                 <q-separator />
                 <q-item
                     v-for="col in props.cols.filter(
-                        (col) => col.name !== 'action'
+                        (col) => !['action', 'highlight'].includes(col.name)
                     )"
                     :key="col.name"
                 >
@@ -42,6 +42,17 @@
                                 {{ col.value }}
                             </div>
                         </q-item-label>
+                    </q-item-section>
+                </q-item>
+                <q-item>
+                    <q-item-section>
+                        <q-item-label>Highlights</q-item-label>
+                        <q-checkbox
+                            size="sm"
+                            v-model="props.row.checked"
+                            val="sm"
+                            @click="handleHighlightMobile(props.row)"
+                        />
                     </q-item-section>
                 </q-item>
                 <q-item>
@@ -83,9 +94,9 @@ import { useAdminAuthStore } from '@store_admin/base/auth.js';
 import { ref } from 'vue';
 
 export default {
-    props: ['props'],
+    props: ['props', 'propertyHighlights'],
 
-    setup(props) {
+    setup(props, { emit }) {
         const postPropertyStore = usePropertyAdminStore();
 
         // fetch auth token
@@ -94,6 +105,11 @@ export default {
         const propertyId = props.props.row?.id || null;
 
         const selected = ref([]);
+
+        const propertySubmitHighlights = ref([]);
+        const propertyHighlightsMobile = ref([]);
+
+        propertyHighlightsMobile.value = props.propertyHighlights;
 
         const handleEdit = () => {
             postPropertyStore.handleEditProperty(propertyId);
@@ -110,11 +126,34 @@ export default {
             postPropertyStore.handleViewProperty(propertyId, props.props);
         };
 
+        const handleHighlightMobile = (props) => {
+            props.highlight = props.checked;
+
+            const existHighlights = postPropertyStore.handleHighlights(
+                props,
+                propertyHighlightsMobile.value
+            );
+
+            propertySubmitHighlights.value = existHighlights;
+            emit('mobileHighlightsData', propertySubmitHighlights.value);
+        };
+
+        const submitHighlight = async () => {
+            await postPropertyStore.submitHighlight(
+                propertySubmitHighlights.value,
+                getAuthToken
+            );
+        };
+
         return {
             handleView,
             handleEdit,
             handleDelete,
+            handleHighlightMobile,
             selected,
+            propertyHighlightsMobile,
+            propertySubmitHighlights,
+            submitHighlight,
             getSelectedString() {
                 console.log(selected.value);
                 return selected.value.length === 0
