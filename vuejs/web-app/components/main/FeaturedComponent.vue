@@ -47,36 +47,45 @@
                             </div>
 
                             <div
-                                class="col-12 col-md-6 col-lg-5 featured-container flex flex-col gap-12 justify-center border rounded-lg py-6"
-                                :class="$q.screen.lt.md ? 'px-7' : 'px-10'"
+                                class="col-12 col-md-6 col-lg-5 featured-container flex flex-col gap-10 justify-center border rounded-lg"
+                                :class="
+                                    $q.screen.lt.md ? 'py-10' : 'px-10 py-6'
+                                "
                             >
                                 <div
-                                    class="q-gutter-sm pb-3 featured-content"
+                                    class="pb-3 featured-content flex flex-col"
                                     :class="
-                                        $q.screen.lt.md ? 'text-center' : ''
+                                        $q.screen.lt.md
+                                            ? 'text-center gap-6'
+                                            : 'gap-10'
                                     "
                                 >
                                     <div class="text-4xl font-bold">
                                         {{ highlight.property.name }}
                                     </div>
+
                                     <div
-                                        class="row justify-between items-center gap-4"
+                                        class="text-sm featured-property__descriptions"
                                     >
-                                        <div
-                                            class="col col-auto text-sm break-words"
-                                            v-html="
+                                        {{
+                                            highlight.property.short_description
+                                        }}
+                                        <q-tooltip>
+                                            {{
                                                 highlight.property
                                                     .short_description
-                                            "
-                                        ></div>
-                                        <div
-                                            class="col col-auto text-sm bg-primary text-center px-4 py-2 font-bold rounded text-white"
-                                        >
-                                            For
-                                            {{
-                                                highlight.property.listing_type
                                             }}
-                                        </div>
+                                        </q-tooltip>
+                                    </div>
+
+                                    <q-separator color="grey-4" />
+
+                                    <div
+                                        class="text-sm bg-primary text-center px-4 py-2 font-bold rounded text-white w-[120px] capitalize"
+                                        :class="$q.screen.lt.md ? 'm-auto' : ''"
+                                    >
+                                        For
+                                        {{ highlight.property.listing_type }}
                                     </div>
                                 </div>
                                 <div class="row items-center">
@@ -169,3 +178,13 @@ export default {
     },
 };
 </script>
+
+<style>
+.featured-property__descriptions {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    word-break: break-all;
+}
+</style>
