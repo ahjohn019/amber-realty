@@ -1,34 +1,34 @@
 <template>
-    <div
-        class="row q-gutter-y-md border rounded-lg bg-slate-50"
-        :class="$q.screen.lt.md ? 'p-4' : 'p-10'"
-    >
-        <div class="col-12 text-3xl font-bold border-b-2 pb-4">
-            Listing Admin
-        </div>
-        <div
-            class="col-12 row items-center border-b-2 pb-6"
-            v-for="(agent, key) in contactAgent"
-            :key="key"
-        >
-            <div class="col" :class="$q.screen.lt.sm ? 'col-4' : 'col-auto'">
-                <q-avatar size="75px">
+    <div class="row border rounded-lg px-6 py-10 gap-6">
+        <div class="col-12 flex gap-4">
+            <div>
+                <q-avatar>
                     <img src="https://cdn.quasar.dev/img/avatar.png" />
                 </q-avatar>
             </div>
+            <div>
+                <div class="font-bold text-xl">Admin</div>
+                <div class="text-sm">E-(3)1482</div>
+            </div>
+        </div>
+
+        <div class="col-12">
+            <q-separator color="grey-4" />
+        </div>
+
+        <div class="col-12 row gap-6">
             <div
-                class="col row pl-4"
-                :class="$q.screen.lt.md ? '' : 'col-auto'"
+                class="col-12 row items-center"
+                v-for="(agent, key) in contactAgent"
+                :key="key"
             >
-                <div
-                    class="col-12 pl-2 font-bold"
-                    :class="$q.screen.lt.md ? '' : 'text-xl'"
-                >
-                    {{ agent.name }}
-                </div>
-                <div class="col-12 pl-2">{{ agent.contact }}</div>
                 <div class="col-12">
-                    <q-chip color="teal" text-color="white">
+                    <q-chip
+                        color="white"
+                        text-color="black"
+                        class="w-full py-4 border shadow-md"
+                        size="22px"
+                    >
                         <a
                             :href="
                                 'https://wa.me/' +
@@ -38,15 +38,27 @@
                             "
                             target="_blank"
                         >
-                            <q-img
-                                src="/images/amber_whatsapp.png"
-                                alt=""
-                                width="20px"
-                            />
-                            <span
-                                class="align-middle ml-1 px-2 text-sm font-bold"
-                                >Whatsapp</span
-                            >
+                            <q-avatar size="24px">
+                                <q-img src="/images/amber_whatsapp.png" />
+                            </q-avatar>
+                            <span class="text-lg ml-2">Chat On Whatsapp</span>
+                        </a>
+                    </q-chip>
+                </div>
+                <div class="col-12">
+                    <q-chip
+                        color="white"
+                        text-color="black"
+                        class="w-full py-4 border shadow-md"
+                        size="22px"
+                    >
+                        <a :href="`tel:${agent.contact}`">
+                            <q-avatar>
+                                <q-icon name="phone" size="24px" />
+                            </q-avatar>
+                            <span class="text-lg ml-2">{{
+                                agent.contactLabel
+                            }}</span>
                         </a>
                     </q-chip>
                 </div>
@@ -64,9 +76,21 @@ export default {
         const contactAgent = ref([]);
 
         contactAgent.value = [
-            { name: 'Admin', contact: '60192140561' },
-            { name: 'Admin', contact: '60123729668' },
-            { name: 'Admin', contact: '60193560561' },
+            {
+                name: 'Admin',
+                contact: '60192140561',
+                contactLabel: '019-2140561',
+            },
+            {
+                name: 'Admin',
+                contact: '60123729668',
+                contactLabel: '012-3729668',
+            },
+            {
+                name: 'Admin',
+                contact: '60193560561',
+                contactLabel: '019-3560561',
+            },
         ];
 
         return {
@@ -75,3 +99,9 @@ export default {
     },
 };
 </script>
+
+<style>
+.q-anchor--skip.q-chip__content {
+    justify-content: center;
+}
+</style>
