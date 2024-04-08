@@ -33,13 +33,43 @@
                         Kuala Lumpur.
                     </div>
                     <div class="col-12 text-xl font-bold">Main</div>
-                    <div class="col-12">6012-3729668</div>
+                    <div class="col-12">
+                        <a
+                            href="tel:60123729668"
+                            class="text-blue-600 font-bold"
+                            >6012-3729668</a
+                        >
+                    </div>
                     <div class="col-12 text-xl font-bold">Admin</div>
-                    <div class="col-12">6019-2140561</div>
-                    <div class="col-12">6019-3560561</div>
-                    <div class="col-12">6012-3771428</div>
+                    <div class="col-12">
+                        <a
+                            href="tel:60192140561"
+                            class="text-blue-600 font-bold"
+                            >6019-2140561</a
+                        >
+                    </div>
+                    <div class="col-12">
+                        <a
+                            href="tel:60193560561"
+                            class="text-blue-600 font-bold"
+                            >6019-3560561</a
+                        >
+                    </div>
+                    <div class="col-12">
+                        <a
+                            href="tel:60123771428"
+                            class="text-blue-600 font-bold"
+                            >6012-3771428</a
+                        >
+                    </div>
                     <div class="col-12 text-xl font-bold">Office</div>
-                    <div class="col-12">603-40222822</div>
+                    <div class="col-12">
+                        <a
+                            href="tel:60340222822"
+                            class="text-blue-600 font-bold"
+                            >603-40222822</a
+                        >
+                    </div>
                     <div class="col-12 text-xl font-bold">Email</div>
                     <div class="col-12">
                         <a

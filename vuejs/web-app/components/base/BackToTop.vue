@@ -2,11 +2,11 @@
     <transition name="fade">
         <div
             id="pagetop"
-            class="fixed right-5 bottom-10 bg-primary rounded-full"
+            class="fixed right-5 bottom-10 bg-primary rounded-full cursor-pointer"
             :class="scrollY > 300 ? '' : 'hidden'"
             @click="toTop"
         >
-            <q-icon name="expand_less" color="secondary" size="64px" />
+            <q-icon name="expand_less" color="secondary" size="45px" />
         </div>
     </transition>
 </template>

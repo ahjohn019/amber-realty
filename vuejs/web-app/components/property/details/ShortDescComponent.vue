@@ -1,15 +1,13 @@
 <template>
-    <div class="col-12 row q-gutter-y-md justify-between">
-        <div
-            class="col-12 bg-secondary rounded row q-gutter-y-md"
-            :class="$q.screen.lt.md ? 'p-4' : 'p-10'"
-        >
+    <div class="col-12 row justify-between">
+        <div class="col-12 rounded row py-10">
             <div class="col-12 row q-gutter-y-md">
                 <div
-                    class="col-12 text-3xl font-bold border-b border-black pb-4"
+                    class="col-12 text-3xl font-bold border-b border-grey flex items-center pb-4"
                 >
                     Short Descriptions
                 </div>
+
                 <div
                     class="col-12 break-words"
                     v-html="propertyDetails.short_description"
