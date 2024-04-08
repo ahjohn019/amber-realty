@@ -1,28 +1,7 @@
 <template>
-    <div class="col-12 row justify-between items-center q-gutter-y-md">
-        <div class="col-12 pl-2 row justify-between items-center q-gutter-y-md">
-            <div class="col col-auto text-4xl break-words">
-                {{ propertyDetails.name }}
-            </div>
-            <div class="col col-auto text-right" v-if="sliders > 0">
-                <q-btn
-                    label="View More"
-                    icon="photo_camera"
-                    color="teal"
-                    :class="sliderButton"
-                    @click="selectSliderModal()"
-                />
-                <q-dialog v-model="sliderModal">
-                    <q-card style="width: 700px; max-width: 100vw">
-                        <q-card-section>
-                            <SliderComponent
-                                :propertyDetails="propertyDetails"
-                                :sliderOptions="sliderOptions"
-                            />
-                        </q-card-section>
-                    </q-card>
-                </q-dialog>
-            </div>
+    <div class="col-12 row justify-between items-center gap-4">
+        <div class="col-12 row gap-4 items-center text-4xl break-words">
+            {{ propertyDetails.name }}
         </div>
 
         <div
@@ -42,7 +21,7 @@
                 </q-chip>
             </div>
         </div>
-        <div class="col-12 pl-2">
+        <div class="col-12">
             <div
                 class="bg-secondary featured-label text-center py-2 px-4 font-bold rounded capitalize w-[100px]"
             >
@@ -50,10 +29,31 @@
                 {{ propertyDetails.listing_type }}
             </div>
         </div>
-        <div class="col-12 pl-2">
-            <span class="text-xl font-bold">
+        <div class="col-12">
+            <span class="text-3xl font-bold">
                 {{ numberFormat(propertyDetails.price, 'RM ') }}</span
             >
+        </div>
+        <div class="col-12">
+            <div v-if="sliders > 0">
+                <q-btn
+                    label="View More"
+                    icon="photo_camera"
+                    color="teal"
+                    :class="sliderButton"
+                    @click="selectSliderModal()"
+                />
+                <q-dialog v-model="sliderModal">
+                    <q-card style="width: 700px; max-width: 100vw">
+                        <q-card-section>
+                            <SliderComponent
+                                :propertyDetails="propertyDetails"
+                                :sliderOptions="sliderOptions"
+                            />
+                        </q-card-section>
+                    </q-card>
+                </q-dialog>
+            </div>
         </div>
     </div>
 </template>

@@ -6,28 +6,28 @@
                 style="margin-top: 5.5rem"
             />
             <div
-                class="container mx-auto row"
-                :class="$q.screen.lt.md ? 'w-full p-4' : 'w-3/4'"
+                class="container mx-auto row justify-between gap-10 pt-6"
+                :class="$q.screen.lt.lg ? 'p-8' : 'w-4/6'"
             >
                 <div
-                    class="col-12 row justify-between gap-6"
+                    class="col-12 col-md-8 row justify-between gap-6"
                     data-aos="fade-right"
                 >
-                    <div class="col-12 row">
-                        <InfoComponent
-                            :propertyDetails="propertyDetails"
-                            :propertyRoomDetails="propertyRoomDetails"
-                            :contactNumber="contactNumber"
-                            :whatsAppEnquiries="whatsAppEnquiries"
-                            :sliders="sliderImageNumber"
-                        />
-                    </div>
+                    <InfoComponent
+                        :propertyDetails="propertyDetails"
+                        :propertyRoomDetails="propertyRoomDetails"
+                        :contactNumber="contactNumber"
+                        :whatsAppEnquiries="whatsAppEnquiries"
+                        :sliders="sliderImageNumber"
+                    />
+
                     <ShortDescriptionsComponent
                         :propertyDetails="propertyDetails"
                     />
 
                     <DescriptionsComponent :propertyDetails="propertyDetails" />
-
+                </div>
+                <div class="col">
                     <ListingAgentComponent
                         :whatsAppEnquiries="whatsAppEnquiries"
                     />
