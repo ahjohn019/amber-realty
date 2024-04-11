@@ -4,6 +4,7 @@
             <BannerComponent
                 :propertyDetails="propertyDetails"
                 style="margin-top: 5.5rem"
+                class="banner-component"
             />
             <div
                 class="container mx-auto row justify-between gap-10 pt-6"
@@ -16,7 +17,6 @@
                     <InfoComponent
                         :propertyDetails="propertyDetails"
                         :propertyRoomDetails="propertyRoomDetails"
-                        :contactNumber="contactNumber"
                         :whatsAppEnquiries="whatsAppEnquiries"
                         :sliders="sliderImageNumber"
                     />
@@ -27,16 +27,27 @@
 
                     <DescriptionsComponent :propertyDetails="propertyDetails" />
                 </div>
-                <div class="col">
+                <div
+                    class="col"
+                    :class="$q.screen.lt.md ? 'hidden' : listingAgentContainer"
+                >
                     <ListingAgentComponent
                         :whatsAppEnquiries="whatsAppEnquiries"
+                        class="row border rounded-lg px-6 py-10 gap-6"
+                        :class="
+                            listingAgentClassToggle ? listingAgentClass : ''
+                        "
                     />
                 </div>
+            </div>
+            <div :class="$q.screen.lt.md ? '' : 'hidden'">
+                <ListingAgentMobileComponent
+                    :whatsAppEnquiries="whatsAppEnquiries"
+                />
             </div>
         </template>
     </BaseLayout>
 </template>
-
 <script>
 import BaseLayout from '@web/modules/layout/BaseLayout.vue';
 import { usePropertyWebStore } from '@store_web/property/index.js';
@@ -48,26 +59,31 @@ import ShortDescriptionsComponent from '@web/components/property/details/ShortDe
 import DescriptionsComponent from '@web/components/property/details/DescriptionsComponent.vue';
 import BannerComponent from '@web/components/property/details/BannerComponent.vue';
 import ListingAgentComponent from '@web/components/property/details/ListingAgentComponent.vue';
+import ListingAgentMobileComponent from '@web/components/property/details/ListingAgentMobileComponent.vue';
 
 export default {
     components: {
         BaseLayout,
         InfoComponent,
-
         ShortDescriptionsComponent,
         DescriptionsComponent,
         BannerComponent,
         ListingAgentComponent,
+        ListingAgentMobileComponent,
     },
 
     setup() {
         const webProperty = usePropertyWebStore();
         const propertyDetails = ref({});
         const sliderImageNumber = ref(0);
-        const contactNumber = ref([]);
+
         const propertyRoomDetails = ref([]);
         const propertyDetailsSection = ref([]);
         const whatsAppEnquiries = ref('');
+        const listingAgentClass = ref('');
+        const listingAgentContainer = ref('');
+
+        const listingAgentClassToggle = ref(false);
 
         const fetchPropertyDetails = async () => {
             const response = await webProperty.fetchPropertyDetails();
@@ -84,12 +100,6 @@ export default {
             return response;
         };
 
-        contactNumber.value = [
-            { name: 'Agent Ng', contact: '60192137731' },
-            { name: 'Agent Doo', contact: '60123729668' },
-            { name: 'Agent Teng', contact: '60193560561' },
-        ];
-
         propertyRoomDetails.value = [
             { name: 'Beds', icon: 'bed', value: 'bedroom' },
             { name: 'Bath', icon: 'bathtub', value: 'bathroom' },
@@ -103,19 +113,63 @@ export default {
             { name: 'Price', label: '', front_label: 'RM', value: 'price' },
         ];
 
+        const handleDetailsObserver = () => {
+            const bannerComponent = document.querySelector('.banner-component');
+            const footerComponent = document.querySelector('.footer-container');
+
+            const options = {
+                threshold: 0.3,
+            };
+
+            const bannerObserver = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    listingAgentClass.value = '';
+                    listingAgentContainer.value = '';
+
+                    if (!entry.isIntersecting) {
+                        listingAgentClass.value =
+                            'fixed w-[365px] xl:w-[290px] top-[12.5%]';
+                        listingAgentClassToggle.value = true;
+                    }
+                });
+            }, options);
+
+            const footerObserver = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    listingAgentClass.value = '';
+                    listingAgentContainer.value = 'flex items-end';
+
+                    if (!entry.isIntersecting) {
+                        listingAgentClass.value =
+                            'fixed w-[365px] xl:w-[290px] top-[12.5%]';
+                        listingAgentContainer.value = '';
+                    }
+                });
+            }, options);
+            bannerObserver.observe(bannerComponent);
+            footerObserver.observe(footerComponent);
+        };
+
+        const handleListingAgentClass = () => {
+            return listingAgentClassToggle.value ? listingAgentClass.value : '';
+        };
+
         onMounted(() => {
             fetchPropertyDetails();
+            handleDetailsObserver();
         });
 
         return {
+            listingAgentClass,
+            listingAgentClassToggle,
             propertyDetails,
             fetchPropertyDetails,
-
-            contactNumber,
             propertyRoomDetails,
             propertyDetailsSection,
             whatsAppEnquiries,
             sliderImageNumber,
+            listingAgentContainer,
+            handleListingAgentClass,
         };
     },
 };
