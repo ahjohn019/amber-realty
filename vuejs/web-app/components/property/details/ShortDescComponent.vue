@@ -1,9 +1,9 @@
 <template>
     <div class="col-12 row justify-between">
-        <div class="col-12 rounded row py-10">
+        <div class="col-12 rounded row md:py-10">
             <div class="col-12 row q-gutter-y-md">
                 <div
-                    class="col-12 text-3xl font-bold border-b border-grey flex items-center pb-4"
+                    class="col-12 text-xl md:text-4xl font-bold border-b border-grey flex items-center pb-4"
                 >
                     Short Descriptions
                 </div>

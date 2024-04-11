@@ -6,7 +6,7 @@
                     ? propertyDetails.banner.image.url
                     : 'https://cdn.quasar.dev/img/parallax2.jpg'
             "
-            class="cursor-pointer h-[550px]"
+            class="cursor-pointer h-[450px]"
             :fit="$q.screen.lt.md ? 'cover' : 'contain'"
             @click="toggleBanner()"
         />

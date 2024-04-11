@@ -1,6 +1,8 @@
 <template>
     <div class="col-12 row justify-between items-center gap-4">
-        <div class="col-12 row gap-4 items-center text-4xl break-words">
+        <div
+            class="col-12 row gap-4 items-center text-xl md:text-4xl break-words"
+        >
             {{ propertyDetails.name }}
         </div>
 
@@ -30,7 +32,7 @@
             </div>
         </div>
         <div class="col-12">
-            <span class="text-3xl font-bold">
+            <span class="text-xl md:text-4xl font-bold">
                 {{ numberFormat(propertyDetails.price, 'RM ') }}</span
             >
         </div>
@@ -70,7 +72,6 @@ export default {
     props: [
         'propertyDetails',
         'propertyRoomDetails',
-        'contactNumber',
         'whatsAppEnquiries',
         'sliders',
     ],
