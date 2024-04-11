@@ -7,7 +7,11 @@ module.exports = {
         './resources/**/*.scss',
     ],
     theme: {
-        extend: {},
+        extend: {
+            screens: {
+                xl: { max: '1280px' },
+            },
+        },
     },
     plugins: [require('@tailwindcss/typography')],
     safelist: [{ pattern: /./ }],

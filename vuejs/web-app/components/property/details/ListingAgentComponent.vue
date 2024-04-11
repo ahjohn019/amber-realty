@@ -1,5 +1,5 @@
 <template>
-    <div class="row border rounded-lg px-6 py-10 gap-6">
+    <div>
         <div class="col-12 flex gap-4">
             <div>
                 <q-avatar>
