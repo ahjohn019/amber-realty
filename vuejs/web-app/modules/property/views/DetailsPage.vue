@@ -40,7 +40,11 @@
                     />
                 </div>
             </div>
-            <div :class="$q.screen.lt.md ? '' : 'hidden'">
+            <div
+                :class="
+                    $q.screen.lt.md ? listingAgentMobileContainer : 'hidden'
+                "
+            >
                 <ListingAgentMobileComponent
                     :whatsAppEnquiries="whatsAppEnquiries"
                 />
@@ -81,7 +85,9 @@ export default {
         const propertyDetailsSection = ref([]);
         const whatsAppEnquiries = ref('');
         const listingAgentClass = ref('');
+
         const listingAgentContainer = ref('');
+        const listingAgentMobileContainer = ref('');
 
         const listingAgentClassToggle = ref(false);
 
@@ -138,14 +144,17 @@ export default {
                 entries.forEach((entry) => {
                     listingAgentClass.value = '';
                     listingAgentContainer.value = 'flex items-end';
+                    listingAgentMobileContainer.value = 'hidden';
 
                     if (!entry.isIntersecting) {
                         listingAgentClass.value =
                             'fixed w-[365px] xl:w-[290px] top-[12.5%]';
                         listingAgentContainer.value = '';
+                        listingAgentMobileContainer.value = '';
                     }
                 });
             }, options);
+
             bannerObserver.observe(bannerComponent);
             footerObserver.observe(footerComponent);
         };
@@ -169,6 +178,7 @@ export default {
             whatsAppEnquiries,
             sliderImageNumber,
             listingAgentContainer,
+            listingAgentMobileContainer,
             handleListingAgentClass,
         };
     },
