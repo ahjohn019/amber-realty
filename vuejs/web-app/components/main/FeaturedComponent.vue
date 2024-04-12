@@ -1,6 +1,6 @@
 <template>
     <div
-        class="container mx-auto py-12 w-full md:w-[650px] lg:w-[990px] xl:w-[1200px]"
+        class="container mx-auto py-12 px-2 w-full md:w-[650px] lg:w-[990px] xl:w-[1200px]"
     >
         <div class="row">
             <div

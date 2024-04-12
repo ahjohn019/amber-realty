@@ -1,8 +1,7 @@
 <template>
     <div class="">
         <div
-            class="row container mx-auto py-12 w-full md:w-[650px] lg:w-[990px] xl:w-[1200px] justify-between"
-            :class="$q.screen.lt.sm ? 'px-4 q-gutter-y-md' : 'px-12'"
+            class="row container mx-auto py-12 px-2 w-full md:w-[650px] lg:w-[990px] xl:w-[1200px] justify-between gap-6"
         >
             <div
                 class="col-12 text-xl md:text-4xl font-bold pb-8"
