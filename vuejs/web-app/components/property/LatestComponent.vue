@@ -148,6 +148,8 @@ export default {
 .latest-property__name,
 .latest-property__descriptions {
     overflow: hidden;
-    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
 }
 </style>
