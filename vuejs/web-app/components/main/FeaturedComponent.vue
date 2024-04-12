@@ -1,16 +1,15 @@
 <template>
     <div
-        class="container mx-auto"
-        :class="$q.screen.lt.sm ? 'py-12 px-4' : 'py-24 px-12'"
+        class="container mx-auto py-12 w-full md:w-[650px] lg:w-[990px] xl:w-[1200px]"
     >
         <div class="row">
             <div
-                class="col-12 text-3xl font-bold pb-8"
+                class="col-12 text-xl md:text-4xl font-bold pb-8"
                 :class="$q.screen.lt.md ? 'text-center' : ''"
             >
                 Highlight
             </div>
-            <div class="col-12">
+            <div class="col-12 p-2 md:p-0">
                 <Splide
                     :options="{ rewind: true, type: 'fade' }"
                     aria-label="My Favorite Images"
@@ -36,31 +35,21 @@
                                                       .image.url
                                                 : 'https://cdn.quasar.dev/img/mountains.jpg'
                                         "
-                                        class="object-cover rounded-lg"
-                                        :class="
-                                            $q.screen.lt.md
-                                                ? 'h-[350px]'
-                                                : 'h-[600px]'
-                                        "
+                                        class="object-cover rounded-lg h-[325px] lg:h-[600px]"
                                     />
                                 </router-link>
                             </div>
 
                             <div
-                                class="col-12 col-md-6 col-lg-5 featured-container flex flex-col gap-10 justify-center border rounded-lg"
-                                :class="
-                                    $q.screen.lt.md ? 'py-10' : 'px-10 py-6'
-                                "
+                                class="col-12 col-md-6 col-lg-5 featured-container flex flex-col gap-4 md:gap-10 py-8 md:px-10 md:py-6 justify-center lg:border rounded-lg"
                             >
                                 <div
-                                    class="pb-3 featured-content flex flex-col"
+                                    class="pb-3 featured-content flex flex-col gap-6 md:gap-10"
                                     :class="
-                                        $q.screen.lt.md
-                                            ? 'text-center gap-6'
-                                            : 'gap-10'
+                                        $q.screen.lt.md ? 'text-center' : ''
                                     "
                                 >
-                                    <div class="text-4xl font-bold">
+                                    <div class="text-xl md:text-4xl font-bold">
                                         {{ highlight.property.name }}
                                     </div>
 
@@ -90,7 +79,7 @@
                                 </div>
                                 <div class="row items-center">
                                     <div
-                                        class="col-12 col-md-5 text-4xl font-bold properties-content"
+                                        class="col-12 col-md-5 text-xl md:text-4xl font-bold properties-content"
                                         style="text-wrap: nowrap"
                                         :class="
                                             $q.screen.lt.md
@@ -107,7 +96,7 @@
                                     </div>
                                 </div>
                                 <div
-                                    class="row gap-12"
+                                    class="row gap-4"
                                     :class="
                                         $q.screen.lt.md
                                             ? 'justify-center'
@@ -115,9 +104,9 @@
                                     "
                                     v-if="highlight.property.property_detail"
                                 >
-                                    <div class="col-auto text-center">
+                                    <div class="col col-auto text-center">
                                         <div>
-                                            <q-icon name="bed" size="48px" />
+                                            <q-icon name="bed" size="32px" />
                                         </div>
                                         {{
                                             highlight.property.property_detail
@@ -125,11 +114,11 @@
                                         }}
                                         Bedrooms
                                     </div>
-                                    <div class="col-auto text-center">
+                                    <div class="col col-auto text-center">
                                         <div>
                                             <q-icon
                                                 name="bathroom"
-                                                size="48px"
+                                                size="32px"
                                             />
                                         </div>
                                         {{
@@ -138,11 +127,11 @@
                                         }}
                                         Bathrooms
                                     </div>
-                                    <div class="col-auto text-center">
+                                    <div class="col col-auto text-center">
                                         <div>
                                             <q-icon
                                                 name="dashboard"
-                                                size="48px"
+                                                size="32px"
                                             />
                                         </div>
                                         {{

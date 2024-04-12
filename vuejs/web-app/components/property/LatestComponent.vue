@@ -1,13 +1,16 @@
 <template>
     <div class="col-12 row">
-        <div class="col-12 row" v-if="latestProperty.length > 0">
+        <div
+            class="col-12 row !flex-nowrap overflow-scroll md:overflow-auto"
+            v-if="latestProperty.length > 0"
+        >
             <div
-                class="col-12 col-md-4 col-lg-3 p-2"
+                class="col-10 col-sm-6 col-md-3 p-2"
                 v-for="(latest, key) in latestProperty"
                 :key="key"
             >
                 <router-link :to="'property/details/' + latest.id">
-                    <q-card class="my-card">
+                    <q-card class="my-card h-[350px] xl:h-[375px]">
                         <div class="relative">
                             <q-img
                                 :src="
@@ -41,7 +44,7 @@
                                 </q-tooltip>
                             </div>
                             <div
-                                class="col-12 text-subtitle2 latest-property__descriptions !h-[65px]"
+                                class="col-12 text-subtitle2 latest-property__descriptions"
                                 v-html="latest.short_description"
                             ></div>
                         </q-card-section>

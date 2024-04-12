@@ -134,7 +134,7 @@ export default {
 
                     if (!entry.isIntersecting) {
                         listingAgentClass.value =
-                            'fixed w-[365px] xl:w-[290px] top-[12.5%]';
+                            'fixed w-[290px] xl:w-[350px] top-[12.5%]';
                         listingAgentClassToggle.value = true;
                     }
                 });
@@ -148,7 +148,7 @@ export default {
 
                     if (!entry.isIntersecting) {
                         listingAgentClass.value =
-                            'fixed w-[365px] xl:w-[290px] top-[12.5%]';
+                            'fixed w-[290px] xl:w-[350px] top-[12.5%]';
                         listingAgentContainer.value = '';
                         listingAgentMobileContainer.value = '';
                     }
