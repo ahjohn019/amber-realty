@@ -1,7 +1,7 @@
 <template>
     <div class="col-12 row">
         <div
-            class="col-12 row !flex-nowrap overflow-scroll md:overflow-auto"
+            class="col-12 row !flex-nowrap overflow-scroll md:overflow-auto overflow-y-hidden"
             v-if="latestProperty.length > 0"
         >
             <div
@@ -45,8 +45,12 @@
                             </div>
                             <div
                                 class="col-12 text-subtitle2 latest-property__descriptions"
-                                v-html="latest.short_description"
-                            ></div>
+                            >
+                                {{ latest.short_description }}
+                                <q-tooltip max-width="350px">
+                                    {{ latest.short_description }}
+                                </q-tooltip>
+                            </div>
                         </q-card-section>
                         <q-card-section
                             class="q-pt-none"
@@ -141,16 +145,9 @@ export default {
 </script>
 
 <style>
+.latest-property__name,
 .latest-property__descriptions {
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
     overflow: hidden;
-}
-.latest-property__name {
-    display: -webkit-box;
-    -webkit-line-clamp: 1;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
+    text-overflow: ellipsis;
 }
 </style>
