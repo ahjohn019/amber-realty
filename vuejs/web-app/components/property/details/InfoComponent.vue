@@ -45,12 +45,22 @@
                     :class="sliderButton"
                     @click="selectSliderModal()"
                 />
-                <q-dialog v-model="sliderModal">
-                    <q-card style="width: 700px; max-width: 100vw">
-                        <q-card-section>
+                <q-dialog v-model="sliderModal" :maximized="maximizedToggle">
+                    <q-card class="py-6 overflow-hidden">
+                        <q-bar class="justify-end bg-white">
+                            <q-btn flat icon="close" v-close-popup size="18px">
+                                <q-tooltip class="bg-white text-primary"
+                                    >Close</q-tooltip
+                                >
+                            </q-btn>
+                        </q-bar>
+                        <q-card-section
+                            class="h-full lg:w-[990px] grid mx-auto"
+                        >
                             <SliderComponent
                                 :propertyDetails="propertyDetails"
                                 :sliderOptions="sliderOptions"
+                                :thumbnailOptions="thumbnailOptions"
                             />
                         </q-card-section>
                     </q-card>
@@ -81,6 +91,8 @@ export default {
         const sliderOptions = ref({});
         const sliderDisplayDuration = 1200;
         const sliderButton = ref('');
+        const maximizedToggle = ref(true);
+        const thumbnailOptions = ref({});
 
         sliderButton.value = 'hidden';
 
@@ -99,6 +111,16 @@ export default {
                 perPage: 1,
                 gap: '1rem',
                 height: 0,
+            };
+        };
+
+        const thumbnailListOptions = () => {
+            thumbnailOptions.value = {
+                fixedWidth: 100,
+                fixedHeight: 60,
+                gap: 10,
+                rewind: true,
+                pagination: false,
             };
         };
 
@@ -123,6 +145,9 @@ export default {
             sliderOptions,
             sliderButton,
             numberFormat,
+            maximizedToggle,
+            thumbnailListOptions,
+            thumbnailOptions,
         };
     },
 };
