@@ -49,7 +49,7 @@
         </div>
 
         <div class="col-12 row justify-center">
-            <div class="col col-auto">
+            <div class="col-12">
                 <Splide
                     aria-label="The carousel with thumbnails. Selecting a thumbnail will change the main carousel"
                     :options="thumbsOptions"
@@ -67,7 +67,7 @@
                     </SplideSlide>
                 </Splide>
             </div>
-            <div class="col col-auto text-lg font-bold">
+            <div class="col-12 text-lg font-bold flex justify-center">
                 {{ currentSlidePage + 1 }} /
                 {{ propertyDetails.sliders?.length }}
             </div>
