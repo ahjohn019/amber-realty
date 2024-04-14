@@ -2,7 +2,6 @@
     <div class="wrapper row gap-8 overflow-hidden">
         <div class="col-12 m-auto">
             <Splide
-                aria-labelledby="thumbnail-example-heading"
                 :options="mainOptions"
                 ref="main"
                 @splide:moved="handleSlideArrows"
@@ -48,13 +47,9 @@
             </div>
         </div>
 
-        <div class="col-12 row justify-center">
+        <div class="col-12 row justify-center border-t pt-6">
             <div class="col-12">
-                <Splide
-                    aria-label="The carousel with thumbnails. Selecting a thumbnail will change the main carousel"
-                    :options="thumbsOptions"
-                    ref="thumbs"
-                >
+                <Splide :options="thumbsOptions" ref="thumbs">
                     <SplideSlide
                         v-for="(slide, slideKey) in propertyDetails.sliders"
                         :key="slideKey"
@@ -67,9 +62,19 @@
                     </SplideSlide>
                 </Splide>
             </div>
-            <div class="col-12 text-lg font-bold flex justify-center">
-                {{ currentSlidePage + 1 }} /
-                {{ propertyDetails.sliders?.length }}
+            <div class="col-12 text-lg font-semibold flex row">
+                <div class="col-6 col-sm-4">
+                    <q-icon name="collections" size="32px" />
+                    {{ propertyDetails.sliders?.length }}
+                    <span :class="$q.screen.lt.sm ? 'hidden' : ''">Photos</span>
+                </div>
+                <div
+                    class="col-6 col-sm-4 flex"
+                    :class="$q.screen.lt.sm ? 'justify-end' : 'justify-center'"
+                >
+                    {{ currentSlidePage + 1 }} /
+                    {{ propertyDetails.sliders?.length }}
+                </div>
             </div>
         </div>
     </div>
@@ -82,7 +87,7 @@ import { defineComponent, onMounted, ref } from 'vue';
 export default defineComponent({
     name: 'ThumbnailsExample',
 
-    props: ['propertyDetails', 'sliderOptions', 'thumbnailOptions'],
+    props: ['propertyDetails'],
 
     components: {
         Splide,
@@ -101,7 +106,7 @@ export default defineComponent({
             rewind: true,
             perPage: 1,
             perMove: 1,
-            gap: '2rem',
+            gap: '1rem',
             pagination: false,
             fixedHeight: 450,
             cover: true,
@@ -115,7 +120,7 @@ export default defineComponent({
         const thumbsOptions: Options = {
             type: 'slide',
             rewind: true,
-            gap: '1rem',
+            gap: '0.5rem',
             pagination: false,
             fixedWidth: 110,
             fixedHeight: 80,
@@ -123,6 +128,7 @@ export default defineComponent({
             focus: 'center',
             isNavigation: true,
             updateOnMove: true,
+            arrows: false,
         };
 
         const handleSlideArrows = (splide, currentIndex) => {
