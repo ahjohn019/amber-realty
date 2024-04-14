@@ -46,7 +46,7 @@
                     @click="selectSliderModal()"
                 />
                 <q-dialog v-model="sliderModal" :maximized="maximizedToggle">
-                    <q-card class="py-6 overflow-hidden">
+                    <q-card class="py-6 md:px-4 overflow-hidden">
                         <q-bar class="justify-end bg-white">
                             <q-btn flat icon="close" v-close-popup size="18px">
                                 <q-tooltip class="bg-white text-primary"
@@ -54,13 +54,9 @@
                                 >
                             </q-btn>
                         </q-bar>
-                        <q-card-section
-                            class="h-full lg:w-[990px] grid mx-auto"
-                        >
+                        <q-card-section class="h-full grid mx-auto">
                             <SliderComponent
                                 :propertyDetails="propertyDetails"
-                                :sliderOptions="sliderOptions"
-                                :thumbnailOptions="thumbnailOptions"
                             />
                         </q-card-section>
                     </q-card>
@@ -100,28 +96,8 @@ export default {
             sliderModal.value = true;
 
             setTimeout(() => {
-                sliderListOptions();
                 sliderButton.value = '';
             }, sliderDisplayDuration);
-        };
-
-        const sliderListOptions = () => {
-            sliderOptions.value = {
-                type: 'loop',
-                perPage: 1,
-                gap: '1rem',
-                height: 0,
-            };
-        };
-
-        const thumbnailListOptions = () => {
-            thumbnailOptions.value = {
-                fixedWidth: 100,
-                fixedHeight: 60,
-                gap: 10,
-                rewind: true,
-                pagination: false,
-            };
         };
 
         const numberFormat = (number, symbol = 'RM') => {
@@ -133,20 +109,17 @@ export default {
 
         onMounted(() => {
             setTimeout(() => {
-                sliderListOptions();
                 sliderButton.value = '';
             }, sliderDisplayDuration);
         });
 
         return {
             selectSliderModal,
-            sliderListOptions,
             sliderModal,
             sliderOptions,
             sliderButton,
             numberFormat,
             maximizedToggle,
-            thumbnailListOptions,
             thumbnailOptions,
         };
     },
