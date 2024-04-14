@@ -26,6 +26,10 @@
                                 class="col-12"
                                 v-html="propertyData.short_description"
                             ></div>
+                            <div class="col-12 text-h6">Address:</div>
+                            <div class="col-12">
+                                {{ propertyData.full_address }}
+                            </div>
                             <div class="col-12 text-h6">Price:</div>
                             <div class="col-12">
                                 RM {{ propertyData.price }}
@@ -184,6 +188,7 @@ export default {
                 name: response.name,
                 description: response.description,
                 short_description: response.short_description,
+                full_address: response.full_address || '-',
                 price: response.price,
                 state: response.state.label,
                 status: response.status,

@@ -80,6 +80,7 @@ export const usePropertyAdminModelStore = defineStore('property_admin_models', {
                 name: '',
                 description: '',
                 short_description: '',
+                full_address: '',
                 images: [],
                 status: '',
                 price: 300,

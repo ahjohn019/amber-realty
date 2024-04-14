@@ -61,6 +61,17 @@
                     {{ errors.short_description }}
                 </div>
             </div>
+            <div class="col-12">
+                <div class="post-information-name">Address</div>
+                <div class="col-12">
+                    <q-input
+                        v-model="propertyData.full_address"
+                        filled
+                        outlined
+                        placeholder="Address"
+                    />
+                </div>
+            </div>
             <div
                 class="col-12 col-md-6"
                 :class="$q.screen.lt.md ? 'pr-0' : 'pr-6'"
@@ -373,11 +384,14 @@ export default {
 
             const { details } = response;
 
+            console.log(response);
+
             propertyData.value = {
                 ...propertyData.value,
                 name: response.name,
                 description: response.description,
                 short_description: response.short_description,
+                full_address: response.full_address,
                 state: response.state,
                 price: response.price,
                 file: response.file,
