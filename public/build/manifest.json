@@ -349,7 +349,7 @@
     "src": "refList.css"
   },
   "resources/sass/app.scss": {
-    "file": "assets/app-a5672d5a.css",
+    "file": "assets/app-2331e927.css",
     "isEntry": true,
     "src": "resources/sass/app.scss"
   },
@@ -638,7 +638,7 @@
       "vuejs/web-app/modules/property/views/ListPage.vue",
       "vuejs/web-app/modules/property/views/DetailsPage.vue"
     ],
-    "file": "assets/app-172cf72d.js",
+    "file": "assets/app-a826018f.js",
     "imports": [
       "_ckeditor-1f01ba18.js"
     ],
@@ -708,7 +708,7 @@
     "css": [
       "assets/DetailsPage-fec22140.css"
     ],
-    "file": "assets/DetailsPage-f2e93abc.js",
+    "file": "assets/DetailsPage-e7613d57.js",
     "imports": [
       "_BaseLayout-93241c86.js",
       "_index-0a29ad68.js",
