@@ -60,4 +60,15 @@ class PropertyService
 
         return $result;
     }
+
+    public function handleLocation($request)
+    {
+        $googleMapUrl = config('app.google_map_url');
+        $googleMapKey = config('app.google_map_api_key');
+
+        $fullAddress = preg_replace('/\s+/', '+', $request['params']);
+        $fullAddressResult = empty($fullAddress) ? false : $googleMapUrl . "place?key=" . $googleMapKey . "&q=" . $fullAddress;
+
+        return $fullAddressResult;
+    }
 }

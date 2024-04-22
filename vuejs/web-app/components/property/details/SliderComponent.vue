@@ -108,7 +108,7 @@ export default defineComponent({
             perMove: 1,
             gap: '1rem',
             pagination: false,
-            fixedHeight: 450,
+            height: 450,
             cover: true,
             breakpoints: {
                 640: {

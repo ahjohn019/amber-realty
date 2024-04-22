@@ -26,6 +26,11 @@
                     />
 
                     <DescriptionsComponent :propertyDetails="propertyDetails" />
+
+                    <FullAddressComponent
+                        :fullAddress="fullAddress"
+                        v-if="fullAddress.data"
+                    />
                 </div>
                 <div
                     class="col"
@@ -64,6 +69,7 @@ import DescriptionsComponent from '@web/components/property/details/Descriptions
 import BannerComponent from '@web/components/property/details/BannerComponent.vue';
 import ListingAgentComponent from '@web/components/property/details/ListingAgentComponent.vue';
 import ListingAgentMobileComponent from '@web/components/property/details/ListingAgentMobileComponent.vue';
+import FullAddressComponent from '@web/components/property/details/FullAddressComponent.vue';
 
 export default {
     components: {
@@ -74,6 +80,7 @@ export default {
         BannerComponent,
         ListingAgentComponent,
         ListingAgentMobileComponent,
+        FullAddressComponent,
     },
 
     setup() {
@@ -88,6 +95,7 @@ export default {
 
         const listingAgentContainer = ref('');
         const listingAgentMobileContainer = ref('');
+        const fullAddress = ref('');
 
         const listingAgentClassToggle = ref(false);
 
@@ -163,9 +171,21 @@ export default {
             return listingAgentClassToggle.value ? listingAgentClass.value : '';
         };
 
+        const handleFullAddress = async () => {
+            const propertyDetails = await webProperty.fetchPropertyDetails();
+            const fetchFullAddress = await webProperty.fetchLocation(
+                propertyDetails
+            );
+
+            fullAddress.value = fetchFullAddress;
+
+            console.log('aaaaaa', fetchFullAddress);
+        };
+
         onMounted(() => {
             fetchPropertyDetails();
             handleDetailsObserver();
+            handleFullAddress();
         });
 
         return {
@@ -180,6 +200,7 @@ export default {
             listingAgentContainer,
             listingAgentMobileContainer,
             handleListingAgentClass,
+            fullAddress,
         };
     },
 };

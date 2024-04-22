@@ -47,16 +47,30 @@ export const usePropertyWebStore = defineStore('property_web', {
                     routeId
                 );
 
-                console.log(response);
-
                 return response.data.data;
             } catch (error) {}
         },
 
         async fetchPropertyFilterOptionGroup(payload = null) {
             try {
-                const response = await axios.get('/api/ref/' + 'property/filter-option-group', {
-                    params: payload,
+                const response = await axios.get(
+                    '/api/ref/' + 'property/filter-option-group',
+                    {
+                        params: payload,
+                    }
+                );
+
+                return response.data.data;
+            } catch (error) {
+                console.error('Error:', error);
+                throw error;
+            }
+        },
+
+        async fetchLocation(propertyDetails = null) {
+            try {
+                const response = await axios.post(prefix + 'location', {
+                    params: propertyDetails.full_address,
                 });
 
                 return response.data.data;

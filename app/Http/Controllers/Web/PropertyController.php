@@ -51,4 +51,18 @@ class PropertyController extends Controller
 
         return self::successResponse('Fetch Highlight Successfully', $result);
     }
+
+    public function handleLocation(Request $request)
+    {
+        $result = $this->propertyService->handleLocation($request);
+
+        if (isset($result['error'])) {
+            return self::failedResponse('Invalid Property Data', $result['error'], $result['code']);
+        }
+
+        return self::successResponse('Fetch Full Address Successfully', [
+            "type" => "place",
+            "data" => $result
+        ]);
+    }
 }

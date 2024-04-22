@@ -38,6 +38,7 @@ Route::prefix('property')->name('web.property')->group(function () {
     Route::get('/latest', [PropertyController::class, 'latest'])->name('latest');
     Route::get('/details/{id}', [PropertyController::class, 'details'])->name('details');
     Route::get('/highlights', [PropertyController::class, 'highlights'])->name('highlights');
+    Route::post('/location', [PropertyController::class, 'handleLocation'])->name('location');
 });
 
 Route::prefix('auth')->middleware([])->group(
