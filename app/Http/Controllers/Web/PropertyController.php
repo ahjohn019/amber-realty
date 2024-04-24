@@ -65,4 +65,17 @@ class PropertyController extends Controller
             "data" => $result
         ]);
     }
+
+    public function handleActiveLocation(Request $request)
+    {
+        $result = $this->propertyService->handleActiveLocation($request);
+
+        if (isset($result['error'])) {
+            return self::failedResponse('Invalid Property Data', $result['error'], $result['code']);
+        }
+
+        return self::successResponse('Fetch Active Location Successfully', [
+            "data" => $result
+        ]);
+    }
 }

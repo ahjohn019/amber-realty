@@ -79,5 +79,19 @@ export const usePropertyWebStore = defineStore('property_web', {
                 throw error;
             }
         },
+
+        async fetchActiveSelectionQuery(activeLocationQuery = null) {
+            try {
+                const response = await axios.post(
+                    prefix + 'active-location',
+                    activeLocationQuery
+                );
+
+                return response.data.data;
+            } catch (error) {
+                console.error('Error:', error);
+                throw error;
+            }
+        },
     },
 });

@@ -71,4 +71,18 @@ class PropertyService
 
         return $fullAddressResult;
     }
+
+    public function handleActiveLocation($request)
+    {
+        $googleMapUrl = config('app.google_map_url');
+        $googleMapKey = config('app.google_map_api_key');
+
+        $fullAddress = preg_replace('/\s+/', '+', $request['full_address']);
+        $query = $request['query'] == "place" ? null : $request['type'] . "+near+in+";
+
+        $fullAddressResult = empty($fullAddress) ? false : $googleMapUrl . $request['query'] . "?key=" . $googleMapKey . "&q=" . $query . $fullAddress;
+
+
+        return $fullAddressResult;
+    }
 }

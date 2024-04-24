@@ -27,10 +27,7 @@
 
                     <DescriptionsComponent :propertyDetails="propertyDetails" />
 
-                    <FullAddressComponent
-                        :fullAddress="fullAddress"
-                        v-if="fullAddress.data"
-                    />
+                    <FullAddressComponent v-if="propertyDetails.full_address" />
                 </div>
                 <div
                     class="col"
@@ -171,21 +168,9 @@ export default {
             return listingAgentClassToggle.value ? listingAgentClass.value : '';
         };
 
-        const handleFullAddress = async () => {
-            const propertyDetails = await webProperty.fetchPropertyDetails();
-            const fetchFullAddress = await webProperty.fetchLocation(
-                propertyDetails
-            );
-
-            fullAddress.value = fetchFullAddress;
-
-            console.log('aaaaaa', fetchFullAddress);
-        };
-
         onMounted(() => {
             fetchPropertyDetails();
             handleDetailsObserver();
-            handleFullAddress();
         });
 
         return {
