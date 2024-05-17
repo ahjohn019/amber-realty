@@ -45,12 +45,7 @@ class PropertyAddressService
     {
         $findPlaceNearbyUrl = $this->googleMapPlaceUrl . ":searchNearby";
 
-        $propertyDetails = PropertyAddressDetails::whereHas('property', function ($query) {
-            $query->where('status', 'active');
-        })
-            ->where('property_id', $payload['property_id'])
-            ->where('current', 1)
-            ->first();
+        $propertyDetails = PropertyAddressDetails::currentLocation($payload)->first();
 
         if (empty($propertyDetails)) return null;
 
