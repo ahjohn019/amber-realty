@@ -87,6 +87,7 @@ const fetchNearbyNavigationList = () => {
         { label: 'school', title: 'Schools' },
         { label: 'gym', title: 'Gym' },
         { label: 'hospital', title: 'Hospital' },
+        { label: 'cafe', title: 'Cafe' },
     ];
 };
 
