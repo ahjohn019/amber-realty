@@ -45,14 +45,23 @@ class PropertyAddressService
     {
         $findPlaceNearbyUrl = $this->googleMapPlaceUrl . ":searchNearby";
 
+        $propertyDetails = PropertyAddressDetails::whereHas('property', function ($query) {
+            $query->where('status', 'active');
+        })
+            ->where('property_id', $payload['property_id'])
+            ->where('current', 1)
+            ->first();
+
+        if (empty($propertyDetails)) return null;
+
         $fetchPlaceNearbyData = [
             "includedTypes" => explode(",", $payload['includedTypes']),
             "maxResultCount" => (int)$payload['maxResultCount'],
             "locationRestriction" => [
                 "circle" => [
                     "center" => [
-                        "latitude" => $payload["latitude"],
-                        "longitude" => $payload["longitude"]
+                        "latitude" => $propertyDetails->latitude,
+                        "longitude" => $propertyDetails->longitude
                     ],
                     "radius" => (int)$payload['radius']
                 ]
@@ -61,6 +70,8 @@ class PropertyAddressService
         ];
 
         $response = $this->handlePostMethod($findPlaceNearbyUrl, $fetchPlaceNearbyData);
+
+        if (isset($response['error']) && $response['error']['code'] != 0) return null;
 
         // save the nearby data to db
         $result = array_map(function ($item) use ($payload) {
@@ -92,9 +103,11 @@ class PropertyAddressService
         foreach ($types as $type) {
             switch ($type) {
                 case 'restaurant':
+                case 'cafe':
                     $icons = "food_icons";
                     break;
                 case 'hospital':
+                case 'pharmacy':
                     $icons = "hospital_icons";
                     break;
                 case 'primary_school':
