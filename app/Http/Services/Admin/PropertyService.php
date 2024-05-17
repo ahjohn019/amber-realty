@@ -10,13 +10,15 @@ use App\Http\Services\ImageService;
 use App\Http\Services\ExceptionService;
 use App\Enums\Property\PropertyStatusEnum;
 use Symfony\Component\HttpFoundation\Response;
+use App\Http\Services\Admin\PropertyAddressService;
 use App\Http\Resources\Admin\Property\PropertyResource;
 
 class PropertyService
 {
     public function __construct(
         protected ExceptionService $exceptionService,
-        protected ImageService $imageService
+        protected ImageService $imageService,
+        protected PropertyAddressService $addressService,
     ) {
     }
 

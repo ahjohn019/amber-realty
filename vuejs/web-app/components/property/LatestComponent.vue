@@ -104,44 +104,34 @@
     </div>
 </template>
 
-<script>
+<script setup>
 import { usePropertyWebStore } from '@store_web/property/index.js';
 import { onMounted, ref } from 'vue';
 
-export default {
-    setup() {
-        const webProperty = usePropertyWebStore();
-        const payload = {
-            limit: 4,
-        };
-
-        const latestProperty = ref([]);
-
-        const fetchLatestProperty = async () => {
-            const response = await webProperty.fetchLatestProperty(payload);
-            latestProperty.value = response;
-
-            return response;
-        };
-
-        const numberFormat = (number, symbol = 'RM') => {
-            const formattedNumber = number
-                .toString()
-                .replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-            return `${symbol}${formattedNumber}`;
-        };
-
-        onMounted(() => {
-            fetchLatestProperty();
-        });
-
-        return {
-            fetchLatestProperty,
-            numberFormat,
-            latestProperty,
-        };
-    },
+const webProperty = usePropertyWebStore();
+const payload = {
+    limit: 4,
 };
+
+const latestProperty = ref([]);
+
+const fetchLatestProperty = async () => {
+    const response = await webProperty.fetchLatestProperty(payload);
+    latestProperty.value = response;
+
+    return response;
+};
+
+const numberFormat = (number, symbol = 'RM') => {
+    const formattedNumber = number
+        .toString()
+        .replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    return `${symbol}${formattedNumber}`;
+};
+
+onMounted(() => {
+    fetchLatestProperty();
+});
 </script>
 
 <style>

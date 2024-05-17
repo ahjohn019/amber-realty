@@ -67,6 +67,7 @@ export const usePropertyWebStore = defineStore('property_web', {
             }
         },
 
+        // google map location
         async fetchLocation(propertyDetails = null) {
             try {
                 const response = await axios.post(prefix + 'location', {
@@ -92,6 +93,17 @@ export const usePropertyWebStore = defineStore('property_web', {
                 console.error('Error:', error);
                 throw error;
             }
+        },
+
+        // js google map location
+        async fetchNearbyLocation(id) {
+            try {
+                const response = await axios.get(
+                    prefix + 'nearby-location/' + id
+                );
+
+                return response.data.data;
+            } catch (error) {}
         },
     },
 });

@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Web;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Web\Property\ListFormRequest;
+use App\Models\PropertyAddressDetails;
 use App\Http\Services\Web\PropertyService;
+use App\Http\Requests\Web\Property\ListFormRequest;
 
 class PropertyController extends Controller
 {
@@ -77,5 +79,16 @@ class PropertyController extends Controller
         return self::successResponse('Fetch Active Location Successfully', [
             "data" => $result
         ]);
+    }
+
+    public function viewNearbyLocation($id)
+    {
+        $result = PropertyAddressDetails::where('property_id', $id)->get();
+
+        if (empty($result)) {
+            return self::failedResponse('Invalid Property Data', "Nearby Location Not Available", Response::HTTP_FOUND);
+        }
+
+        return self::successResponse('Success', $result);
     }
 }

@@ -27,7 +27,9 @@
 
                     <DescriptionsComponent :propertyDetails="propertyDetails" />
 
-                    <FullAddressComponent v-if="propertyDetails.full_address" />
+                    <!-- <FullAddressComponent v-if="propertyDetails.full_address" /> -->
+
+                    <GoogleMapComponent v-if="nearbyLocationList.length > 0" />
                 </div>
                 <div
                     class="col"
@@ -60,13 +62,13 @@ import { usePropertyWebStore } from '@store_web/property/index.js';
 import { ref, onMounted } from 'vue';
 
 import InfoComponent from '@web/components/property/details/InfoComponent.vue';
-
 import ShortDescriptionsComponent from '@web/components/property/details/ShortDescComponent.vue';
 import DescriptionsComponent from '@web/components/property/details/DescriptionsComponent.vue';
 import BannerComponent from '@web/components/property/details/BannerComponent.vue';
 import ListingAgentComponent from '@web/components/property/details/ListingAgentComponent.vue';
 import ListingAgentMobileComponent from '@web/components/property/details/ListingAgentMobileComponent.vue';
-import FullAddressComponent from '@web/components/property/details/FullAddressComponent.vue';
+// import FullAddressComponent from '@web/components/property/details/FullAddressComponent.vue';
+import GoogleMapComponent from '@web/components/property/details/GoogleMapComponent.vue';
 
 export default {
     components: {
@@ -77,27 +79,31 @@ export default {
         BannerComponent,
         ListingAgentComponent,
         ListingAgentMobileComponent,
-        FullAddressComponent,
+        // FullAddressComponent,
+        GoogleMapComponent,
     },
 
     setup() {
         const webProperty = usePropertyWebStore();
+
         const propertyDetails = ref({});
         const sliderImageNumber = ref(0);
-
         const propertyRoomDetails = ref([]);
         const propertyDetailsSection = ref([]);
         const whatsAppEnquiries = ref('');
         const listingAgentClass = ref('');
-
         const listingAgentContainer = ref('');
         const listingAgentMobileContainer = ref('');
         const fullAddress = ref('');
-
         const listingAgentClassToggle = ref(false);
+        const nearbyLocationList = ref([]);
 
         const fetchPropertyDetails = async () => {
             const response = await webProperty.fetchPropertyDetails();
+            nearbyLocationList.value = await webProperty.fetchNearbyLocation(
+                response.id
+            );
+
             propertyDetails.value = response;
             sliderImageNumber.value = response.sliders?.length || 0;
 
@@ -186,6 +192,7 @@ export default {
             listingAgentMobileContainer,
             handleListingAgentClass,
             fullAddress,
+            nearbyLocationList,
         };
     },
 };
