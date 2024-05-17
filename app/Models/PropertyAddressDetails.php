@@ -17,4 +17,13 @@ class PropertyAddressDetails extends Model
     {
         return $this->belongsTo(Property::class);
     }
+
+    public function scopeCurrentLocation($query = null, array $payload)
+    {
+        return $query->whereHas('property', function ($query) {
+            $query->where('status', 'active');
+        })
+            ->where('property_id', $payload['property_id'])
+            ->where('current', 1);
+    }
 }
