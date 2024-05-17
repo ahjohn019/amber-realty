@@ -38,6 +38,9 @@ Route::prefix('property')->name('web.property')->group(function () {
     Route::get('/latest', [PropertyController::class, 'latest'])->name('latest');
     Route::get('/details/{id}', [PropertyController::class, 'details'])->name('details');
     Route::get('/highlights', [PropertyController::class, 'highlights'])->name('highlights');
+    Route::post('/location', [PropertyController::class, 'handleLocation'])->name('location');
+    Route::post('/active-location', [PropertyController::class, 'handleActiveLocation'])->name('active_location');
+    Route::get('/nearby-location/{id}', [PropertyController::class, 'viewNearbyLocation'])->name('nearby_location');
 });
 
 Route::prefix('auth')->middleware([])->group(

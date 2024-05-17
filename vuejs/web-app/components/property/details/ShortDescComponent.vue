@@ -1,3 +1,7 @@
+<script setup>
+const propertyDetailsProps = defineProps(['propertyDetails']);
+</script>
+
 <template>
     <div class="col-12 row justify-between">
         <div class="col-12 rounded row md:py-10">
@@ -10,15 +14,11 @@
 
                 <div
                     class="col-12 break-words"
-                    v-html="propertyDetails.short_description"
+                    v-html="
+                        propertyDetailsProps.propertyDetails.short_description
+                    "
                 ></div>
             </div>
         </div>
     </div>
 </template>
-
-<script>
-export default {
-    props: ['propertyDetails'],
-};
-</script>

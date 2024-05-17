@@ -10,13 +10,15 @@ use App\Http\Services\ImageService;
 use App\Http\Services\ExceptionService;
 use App\Enums\Property\PropertyStatusEnum;
 use Symfony\Component\HttpFoundation\Response;
+use App\Http\Services\Admin\PropertyAddressService;
 use App\Http\Resources\Admin\Property\PropertyResource;
 
 class PropertyService
 {
     public function __construct(
         protected ExceptionService $exceptionService,
-        protected ImageService $imageService
+        protected ImageService $imageService,
+        protected PropertyAddressService $addressService,
     ) {
     }
 
@@ -58,6 +60,7 @@ class PropertyService
                     'name' => $payload['name'],
                     'description' => $payload['description'],
                     'short_description' => $payload['short_description'],
+                    'full_address' => isset($payload['full_address']) ? $payload['full_address'] : null,
                     'status' => $payload['status'],
                     'price' => $payload['price'],
                     'type_id' => $payload['type_id'],
@@ -134,6 +137,7 @@ class PropertyService
                     'name' => $payload['name'],
                     'description' => $payload['description'],
                     'short_description' => $payload['short_description'],
+                    'full_address' => isset($payload['full_address']) ? $payload['full_address'] : null,
                     'status' => $payload['status'],
                     'price' => $payload['price'],
                     'type_id' => $payload['type_id'],

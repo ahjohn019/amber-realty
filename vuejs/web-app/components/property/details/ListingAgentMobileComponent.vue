@@ -1,3 +1,25 @@
+<script setup>
+import { ref, onMounted } from 'vue';
+import ListingAgentComponent from '@web/components/property/details/ListingAgentComponent.vue';
+
+const enquiriesProps = defineProps(['whatsAppEnquiries']);
+const detailsModal = ref(false);
+
+const handleDetailsModal = () => {
+    detailsModal.value = true;
+};
+
+const checkWindowWidth = () => {
+    if (window.innerWidth > 1024) {
+        detailsModal.value = false;
+    }
+};
+
+onMounted(() => {
+    window.addEventListener('resize', checkWindowWidth);
+});
+</script>
+
 <template>
     <div
         class="row justify-between items-center px-3 py-2 border fixed bottom-0 bg-white w-full"
@@ -30,7 +52,7 @@
 
                 <q-card-section class="q-pt-none">
                     <ListingAgentComponent
-                        :whatsAppEnquiries="whatsAppEnquiries"
+                        :whatsAppEnquiries="enquiriesProps.whatsAppEnquiries"
                         class="row rounded-lg py-6 gap-4"
                     />
                 </q-card-section>
@@ -38,41 +60,6 @@
         </q-dialog>
     </div>
 </template>
-
-<script>
-import { ref, onMounted } from 'vue';
-import ListingAgentComponent from '@web/components/property/details/ListingAgentComponent.vue';
-
-export default {
-    props: ['whatsAppEnquiries'],
-    components: {
-        ListingAgentComponent,
-    },
-    setup() {
-        const detailsModal = ref(false);
-
-        const handleDetailsModal = () => {
-            detailsModal.value = true;
-        };
-
-        const checkWindowWidth = () => {
-            if (window.innerWidth > 1024) {
-                detailsModal.value = false;
-            }
-        };
-
-        onMounted(() => {
-            window.addEventListener('resize', checkWindowWidth);
-        });
-
-        return {
-            handleDetailsModal,
-            detailsModal,
-            checkWindowWidth,
-        };
-    },
-};
-</script>
 
 <style>
 .footer__mobilelabel {

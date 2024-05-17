@@ -40,6 +40,7 @@ class UpdateForm extends FormRequest
             'name' => ['sometimes'],
             'description' => ['sometimes'],
             'short_description' => ['sometimes'],
+            'full_address' =>  ['sometimes'],
             'status' => ['sometimes', new Enum(PropertyStatusEnum::class)],
             'price' => ['sometimes'],
             'type_id' => [

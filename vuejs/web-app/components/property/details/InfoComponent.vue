@@ -1,24 +1,67 @@
+<script setup>
+import { ref, onMounted } from 'vue';
+import SliderComponent from '@web/components/property/details/SliderComponent.vue';
+
+const infoProps = defineProps([
+    'propertyDetails',
+    'propertyRoomDetails',
+    'whatsAppEnquiries',
+    'sliders',
+]);
+
+const sliderModal = ref(false);
+const sliderDisplayDuration = 1200;
+const sliderButton = ref('');
+const maximizedToggle = ref(true);
+
+sliderButton.value = 'hidden';
+
+const selectSliderModal = () => {
+    sliderModal.value = true;
+
+    setTimeout(() => {
+        sliderButton.value = '';
+    }, sliderDisplayDuration);
+};
+
+const numberFormat = (number, symbol = 'RM') => {
+    const formattedNumber = number
+        ?.toString()
+        .replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    return `${symbol}${formattedNumber}`;
+};
+
+onMounted(() => {
+    setTimeout(() => {
+        sliderButton.value = '';
+    }, sliderDisplayDuration);
+});
+</script>
+
 <template>
     <div class="col-12 row justify-between items-center gap-4">
         <div
             class="col-12 row gap-4 items-center text-xl md:text-4xl break-words"
         >
-            {{ propertyDetails.name }}
+            {{ infoProps.propertyDetails.name }}
         </div>
 
         <div
             class="col-12"
-            v-if="propertyDetails.details && propertyDetails.details_toggle"
+            v-if="
+                infoProps.propertyDetails.details &&
+                infoProps.propertyDetails.details_toggle
+            "
         >
             <div class="text-sm">
                 <q-chip
                     color="teal"
                     text-color="white"
                     :icon="room.icon"
-                    v-for="(room, key) in propertyRoomDetails"
+                    v-for="(room, key) in infoProps.propertyRoomDetails"
                     :key="key"
                 >
-                    {{ propertyDetails.details[room.value] }}
+                    {{ infoProps.propertyDetails.details[room.value] }}
                     {{ room.name }}
                 </q-chip>
             </div>
@@ -28,16 +71,16 @@
                 class="bg-secondary featured-label text-center py-2 px-4 font-bold rounded capitalize w-[100px]"
             >
                 For
-                {{ propertyDetails.listing_type }}
+                {{ infoProps.propertyDetails.listing_type }}
             </div>
         </div>
         <div class="col-12">
             <span class="text-xl md:text-4xl font-bold">
-                {{ numberFormat(propertyDetails.price, 'RM ') }}</span
+                {{ numberFormat(infoProps.propertyDetails.price, 'RM ') }}</span
             >
         </div>
         <div class="col-12">
-            <div v-if="sliders > 0">
+            <div v-if="infoProps.sliders > 0">
                 <q-btn
                     label="View More"
                     icon="photo_camera"
@@ -56,7 +99,7 @@
                         </q-bar>
                         <q-card-section class="h-full grid mx-auto">
                             <SliderComponent
-                                :propertyDetails="propertyDetails"
+                                :propertyDetails="infoProps.propertyDetails"
                             />
                         </q-card-section>
                     </q-card>
@@ -65,63 +108,3 @@
         </div>
     </div>
 </template>
-
-<script>
-import { ref, onMounted } from 'vue';
-import SliderComponent from '@web/components/property/details/SliderComponent.vue';
-
-export default {
-    components: {
-        SliderComponent,
-    },
-
-    props: [
-        'propertyDetails',
-        'propertyRoomDetails',
-        'whatsAppEnquiries',
-        'sliders',
-    ],
-
-    setup() {
-        const sliderModal = ref(false);
-        const sliderOptions = ref({});
-        const sliderDisplayDuration = 1200;
-        const sliderButton = ref('');
-        const maximizedToggle = ref(true);
-        const thumbnailOptions = ref({});
-
-        sliderButton.value = 'hidden';
-
-        const selectSliderModal = () => {
-            sliderModal.value = true;
-
-            setTimeout(() => {
-                sliderButton.value = '';
-            }, sliderDisplayDuration);
-        };
-
-        const numberFormat = (number, symbol = 'RM') => {
-            const formattedNumber = number
-                ?.toString()
-                .replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-            return `${symbol}${formattedNumber}`;
-        };
-
-        onMounted(() => {
-            setTimeout(() => {
-                sliderButton.value = '';
-            }, sliderDisplayDuration);
-        });
-
-        return {
-            selectSliderModal,
-            sliderModal,
-            sliderOptions,
-            sliderButton,
-            numberFormat,
-            maximizedToggle,
-            thumbnailOptions,
-        };
-    },
-};
-</script>

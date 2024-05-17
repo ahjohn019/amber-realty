@@ -92,6 +92,9 @@ Route::middleware(['auth:sanctum', 'role:' . RoleTag::SUPERADMIN . '|' . RoleTag
         Route::post('/update/{id}', [PropertyController::class, 'update'])->name('update');
         Route::delete('/delete/{id}', [PropertyController::class, 'destroy'])->name('destroy');
         Route::post('/highlight', [PropertyController::class, 'highlight'])->name('highlight');
+        Route::get('/view-nearby-location/{id}', [PropertyController::class, 'viewNearbyLocation'])->name('view_nearby_location');
+        Route::post('/main-location', [PropertyController::class, 'mainLocation'])->name('main_location');
+        Route::post('/nearby', [PropertyController::class, 'nearby'])->name('nearby_details');
     });
 
     Route::prefix('ref')->name('ref.')->group(function () {

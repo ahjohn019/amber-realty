@@ -2,19 +2,21 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Property;
+
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Web\ListFormRequest;
 use App\Http\Services\Admin\PropertyService;
+use Symfony\Component\HttpFoundation\Response;
 use App\Http\Requests\Admin\Property\CreateForm;
 use App\Http\Requests\Admin\Property\UpdateForm;
-use App\Http\Requests\Web\ListFormRequest;
-use Symfony\Component\HttpFoundation\Response;
+use App\Http\Services\Admin\PropertyAddressService;
 
 class PropertyController extends Controller
 {
     public function __construct(
-        protected PropertyService $propertyService
+        protected PropertyService $propertyService,
+        protected PropertyAddressService $propertyAddressService
     ) {
     }
 
@@ -94,5 +96,31 @@ class PropertyController extends Controller
         }
 
         return self::successResponse('Highlight Updated Successfully', $result);
+    }
+
+    public function mainLocation(Request $request)
+    {
+        $params = $request->all();
+
+        $result = $this->propertyAddressService->fetchMainLocation($params);
+
+        if (empty($result)) {
+            return self::failedResponse('Invalid Property Data', "Main Location Not Available", Response::HTTP_FOUND);
+        }
+
+        return self::successResponse('Success', $result);
+    }
+
+    public function nearby(Request $request)
+    {
+        $params = $request->all();
+
+        $result = $this->propertyAddressService->nearby($params);
+
+        if (empty($result)) {
+            return self::failedResponse('Invalid Property Data', "Nearby Location Not Available", Response::HTTP_FOUND);
+        }
+
+        return self::successResponse('Success', $result);
     }
 }
