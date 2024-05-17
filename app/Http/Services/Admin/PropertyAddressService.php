@@ -45,14 +45,23 @@ class PropertyAddressService
     {
         $findPlaceNearbyUrl = $this->googleMapPlaceUrl . ":searchNearby";
 
+        $propertyDetails = PropertyAddressDetails::whereHas('property', function ($query) {
+            $query->where('status', 'active');
+        })
+            ->where('property_id', $payload['property_id'])
+            ->where('current', 1)
+            ->first();
+
+        if (empty($propertyDetails)) return null;
+
         $fetchPlaceNearbyData = [
             "includedTypes" => explode(",", $payload['includedTypes']),
             "maxResultCount" => (int)$payload['maxResultCount'],
             "locationRestriction" => [
                 "circle" => [
                     "center" => [
-                        "latitude" => $payload["latitude"],
-                        "longitude" => $payload["longitude"]
+                        "latitude" => $propertyDetails->latitude,
+                        "longitude" => $propertyDetails->longitude
                     ],
                     "radius" => (int)$payload['radius']
                 ]
