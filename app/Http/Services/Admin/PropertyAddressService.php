@@ -71,6 +71,8 @@ class PropertyAddressService
 
         $response = $this->handlePostMethod($findPlaceNearbyUrl, $fetchPlaceNearbyData);
 
+        if (isset($response['error']) && $response['error']['code'] != 0) return null;
+
         // save the nearby data to db
         $result = array_map(function ($item) use ($payload) {
             $iconPath = $this->iconsReplacement($item['types']);
@@ -101,9 +103,11 @@ class PropertyAddressService
         foreach ($types as $type) {
             switch ($type) {
                 case 'restaurant':
+                case 'cafe':
                     $icons = "food_icons";
                     break;
                 case 'hospital':
+                case 'pharmacy':
                     $icons = "hospital_icons";
                     break;
                 case 'primary_school':
