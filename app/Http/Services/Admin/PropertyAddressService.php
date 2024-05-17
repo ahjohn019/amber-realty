@@ -102,8 +102,13 @@ class PropertyAddressService
 
         foreach ($types as $type) {
             switch ($type) {
-                case 'restaurant':
+                case 'gym';
+                    $icons = "gym_icons";
+                    break;
                 case 'cafe':
+                    $icons = "cafe_icons";
+                    break;
+                case 'restaurant':
                     $icons = "food_icons";
                     break;
                 case 'hospital':
@@ -113,9 +118,6 @@ class PropertyAddressService
                 case 'primary_school':
                 case 'secondary_school':
                     $icons = "school_icons";
-                    break;
-                case 'gym';
-                    $icons = "gym_icons";
                     break;
                 default:
                     break;
