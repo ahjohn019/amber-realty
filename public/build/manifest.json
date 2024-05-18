@@ -638,7 +638,7 @@
       "vuejs/web-app/modules/property/views/ListPage.vue",
       "vuejs/web-app/modules/property/views/DetailsPage.vue"
     ],
-    "file": "assets/app-b0f5fdc9.js",
+    "file": "assets/app-5d5b40ba.js",
     "imports": [
       "_ckeditor-568c0a64.js"
     ],
@@ -708,7 +708,7 @@
     "css": [
       "assets/DetailsPage-fec22140.css"
     ],
-    "file": "assets/DetailsPage-7180ce08.js",
+    "file": "assets/DetailsPage-be25b55d.js",
     "imports": [
       "_ckeditor-568c0a64.js",
       "_BaseLayout-ef0c9c06.js",
