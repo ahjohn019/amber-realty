@@ -1,5 +1,5 @@
 <script setup>
-import { GoogleMap, Marker, InfoWindow } from 'vue3-google-map';
+import { GoogleMap, Marker, InfoWindow, CustomControl } from 'vue3-google-map';
 import { ref, reactive } from 'vue';
 import { usePropertyWebStore } from '@store_web/property/index.js';
 
@@ -13,6 +13,7 @@ const nearbyGeolocationPosition = ref({});
 const mainGeolocationPosition = ref({});
 const activeButton = ref(null);
 const nearbyNavigationList = ref({});
+const nearbyOpacity = ref(1);
 
 const mapStyle = ref([]);
 mapStyle.value = [
@@ -102,6 +103,7 @@ const fetchNearbySelection = async (event) => {
     const nearbyLocation = await fetchNearbyLocationList();
     const fetchNearbySelectionAttribute = event.target.getAttribute('nearby');
 
+    nearbyOpacity.value = 1;
     activeButton.value = await activeSelection(event, activeButton.value);
 
     nearbyGeolocationPosition.value = nearbyLocation.filter(
@@ -127,6 +129,10 @@ const fetchNearbyNavigationList = () => {
         { label: 'hospital', title: 'Hospital' },
         { label: 'cafe', title: 'Cafe' },
     ];
+};
+
+const clearNearbyIcons = () => {
+    nearbyOpacity.value = nearbyOpacity.value ? 0 : 1;
 };
 
 fetchWebLocation();
@@ -192,6 +198,7 @@ fetchNearbyNavigationList();
                         url: `../../images/` + nearbyPosition.icon_url + `.png`,
                         scaledSize: { width: 25, height: 25 },
                     },
+                    opacity: nearbyOpacity,
                 }"
                 @click="centerMapOnMarker"
             >
@@ -212,5 +219,37 @@ fetchNearbyNavigationList();
                 </InfoWindow>
             </Marker>
         </div>
+        <CustomControl position="BOTTOM_CENTER">
+            <button class="clear-nearby-button">
+                <q-icon
+                    :name="
+                        nearbyOpacity == 1 ? 'highlight_off' : 'check_circle'
+                    "
+                    :color="nearbyOpacity == 1 ? 'red' : 'green'"
+                    size="32px"
+                    @click="clearNearbyIcons()"
+                />
+            </button>
+        </CustomControl>
     </GoogleMap>
 </template>
+
+<style scoped>
+.clear-nearby-button {
+    box-sizing: border-box;
+    background: white;
+    height: 40px;
+    width: 40px;
+    border-radius: 2px;
+    border: 0px;
+    margin: 10px;
+    padding: 0px;
+    font-size: 1.25rem;
+    text-transform: none;
+    appearance: none;
+    cursor: pointer;
+    user-select: none;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 4px -1px;
+    overflow: hidden;
+}
+</style>
