@@ -2,7 +2,6 @@
 
 namespace App\Http\Services\Admin;
 
-use Illuminate\Support\Facades\DB;
 use App\Models\PropertyAddressDetails;
 
 class PropertyAddressService
@@ -22,7 +21,10 @@ class PropertyAddressService
 
     public function fetchMainLocation(array $payload = null)
     {
-        $fetchGeocodingUrl = $this->googleMapGeocodingUrl . "/json?address=" . urlencode($payload['address']) . "&key=" . $this->googleMapKey;
+        $propertyDetails = PropertyAddressDetails::currentLocation($payload)->first();
+        if (empty($propertyDetails)) return null;
+
+        $fetchGeocodingUrl = $this->googleMapGeocodingUrl . "/json?address=" . urlencode($propertyDetails->formatted_address) . "&key=" . $this->googleMapKey;
         $geoCodeResponse = $this->handleGetMethod($fetchGeocodingUrl);
         $geoCode = [];
 
@@ -46,7 +48,6 @@ class PropertyAddressService
         $findPlaceNearbyUrl = $this->googleMapPlaceUrl . ":searchNearby";
 
         $propertyDetails = PropertyAddressDetails::currentLocation($payload)->first();
-
         if (empty($propertyDetails)) return null;
 
         $fetchPlaceNearbyData = [
