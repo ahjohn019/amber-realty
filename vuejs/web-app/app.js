@@ -27,6 +27,8 @@ app.use(VueNumber);
 app.use(VueAxios, axios);
 
 app.config.globalProperties.mainLogo = '/images/amber_realty_logo.png';
+app.config.globalProperties.googleMapKey =
+    'AIzaSyBwxqhcFY1bJHs3CbyxLzU41z458Rh3n20';
 
 app.use(CKEditor);
 app.use(

@@ -18,6 +18,11 @@ return [
 
     'name' => env('APP_NAME', 'Laravel'),
     'admin_name' => env('APP_NAME', 'Admin Crystal'),
+    'google_map_url' => env('GOOGLE_MAP_URL'),
+    'google_map_api_key' => env('GOOGLE_MAP_API_KEY'),
+    'google_map_api_url' => env('GOOGLE_MAP_API_URL'),
+    'google_map_place_url' => env('GOOGLE_MAP_API_PLACE_URL'),
+    'google_map_geocoding_url' => env('GOOGLE_MAP_GEOCODING_URL'),
 
     /*
     |--------------------------------------------------------------------------

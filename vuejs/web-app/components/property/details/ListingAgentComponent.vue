@@ -1,3 +1,28 @@
+<script setup>
+import { ref } from 'vue';
+
+const enquiriesProps = defineProps(['whatsAppEnquiries']);
+const contactAgent = ref([]);
+
+contactAgent.value = [
+    {
+        name: 'Admin',
+        contact: '60192140561',
+        contactLabel: '019-2140561',
+    },
+    {
+        name: 'Admin',
+        contact: '60123729668',
+        contactLabel: '012-3729668',
+    },
+    {
+        name: 'Admin',
+        contact: '60193560561',
+        contactLabel: '019-3560561',
+    },
+];
+</script>
+
 <template>
     <div>
         <div class="col-12 flex gap-4">
@@ -34,7 +59,9 @@
                                 'https://wa.me/' +
                                 agent.contact +
                                 '?text=' +
-                                encodeURIComponent(whatsAppEnquiries)
+                                encodeURIComponent(
+                                    enquiriesProps.whatsAppEnquiries
+                                )
                             "
                             target="_blank"
                         >
@@ -66,39 +93,6 @@
         </div>
     </div>
 </template>
-
-<script>
-import { ref } from 'vue';
-
-export default {
-    props: ['whatsAppEnquiries'],
-    setup() {
-        const contactAgent = ref([]);
-
-        contactAgent.value = [
-            {
-                name: 'Admin',
-                contact: '60192140561',
-                contactLabel: '019-2140561',
-            },
-            {
-                name: 'Admin',
-                contact: '60123729668',
-                contactLabel: '012-3729668',
-            },
-            {
-                name: 'Admin',
-                contact: '60193560561',
-                contactLabel: '019-3560561',
-            },
-        ];
-
-        return {
-            contactAgent,
-        };
-    },
-};
-</script>
 
 <style>
 .q-anchor--skip.q-chip__content {

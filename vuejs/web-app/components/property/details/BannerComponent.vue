@@ -1,9 +1,20 @@
+<script setup>
+import { ref } from 'vue';
+
+const propertyDetailsProps = defineProps(['propertyDetails']);
+const openBanner = ref(false);
+
+const toggleBanner = () => {
+    openBanner.value = true;
+};
+</script>
+
 <template>
     <div>
         <q-img
             :src="
-                propertyDetails.banner
-                    ? propertyDetails.banner.image.url
+                propertyDetailsProps.propertyDetails.banner
+                    ? propertyDetailsProps.propertyDetails.banner.image.url
                     : 'https://cdn.quasar.dev/img/parallax2.jpg'
             "
             class="cursor-pointer h-[450px]"
@@ -16,8 +27,9 @@
                 <q-card-section>
                     <q-img
                         :src="
-                            propertyDetails.banner
-                                ? propertyDetails.banner.image.url
+                            propertyDetailsProps.propertyDetails.banner
+                                ? propertyDetailsProps.propertyDetails.banner
+                                      .image.url
                                 : 'https://cdn.quasar.dev/img/parallax2.jpg'
                         "
                         :fit="contain"
@@ -27,22 +39,3 @@
         </q-dialog>
     </div>
 </template>
-
-<script>
-import { ref } from 'vue';
-export default {
-    props: ['propertyDetails'],
-    setup() {
-        const openBanner = ref(false);
-
-        const toggleBanner = () => {
-            openBanner.value = true;
-        };
-
-        return {
-            openBanner,
-            toggleBanner,
-        };
-    },
-};
-</script>
