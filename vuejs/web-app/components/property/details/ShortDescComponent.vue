@@ -9,7 +9,7 @@ const propertyDetailsProps = defineProps(['propertyDetails']);
                 <div
                     class="col-12 text-xl md:text-4xl font-bold border-b border-grey flex items-center pb-4"
                 >
-                    Short Descriptions
+                    Details
                 </div>
 
                 <div
