@@ -22,7 +22,7 @@ class PropertyAddressService
 
     public function fetchMainLocation(array $payload = null)
     {
-        $propertyDetails = Property::find($payload['property_id'] ?? '')->first();
+        $propertyDetails = Property::find($payload['property_id'] ?? '');
         if (empty($propertyDetails)) return null;
 
         $fetchGeocodingUrl = $this->googleMapGeocodingUrl . "/json?address=" . urlencode($propertyDetails->full_address) . "&key=" . $this->googleMapKey;
