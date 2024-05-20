@@ -104,10 +104,16 @@ onMounted(() => {
     setTimeout(function () {
         const containerHeight =
             document.querySelector('.container').offsetHeight;
-        const containerMinimumHeight = 600;
-        if (containerHeight > containerMinimumHeight) {
+        const containerMinimumHeight = 700;
+        const deviceScreenMaxSize = 1024;
+        if (
+            containerHeight > containerMinimumHeight ||
+            window.innerWidth < deviceScreenMaxSize
+        ) {
             handleDetailsObserver();
         }
+
+        console.log(window.innerWidth);
     }, 1000);
 
     handleListingAgentClass();
