@@ -2,6 +2,7 @@
 
 namespace App\Http\Services\Admin;
 
+use App\Models\Property;
 use App\Models\PropertyAddressDetails;
 
 class PropertyAddressService
@@ -21,10 +22,10 @@ class PropertyAddressService
 
     public function fetchMainLocation(array $payload = null)
     {
-        $propertyDetails = PropertyAddressDetails::currentLocation($payload)->first();
+        $propertyDetails = Property::find($payload['property_id'] ?? '')->first();
         if (empty($propertyDetails)) return null;
 
-        $fetchGeocodingUrl = $this->googleMapGeocodingUrl . "/json?address=" . urlencode($propertyDetails->formatted_address) . "&key=" . $this->googleMapKey;
+        $fetchGeocodingUrl = $this->googleMapGeocodingUrl . "/json?address=" . urlencode($propertyDetails->full_address) . "&key=" . $this->googleMapKey;
         $geoCodeResponse = $this->handleGetMethod($fetchGeocodingUrl);
         $geoCode = [];
 
