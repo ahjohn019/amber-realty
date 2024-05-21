@@ -10,6 +10,8 @@ import ListingAgentComponent from '@web/components/property/details/ListingAgent
 import ListingAgentMobileComponent from '@web/components/property/details/ListingAgentMobileComponent.vue';
 import GoogleMapComponent from '@web/components/property/details/GoogleMapComponent.vue';
 
+import DescriptionsButton from '@web/components/property/details/DescriptionsButton.vue';
+
 const webProperty = usePropertyWebStore();
 
 const propertyDetails = ref({});
@@ -22,6 +24,9 @@ const listingAgentContainer = ref('');
 const listingAgentMobileContainer = ref('');
 const listingAgentClassToggle = ref(false);
 const nearbyLocationList = ref([]);
+
+const descriptionButtonPosition = ref('');
+descriptionButtonPosition.value = 'bottom-[8%]';
 
 const fetchPropertyDetails = async () => {
     const response = await webProperty.fetchPropertyDetails();
@@ -112,8 +117,6 @@ onMounted(() => {
         ) {
             handleDetailsObserver();
         }
-
-        console.log(window.innerWidth);
     }, 1000);
 
     handleListingAgentClass();
@@ -122,7 +125,7 @@ onMounted(() => {
 
 <template>
     <BaseLayout>
-        <template #content>
+        <template #content="{ descriptionButtonPosition }">
             <BannerComponent
                 :propertyDetails="propertyDetails"
                 style="margin-top: 5.5rem"
@@ -147,7 +150,11 @@ onMounted(() => {
                         :propertyDetails="propertyDetails"
                     />
 
-                    <GoogleMapComponent v-if="nearbyLocationList.length > 0" />
+                    <GoogleMapComponent
+                        :propertyDetails="propertyDetails"
+                        :nearbyLocationList="nearbyLocationList"
+                        v-if="nearbyLocationList.length > 0"
+                    />
                 </div>
                 <div
                     class="col"
@@ -170,6 +177,10 @@ onMounted(() => {
                 <ListingAgentMobileComponent
                     :whatsAppEnquiries="whatsAppEnquiries"
                 />
+            </div>
+
+            <div :class="`p-4 pr-2 fixed ${descriptionButtonPosition} right-0`">
+                <DescriptionsButton :propertyDetails="propertyDetails" />
             </div>
         </template>
     </BaseLayout>

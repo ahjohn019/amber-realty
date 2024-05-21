@@ -1,18 +1,9 @@
 <script setup>
 import { ref } from 'vue';
-import { usePropertyWebStore } from '@store_web/property/index.js';
 
 const dialog = ref(false);
 const maximizedToggle = ref(true);
-const propertyDetails = ref({});
-const webProperty = usePropertyWebStore();
-
-const fetchPropertyDetails = async () => {
-    const response = await webProperty.fetchPropertyDetails();
-    propertyDetails.value = response;
-};
-
-fetchPropertyDetails();
+const props = defineProps(['propertyDetails']);
 </script>
 
 <template>
@@ -70,7 +61,7 @@ fetchPropertyDetails();
                 <q-card-section
                     class="prose max-w-none prose-strong:font-black prose-h1:text-7xl prose-h2:text-6xl prose-h3:text-5xl md:py-10"
                 >
-                    <div v-html="propertyDetails.description"></div>
+                    <div v-html="props.propertyDetails.description"></div>
                 </q-card-section>
             </q-card>
         </q-dialog>

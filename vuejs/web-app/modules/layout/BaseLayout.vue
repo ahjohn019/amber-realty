@@ -2,7 +2,6 @@
 import NavBar from '@web/components/base/NavBar.vue';
 import BaseFooter from '@web/components/base/BaseFooter.vue';
 import BackToTop from '@web/components/base/BackToTop.vue';
-import DescriptionsButton from '@web/components/property/details/DescriptionsButton.vue';
 import { useRoute } from 'vue-router';
 import { ref } from 'vue';
 
@@ -35,18 +34,15 @@ switch (route.name) {
     <div class="overflow-hidden">
         <NavBar />
 
-        <slot name="content"></slot>
+        <slot
+            name="content"
+            :descriptionButtonPosition="descriptionButtonPosition"
+        ></slot>
 
         <BackToTop
             :class="`fixed right-3 bg-primary rounded-full cursor-pointer ${backToTopBottomClass}`"
             @scrollY="handleScrollY"
         />
-        <div
-            :class="`p-4 pr-2 fixed ${descriptionButtonPosition} right-0`"
-            v-if="route.name == 'property.details'"
-        >
-            <DescriptionsButton />
-        </div>
 
         <BaseFooter />
     </div>
