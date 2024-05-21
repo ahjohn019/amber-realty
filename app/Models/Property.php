@@ -78,6 +78,11 @@ class Property extends Model
 
 
     // methods
+    public function storeLogs($result)
+    {
+        activity()->performedOn($result)->withProperties(['id' => $result->id, 'name' => 'details'])->log(json_encode($result));
+    }
+
 
     // static methods
     public static function convertListingType($listingTypeKey)

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Web;
 
+use App\Models\Property;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Http\Controllers\Controller;
@@ -31,7 +32,7 @@ class PropertyController extends Controller
     public function details(String $id)
     {
         $result = $this->propertyService->fetchDetails($id);
-        return self::successResponse('Details Display Successfully', $result);
+        return self::successResponse('Details Displays Successfully', $result);
     }
 
     public function list(ListFormRequest $request)
@@ -54,34 +55,7 @@ class PropertyController extends Controller
         return self::successResponse('Fetch Highlight Successfully', $result);
     }
 
-    public function handleLocation(Request $request)
-    {
-        $result = $this->propertyService->handleLocation($request);
-
-        if (isset($result['error'])) {
-            return self::failedResponse('Invalid Property Data', $result['error'], $result['code']);
-        }
-
-        return self::successResponse('Fetch Full Address Successfully', [
-            "type" => "place",
-            "data" => $result
-        ]);
-    }
-
-    public function handleActiveLocation(Request $request)
-    {
-        $result = $this->propertyService->handleActiveLocation($request);
-
-        if (isset($result['error'])) {
-            return self::failedResponse('Invalid Property Data', $result['error'], $result['code']);
-        }
-
-        return self::successResponse('Fetch Active Location Successfully', [
-            "data" => $result
-        ]);
-    }
-
-    public function viewNearbyLocation($id)
+    public function viewNearbyLocation(String $id)
     {
         $result = PropertyAddressDetails::where('property_id', $id)->get();
 
@@ -90,5 +64,9 @@ class PropertyController extends Controller
         }
 
         return self::successResponse('Success', $result);
+    }
+
+    public function fetchTotalViews(String $id)
+    {
     }
 }

@@ -9,9 +9,14 @@ use App\Http\Resources\Web\Property\PropertyResource;
 
 class PropertyService
 {
+    public function __construct(
+        protected Property $property
+    ) {
+    }
+
     public function fetchLatestProperty($payload)
     {
-        $result = Property::where('status', Property::STATUS_ACTIVE)
+        $result = $this->property->where('status', Property::STATUS_ACTIVE)
             ->orderBy('created_at', Property::LATEST)
             ->limit($payload->limit)
             ->get();
@@ -25,9 +30,10 @@ class PropertyService
 
     public function fetchDetails($id)
     {
-        $result = Property::find($id);
+        $result = $this->property->find($id);
 
         $result->load(['banner.image', 'sliders.image']);
+        $this->property->storeLogs($result);
 
         $result = new PropertyResource($result);
 
@@ -59,30 +65,5 @@ class PropertyService
         $result = PropertyHighlight::with('property', 'property.propertyDetail', 'property.banner.image')->where('status', 1)->get();
 
         return $result;
-    }
-
-    public function handleLocation($request)
-    {
-        $googleMapUrl = config('app.google_map_url');
-        $googleMapKey = config('app.google_map_api_key');
-
-        $fullAddress = preg_replace('/\s+/', '+', $request['params']);
-        $fullAddressResult = empty($fullAddress) ? false : $googleMapUrl . "place?key=" . $googleMapKey . "&q=" . $fullAddress;
-
-        return $fullAddressResult;
-    }
-
-    public function handleActiveLocation($request)
-    {
-        $googleMapUrl = config('app.google_map_url');
-        $googleMapKey = config('app.google_map_api_key');
-
-        $fullAddress = preg_replace('/\s+/', '+', $request['full_address']);
-        $query = $request['query'] == "place" ? null : $request['type'] . "+near+in+";
-
-        $fullAddressResult = empty($fullAddress) ? false : $googleMapUrl . $request['query'] . "?key=" . $googleMapKey . "&q=" . $query . $fullAddress;
-
-
-        return $fullAddressResult;
     }
 }
