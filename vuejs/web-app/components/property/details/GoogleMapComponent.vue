@@ -1,14 +1,13 @@
 <script setup>
 import { GoogleMap, Marker, InfoWindow, CustomControl } from 'vue3-google-map';
 import { ref, reactive } from 'vue';
-import { usePropertyWebStore } from '@store_web/property/index.js';
 
 const mapRef = ref(null);
 const activeMarker = reactive({
     latLng: null,
 });
+const props = defineProps(['propertyDetails', 'nearbyLocationList']);
 
-const nearbyLocationList = ref('');
 const nearbyGeolocationPosition = ref({});
 const mainGeolocationPosition = ref({});
 const activeButton = ref(null);
@@ -53,8 +52,6 @@ mapStyle.value = [
     },
 ];
 
-const webProperty = usePropertyWebStore();
-
 const centerMapOnMarker = (marker) => {
     const onCenter = { lat: marker.latLng.lat(), lng: marker.latLng.lng() };
     mapRef.value.map.panTo(onCenter);
@@ -65,19 +62,8 @@ const closeInfoWindow = () => {
     activeMarker.latLng = null;
 };
 
-const fetchNearbyLocationList = async () => {
-    const propertyDetails = await webProperty.fetchPropertyDetails();
-    const nearbyLocation = await webProperty.fetchNearbyLocation(
-        propertyDetails.id
-    );
-
-    nearbyLocationList.value = nearbyLocation;
-
-    return nearbyLocation;
-};
-
 const fetchWebLocation = async () => {
-    const nearbyLocation = await fetchNearbyLocationList();
+    const nearbyLocation = props.nearbyLocationList;
 
     mainGeolocationPosition.value = nearbyLocation.find(
         (item) => item.current === 1
@@ -100,7 +86,7 @@ const activeSelection = (event, activeButton) => {
 };
 
 const fetchNearbySelection = async (event) => {
-    const nearbyLocation = await fetchNearbyLocationList();
+    const nearbyLocation = props.nearbyLocationList;
     const fetchNearbySelectionAttribute = event.target.getAttribute('nearby');
 
     nearbyOpacity.value = 1;
