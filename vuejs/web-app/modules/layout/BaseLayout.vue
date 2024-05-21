@@ -16,7 +16,7 @@ const handleScrollY = (value) => {
     scrollY.value = value;
 
     descriptionButtonPosition.value =
-        scrollY.value > 300 ? 'bottom-[15%]' : 'bottom-[8%]';
+        scrollY.value > 300 ? 'bottom-[7.5rem]' : 'bottom-[4.5rem]';
 };
 
 switch (route.name) {
