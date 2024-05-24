@@ -10,7 +10,6 @@ use App\Traits\HasModelTrait;
 use App\Models\PropertyDetails;
 use App\Models\PropertyHighlight;
 use Illuminate\Database\Eloquent\Model;
-use Spatie\Activitylog\Models\Activity;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -75,6 +74,10 @@ class Property extends Model
     {
         return $this->morphOne(ServerFile::class, 'uploadable');
     }
+
+
+
+    // methods
 
     // static methods
     public static function convertListingType($listingTypeKey)

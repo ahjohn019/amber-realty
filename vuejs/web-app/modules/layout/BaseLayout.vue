@@ -10,7 +10,7 @@ const backToTopBottomClass = ref('');
 const scrollY = ref(0);
 
 const descriptionButtonPosition = ref('');
-descriptionButtonPosition.value = 'bottom-[4.5rem]';
+descriptionButtonPosition.value = 'bottom-[8%]';
 
 const handleScrollY = (value) => {
     scrollY.value = value;

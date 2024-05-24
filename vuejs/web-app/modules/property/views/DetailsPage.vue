@@ -24,7 +24,6 @@ const listingAgentContainer = ref('');
 const listingAgentMobileContainer = ref('');
 const listingAgentClassToggle = ref(false);
 const nearbyLocationList = ref([]);
-const detailViews = ref([]);
 
 const descriptionButtonPosition = ref('');
 descriptionButtonPosition.value = 'bottom-[8%]';
@@ -34,7 +33,6 @@ const fetchPropertyDetails = async () => {
     nearbyLocationList.value = await webProperty.fetchNearbyLocation(
         response.id
     );
-    detailViews.value = await webProperty.fetchDetailViews(response.id);
 
     propertyDetails.value = response;
     sliderImageNumber.value = response.sliders?.length || 0;
@@ -146,7 +144,6 @@ onMounted(() => {
                         :propertyRoomDetails="propertyRoomDetails"
                         :whatsAppEnquiries="whatsAppEnquiries"
                         :sliders="sliderImageNumber"
-                        :detailViews="detailViews"
                     />
 
                     <ShortDescriptionsComponent

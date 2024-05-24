@@ -1,15 +1,11 @@
 <?php
 
-namespace App\Helpers;
+namespace App\Http\Helpers;
 
 class Helpers
 {
-    public function storeLogs($model, String $event = null)
+    public static function fetchMonth()
     {
-        activity()
-            ->performedOn($model)
-            ->event($event)
-            ->withProperties(['ip_address' => request()->ip()])
-            ->log(json_encode($model));
+        return ['a'];
     }
 }
