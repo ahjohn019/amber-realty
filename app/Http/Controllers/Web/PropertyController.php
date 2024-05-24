@@ -54,41 +54,25 @@ class PropertyController extends Controller
         return self::successResponse('Fetch Highlight Successfully', $result);
     }
 
-    public function handleLocation(Request $request)
-    {
-        $result = $this->propertyService->handleLocation($request);
-
-        if (isset($result['error'])) {
-            return self::failedResponse('Invalid Property Data', $result['error'], $result['code']);
-        }
-
-        return self::successResponse('Fetch Full Address Successfully', [
-            "type" => "place",
-            "data" => $result
-        ]);
-    }
-
-    public function handleActiveLocation(Request $request)
-    {
-        $result = $this->propertyService->handleActiveLocation($request);
-
-        if (isset($result['error'])) {
-            return self::failedResponse('Invalid Property Data', $result['error'], $result['code']);
-        }
-
-        return self::successResponse('Fetch Active Location Successfully', [
-            "data" => $result
-        ]);
-    }
-
-    public function viewNearbyLocation($id)
+    public function viewNearbyLocation(String $id)
     {
         $result = PropertyAddressDetails::where('property_id', $id)->get();
 
         if (empty($result)) {
-            return self::failedResponse('Invalid Property Data', "Nearby Location Not Available", Response::HTTP_FOUND);
+            return self::failedResponse('Invalid Property Data', "Nearby Location Not Available", Response::HTTP_NOT_FOUND);
         }
 
         return self::successResponse('Success', $result);
+    }
+
+    public function detailTotalViews(String $id)
+    {
+        $result = $this->propertyService->detailTotalViews($id);
+
+        if (empty($result)) {
+            return self::failedResponse('Invalid Property Data', "Property Doesn't Exist", Response::HTTP_NOT_FOUND);
+        }
+
+        return self::successResponse("Success", $result);
     }
 }

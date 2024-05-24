@@ -103,7 +103,22 @@ export const usePropertyWebStore = defineStore('property_web', {
                 );
 
                 return response.data.data;
-            } catch (error) {}
+            } catch (error) {
+                console.error('Error:', error);
+                throw error;
+            }
+        },
+
+        // fetch total views from property details page
+        async fetchDetailViews(id) {
+            try {
+                const response = await axios.get(prefix + 'detail-views/' + id);
+
+                return response.data.data;
+            } catch (error) {
+                console.error('Error:', error);
+                throw error;
+            }
         },
     },
 });
