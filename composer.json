@@ -37,7 +37,7 @@
             "Pylon\\": "vault/Pylon/"
         },
         "files": [
-            "app/Helpers/helpers.php"
+            "app/Helpers/Helpers.php"
         ]
     },
     "autoload-dev": {
