@@ -65,12 +65,16 @@ const closeInfoWindow = () => {
 const fetchWebLocation = async () => {
     const nearbyLocation = props.nearbyLocationList;
 
+    console.log('nearby location', nearbyLocation);
+
     mainGeolocationPosition.value = nearbyLocation.find(
         (item) => item.current === 1
     );
     nearbyGeolocationPosition.value = nearbyLocation.filter(
         (item) => item.nearby === 1
     );
+
+    console.log('Nearby Geolocation', nearbyGeolocationPosition.value);
 };
 
 const activeSelection = (event, activeButton) => {
