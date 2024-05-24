@@ -40,7 +40,6 @@ class PropertyService
         $result = $this->property->find($id);
 
         $result->load(['banner.image', 'sliders.image']);
-        $this->property->storeLogs($result);
 
         $this->propertyViewService->totalViewsValidation($result);
         $this->helpers->storeLogs($result, 'details');
