@@ -7,6 +7,7 @@ const infoProps = defineProps([
     'propertyRoomDetails',
     'whatsAppEnquiries',
     'sliders',
+    'detailViews',
 ]);
 
 const sliderModal = ref(false);
@@ -41,9 +42,14 @@ onMounted(() => {
 <template>
     <div class="col-12 row justify-between items-center gap-4">
         <div
-            class="col-12 row gap-4 items-center text-xl md:text-4xl break-words"
+            class="col-6 row gap-4 items-center text-xl md:text-4xl break-words"
         >
             {{ infoProps.propertyDetails.name }}
+        </div>
+
+        <div class="col-4 row gap-1 items-center text-sm justify-end">
+            <q-icon name="visibility" />
+            {{ infoProps.detailViews.current_total }}
         </div>
 
         <div

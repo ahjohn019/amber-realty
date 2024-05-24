@@ -2,15 +2,22 @@
 
 namespace App\Http\Services\Web;
 
+use App\Helpers\Helpers;
 use App\Models\Property;
 use App\Models\PropertyHighlight;
+use App\Models\PropertyDetailViews;
 use App\Queriplex\PropertyQueriplex;
+use Spatie\Activitylog\Models\Activity;
+use App\Http\Services\Web\PropertyViewService;
 use App\Http\Resources\Web\Property\PropertyResource;
 
 class PropertyService
 {
     public function __construct(
-        protected Property $property
+        protected Property $property,
+        protected Activity $activity,
+        protected PropertyViewService $propertyViewService,
+        protected Helpers $helpers
     ) {
     }
 
@@ -35,6 +42,10 @@ class PropertyService
         $result->load(['banner.image', 'sliders.image']);
         $this->property->storeLogs($result);
 
+        $this->propertyViewService->totalViewsValidation($result);
+        $this->helpers->storeLogs($result, 'details');
+        $this->propertyViewService->updateTotalViews($id, $result);
+
         $result = new PropertyResource($result);
 
         return $result;
@@ -42,7 +53,7 @@ class PropertyService
 
     public function list(array $payload)
     {
-        $result = PropertyQueriplex::make(Property::query(), $payload)
+        $result = PropertyQueriplex::make($this->property->query(), $payload)
             ->paginate($payload['items_per_page'] ?? 15);
 
         $result->load([
@@ -55,6 +66,7 @@ class PropertyService
             'banner.image',
             'sliders.image'
         ]);
+
         $result = PropertyResource::paginateCollection($result);
 
         return $result;
@@ -63,6 +75,13 @@ class PropertyService
     public function highlights()
     {
         $result = PropertyHighlight::with('property', 'property.propertyDetail', 'property.banner.image')->where('status', 1)->get();
+
+        return $result;
+    }
+
+    public function detailTotalViews($id)
+    {
+        $result = PropertyDetailViews::where('property_id', $id)->first();
 
         return $result;
     }

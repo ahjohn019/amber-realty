@@ -60,13 +60,20 @@ class PropertyController extends Controller
         $result = PropertyAddressDetails::where('property_id', $id)->get();
 
         if (empty($result)) {
-            return self::failedResponse('Invalid Property Data', "Nearby Location Not Available", Response::HTTP_FOUND);
+            return self::failedResponse('Invalid Property Data', "Nearby Location Not Available", Response::HTTP_NOT_FOUND);
         }
 
         return self::successResponse('Success', $result);
     }
 
-    public function fetchTotalViews(String $id)
+    public function detailTotalViews(String $id)
     {
+        $result = $this->propertyService->detailTotalViews($id);
+
+        if (empty($result)) {
+            return self::failedResponse('Invalid Property Data', "Property Doesn't Exist", Response::HTTP_NOT_FOUND);
+        }
+
+        return self::successResponse("Success", $result);
     }
 }
