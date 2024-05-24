@@ -68,10 +68,10 @@ const fetchWebLocation = async () => {
     console.log('nearby location', nearbyLocation);
 
     mainGeolocationPosition.value = nearbyLocation.find(
-        (item) => item.current === 1
+        (item) => parseInt(item.current) === 1
     );
     nearbyGeolocationPosition.value = nearbyLocation.filter(
-        (item) => item.nearby === 1
+        (item) => parseInt(item.nearby) === 1
     );
 
     console.log('Nearby Geolocation', nearbyGeolocationPosition.value);
