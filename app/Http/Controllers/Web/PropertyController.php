@@ -29,10 +29,10 @@ class PropertyController extends Controller
         return self::successResponse('Latest Property Display Successfully', $result);
     }
 
-    public function details(String $id)
+    public function details(Request $request)
     {
-        $result = $this->propertyService->fetchDetails($id);
-        return self::successResponse('Details Displays Successfully', $result);
+        $result = $this->propertyService->fetchDetails($request->all());
+        return self::successResponse('Details Display Successfully', $result);
     }
 
     public function list(ListFormRequest $request)
