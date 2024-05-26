@@ -93,7 +93,7 @@ const fetchNearbySelection = async (event) => {
     activeButton.value = await activeSelection(event, activeButton.value);
 
     nearbyGeolocationPosition.value = nearbyLocation.filter(
-        (item) => item.nearby === 1
+        (item) => parseInt(item.nearby) === 1
     );
 
     if (fetchNearbySelectionAttribute !== 'all') {
