@@ -31,9 +31,13 @@ descriptionButtonPosition.value = 'bottom-[8%]';
 
 const fetchPropertyDetails = async () => {
     const response = await webProperty.fetchPropertyDetails();
-    nearbyLocationList.value = await webProperty.fetchNearbyLocation(
-        response.id
-    );
+
+    if (response.nearby_details.length <= 0) {
+        nearbyLocationList.value = await webProperty.fetchNearbyLocation(
+            response.id
+        );
+    }
+
     detailViews.value = await webProperty.fetchDetailViews(response.id);
 
     propertyDetails.value = response;

@@ -9,8 +9,8 @@ use App\Models\PropertyTypes;
 use App\Traits\HasModelTrait;
 use App\Models\PropertyDetails;
 use App\Models\PropertyHighlight;
+use App\Models\PropertyAddressDetails;
 use Illuminate\Database\Eloquent\Model;
-use Spatie\Activitylog\Models\Activity;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -74,6 +74,11 @@ class Property extends Model
     public function image(): MorphOne
     {
         return $this->morphOne(ServerFile::class, 'uploadable');
+    }
+
+    public function nearbyDetails(): HasMany
+    {
+        return $this->hasMany(PropertyAddressDetails::class);
     }
 
     // static methods
