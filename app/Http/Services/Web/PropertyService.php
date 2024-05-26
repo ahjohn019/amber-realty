@@ -35,15 +35,16 @@ class PropertyService
         return $result;
     }
 
-    public function fetchDetails($id)
+    public function fetchDetails($request)
     {
-        $result = $this->property->find($id);
+        $detailsId = $request['route_id'] ?? "";
+        $result = $this->property->find($detailsId);
 
         $result->load(['banner.image', 'sliders.image']);
 
         $this->propertyViewService->totalViewsValidation($result);
-        $this->helpers->storeLogs($result, 'details');
-        $this->propertyViewService->updateTotalViews($id, $result);
+        $this->helpers->storeLogs($result, $request);
+        $this->propertyViewService->updateTotalViews($detailsId, $result);
 
         $result = new PropertyResource($result);
 
