@@ -646,7 +646,7 @@
       "vuejs/web-app/modules/property/views/ListPage.vue",
       "vuejs/web-app/modules/property/views/DetailsPage.vue"
     ],
-    "file": "assets/app-c39b4cda.js",
+    "file": "assets/app-b6b61346.js",
     "imports": [
       "_ckeditor-568c0a64.js"
     ],
@@ -710,14 +710,14 @@
     "src": "vuejs/web-app/modules/main/views/MainPage.vue"
   },
   "vuejs/web-app/modules/property/views/DetailsPage.css": {
-    "file": "assets/DetailsPage-218d3fb1.css",
+    "file": "assets/DetailsPage-4c44f531.css",
     "src": "vuejs/web-app/modules/property/views/DetailsPage.css"
   },
   "vuejs/web-app/modules/property/views/DetailsPage.vue": {
     "css": [
-      "assets/DetailsPage-218d3fb1.css"
+      "assets/DetailsPage-4c44f531.css"
     ],
-    "file": "assets/DetailsPage-c10e1d25.js",
+    "file": "assets/DetailsPage-8c9d03e2.js",
     "imports": [
       "_ckeditor-568c0a64.js",
       "_BaseLayout-d35d10d9.js",
