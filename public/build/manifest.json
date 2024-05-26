@@ -259,17 +259,17 @@
   "_format-7985d814.js": {
     "file": "assets/format-7985d814.js"
   },
-  "_index-85aa0263.js": {
-    "file": "assets/index-85aa0263.js",
-    "imports": [
-      "_ckeditor-568c0a64.js"
-    ]
-  },
   "_index-9b598257.js": {
     "file": "assets/index-9b598257.js",
     "imports": [
       "_ckeditor-568c0a64.js",
       "_auth-70e1d751.js"
+    ]
+  },
+  "_index-d59499f5.js": {
+    "file": "assets/index-d59499f5.js",
+    "imports": [
+      "_ckeditor-568c0a64.js"
     ]
   },
   "_option-sizes-32743e51.js": {
@@ -646,7 +646,7 @@
       "vuejs/web-app/modules/property/views/ListPage.vue",
       "vuejs/web-app/modules/property/views/DetailsPage.vue"
     ],
-    "file": "assets/app-56b0037a.js",
+    "file": "assets/app-11fa8f35.js",
     "imports": [
       "_ckeditor-568c0a64.js"
     ],
@@ -680,7 +680,7 @@
     "css": [
       "assets/MainPage-03cb3f5d.css"
     ],
-    "file": "assets/MainPage-108ce5a4.js",
+    "file": "assets/MainPage-8b48a080.js",
     "imports": [
       "_QLayout-497c8120.js",
       "_ckeditor-568c0a64.js",
@@ -694,7 +694,7 @@
       "_QSpace-b0ae8a1e.js",
       "_QCardActions-2586a9d0.js",
       "_QDialog-40930b1c.js",
-      "_index-85aa0263.js",
+      "_index-d59499f5.js",
       "_QImg-21d7b9bb.js",
       "_QTooltip-05843c46.js",
       "_BaseLayout-d35d10d9.js",
@@ -717,11 +717,11 @@
     "css": [
       "assets/DetailsPage-ad1289e9.css"
     ],
-    "file": "assets/DetailsPage-d53c82c2.js",
+    "file": "assets/DetailsPage-86d130ce.js",
     "imports": [
       "_ckeditor-568c0a64.js",
       "_BaseLayout-d35d10d9.js",
-      "_index-85aa0263.js",
+      "_index-d59499f5.js",
       "_vm-f21f9386.js",
       "_QChip-50267dd3.js",
       "_QBtn-05999df9.js",
@@ -745,7 +745,7 @@
     "src": "vuejs/web-app/modules/property/views/DetailsPage.vue"
   },
   "vuejs/web-app/modules/property/views/ListPage.vue": {
-    "file": "assets/ListPage-87c1ed5a.js",
+    "file": "assets/ListPage-1ca4918e.js",
     "imports": [
       "_QBreadcrumbs-f9605adc.js",
       "_QInput-73018601.js",
@@ -766,7 +766,7 @@
       "_BaseLayout-d35d10d9.js",
       "_QImg-21d7b9bb.js",
       "_QChip-50267dd3.js",
-      "_index-85aa0263.js",
+      "_index-d59499f5.js",
       "_use-tick-0d48cbe6.js",
       "_use-checkbox-ed877009.js",
       "_option-sizes-32743e51.js",
