@@ -24,15 +24,21 @@ const listingAgentContainer = ref('');
 const listingAgentMobileContainer = ref('');
 const listingAgentClassToggle = ref(false);
 const nearbyLocationList = ref([]);
+const detailViews = ref([]);
 
 const descriptionButtonPosition = ref('');
 descriptionButtonPosition.value = 'bottom-[8%]';
 
 const fetchPropertyDetails = async () => {
     const response = await webProperty.fetchPropertyDetails();
-    nearbyLocationList.value = await webProperty.fetchNearbyLocation(
-        response.id
-    );
+
+    if (response.nearby_details.length > 0) {
+        nearbyLocationList.value = await webProperty.fetchNearbyLocation(
+            response.id
+        );
+    }
+
+    detailViews.value = await webProperty.fetchDetailViews(response.id);
 
     propertyDetails.value = response;
     sliderImageNumber.value = response.sliders?.length || 0;
@@ -68,14 +74,15 @@ const handleDetailsObserver = () => {
         threshold: 0.3,
     };
 
+    const listingAgentClassList = 'fixed w-[290px] xl:w-[350px] top-[12.5%]';
+
     const bannerObserver = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
             listingAgentClass.value = '';
             listingAgentContainer.value = '';
 
             if (!entry.isIntersecting) {
-                listingAgentClass.value =
-                    'fixed w-[290px] xl:w-[350px] top-[12.5%]';
+                listingAgentClass.value = listingAgentClassList;
                 listingAgentClassToggle.value = true;
             }
         });
@@ -88,8 +95,7 @@ const handleDetailsObserver = () => {
             listingAgentMobileContainer.value = 'hidden';
 
             if (!entry.isIntersecting) {
-                listingAgentClass.value =
-                    'fixed w-[290px] xl:w-[350px] top-[12.5%]';
+                listingAgentClass.value = listingAgentClassList;
                 listingAgentContainer.value = '';
                 listingAgentMobileContainer.value = '';
             }
@@ -144,6 +150,7 @@ onMounted(() => {
                         :propertyRoomDetails="propertyRoomDetails"
                         :whatsAppEnquiries="whatsAppEnquiries"
                         :sliders="sliderImageNumber"
+                        :detailViews="detailViews"
                     />
 
                     <ShortDescriptionsComponent

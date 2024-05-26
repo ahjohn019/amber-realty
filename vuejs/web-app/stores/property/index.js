@@ -38,14 +38,34 @@ export const usePropertyWebStore = defineStore('property_web', {
             }
         },
 
+        screenSize(screenSize) {
+            const screenSizes = [
+                { size: 425, name: 'mobile' },
+                { size: 768, name: 'tablet' },
+                { size: 1200, name: 'laptop' },
+            ];
+
+            for (const screen of screenSizes) {
+                if (screenSize <= screen.size) {
+                    return screen.name;
+                }
+            }
+
+            return 'desktop';
+        },
+
         async fetchPropertyDetails() {
             try {
                 const routeId = this.route.params?.id || null;
+                const screenSize = window.innerWidth;
 
-                const response = await axios.get(
-                    prefix + 'details/' + routeId,
-                    routeId
-                );
+                const payload = {
+                    route_id: routeId,
+                    device: this.screenSize(screenSize),
+                    event: 'details',
+                };
+
+                const response = await axios.post(prefix + 'details', payload);
 
                 return response.data.data;
             } catch (error) {}
@@ -103,7 +123,22 @@ export const usePropertyWebStore = defineStore('property_web', {
                 );
 
                 return response.data.data;
-            } catch (error) {}
+            } catch (error) {
+                console.error('Error:', error);
+                throw error;
+            }
+        },
+
+        // fetch total views from property details page
+        async fetchDetailViews(id) {
+            try {
+                const response = await axios.get(prefix + 'detail-views/' + id);
+
+                return response.data.data;
+            } catch (error) {
+                console.error('Error:', error);
+                throw error;
+            }
         },
     },
 });

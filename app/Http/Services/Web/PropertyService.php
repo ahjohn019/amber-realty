@@ -2,32 +2,49 @@
 
 namespace App\Http\Services\Web;
 
+use App\Helpers\Helpers;
 use App\Models\Property;
 use App\Models\PropertyHighlight;
+use App\Models\PropertyDetailViews;
 use App\Queriplex\PropertyQueriplex;
+use Spatie\Activitylog\Models\Activity;
+use App\Http\Services\Web\PropertyViewService;
 use App\Http\Resources\Web\Property\PropertyResource;
 
 class PropertyService
 {
+    public function __construct(
+        protected Property $property,
+        protected Activity $activity,
+        protected PropertyViewService $propertyViewService,
+        protected Helpers $helpers
+    ) {
+    }
+
     public function fetchLatestProperty($payload)
     {
-        $result = Property::where('status', Property::STATUS_ACTIVE)
+        $result = $this->property->where('status', Property::STATUS_ACTIVE)
             ->orderBy('created_at', Property::LATEST)
             ->limit($payload->limit)
             ->get();
 
-        $result->load(['banner.image', 'sliders.image']);
+        $result->load(['banner.image', 'sliders.image', 'nearbyDetails']);
 
         $result = PropertyResource::collection($result);
 
         return $result;
     }
 
-    public function fetchDetails($id)
+    public function fetchDetails($request)
     {
-        $result = Property::find($id);
+        $detailsId = $request['route_id'] ?? "";
+        $result = $this->property->find($detailsId);
 
-        $result->load(['banner.image', 'sliders.image']);
+        $result->load(['banner.image', 'sliders.image', 'nearbyDetails']);
+
+        $this->propertyViewService->totalViewsValidation($result);
+        $this->helpers->storeLogs($result, $request);
+        $this->propertyViewService->updateTotalViews($detailsId, $result);
 
         $result = new PropertyResource($result);
 
@@ -36,7 +53,7 @@ class PropertyService
 
     public function list(array $payload)
     {
-        $result = PropertyQueriplex::make(Property::query(), $payload)
+        $result = PropertyQueriplex::make($this->property->query(), $payload)
             ->paginate($payload['items_per_page'] ?? 15);
 
         $result->load([
@@ -49,6 +66,7 @@ class PropertyService
             'banner.image',
             'sliders.image'
         ]);
+
         $result = PropertyResource::paginateCollection($result);
 
         return $result;
@@ -61,28 +79,10 @@ class PropertyService
         return $result;
     }
 
-    public function handleLocation($request)
+    public function detailTotalViews($id)
     {
-        $googleMapUrl = config('app.google_map_url');
-        $googleMapKey = config('app.google_map_api_key');
+        $result = PropertyDetailViews::where('property_id', $id)->first();
 
-        $fullAddress = preg_replace('/\s+/', '+', $request['params']);
-        $fullAddressResult = empty($fullAddress) ? false : $googleMapUrl . "place?key=" . $googleMapKey . "&q=" . $fullAddress;
-
-        return $fullAddressResult;
-    }
-
-    public function handleActiveLocation($request)
-    {
-        $googleMapUrl = config('app.google_map_url');
-        $googleMapKey = config('app.google_map_api_key');
-
-        $fullAddress = preg_replace('/\s+/', '+', $request['full_address']);
-        $query = $request['query'] == "place" ? null : $request['type'] . "+near+in+";
-
-        $fullAddressResult = empty($fullAddress) ? false : $googleMapUrl . $request['query'] . "?key=" . $googleMapKey . "&q=" . $query . $fullAddress;
-
-
-        return $fullAddressResult;
+        return $result;
     }
 }

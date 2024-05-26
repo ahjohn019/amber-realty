@@ -3,7 +3,10 @@
 namespace App\Providers;
 
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\Request;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Cache\RateLimiting\Limit;
+use Illuminate\Support\Facades\RateLimiter;
 
 class AppServiceProvider extends ServiceProvider
 {
