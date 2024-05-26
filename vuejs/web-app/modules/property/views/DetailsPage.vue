@@ -74,14 +74,15 @@ const handleDetailsObserver = () => {
         threshold: 0.3,
     };
 
+    const listingAgentClassList = 'fixed w-[290px] xl:w-[350px] top-[12.5%]';
+
     const bannerObserver = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
             listingAgentClass.value = '';
             listingAgentContainer.value = '';
 
             if (!entry.isIntersecting) {
-                listingAgentClass.value =
-                    'fixed w-[290px] xl:w-[350px] top-[12.5%]';
+                listingAgentClass.value = listingAgentClassList;
                 listingAgentClassToggle.value = true;
             }
         });
@@ -94,8 +95,7 @@ const handleDetailsObserver = () => {
             listingAgentMobileContainer.value = 'hidden';
 
             if (!entry.isIntersecting) {
-                listingAgentClass.value =
-                    'fixed w-[290px] xl:w-[350px] top-[12.5%]';
+                listingAgentClass.value = listingAgentClassList;
                 listingAgentContainer.value = '';
                 listingAgentMobileContainer.value = '';
             }
