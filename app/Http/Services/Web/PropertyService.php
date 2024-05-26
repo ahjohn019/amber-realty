@@ -28,7 +28,7 @@ class PropertyService
             ->limit($payload->limit)
             ->get();
 
-        $result->load(['banner.image', 'sliders.image']);
+        $result->load(['banner.image', 'sliders.image', 'nearbyDetails']);
 
         $result = PropertyResource::collection($result);
 
@@ -40,7 +40,7 @@ class PropertyService
         $detailsId = $request['route_id'] ?? "";
         $result = $this->property->find($detailsId);
 
-        $result->load(['banner.image', 'sliders.image']);
+        $result->load(['banner.image', 'sliders.image', 'nearbyDetails']);
 
         $this->propertyViewService->totalViewsValidation($result);
         $this->helpers->storeLogs($result, $request);
