@@ -8,7 +8,10 @@ class Helpers
 {
     public function storeLogs($model, String $event = null)
     {
-        $findIpAddress = Activity::whereJsonContains('properties->ip_address', request()->ip())->exists();
+        $findIpAddress = Activity::where([
+            ['event', 'details'],
+            ['subject_id', $model->id]
+        ])->whereJsonContains('properties->ip_address', request()->ip())->exists();
         if ($findIpAddress) return true;
 
         activity()
