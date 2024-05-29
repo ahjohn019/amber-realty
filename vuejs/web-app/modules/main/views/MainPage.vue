@@ -32,10 +32,10 @@ onMounted(() => {
         <template #content>
             <HeaderContainer data-aos="fade-up" />
             <PropertiesContainer />
-            <FeaturedComponent
+            <!-- <FeaturedComponent
                 :highlights="highlights"
                 v-if="highlights.length > 0"
-            />
+            /> -->
             <MissionStatement />
             <SocialProof />
             <CallToAction />
