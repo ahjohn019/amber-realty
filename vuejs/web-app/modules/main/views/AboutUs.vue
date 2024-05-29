@@ -1,11 +1,7 @@
 <template>
     <BaseLayout>
         <template #content>
-            <div
-                class="bg-primary"
-                data-aos="fade-up"
-                style="margin-top: 3.5rem"
-            >
+            <div class="bg-primary" data-aos="fade-up">
                 <div
                     class="container mx-auto text-white h-[45vh] flex justify-center items-center"
                 >

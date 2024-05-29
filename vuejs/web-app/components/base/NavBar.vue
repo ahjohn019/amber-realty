@@ -1,6 +1,9 @@
 <template>
-    <div>
-        <q-toolbar class="bg-secondary shadow-2" style="height: 85px">
+    <q-header elevated :class="$q.dark.isActive ? 'bg-secondary' : 'bg-black'">
+        <q-toolbar
+            class="bg-secondary shadow-2 text-black"
+            style="height: 85px"
+        >
             <div class="col-4 col-md-2">
                 <router-link to="/" exact>
                     <img :src="mainLogo" alt="" width="85" />
@@ -27,7 +30,7 @@
                 <BaseDrawer />
             </div>
         </q-toolbar>
-    </div>
+    </q-header>
 </template>
 
 <script>
@@ -38,6 +41,7 @@ export default {
     components: {
         BaseDrawer,
     },
+    props: ['scrollY'],
     setup() {
         return {
             model: ref('home'),

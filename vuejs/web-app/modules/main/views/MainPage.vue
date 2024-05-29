@@ -2,14 +2,14 @@
     <BaseLayout>
         <template #content>
             <HeaderContainer data-aos="fade-up" />
-            <PropertiesContainer data-aos="fade-left" />
+            <PropertiesContainer />
             <FeaturedComponent
                 :highlights="highlights"
                 v-if="highlights.length > 0"
             />
-            <MissionStatement data-aos="fade-right" />
-            <SocialProof data-aos="fade-right" />
-            <CallToAction data-aos="fade-left" />
+            <MissionStatement />
+            <SocialProof />
+            <CallToAction />
         </template>
     </BaseLayout>
 </template>
