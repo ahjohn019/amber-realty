@@ -7,15 +7,15 @@
     "file": "assets/BasePage-584d65b5.css",
     "src": "BasePage.css"
   },
-  "_BaseLayout-55729248.js": {
+  "_BaseLayout-afeda26a.js": {
     "css": [
       "assets/BaseLayout-5271f807.css"
     ],
-    "file": "assets/BaseLayout-55729248.js",
+    "file": "assets/BaseLayout-afeda26a.js",
     "imports": [
+      "_QToolbar-5ad6ba3e.js",
       "_ckeditor-211a22bb.js",
       "_QBtn-d4f24742.js",
-      "_QToolbar-5ad6ba3e.js",
       "_vm-e10c9529.js",
       "_portal-2d801567.js",
       "_QSeparator-393d6f24.js",
@@ -697,7 +697,7 @@
       "vuejs/web-app/modules/property/views/ListPage.vue",
       "vuejs/web-app/modules/property/views/DetailsPage.vue"
     ],
-    "file": "assets/app-1a17c3dd.js",
+    "file": "assets/app-f8984579.js",
     "imports": [
       "_ckeditor-211a22bb.js"
     ],
@@ -705,11 +705,11 @@
     "src": "vuejs/web-app/app.js"
   },
   "vuejs/web-app/modules/main/views/AboutUs.vue": {
-    "file": "assets/AboutUs-05855edf.js",
+    "file": "assets/AboutUs-563aebd6.js",
     "imports": [
       "_QBreadcrumbs-33d9103a.js",
       "_QImg-ac41b4fb.js",
-      "_BaseLayout-55729248.js",
+      "_BaseLayout-afeda26a.js",
       "_ckeditor-211a22bb.js",
       "_vm-e10c9529.js",
       "_QBtn-d4f24742.js",
@@ -732,9 +732,8 @@
     "css": [
       "assets/MainPage-03cb3f5d.css"
     ],
-    "file": "assets/MainPage-30e79902.js",
+    "file": "assets/MainPage-0a8887ec.js",
     "imports": [
-      "_QToolbar-5ad6ba3e.js",
       "_ckeditor-211a22bb.js",
       "_QBtn-d4f24742.js",
       "_QBtnGroup-b3ca7ab3.js",
@@ -750,14 +749,15 @@
       "_index-e9ba48e5.js",
       "_QImg-ac41b4fb.js",
       "_QTooltip-79fbac39.js",
-      "_BaseLayout-55729248.js",
+      "_BaseLayout-afeda26a.js",
       "_auth-2c69448c.js",
-      "_use-timeout-79fca903.js",
-      "_QScrollArea-9537b7a3.js",
       "_uid-6a237b22.js",
       "_focus-manager-cb626d5f.js",
+      "_use-timeout-79fca903.js",
       "_use-tick-491e46f4.js",
       "_position-engine-a7c1bc08.js",
+      "_QToolbar-5ad6ba3e.js",
+      "_QScrollArea-9537b7a3.js",
       "_ClosePopup-cfa18d09.js",
       "_dayjs.min-076ef4c6.js"
     ],
@@ -772,10 +772,10 @@
     "css": [
       "assets/DetailsPage-5cfa0ad9.css"
     ],
-    "file": "assets/DetailsPage-0789d35f.js",
+    "file": "assets/DetailsPage-10401aa6.js",
     "imports": [
       "_ckeditor-211a22bb.js",
-      "_BaseLayout-55729248.js",
+      "_BaseLayout-afeda26a.js",
       "_index-e9ba48e5.js",
       "_vm-e10c9529.js",
       "_QChip-6c699843.js",
@@ -803,7 +803,7 @@
     "src": "vuejs/web-app/modules/property/views/DetailsPage.vue"
   },
   "vuejs/web-app/modules/property/views/ListPage.vue": {
-    "file": "assets/ListPage-d719f810.js",
+    "file": "assets/ListPage-4d87f1ed.js",
     "imports": [
       "_QBreadcrumbs-33d9103a.js",
       "_QInput-6b59f9e3.js",
@@ -823,7 +823,7 @@
       "_QCard-9bab7db1.js",
       "_QDialog-73dc65b1.js",
       "_ClosePopup-cfa18d09.js",
-      "_BaseLayout-55729248.js",
+      "_BaseLayout-afeda26a.js",
       "_QImg-ac41b4fb.js",
       "_QChip-6c699843.js",
       "_index-e9ba48e5.js",
