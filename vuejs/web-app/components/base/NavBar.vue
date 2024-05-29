@@ -1,10 +1,5 @@
 <template>
-    <q-layout
-        class="fixed z-10 w-full"
-        view="hHh Lpr lff"
-        container
-        style="height: 100vh"
-    >
+    <div>
         <q-toolbar class="bg-secondary shadow-2" style="height: 85px">
             <div class="col-4 col-md-2">
                 <router-link to="/" exact>
@@ -17,7 +12,6 @@
                 </div>
                 <div style="text-wrap: nowrap">E-(3)1482</div>
             </div>
-
             <div class="col-8 text-center nav-bar-content">
                 <router-link
                     v-for="(option, key) in options"
@@ -29,12 +23,11 @@
                     <q-btn flat :label="option.label" />
                 </router-link>
             </div>
-
             <div class="col-4 text-right nav-bar-dropdown">
                 <BaseDrawer />
             </div>
         </q-toolbar>
-    </q-layout>
+    </div>
 </template>
 
 <script>

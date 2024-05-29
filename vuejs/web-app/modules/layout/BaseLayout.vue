@@ -32,12 +32,13 @@ switch (route.name) {
 
 <template>
     <div class="overflow-hidden">
-        <NavBar />
-
-        <slot
-            name="content"
-            :descriptionButtonPosition="descriptionButtonPosition"
-        ></slot>
+        <q-layout view="lhh LpR lff">
+            <NavBar />
+            <slot
+                name="content"
+                :descriptionButtonPosition="descriptionButtonPosition"
+            ></slot>
+        </q-layout>
 
         <BackToTop
             :class="`fixed right-3 bg-primary rounded-full cursor-pointer ${backToTopBottomClass}`"
