@@ -1,17 +1,15 @@
 <template>
     <BaseLayout>
         <template #content>
-            <q-layout class="mt-20">
-                <HeaderContainer data-aos="fade-up" />
-                <PropertiesContainer data-aos="fade-left" />
-                <FeaturedComponent
-                    :highlights="highlights"
-                    v-if="highlights.length > 0"
-                />
-                <MissionStatement data-aos="fade-right" />
-                <SocialProof data-aos="fade-right" />
-                <CallToAction data-aos="fade-left" />
-            </q-layout>
+            <HeaderContainer data-aos="fade-up" />
+            <PropertiesContainer data-aos="fade-left" />
+            <FeaturedComponent
+                :highlights="highlights"
+                v-if="highlights.length > 0"
+            />
+            <MissionStatement data-aos="fade-right" />
+            <SocialProof data-aos="fade-right" />
+            <CallToAction data-aos="fade-left" />
         </template>
     </BaseLayout>
 </template>
