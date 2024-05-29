@@ -1,3 +1,26 @@
+<script setup>
+import { ref } from 'vue';
+import BaseDrawer from './BaseDrawer.vue';
+
+const options = ref([]);
+options.value = [
+    {
+        label: 'Home',
+        value: 'home',
+        to: '/',
+        exact: true,
+        activeClass: 'active-link',
+    },
+    {
+        label: 'About Us',
+        value: 'about_us',
+        to: '/about-us',
+        exact: false,
+        activeClass: 'active-link',
+    },
+];
+</script>
+
 <template>
     <q-header elevated :class="$q.dark.isActive ? 'bg-secondary' : 'bg-black'">
         <q-toolbar
@@ -32,40 +55,6 @@
         </q-toolbar>
     </q-header>
 </template>
-
-<script>
-import { ref } from 'vue';
-import BaseDrawer from './BaseDrawer.vue';
-
-export default {
-    components: {
-        BaseDrawer,
-    },
-    props: ['scrollY'],
-    setup() {
-        return {
-            model: ref('home'),
-
-            options: [
-                {
-                    label: 'Home',
-                    value: 'home',
-                    to: '/',
-                    exact: true,
-                    activeClass: 'active-link',
-                },
-                {
-                    label: 'About Us',
-                    value: 'about_us',
-                    to: '/about-us',
-                    exact: false,
-                    activeClass: 'active-link',
-                },
-            ],
-        };
-    },
-};
-</script>
 
 <style>
 .q-btn {
