@@ -1,3 +1,58 @@
+<script setup>
+import BaseLayout from '@web/modules/layout/BaseLayout.vue';
+import { ref } from 'vue';
+
+const aboutUsContentOne = ref({});
+const aboutUsContentTwo = ref([]);
+
+aboutUsContentTwo.value = [
+    { content: 'Serving with integrity' },
+    {
+        content:
+            'Conducting ourselves and our business in an honest, ethical, and trustworthy manner',
+    },
+    { content: 'Providing financial stewardship' },
+    { content: 'Growing through innovation and creativity' },
+];
+
+aboutUsContentOne.value = {
+    title: 'Your Trusted Partner in Real Estate',
+    content: `
+                <div class='flex flex-col gap-4 text-lg'>
+                    <div>
+                        Amber Realty is a licensed real estate agent registered with
+                        the Board of Valuers, Appraisers and Estate Agents of
+                        Malaysia, and based in Kuala Lumpur the capital city of
+                        Malaysian. 
+                    </div>
+                    <div>
+                        Amber Realty has always been committed to
+                        providing the highest standards in the practice of Real
+                        Estate and unwavering dedication to the satisfaction of
+                        customers. Amber Realty place equal significance on
+                        personalized service and continuing innovation in building
+                        lifetime relationships with our customers and communities.
+                    </div>
+                    <div>
+                        Our Team of highly motivated and experienced negotiators is 
+                        dedicated and committed to providing assistance to all real estate 
+                        investment needs and complete transactions in the most efficient manner. 
+                    </div>
+                    <div>
+                        Among the properties we handle are Residential, Commercial and Industrial, 
+                        including Land for various types of use. 
+                        We also undertake all categories of Projects Sales, on behalf of Developers. 
+                    </div>
+                    <div>
+                        With many years of experience in this field Amber Realty is 
+                        in a position to share feedbacks on requirements by the end-users.  
+                        This allows us, when called upon by developers, to advise them with the planning of the layout, 
+                        floor plans and the selling price, in accordance with the specific locations of the development.
+                    </div>
+                </div>`,
+};
+</script>
+
 <template>
     <BaseLayout>
         <template #content>
@@ -93,71 +148,3 @@
         </template>
     </BaseLayout>
 </template>
-
-<script>
-import BaseLayout from '@web/modules/layout/BaseLayout.vue';
-import { ref } from 'vue';
-
-export default {
-    components: {
-        BaseLayout,
-    },
-
-    setup() {
-        const aboutUsContentOne = ref({});
-        const aboutUsContentTwo = ref([]);
-
-        aboutUsContentTwo.value = [
-            { content: 'Serving with integrity' },
-            {
-                content:
-                    'Conducting ourselves and our business in an honest, ethical, and trustworthy manner',
-            },
-            { content: 'Providing financial stewardship' },
-            { content: 'Growing through innovation and creativity' },
-        ];
-
-        aboutUsContentOne.value = {
-            title: 'Your Trusted Partner in Real Estate',
-            content: `
-                <div class='flex flex-col gap-4 text-lg'>
-                    <div>
-                        Amber Realty is a licensed real estate agent registered with
-                        the Board of Valuers, Appraisers and Estate Agents of
-                        Malaysia, and based in Kuala Lumpur the capital city of
-                        Malaysian. 
-                    </div>
-                    <div>
-                        Amber Realty has always been committed to
-                        providing the highest standards in the practice of Real
-                        Estate and unwavering dedication to the satisfaction of
-                        customers. Amber Realty place equal significance on
-                        personalized service and continuing innovation in building
-                        lifetime relationships with our customers and communities.
-                    </div>
-                    <div>
-                        Our Team of highly motivated and experienced negotiators is 
-                        dedicated and committed to providing assistance to all real estate 
-                        investment needs and complete transactions in the most efficient manner. 
-                    </div>
-                    <div>
-                        Among the properties we handle are Residential, Commercial and Industrial, 
-                        including Land for various types of use. 
-                        We also undertake all categories of Projects Sales, on behalf of Developers. 
-                    </div>
-                    <div>
-                        With many years of experience in this field Amber Realty is 
-                        in a position to share feedbacks on requirements by the end-users.  
-                        This allows us, when called upon by developers, to advise them with the planning of the layout, 
-                        floor plans and the selling price, in accordance with the specific locations of the development.
-                    </div>
-                </div>`,
-        };
-
-        return {
-            aboutUsContentOne,
-            aboutUsContentTwo,
-        };
-    },
-};
-</script>
