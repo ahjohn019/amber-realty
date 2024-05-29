@@ -107,11 +107,11 @@ propertyIconList.value = [
                         <q-separator color="grey-4" />
 
                         <q-card-section>
-                            <div class="text-h4">
+                            <div class="text-h6">
                                 {{ highlight.property.name }}
                             </div>
                             <div
-                                class="text-sm featured-property__descriptions"
+                                class="text-subtitle2 featured-property__descriptions"
                             >
                                 {{ highlight.property.short_description }}
                                 <q-tooltip>
