@@ -1,172 +1,143 @@
+<script setup>
+import { ref } from 'vue';
+
+const props = defineProps(['highlights']);
+const formattedNumber = ref('');
+const highlightOptions = ref({});
+const propertyIconList = ref([]);
+
+const numberFormat = (number, symbol = 'RM') => {
+    formattedNumber.value = number
+        .toString()
+        .replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+
+    return `${symbol}${formattedNumber.value}`;
+};
+
+highlightOptions.value = {
+    type: 'loop',
+    perPage: 3,
+    focus: 'center',
+    breakpoints: {
+        768: {
+            perPage: 1,
+            arrows: false,
+        },
+    },
+    autoplay: true,
+    interval: 4000,
+};
+
+propertyIconList.value = [
+    { icon: 'bed', title: 'bedroom' },
+    { icon: 'bathtub', title: 'bathroom' },
+    { icon: 'directions_car', title: 'car_park' },
+];
+</script>
+
 <template>
     <div
         class="container mx-auto py-12 px-2 w-full md:w-[650px] lg:w-[990px] xl:w-[1200px]"
     >
-        <div class="row">
-            <div
-                class="col-12 text-xl md:text-4xl font-bold pb-8"
-                :class="$q.screen.lt.md ? 'text-center' : ''"
-            >
-                Highlight
-            </div>
-            <div class="col-12 p-2 md:p-0">
-                <Splide
-                    :options="{ rewind: true, type: 'fade' }"
-                    aria-label="My Favorite Images"
+        <div
+            class="col-12 text-xl md:text-4xl font-bold pb-8"
+            :class="$q.screen.lt.md ? 'text-center' : ''"
+        >
+            Highlight
+        </div>
+        <div>
+            <Splide :options="highlightOptions" aria-label="My Favorite Images">
+                <SplideSlide
+                    v-for="(highlight, highlightKey) in props.highlights"
+                    :key="highlightKey"
                 >
-                    <SplideSlide
-                        v-for="(highlight, highlightKey) in highlights"
-                        :key="highlightKey"
-                    >
-                        <div class="col-12 row">
-                            <div
-                                class="col-12 col-md-6 col-lg-7 grid place-items-center"
-                            >
-                                <router-link
-                                    :to="{
-                                        name: 'property.details',
-                                        params: { id: highlight.id },
-                                    }"
-                                >
-                                    <img
-                                        :src="
-                                            highlight.property.banner
-                                                ? highlight.property.banner
-                                                      .image.url
-                                                : 'https://cdn.quasar.dev/img/mountains.jpg'
-                                        "
-                                        class="object-cover rounded-lg h-[325px] lg:h-[600px]"
-                                    />
-                                </router-link>
-                            </div>
+                    <q-card class="h-[550px] card-container">
+                        <router-link
+                            :to="{
+                                name: 'property.details',
+                                params: { id: highlight.id },
+                            }"
+                        >
+                            <img
+                                :src="
+                                    highlight.property.banner
+                                        ? highlight.property.banner.image.url
+                                        : 'https://cdn.quasar.dev/img/mountains.jpg'
+                                "
+                                class="h-[325px] w-full object-contain"
+                            />
+                        </router-link>
 
-                            <div
-                                class="col-12 col-md-6 col-lg-5 featured-container flex flex-col gap-4 md:gap-10 py-8 md:px-10 md:py-6 justify-center lg:border rounded-lg"
-                            >
+                        <q-card-section>
+                            <div class="flex justify-between items-center">
                                 <div
-                                    class="pb-3 featured-content flex flex-col gap-6 md:gap-10"
-                                    :class="
-                                        $q.screen.lt.md ? 'text-center' : ''
-                                    "
+                                    class="text-sm bg-primary text-center px-4 py-2 font-bold rounded text-white w-[90px] capitalize"
                                 >
-                                    <div class="text-xl md:text-4xl font-bold">
-                                        {{ highlight.property.name }}
-                                    </div>
-
-                                    <div
-                                        class="text-sm featured-property__descriptions"
-                                    >
-                                        {{
-                                            highlight.property.short_description
-                                        }}
-                                        <q-tooltip>
-                                            {{
-                                                highlight.property
-                                                    .short_description
-                                            }}
-                                        </q-tooltip>
-                                    </div>
-
-                                    <q-separator color="grey-4" />
-
-                                    <div
-                                        class="text-sm bg-primary text-center px-4 py-2 font-bold rounded text-white w-[120px] capitalize"
-                                        :class="$q.screen.lt.md ? 'm-auto' : ''"
-                                    >
-                                        For
-                                        {{ highlight.property.listing_type }}
-                                    </div>
-                                </div>
-                                <div class="row items-center">
-                                    <div
-                                        class="col-12 col-md-5 text-xl md:text-4xl font-bold properties-content"
-                                        style="text-wrap: nowrap"
-                                        :class="
-                                            $q.screen.lt.md
-                                                ? 'text-center'
-                                                : 'text-left'
-                                        "
-                                    >
-                                        {{
-                                            numberFormat(
-                                                highlight.property.price,
-                                                'RM '
-                                            )
-                                        }}
-                                    </div>
+                                    {{ highlight.property.listing_type }}
                                 </div>
                                 <div
-                                    class="row gap-4"
-                                    :class="
-                                        $q.screen.lt.md
-                                            ? 'justify-center'
-                                            : 'justify-left'
-                                    "
+                                    class="row gap-2"
                                     v-if="highlight.property.property_detail"
                                 >
-                                    <div class="col col-auto text-center">
-                                        <div>
-                                            <q-icon name="bed" size="32px" />
-                                        </div>
-                                        {{
-                                            highlight.property.property_detail
-                                                .bedroom
-                                        }}
-                                        Bedrooms
-                                    </div>
-                                    <div class="col col-auto text-center">
-                                        <div>
-                                            <q-icon
-                                                name="bathroom"
-                                                size="32px"
-                                            />
-                                        </div>
-                                        {{
-                                            highlight.property.property_detail
-                                                .bathroom
-                                        }}
-                                        Bathrooms
-                                    </div>
-                                    <div class="col col-auto text-center">
-                                        <div>
-                                            <q-icon
-                                                name="dashboard"
-                                                size="32px"
-                                            />
-                                        </div>
-                                        {{
-                                            highlight.property.property_detail
-                                                .square_feet
-                                        }}
-                                        sqft
+                                    <div
+                                        class="col col-auto text-center"
+                                        v-for="(
+                                            propertyIcon, key
+                                        ) in propertyIconList"
+                                        :key="key"
+                                    >
+                                        <q-icon
+                                            :name="propertyIcon.icon"
+                                            size="24px"
+                                            class="pr-1"
+                                        />
+                                        <span class="align-middle text-sm">
+                                            {{
+                                                highlight.property
+                                                    .property_detail[
+                                                    propertyIcon.title
+                                                ]
+                                            }}
+                                        </span>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </SplideSlide>
-                </Splide>
-            </div>
+                        </q-card-section>
+
+                        <q-separator color="grey-4" />
+
+                        <q-card-section>
+                            <div class="text-h4">
+                                {{ highlight.property.name }}
+                            </div>
+                            <div
+                                class="text-sm featured-property__descriptions"
+                            >
+                                {{ highlight.property.short_description }}
+                                <q-tooltip>
+                                    {{ highlight.property.short_description }}
+                                </q-tooltip>
+                            </div>
+                        </q-card-section>
+
+                        <q-separator color="grey-4" />
+
+                        <q-card-section>
+                            <div class="text-h6">
+                                {{
+                                    numberFormat(
+                                        highlight.property.price,
+                                        'RM '
+                                    )
+                                }}
+                            </div>
+                        </q-card-section>
+                    </q-card>
+                </SplideSlide>
+            </Splide>
         </div>
     </div>
 </template>
-
-<script>
-export default {
-    props: ['highlights'],
-    setup() {
-        const numberFormat = (number, symbol = 'RM') => {
-            const formattedNumber = number
-                .toString()
-                .replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-            return `${symbol}${formattedNumber}`;
-        };
-
-        return {
-            numberFormat,
-        };
-    },
-};
-</script>
 
 <style>
 .featured-property__descriptions {
@@ -175,5 +146,28 @@ export default {
     -webkit-box-orient: vertical;
     overflow: hidden;
     word-break: break-all;
+}
+
+.splide__slide .card-container {
+    transition: transform 100ms;
+    transform: scale(0.75);
+    transform-origin: center center;
+}
+
+.splide__slide.is-active .card-container {
+    transform: scale(0.95);
+}
+
+.splide__progress__bar {
+    height: 3px;
+    background: black;
+}
+
+.splide__pagination__page {
+    background: black;
+}
+
+.splide__pagination__page.is-active {
+    background: red;
 }
 </style>
