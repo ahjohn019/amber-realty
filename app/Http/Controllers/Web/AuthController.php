@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\Web\LoginFormRequest;
 use App\Http\Requests\Web\RegisterFormRequest;
+use Symfony\Component\HttpFoundation\Response;
 use App\Http\Requests\Web\ResetPasswordRequest;
 use App\Http\Requests\Admin\ForgotPasswordRequest;
 use App\Http\Requests\Web\AuthPasswordUpdateFormRequest;
@@ -40,7 +41,7 @@ class AuthController extends Controller
                 ])->header('Authorization', $token->plainTextToken);
             });
         } catch (\Throwable $th) {
-            return self::failedResponse('Unauthorized', $th->getMessage());
+            return self::failedResponse('Unauthorized', $th->getMessage(), Response::HTTP_UNAUTHORIZED);
         }
     }
 
@@ -52,7 +53,7 @@ class AuthController extends Controller
 
             return self::successResponse('Success', $result);
         } catch (\Throwable $th) {
-            return self::failedResponse('Unauthorized', $th->getMessage());
+            return self::failedResponse('Unauthorized', $th->getMessage(), Response::HTTP_UNAUTHORIZED);
         }
     }
 
