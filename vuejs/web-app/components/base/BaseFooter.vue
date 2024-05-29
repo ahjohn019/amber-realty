@@ -1,3 +1,11 @@
+<script setup>
+import dayjs from 'dayjs';
+import { ref } from 'vue';
+
+const yearNow = ref('');
+yearNow.value = dayjs().format('YYYY');
+</script>
+
 <template>
     <div class="footer-container">
         <div
@@ -116,22 +124,6 @@
         </div>
     </div>
 </template>
-
-<script>
-import dayjs from 'dayjs';
-import { ref } from 'vue';
-
-export default {
-    setup() {
-        const yearNow = ref('');
-        yearNow.value = dayjs().format('YYYY');
-
-        return {
-            yearNow,
-        };
-    },
-};
-</script>
 
 <style>
 .footer-container {
