@@ -1,0 +1,1 @@
+import{k as e,B as r}from"./ckeditor-e046e440.js";import{c as n,e as s}from"./vm-8712a45d.js";const l=n({name:"QCardSection",props:{tag:{type:String,default:"div"},horizontal:Boolean},setup(t,{slots:o}){const a=e(()=>`q-card__section q-card__section--${t.horizontal===!0?"horiz row no-wrap":"vert"}`);return()=>r(t.tag,{class:a.value},s(o.default))}});export{l as Q};
