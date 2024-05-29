@@ -134,7 +134,6 @@ onMounted(() => {
         <template #content="{ descriptionButtonPosition }">
             <BannerComponent
                 :propertyDetails="propertyDetails"
-                style="margin-top: 5.5rem"
                 class="banner-component"
             />
             <div
