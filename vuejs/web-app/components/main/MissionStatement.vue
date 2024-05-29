@@ -12,9 +12,9 @@
             <div
                 class="col-12 col-md-3 text-center py-12 px-8 row gap-8 border rounded-lg bg-primary"
                 v-for="(mission, key) in missionStatement"
+                :key="key"
                 data-aos="flip-left"
                 data-aos-duration="1500"
-                :key="key"
             >
                 <div class="col-12">
                     <div

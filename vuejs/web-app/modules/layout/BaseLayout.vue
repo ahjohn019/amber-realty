@@ -31,20 +31,21 @@ switch (route.name) {
 </script>
 
 <template>
-    <div class="overflow-hidden">
-        <q-layout view="lhh LpR lff">
-            <NavBar />
-            <slot
-                name="content"
-                :descriptionButtonPosition="descriptionButtonPosition"
-            ></slot>
-        </q-layout>
+    <q-layout view="hHh Lpr lff" class="shadow-2 rounded-borders">
+        <NavBar />
+        <q-page-container>
+            <q-page>
+                <slot
+                    name="content"
+                    :descriptionButtonPosition="descriptionButtonPosition"
+                ></slot>
+                <BaseFooter />
+            </q-page>
+        </q-page-container>
+    </q-layout>
 
-        <BackToTop
-            :class="`fixed right-3 bg-primary rounded-full cursor-pointer ${backToTopBottomClass}`"
-            @scrollY="handleScrollY"
-        />
-
-        <BaseFooter />
-    </div>
+    <BackToTop
+        :class="`fixed right-3 bg-primary rounded-full cursor-pointer ${backToTopBottomClass}`"
+        @scrollY="handleScrollY"
+    />
 </template>
