@@ -1,21 +1,21 @@
 <template>
-    <div class="fixed z-10 w-full">
+    <q-layout
+        class="fixed z-10 w-full"
+        view="hHh Lpr lff"
+        container
+        style="height: 100vh"
+    >
         <q-toolbar class="bg-secondary shadow-2" style="height: 85px">
             <div class="col-4 col-md-2">
                 <router-link to="/" exact>
                     <img :src="mainLogo" alt="" width="85" />
                 </router-link>
             </div>
-
             <div class="col-4 nav-bar-dropdown text-center uppercase font-bold">
                 <div :class="$q.screen.lt.sm ? 'text-sm' : 'text-2xl'">
                     amber realty
                 </div>
                 <div style="text-wrap: nowrap">E-(3)1482</div>
-            </div>
-
-            <div class="col-4 text-right nav-bar-dropdown">
-                <BaseDrawer />
             </div>
 
             <div class="col-8 text-center nav-bar-content">
@@ -29,8 +29,12 @@
                     <q-btn flat :label="option.label" />
                 </router-link>
             </div>
+
+            <div class="col-4 text-right nav-bar-dropdown">
+                <BaseDrawer />
+            </div>
         </q-toolbar>
-    </div>
+    </q-layout>
 </template>
 
 <script>
@@ -60,13 +64,6 @@ export default {
                     exact: false,
                     activeClass: 'active-link',
                 },
-                // {
-                //     label: 'Property',
-                //     value: 'property',
-                //     to: '/property',
-                //     exact: false,
-                //     activeClass: 'active-link',
-                // },
             ],
         };
     },
