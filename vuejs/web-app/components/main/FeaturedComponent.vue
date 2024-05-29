@@ -25,7 +25,6 @@ highlightOptions.value = {
         },
     },
     autoplay: true,
-    interval: 4000,
 };
 
 propertyIconList.value = [
@@ -64,14 +63,14 @@ propertyIconList.value = [
                                         ? highlight.property.banner.image.url
                                         : 'https://cdn.quasar.dev/img/mountains.jpg'
                                 "
-                                class="h-[325px] w-full object-contain"
+                                class="h-[325px] w-full object-cover"
                             />
                         </router-link>
 
                         <q-card-section>
                             <div class="flex justify-between items-center">
                                 <div
-                                    class="text-sm bg-primary text-center px-4 py-2 font-bold rounded text-white w-[90px] capitalize"
+                                    class="text-sm bg-primary text-center px-4 py-2 font-bold rounded text-white w-[90px] capitalize featured-property__title"
                                 >
                                     {{ highlight.property.listing_type }}
                                 </div>
@@ -140,9 +139,10 @@ propertyIconList.value = [
 </template>
 
 <style>
-.featured-property__descriptions {
+.featured-property__descriptions,
+.featured-property__title {
     display: -webkit-box;
-    -webkit-line-clamp: 3;
+    -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
     overflow: hidden;
     word-break: break-all;
