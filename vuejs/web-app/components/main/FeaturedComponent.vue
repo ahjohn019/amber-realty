@@ -103,15 +103,13 @@ propertyIconList.value = [
                             </div>
                         </q-card-section>
 
-                        <!-- <q-separator color="grey-4" />
+                        <q-separator color="grey-4" />
 
                         <q-card-section>
                             <div class="text-h6">
                                 {{ highlight.property.name }}
                             </div>
                         </q-card-section>
-
-                        <q-separator color="grey-4" />
 
                         <q-card-section>
                             <div class="text-h6">
@@ -122,7 +120,7 @@ propertyIconList.value = [
                                     )
                                 }}
                             </div>
-                        </q-card-section> -->
+                        </q-card-section>
                     </q-card>
                 </SplideSlide>
             </Splide>
