@@ -111,7 +111,7 @@ propertyIconList.value = [
                             </div>
                         </q-card-section>
 
-                        <q-card-section>
+                        <!-- <q-card-section>
                             <div class="text-h6">
                                 {{
                                     numberFormat(
@@ -120,7 +120,7 @@ propertyIconList.value = [
                                     )
                                 }}
                             </div>
-                        </q-card-section>
+                        </q-card-section> -->
                     </q-card>
                 </SplideSlide>
             </Splide>
