@@ -20,12 +20,17 @@ highlightOptions.value = {
     focus: 'center',
     breakpoints: {
         768: {
-            perPage: 1,
+            perPage: 2,
             arrows: false,
+            focus: false,
+        },
+        425: {
+            perPage: 1,
         },
     },
     autoplay: true,
     interval: 4500,
+    height: 550,
 };
 
 propertyIconList.value = [
@@ -51,7 +56,7 @@ propertyIconList.value = [
                     v-for="(highlight, highlightKey) in props.highlights"
                     :key="highlightKey"
                 >
-                    <q-card class="h-[550px] card-container">
+                    <q-card class="card-container">
                         <router-link
                             :to="{
                                 name: 'property.details',
@@ -107,7 +112,7 @@ propertyIconList.value = [
                         <q-separator color="grey-4" />
 
                         <q-card-section>
-                            <div class="text-h6">
+                            <div class="text-h6 featured-property__title">
                                 {{ highlight.property.name }}
                             </div>
                             <div
@@ -146,15 +151,22 @@ propertyIconList.value = [
     overflow: hidden;
     word-break: break-all;
 }
+@media only screen and (min-width: 769px) {
+    .splide__slide .card-container {
+        transition: transform 100ms;
+        transform: scale(0.75);
+        transform-origin: center center;
+    }
 
-.splide__slide .card-container {
-    transition: transform 100ms;
-    transform: scale(0.75);
-    transform-origin: center center;
+    .splide__slide.is-active .card-container {
+        transform: scale(0.95);
+    }
 }
 
-.splide__slide.is-active .card-container {
-    transform: scale(0.95);
+@media only screen and (max-width: 768px) {
+    .splide__slide .card-container {
+        transform: scale(0.9);
+    }
 }
 
 .splide__progress__bar {
