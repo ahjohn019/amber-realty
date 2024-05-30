@@ -24,7 +24,7 @@ highlightOptions.value = {
             arrows: false,
         },
     },
-    autoplay: true,
+    // autoplay: true,
 };
 
 propertyIconList.value = [
@@ -148,15 +148,16 @@ propertyIconList.value = [
     word-break: break-all;
 }
 
-.splide__slide .card-container {
-    transition: transform 100ms;
+/* .splide__slide.is-prev .card-container,
+.splide__slide.is-next .card-container {
+    transition: transform 50ms;
     transform: scale(0.75);
     transform-origin: center center;
 }
 
 .splide__slide.is-active .card-container {
     transform: scale(0.95);
-}
+} */
 
 .splide__progress__bar {
     height: 3px;
