@@ -122,7 +122,7 @@ propertyIconList.value = [
                         <q-separator color="grey-4" />
 
                         <q-card-section>
-                            <div class="text-h6">
+                            <div class="text-subtitle2">
                                 {{
                                     numberFormat(
                                         highlight.property.price,
