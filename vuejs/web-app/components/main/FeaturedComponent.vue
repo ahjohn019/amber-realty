@@ -42,7 +42,7 @@ propertyIconList.value = [
 
 <template>
     <div
-        class="container mx-auto py-12 px-2 w-full md:w-[650px] lg:w-[990px] xl:w-[1200px]"
+        class="row container mx-auto py-12 px-2 w-full md:w-[650px] lg:w-[990px] xl:w-[1200px]"
     >
         <div
             class="col-12 text-xl md:text-4xl font-bold pb-8"
@@ -50,7 +50,7 @@ propertyIconList.value = [
         >
             Highlight
         </div>
-        <div>
+        <div class="col-12">
             <Splide :options="highlightOptions" aria-label="My Favorite Images">
                 <SplideSlide
                     v-for="(highlight, highlightKey) in props.highlights"
