@@ -67,7 +67,7 @@ propertyIconList.value = [
                             />
                         </router-link>
 
-                        <q-card-section>
+                        <!-- <q-card-section>
                             <div class="flex justify-between items-center">
                                 <div
                                     class="text-sm bg-primary text-center px-4 py-2 font-bold rounded text-white w-[90px] capitalize featured-property__title"
@@ -130,7 +130,7 @@ propertyIconList.value = [
                                     )
                                 }}
                             </div>
-                        </q-card-section>
+                        </q-card-section> -->
                     </q-card>
                 </SplideSlide>
             </Splide>
@@ -148,7 +148,7 @@ propertyIconList.value = [
     word-break: break-all;
 }
 
-/* .splide__slide.is-prev .card-container,
+.splide__slide.is-prev .card-container,
 .splide__slide.is-next .card-container {
     transition: transform 50ms;
     transform: scale(0.75);
@@ -157,7 +157,7 @@ propertyIconList.value = [
 
 .splide__slide.is-active .card-container {
     transform: scale(0.95);
-} */
+}
 
 .splide__progress__bar {
     height: 3px;
