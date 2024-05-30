@@ -2,16 +2,16 @@
 import { ref } from 'vue';
 
 const props = defineProps(['highlights']);
-const formattedNumber = ref('');
 const highlightOptions = ref({});
 const propertyIconList = ref([]);
 
 const numberFormat = (number, symbol = 'RM') => {
-    formattedNumber.value = number
-        .toString()
-        .replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    const formattedNumber = new Intl.NumberFormat('en-US', {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+    }).format(number);
 
-    return `${symbol}${formattedNumber.value}`;
+    return `${symbol}${formattedNumber}`;
 };
 
 highlightOptions.value = {
@@ -119,10 +119,8 @@ propertyIconList.value = [
                             </div>
                         </q-card-section>
 
-                        <q-separator color="grey-4" />
-
                         <q-card-section>
-                            <div class="text-subtitle2">
+                            <div class="text-h6">
                                 {{
                                     numberFormat(
                                         highlight.property.price,
