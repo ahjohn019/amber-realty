@@ -67,7 +67,7 @@ propertyIconList.value = [
                             />
                         </router-link>
 
-                        <!-- <q-card-section>
+                        <q-card-section>
                             <div class="flex justify-between items-center">
                                 <div
                                     class="text-sm bg-primary text-center px-4 py-2 font-bold rounded text-white w-[90px] capitalize featured-property__title"
@@ -103,19 +103,11 @@ propertyIconList.value = [
                             </div>
                         </q-card-section>
 
-                        <q-separator color="grey-4" />
+                        <!-- <q-separator color="grey-4" />
 
                         <q-card-section>
                             <div class="text-h6">
                                 {{ highlight.property.name }}
-                            </div>
-                            <div
-                                class="text-subtitle2 featured-property__descriptions"
-                            >
-                                {{ highlight.property.short_description }}
-                                <q-tooltip>
-                                    {{ highlight.property.short_description }}
-                                </q-tooltip>
                             </div>
                         </q-card-section>
 
