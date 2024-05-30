@@ -60,7 +60,7 @@ propertyIconList.value = [
                         <router-link
                             :to="{
                                 name: 'property.details',
-                                params: { id: highlight.id },
+                                params: { id: highlight.property_id },
                             }"
                         >
                             <img
