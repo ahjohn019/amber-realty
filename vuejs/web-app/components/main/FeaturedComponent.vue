@@ -24,7 +24,7 @@ highlightOptions.value = {
             arrows: false,
         },
     },
-    // autoplay: true,
+    autoplay: true,
 };
 
 propertyIconList.value = [
@@ -106,7 +106,7 @@ propertyIconList.value = [
                         <q-separator color="grey-4" />
 
                         <q-card-section>
-                            <div class="text-h6">
+                            <div class="text-h4">
                                 {{ highlight.property.name }}
                             </div>
                         </q-card-section>
