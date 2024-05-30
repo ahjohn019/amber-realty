@@ -25,6 +25,7 @@ highlightOptions.value = {
         },
     },
     autoplay: true,
+    interval: 4500,
 };
 
 propertyIconList.value = [
