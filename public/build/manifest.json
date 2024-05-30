@@ -697,7 +697,7 @@
       "vuejs/web-app/modules/property/views/ListPage.vue",
       "vuejs/web-app/modules/property/views/DetailsPage.vue"
     ],
-    "file": "assets/app-685f8756.js",
+    "file": "assets/app-8cfceef4.js",
     "imports": [
       "_ckeditor-e046e440.js"
     ],
@@ -732,7 +732,7 @@
     "css": [
       "assets/MainPage-1b4a70f6.css"
     ],
-    "file": "assets/MainPage-d3d0585c.js",
+    "file": "assets/MainPage-86e183ad.js",
     "imports": [
       "_ckeditor-e046e440.js",
       "_QBtn-1da1afde.js",
@@ -772,7 +772,7 @@
     "css": [
       "assets/DetailsPage-4c44f531.css"
     ],
-    "file": "assets/DetailsPage-0a80f68c.js",
+    "file": "assets/DetailsPage-46a96c7d.js",
     "imports": [
       "_ckeditor-e046e440.js",
       "_BaseLayout-9eb8f943.js",
