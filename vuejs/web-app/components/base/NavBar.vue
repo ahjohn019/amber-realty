@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from 'vue';
 import BaseDrawer from './BaseDrawer.vue';
+import BaseAuth from './BaseAuth.vue';
 
 const options = ref([]);
 options.value = [
@@ -24,10 +25,9 @@ options.value = [
 <template>
     <q-header elevated :class="$q.dark.isActive ? 'bg-secondary' : 'bg-black'">
         <q-toolbar
-            class="bg-secondary shadow-2 text-black"
-            style="height: 85px"
+            class="bg-secondary shadow-2 text-black justify-between h-[85px]"
         >
-            <div class="col-4 col-md-2">
+            <div class="col-2">
                 <router-link to="/" exact>
                     <img :src="mainLogo" alt="" width="85" />
                 </router-link>
@@ -38,7 +38,7 @@ options.value = [
                 </div>
                 <div style="text-wrap: nowrap">E-(3)1482</div>
             </div>
-            <div class="col-8 text-center nav-bar-content">
+            <div class="col-4 text-center nav-bar-content">
                 <router-link
                     v-for="(option, key) in options"
                     :key="key"
@@ -49,7 +49,10 @@ options.value = [
                     <q-btn flat :label="option.label" />
                 </router-link>
             </div>
-            <div class="col-4 text-right nav-bar-dropdown">
+            <div class="col-2 text-right nav-bar-content font-bold uppercase">
+                <BaseAuth />
+            </div>
+            <div class="col-2 text-right nav-bar-dropdown">
                 <BaseDrawer />
             </div>
         </q-toolbar>

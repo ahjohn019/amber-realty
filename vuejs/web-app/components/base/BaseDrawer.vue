@@ -1,5 +1,6 @@
 <script setup>
 import { ref } from 'vue';
+import BaseDrawerAuth from './BaseDrawerAuth.vue';
 
 const baseDrawerMenu = ref({});
 const toggleDrawer = ref(false);
@@ -50,6 +51,7 @@ const toggleDrawerMobile = () => {
                         </router-link>
                     </q-item-section>
                 </q-item>
+                <BaseDrawerAuth />
             </q-list>
         </q-scroll-area>
     </q-drawer>
