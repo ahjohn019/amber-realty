@@ -1,1 +1,0 @@
-import{Z as n,i as r,a3 as s,J as a}from"./ckeditor-e046e440.js";import{n as c}from"./vm-8712a45d.js";function f(){let e;const i=a();function t(){e=void 0}return n(t),r(t),{removeTick:t,registerTick(o){e=o,s(()=>{e===o&&(c(i)===!1&&e(),e=void 0)})}}}export{f as u};
