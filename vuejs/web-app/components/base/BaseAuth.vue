@@ -1,103 +1,126 @@
 <script setup>
 import { ref } from 'vue';
+import Swal from 'sweetalert2';
+import { useRouter } from 'vue-router';
+import BaseAuthLogin from './BaseAuthLogin.vue';
+import BaseAuthSignUp from './BaseAuthSignUp.vue';
 
-const authAlert = ref(true);
+const authAlert = ref(false);
+const signUpDescriptions = ref([]);
+const loginClass = ref(true);
+const signUpClass = ref(false);
+const modalInfo = ref(true);
 
 const authSelection = () => {
     authAlert.value = true;
 };
 
-const handleSignUp = () => {
-    console.log('sign up');
+const router = useRouter();
+
+signUpDescriptions.value = [
+    { icon: 'done', title: 'Save Searches' },
+    { icon: 'group', title: 'Shortlist' },
+    { icon: 'handshake', title: 'Transaction Insights' },
+];
+
+const handleAuthComponent = (value) => {
+    switch (value) {
+        case 'signup':
+            loginClass.value = false;
+            signUpClass.value = true;
+            break;
+
+        default:
+            loginClass.value = true;
+            signUpClass.value = false;
+            break;
+    }
 };
 
-const handleForgetPassword = () => {
-    console.log('forget password');
+const handleInfoMessage = (value) => {
+    const responses = {
+        login: {
+            text: 'Login Successfully',
+            icon: 'success',
+        },
+        signup: {
+            text: 'Sign Up Successfully',
+            icon: 'success',
+        },
+    };
+    const response = responses[value.type];
+    if (response) {
+        modalInfo.value = false;
+        Swal.fire(response).then((result) => {
+            if (result.isConfirmed) {
+                router.go(0);
+            }
+        });
+    }
 };
 </script>
 
 <template>
     <div class="q-pa-md q-gutter-sm">
-        <q-btn flat label="Login" color="black" @click="authSelection()" />
+        <q-btn flat label="Login" color="black" @click="authSelection" />
 
-        <q-dialog v-model="authAlert" :class="$q.screen.lt.md ? 'hidden' : ''">
+        <q-dialog
+            v-model="authAlert"
+            :class="$q.screen.lt.md ? 'hidden' : ''"
+            v-if="modalInfo"
+        >
             <q-card
                 class="auth__background__main h-[650px] w-full relative bg-white"
-                :class="$q.screen.lt.lg ? '!max-w-[85vw]' : '!max-w-[55vw]'"
+                :class="$q.screen.lt.lg ? '!max-w-[85vw]' : '!max-w-[50vw]'"
             >
                 <q-card-section
                     class="auth__background__two absolute h-full w-full"
                 ></q-card-section>
+                <BaseAuthLogin
+                    class="absolute bg-white right-[2.5rem] top-[18%] w-1/2 flex flex-col !shadow-xl !rounded-lg text-center font-bold h-[450px] justify-center"
+                    @signUpSelection="handleAuthComponent"
+                    @infoMessage="handleInfoMessage"
+                    v-if="loginClass"
+                />
+
+                <BaseAuthSignUp
+                    class="absolute bg-white right-[2.5rem] top-[18%] w-1/2 flex flex-col !shadow-xl !rounded-lg text-center font-bold h-[450px] justify-center"
+                    @loginSelection="handleAuthComponent"
+                    @infoMessage="handleInfoMessage"
+                    v-if="signUpClass"
+                />
+
                 <q-card-section
-                    class="absolute bg-white right-[2.5rem] top-[25%] w-1/2 flex flex-col gap-4 !shadow-lg text-center font-bold"
+                    class="text-white absolute top-[15%] left-[5%] font-bold"
                 >
-                    <q-input outlined dense label="Email" />
-                    <q-input outlined dense label="Password" />
-                    <q-btn color="primary" label="Login" />
+                    <q-list class="q-gutter-sm">
+                        <q-item>
+                            <q-img
+                                src="images/amber_realty_logo.png"
+                                fit="contain"
+                                class="rounded-lg h-[100px]"
+                            >
+                            </q-img>
+                        </q-item>
 
-                    <q-separator color="grey-4" />
-
-                    <div>
-                        Dont have an account ?
-                        <span
-                            class="text-blue-700 cursor-pointer"
-                            @click="handleSignUp()"
-                            >Sign Up</span
-                        >
-                    </div>
-
-                    <q-separator color="grey-4" />
-
-                    <div
-                        class="text-blue-700 cursor-pointer"
-                        @click="handleForgetPassword()"
-                    >
-                        Forget password ?
-                    </div>
-                </q-card-section>
-                <q-card-section
-                    class="text-white absolute top-[22%] left-[5%] font-bold"
-                >
-                    <q-list class="q-gutter-md">
                         <q-item class="text-4xl pb-6">
                             <q-item-section>Why Sign-Up ?</q-item-section>
                         </q-item>
 
-                        <q-item>
+                        <q-item
+                            v-for="(description, key) in signUpDescriptions"
+                            :key="key"
+                        >
                             <q-item-section avatar>
                                 <q-avatar
                                     color="primary"
                                     text-color="white"
-                                    icon="done"
+                                    :icon="description.icon"
                                 />
                             </q-item-section>
-                            <q-item-section class="uppercase"
-                                >Saved Searches</q-item-section
-                            >
-                        </q-item>
-                        <q-item>
-                            <q-item-section avatar>
-                                <q-avatar
-                                    color="primary"
-                                    text-color="white"
-                                    icon="group"
-                                />
-                            </q-item-section>
-                            <q-item-section class="uppercase"
-                                >Shortlist</q-item-section
-                            >
-                        </q-item>
-                        <q-item>
-                            <q-item-section avatar>
-                                <q-avatar
-                                    color="primary"
-                                    text-color="white"
-                                    icon="handshake"
-                                />
-                            </q-item-section>
-                            <q-item-section class="uppercase"
-                                >Transaction Insights</q-item-section
-                            >
+                            <q-item-section class="uppercase">{{
+                                description.title
+                            }}</q-item-section>
                         </q-item>
                     </q-list>
                 </q-card-section>
