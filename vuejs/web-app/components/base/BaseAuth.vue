@@ -1,15 +1,18 @@
 <script setup>
 import { ref } from 'vue';
-import Swal from 'sweetalert2';
 import { useRouter } from 'vue-router';
 import BaseAuthLogin from './BaseAuthLogin.vue';
 import BaseAuthSignUp from './BaseAuthSignUp.vue';
+import { usePropertyWebStore } from '@store_web/auth/index.js';
 
 const authAlert = ref(false);
 const signUpDescriptions = ref([]);
 const loginClass = ref(true);
 const signUpClass = ref(false);
 const modalInfo = ref(true);
+const webProperty = usePropertyWebStore();
+const getAuthToken = webProperty.fetchSessionToken();
+const authCheck = ref(false);
 
 const authSelection = () => {
     authAlert.value = true;
@@ -49,20 +52,70 @@ const handleInfoMessage = (value) => {
         },
     };
     const response = responses[value.type];
-    if (response) {
+
+    if (response && value.message === 'success') {
         modalInfo.value = false;
-        Swal.fire(response).then((result) => {
-            if (result.isConfirmed) {
-                router.go(0);
-            }
-        });
+        router.go(0);
     }
 };
+
+const fetchProfile = async () => {
+    try {
+        const response = await webProperty.fetchProfile(getAuthToken);
+
+        if (response) {
+            authCheck.value = true;
+        }
+
+        return response;
+    } catch (error) {}
+};
+
+const handleLogout = async () => {
+    try {
+        const response = await webProperty.handleLogoutProcess(getAuthToken);
+
+        if (response) {
+            authCheck.value = false;
+        }
+
+        return response;
+    } catch (error) {}
+};
+
+fetchProfile();
 </script>
 
 <template>
     <div class="q-pa-md q-gutter-sm">
-        <q-btn flat label="Login" color="black" @click="authSelection" />
+        <q-btn
+            flat
+            label="Login"
+            color="black"
+            @click="authSelection"
+            v-if="!authCheck"
+        />
+
+        <q-btn-dropdown flat color="black" label="Profile" v-if="authCheck">
+            <q-list>
+                <q-item clickable v-close-popup>
+                    <q-item-section>
+                        <router-link
+                            to="/profile"
+                            activeClass="font-bold text-red"
+                        >
+                            <q-item-label>Dashboard</q-item-label>
+                        </router-link>
+                    </q-item-section>
+                </q-item>
+
+                <q-item clickable v-close-popup @click="handleLogout">
+                    <q-item-section>
+                        <q-item-label>Logout</q-item-label>
+                    </q-item-section>
+                </q-item>
+            </q-list>
+        </q-btn-dropdown>
 
         <q-dialog
             v-model="authAlert"

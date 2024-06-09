@@ -53,6 +53,8 @@ Route::prefix('auth')->middleware([])->group(
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::prefix('auth')->middleware([])->group(function () {
+        Route::post('/profile', [AuthController::class, 'authProfile']);
+        Route::post('/update-profile', [AuthController::class, 'updateProfile']);
         Route::post('/logout', [AuthController::class, 'logout']);
         Route::post('/update-password', [AuthController::class, 'updatePassword']);
     });
