@@ -49,7 +49,7 @@ class AuthController extends Controller
 
     public function authProfile()
     {
-        return self::successResponse('Success', auth()->user()->load('saved_property'));
+        return self::successResponse('Success', auth()->user()->load('saved_property', 'saved_property.banner.image'));
     }
 
     public function register(RegisterFormRequest $request)

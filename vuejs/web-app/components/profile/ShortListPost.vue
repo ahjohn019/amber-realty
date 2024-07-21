@@ -50,10 +50,12 @@ const handleShortListToggle = async (shortlist) => {
         <div class="col-12 col-md-3 col-auto">
             <q-img
                 :src="
-                    shortlist.banner_url
-                        ? shortlist.banner_url
+                    shortlist.banner
+                        ? shortlist.banner.image.url
                         : 'https://cdn.quasar.dev/img/parallax2.jpg'
                 "
+                fit="contain"
+                class="rounded-lg h-[150px]"
             />
         </div>
         <div class="col-12 col-md-8 col-auto row">
