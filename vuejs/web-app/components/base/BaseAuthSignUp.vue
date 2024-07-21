@@ -1,13 +1,13 @@
 <script setup>
 import { ref } from 'vue';
-import { usePropertyWebStore } from '@store_web/auth/index.js';
+import { usePropertyAuthWebStore } from '@store_web/auth/index.js';
 
 const emit = defineEmits(['loginSelection', 'infoMessage']);
 
 const handleLogin = () => {
     emit('loginSelection', 'login');
 };
-const webProperty = usePropertyWebStore();
+const webProperty = usePropertyAuthWebStore();
 const signUpFormData = ref({
     name: '',
     email: '',

@@ -1,8 +1,12 @@
 <script setup>
 import { usePropertyWebStore } from '@store_web/property/index.js';
+import { usePropertyAuthWebStore } from '@store_web/auth/index.js';
 import { onMounted, ref } from 'vue';
 
 const webProperty = usePropertyWebStore();
+const webAuthProperty = usePropertyAuthWebStore();
+const getAuthToken = webAuthProperty.fetchSessionToken();
+
 const payload = {
     limit: 4,
 };
@@ -21,6 +25,19 @@ const numberFormat = (number, symbol = 'RM') => {
         .toString()
         .replace(/\B(?=(\d{3})+(?!\d))/g, ',');
     return `${symbol}${formattedNumber}`;
+};
+
+const handleFavorite = async (latest) => {
+    latest.user_shortlists = !latest.user_shortlists;
+
+    return await webAuthProperty.toggleShortListPosts(getAuthToken, {
+        id: latest.id,
+        status: latest.user_shortlists,
+    });
+};
+
+const handleIconList = (latest) => {
+    return latest.user_shortlists ? 'favorite' : 'favorite_border';
 };
 
 onMounted(() => {
@@ -63,6 +80,15 @@ onMounted(() => {
                             >
                                 <div>
                                     {{ numberFormat(latest.price, 'RM ') }}
+                                </div>
+                                <div>
+                                    <q-btn
+                                        flat
+                                        round
+                                        color="primary"
+                                        :icon="handleIconList(latest)"
+                                        @click.prevent="handleFavorite(latest)"
+                                    />
                                 </div>
                             </div>
                             <div

@@ -1,6 +1,7 @@
 import { createWebHistory, createRouter } from 'vue-router';
 import * as Master from '../modules/main/router';
 import Property from '../modules/property/router';
+import { usePropertyAuthWebStore } from '../stores/auth/index.js';
 
 const routes = [
     {
@@ -27,6 +28,12 @@ const routes = [
         meta: { requiresAuth: false },
         name: 'property.about_us',
     },
+    {
+        path: '/profile',
+        component: Property.ProfilePage,
+        meta: { requiresAuth: true },
+        name: 'property.profile',
+    },
 ];
 
 const router = createRouter({
@@ -38,7 +45,15 @@ const router = createRouter({
 });
 
 router.beforeEach(async (to, from, next) => {
-    next();
+    // next();
+    const userAuthStore = usePropertyAuthWebStore();
+    const getAuthToken = userAuthStore.fetchSessionToken();
+
+    if (to.path != '/' && getAuthToken == null && to.meta.requiresAuth) {
+        next('/');
+    } else {
+        next();
+    }
 });
 
 export default router;
