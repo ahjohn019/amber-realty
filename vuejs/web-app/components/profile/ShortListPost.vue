@@ -31,7 +31,7 @@ const handleShortListToggle = async (shortlist) => {
         );
 
         const shortlistIndex = shortLists.value.findIndex(
-            (item) => item.id === response.post_id
+            (item) => item.id === parseInt(response.post_id)
         );
 
         shortLists.value.splice(shortlistIndex, 1);
