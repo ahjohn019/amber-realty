@@ -5,7 +5,7 @@ import Swal from 'sweetalert2';
 
 const prefix = '/api/auth/';
 
-export const usePropertyWebStore = defineStore('property_web_auth', {
+export const usePropertyAuthWebStore = defineStore('property_web_auth', {
     state: () => ({
         post_table_web: null,
         router: useRouter(),
@@ -126,6 +126,41 @@ export const usePropertyWebStore = defineStore('property_web_auth', {
                 });
 
                 return response;
+            } catch (error) {
+                console.error('Error:', error);
+                throw error;
+            }
+        },
+
+        async savedShortListPosts(payload) {
+            try {
+                this.config.headers.Authorization = `Bearer ${payload}`;
+
+                const response = await axios.get(
+                    prefix + 'saved-shortlists',
+                    this.config
+                );
+
+                return response.data.data;
+            } catch (error) {
+                console.error('Error:', error);
+                throw error;
+            }
+        },
+
+        async toggleShortListPosts(payload, shortListData) {
+            try {
+                this.config.headers.Authorization = `Bearer ${payload}`;
+
+                const response = await axios.post(
+                    prefix + 'toggle-shortlists',
+                    shortListData,
+                    this.config
+                );
+
+                console.log(response);
+
+                return response.data.data;
             } catch (error) {
                 console.error('Error:', error);
                 throw error;

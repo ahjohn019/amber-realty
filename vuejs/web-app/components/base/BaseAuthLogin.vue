@@ -1,5 +1,5 @@
 <script setup>
-import { usePropertyWebStore } from '@store_web/auth/index.js';
+import { usePropertyAuthWebStore } from '@store_web/auth/index.js';
 import { ref } from 'vue';
 
 const emit = defineEmits([
@@ -7,7 +7,7 @@ const emit = defineEmits([
     'forgetPasswordSelection',
     'infoMessage',
 ]);
-const webProperty = usePropertyWebStore();
+const webProperty = usePropertyAuthWebStore();
 const loginFormData = ref({
     email: '',
     password: '',

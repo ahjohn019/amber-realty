@@ -1,8 +1,8 @@
 <script setup>
 import { ref } from 'vue';
-import { usePropertyWebStore } from '@store_web/auth/index.js';
+import { usePropertyAuthWebStore } from '@store_web/auth/index.js';
 
-const webProperty = usePropertyWebStore();
+const webProperty = usePropertyAuthWebStore();
 const getAuthToken = webProperty.fetchSessionToken();
 
 const changePasswordForm = ref({

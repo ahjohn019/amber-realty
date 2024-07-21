@@ -6,10 +6,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Web\{
     AuthController,
     PostController,
-    UserController,
     CommentController,
     PropertyController,
-    RefController
+    RefController,
+    UserPostsController
 };
 
 /*
@@ -57,13 +57,13 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/update-profile', [AuthController::class, 'updateProfile']);
         Route::post('/logout', [AuthController::class, 'logout']);
         Route::post('/update-password', [AuthController::class, 'updatePassword']);
+        Route::post('/toggle-shortlists', [UserPostsController::class, 'toggle']);
+        Route::post('/favourite-shortlists', [UserPostsController::class, 'saved']);
     });
 });
 
 // sanctum auth
 Route::middleware('auth:sanctum', 'role:' . RoleTag::USER)->group(function () {
-    Route::get('/user-test', [UserController::class, 'index']);
-
     Route::prefix('post')->group(function () {
         Route::get('/list', [PostController::class, 'list'])->name('web.posts.list');
         Route::post('/store', [PostController::class, 'store'])->name('web.posts.store');

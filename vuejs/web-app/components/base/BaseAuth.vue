@@ -3,14 +3,14 @@ import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import BaseAuthLogin from './BaseAuthLogin.vue';
 import BaseAuthSignUp from './BaseAuthSignUp.vue';
-import { usePropertyWebStore } from '@store_web/auth/index.js';
+import { usePropertyAuthWebStore } from '@store_web/auth/index.js';
 
 const authAlert = ref(false);
 const signUpDescriptions = ref([]);
 const loginClass = ref(true);
 const signUpClass = ref(false);
 const modalInfo = ref(true);
-const webProperty = usePropertyWebStore();
+const webProperty = usePropertyAuthWebStore();
 const getAuthToken = webProperty.fetchSessionToken();
 const authCheck = ref(false);
 
@@ -66,6 +66,8 @@ const fetchProfile = async () => {
         if (response) {
             authCheck.value = true;
         }
+
+        console.log('response', response);
 
         return response;
     } catch (error) {}

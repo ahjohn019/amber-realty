@@ -39,7 +39,8 @@ class PropertyResource extends JsonResource
             "banner" => $this->banner,
             "sliders" => $this->sliders,
             'details_toggle' => $this->details == 1 ? true : false,
-            'nearby_details' => $this->nearbyDetails
+            'nearby_details' => $this->nearbyDetails,
+            'user_shortlists' => $this->property_users->isNotEmpty()
         ];
     }
 }

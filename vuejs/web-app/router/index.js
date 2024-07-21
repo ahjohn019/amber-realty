@@ -1,7 +1,7 @@
 import { createWebHistory, createRouter } from 'vue-router';
 import * as Master from '../modules/main/router';
 import Property from '../modules/property/router';
-import { usePropertyWebStore } from '../stores/auth/index.js';
+import { usePropertyAuthWebStore } from '../stores/auth/index.js';
 
 const routes = [
     {
@@ -46,7 +46,7 @@ const router = createRouter({
 
 router.beforeEach(async (to, from, next) => {
     // next();
-    const userAuthStore = usePropertyWebStore();
+    const userAuthStore = usePropertyAuthWebStore();
     const getAuthToken = userAuthStore.fetchSessionToken();
 
     if (to.path != '/' && getAuthToken == null && to.meta.requiresAuth) {

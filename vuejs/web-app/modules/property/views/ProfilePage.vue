@@ -1,27 +1,30 @@
 <script setup>
 import BaseLayout from '@web/modules/layout/BaseLayout.vue';
 import ChangePasswordForm from '@web/components/profile/ChangePasswordForm.vue';
-import { usePropertyWebStore } from '@store_web/auth/index.js';
+import ShortListPost from '@web/components/profile/ShortListPost.vue';
+import { usePropertyAuthWebStore } from '@store_web/auth/index.js';
 import { ref } from 'vue';
 
-const webProperty = usePropertyWebStore();
-const getAuthToken = webProperty.fetchSessionToken();
+const webAuthProperty = usePropertyAuthWebStore();
+const getAuthToken = webAuthProperty.fetchSessionToken();
 const tabs = ref('edit_profile');
 const userProfile = ref({
     name: '',
     email: '',
+    saved_property: '',
 });
 const changePasswordModal = ref(false);
 const errors = ref({});
 
 const fetchProfile = async () => {
     try {
-        const response = await webProperty.fetchProfile(getAuthToken);
+        const response = await webAuthProperty.fetchProfile(getAuthToken);
 
         userProfile.value = {
             ...userProfile.value,
             name: response?.name ?? null,
             email: response?.email ?? null,
+            saved_property: response?.saved_property ?? null,
         };
 
         return response;
@@ -30,7 +33,7 @@ const fetchProfile = async () => {
 
 const updateProfile = async () => {
     try {
-        const response = await webProperty.updateProfile(
+        const response = await webAuthProperty.updateProfile(
             getAuthToken,
             userProfile.value
         );
@@ -93,13 +96,13 @@ fetchProfile();
                                     label="Edit Profile"
                                 />
                                 <q-tab
-                                    name="saved_posts"
-                                    label="My Saved Posts"
+                                    name="my_shortlists"
+                                    label="My Shortlists"
                                 />
-                                <q-tab
+                                <!-- <q-tab
                                     name="shared_posts"
                                     label="My Shared Posts"
-                                />
+                                /> -->
                             </q-tabs>
 
                             <q-tab-panels v-model="tabs" animated>
@@ -160,15 +163,18 @@ fetchProfile();
                                     </q-dialog>
                                 </q-tab-panel>
 
-                                <q-tab-panel name="saved_posts">
-                                    Lorem ipsum dolor sit amet consectetur
-                                    adipisicing elit.
+                                <q-tab-panel name="my_shortlists">
+                                    <ShortListPost
+                                        :userProfileProperty="
+                                            userProfile.saved_property
+                                        "
+                                    />
                                 </q-tab-panel>
 
-                                <q-tab-panel name="shared_posts">
+                                <!-- <q-tab-panel name="shared_posts">
                                     Lorem ipsum dolor sit amet consectetur
                                     adipisicing elit.
-                                </q-tab-panel>
+                                </q-tab-panel> -->
                             </q-tab-panels>
                         </q-card>
                     </div>
