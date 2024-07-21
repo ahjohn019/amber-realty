@@ -7,12 +7,14 @@ use App\Http\Services\AuthService;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Request;
 use App\Http\Requests\Web\LoginFormRequest;
 use App\Http\Requests\Web\RegisterFormRequest;
 use Symfony\Component\HttpFoundation\Response;
 use App\Http\Requests\Web\ResetPasswordRequest;
 use App\Http\Requests\Admin\ForgotPasswordRequest;
 use App\Http\Requests\Web\AuthPasswordUpdateFormRequest;
+use App\Http\Requests\Web\UpdateUserFormRequest;
 use Symfony\Component\HttpFoundation\Exception\BadRequestException;
 
 class AuthController extends Controller
@@ -43,6 +45,11 @@ class AuthController extends Controller
         } catch (\Throwable $th) {
             return self::failedResponse('Unauthorized', $th->getMessage(), Response::HTTP_UNAUTHORIZED);
         }
+    }
+
+    public function authProfile()
+    {
+        return self::successResponse('Success', auth()->user()->load('saved_property'));
     }
 
     public function register(RegisterFormRequest $request)
@@ -104,6 +111,22 @@ class AuthController extends Controller
 
         return self::successResponse('Success', [
             'email' => $result,
+        ]);
+    }
+
+    public function updateProfile(UpdateUserFormRequest $request)
+    {
+        $authUser = auth()->user();
+        $payload = $request->validated();
+
+        $result = AuthService::updateUser($authUser, [
+            'name' => $payload['name'],
+            'email' => $payload['email']
+        ]);
+
+        return self::successResponse('Success', [
+            'name' => $result->name,
+            'email' => $result->email,
         ]);
     }
 }
