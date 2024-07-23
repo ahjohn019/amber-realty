@@ -55,7 +55,6 @@ const handleInfoMessage = (value) => {
 
     if (response && value.message === 'success') {
         modalInfo.value = false;
-        router.go(0);
     }
 };
 
@@ -67,8 +66,6 @@ const fetchProfile = async () => {
             authCheck.value = true;
         }
 
-        console.log('response', response);
-
         return response;
     } catch (error) {}
 };
@@ -79,6 +76,7 @@ const handleLogout = async () => {
 
         if (response) {
             authCheck.value = false;
+            router.go(0);
         }
 
         return response;

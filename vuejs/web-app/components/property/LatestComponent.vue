@@ -2,6 +2,7 @@
 import { usePropertyWebStore } from '@store_web/property/index.js';
 import { usePropertyAuthWebStore } from '@store_web/auth/index.js';
 import { onMounted, ref } from 'vue';
+import Swal from 'sweetalert2';
 
 const webProperty = usePropertyWebStore();
 const webAuthProperty = usePropertyAuthWebStore();
@@ -28,6 +29,14 @@ const numberFormat = (number, symbol = 'RM') => {
 };
 
 const handleFavorite = async (latest) => {
+    if (!getAuthToken) {
+        Swal.fire({
+            text: 'Please Login',
+            icon: 'error',
+        });
+        return;
+    }
+
     latest.user_shortlists = !latest.user_shortlists;
 
     return await webAuthProperty.toggleShortListPosts(getAuthToken, {
@@ -37,7 +46,9 @@ const handleFavorite = async (latest) => {
 };
 
 const handleIconList = (latest) => {
-    return latest.user_shortlists ? 'favorite' : 'favorite_border';
+    return latest.user_shortlists && getAuthToken
+        ? 'favorite'
+        : 'favorite_border';
 };
 
 onMounted(() => {
