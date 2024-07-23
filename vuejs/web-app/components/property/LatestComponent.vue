@@ -69,7 +69,7 @@ onMounted(() => {
                                 fit="contain"
                             />
                             <div
-                                class="absolute top-4 left-5 bg-secondary font-bold px-6 py-2 rounded capitalize"
+                                class="absolute top-4 left-5 bg-secondary font-medium px-6 py-2 rounded capitalize"
                             >
                                 For {{ latest.listing_type }}
                             </div>

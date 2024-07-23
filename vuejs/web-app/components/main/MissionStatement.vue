@@ -1,16 +1,16 @@
 <template>
-    <div class="">
+    <div class="bg-gray-100">
         <div
             class="row container mx-auto py-12 px-2 w-full md:w-[650px] lg:w-[990px] xl:w-[1200px] justify-between gap-6"
         >
             <div
-                class="col-12 text-xl md:text-4xl font-bold pb-8"
+                class="col-12 text-xl md:text-4xl font-medium pb-8"
                 :class="$q.screen.lt.md ? 'text-center' : ''"
             >
                 Mission Statement
             </div>
             <div
-                class="col-12 col-md-3 text-center py-12 px-8 row gap-8 border rounded-lg bg-primary"
+                class="col-12 col-md-3 text-center py-12 px-8 row gap-8 border rounded-lg bg-white"
                 v-for="(mission, key) in missionStatement"
                 :key="key"
                 data-aos="flip-left"
@@ -18,18 +18,15 @@
             >
                 <div class="col-12">
                     <div
-                        class="w-[125px] h-[125px] m-auto rounded-full flex justify-center items-center bg-secondary"
+                        class="w-[125px] h-[125px] m-auto rounded-full flex justify-center items-center bg-gray-100 border"
                     >
                         <q-icon :name="mission.icon" size="64px"></q-icon>
                     </div>
                 </div>
-                <div class="col-12 text-xl font-bold h-[50px] text-white">
+                <div class="col-12 text-xl font-medium h-[50px]">
                     {{ mission.title }}
                 </div>
-                <div
-                    class="col-12 h-[50px] text-white"
-                    v-html="mission.description"
-                ></div>
+                <div class="col-12 h-[50px]" v-html="mission.description"></div>
             </div>
         </div>
     </div>

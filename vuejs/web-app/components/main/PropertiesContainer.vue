@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-primary">
+    <div class="bg-gray-100">
         <div
             class="row container mx-auto gap-10 py-12 px-2 w-full md:w-[650px] lg:w-[990px] xl:w-[1200px]"
         >
@@ -8,13 +8,13 @@
                 :class="$q.screen.lt.sm ? 'justify-center' : 'justify-between'"
             >
                 <div
-                    class="col col-auto text-xl md:text-4xl font-bold text-white"
+                    class="col col-auto text-xl md:text-4xl font-medium"
                     :class="$q.screen.lt.md ? 'text-center' : ''"
                 >
                     Explore Our Latest Properties
                 </div>
                 <div
-                    class="col col-auto font-bold text-white text-sm"
+                    class="col col-auto font-medium text-sm"
                     style="text-wrap: nowrap"
                 >
                     <router-link :to="{ name: 'property.list' }"

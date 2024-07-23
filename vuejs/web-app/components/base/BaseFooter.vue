@@ -7,7 +7,7 @@ yearNow.value = dayjs().format('YYYY');
 </script>
 
 <template>
-    <div class="footer-container">
+    <div class="footer-container bg-gray-100">
         <div
             class="row pb-14"
             :class="$q.screen.lt.lg ? 'text-center gap-4' : ''"

@@ -2,7 +2,7 @@
 import HeaderContainer from '@web/components/main/HeaderContainer.vue';
 import PropertiesContainer from '@web/components/main/PropertiesContainer.vue';
 import SocialProof from '@web/components/main/SocialProof.vue';
-import CallToAction from '@web/components/main/CallToAction.vue';
+// import CallToAction from '@web/components/main/CallToAction.vue';
 import BaseLayout from '@web/modules/layout/BaseLayout.vue';
 import MissionStatement from '@web/components/main/MissionStatement.vue';
 import FeaturedComponent from '../../../components/main/FeaturedComponent.vue';
@@ -38,7 +38,7 @@ onMounted(() => {
             />
             <MissionStatement />
             <SocialProof />
-            <CallToAction />
+            <!-- <CallToAction /> -->
         </template>
     </BaseLayout>
 </template>
